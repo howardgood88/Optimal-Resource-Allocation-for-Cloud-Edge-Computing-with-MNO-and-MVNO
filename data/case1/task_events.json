@@ -1,0 +1,12 @@
+[
+    {"round":1,"start_time":10,"duration":10,"task_type":"VoIP","user_id":"1","machine_id":"1","cpu_request":0.1,"average_cpu_usage":0.02,"average_throughput":{"uplink":370,"downlink":16}},
+    {"round":1,"start_time":15,"duration":20,"task_type":"IP_Video","user_id":"2","machine_id":"2","cpu_request":0.1,"average_cpu_usage":0.06,"average_throughput":{"uplink":20,"downlink":900}},
+    {"round":1,"start_time":30,"duration":10,"task_type":"FTP","user_id":"3","machine_id":"3","cpu_request":0.2,"average_cpu_usage":0.08,"average_throughput":{"uplink":35,"downlink":1000}},
+    {"round":1,"start_time":50,"duration":7,"task_type":"VoIP","user_id":"1","machine_id":"3","cpu_request":0.1,"average_cpu_usage":0.05,"average_throughput":{"uplink":300,"downlink":16}},
+    {"round":2,"start_time":64,"duration":5,"task_type":"IP_Video","user_id":"4","machine_id":"4","cpu_request":0.15,"average_cpu_usage":0.09,"average_throughput":{"uplink":31,"downlink":850}},
+    {"round":2,"start_time":100,"duration":20,"task_type":"FTP","user_id":"5","machine_id":"5","cpu_request":0.3,"average_cpu_usage":0.12,"average_throughput":{"uplink":25,"downlink":1300}},
+    {"round":3,"start_time":150,"duration":13,"task_type":"IP_Video","user_id":"6","machine_id":"6","cpu_request":0.08,"average_cpu_usage":0.05,"average_throughput":{"uplink":24,"downlink":1065}},
+    {"round":4,"start_time":200,"duration":9,"task_type":"VoIP","user_id":"7","machine_id":"2","cpu_request":0.05,"average_cpu_usage":0.02,"average_throughput":{"uplink":246,"downlink":15}},
+    {"round":4,"start_time":230,"duration":20,"task_type":"FTP","user_id":"8","machine_id":"4","cpu_request":0.15,"average_cpu_usage":0.1,"average_throughput":{"uplink":26,"downlink":790}},
+    {"round":5,"start_time":245,"duration":11,"task_type":"VoIP","user_id":"1","machine_id":"6","cpu_request":0.07,"average_cpu_usage":0.04,"average_throughput":{"uplink":450,"downlink":17}}
+]
