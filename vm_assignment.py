@@ -1,15 +1,16 @@
 import numpy as np
-from network_operator import Contract
-from parameters import Parameters
+from parameters import (rnd_seed, _theta, _lambda, Task_type)
+from optimizing import GeneticOptimizing
+from utility import (printReturn, funcCall)
 
-np.random.seed(Parameters.rnd_seed)
+np.random.seed(rnd_seed)
 
 class VMAssignment:
     def __init__(self):
-        self._lambda = 0.6
-        self._mu = 0.8
+        self.optimizing = GeneticOptimizing() # TODO
     
-    def run(self, contract: Contract, total_machine_id: np.array, statistic_data: np.array, machine_bw: dict, machine_attributes: dict):
+    @funcCall
+    def run(self, contract, candidate_vm_id: np.array, statistic_data: np.array, vm_list: dict) -> None:
         '''
         Start running VMAssignment algorithm.
 
@@ -17,22 +18,76 @@ class VMAssignment:
         ----------
         contract : Contract
             Contract object that supply the upper bound and lower bound of bw and cr.
-        total_machine_id : np.array
-            The machines that MNO can supply.
+        total_vm_id : np.array
+            The vms that MNO can supply.
         statistic_data : np.array
             The statistic data of history data.
-        machine_bw : dict
-            The average bw to machine of all user in user_list.
-        machine_attributes : dict
-            The machine attributes in machine_attributes.json.
+        vm_bw : dict
+            The average bw to vm of all user in user_list.
+        vm_attributes : dict
+            The vm attributes in vm_attributes.json.
         '''
+        # TODO
+        print('-----------Start of VM Assignment...------------')
         while 1:
-            choose_machine_id = self.choose_machine(total_machine_id)
-            if self.check_condition(choose_machine_id):
+            selected_vm = self.choose_vm(candidate_vm_id)
+            print(f'try candidate vm: {selected_vm}...')
+            mvno_vm_id = candidate_vm_id[selected_vm]
+            if self.check_condition(mvno_vm_id, vm_list, contract, statistic_data):
+                mno_vm_id = candidate_vm_id[np.logical_not(selected_vm)]
                 break
+            print('candidate vm not legal. try again...')
+        print('-----------End of VM Assignment...------------')
+        return mno_vm_id, mvno_vm_id
 
-    def choose_machine(self, total_machine_id: np.array):
-        return total_machine_id[np.random.choice([True, False], total_machine_id.shape, p = [0.3, 0.7])]
+    @funcCall
+    def choose_vm(self, candidate_vm_id: np.array) -> np.array:
+        '''Choose a set of vm.'''
+        return np.random.choice([True, False], candidate_vm_id.shape, p = [0.5, 0.5])
+        #return np.array([True for i in range(6)])
 
-    def check_condition(self, choose_machine_id: np.array):
-        return True
+    @funcCall
+    def check_condition(self, selected_vm_id: np.array, vm_list: dict, contract, statistic_data: np.array) -> bool:
+        '''Check whether the vm set assign to mvno fit the conditions.'''
+        # get needed value
+        ## contract content
+        bw_low = contract.bw_low
+        bw_high = contract.bw_high
+        cr_low = contract.cr_low
+        cr_high = contract.cr_high
+
+        ## statistic data
+        voip_idx = Task_type.VoIP.value
+        cr_voip = statistic_data[voip_idx][0]
+        T_voip_up = statistic_data[voip_idx][1]
+        T_voip_down = statistic_data[voip_idx][2]
+        ipVideo_idx = Task_type.IP_Video.value
+        cr_ipVideo = statistic_data[ipVideo_idx][0]
+        T_ipVideo_up = statistic_data[ipVideo_idx][1]
+        T_ipVideo_down = statistic_data[ipVideo_idx][2]
+        ftp_idx = Task_type.FTP.value
+        cr_ftp = statistic_data[ftp_idx][0]
+        T_ftp_up = statistic_data[ftp_idx][1]
+        T_ftp_down = statistic_data[ftp_idx][2]
+
+        ## vm bw and cr data of different task type
+        bw_task_x = [0 for i in range(len(Task_type))]
+        cr_task_x = [0 for i in range(len(Task_type))]
+        for id in selected_vm_id:
+            vm = vm_list[id]
+            # the price mvno buy from mno
+            price = vm.price * _lambda
+            vm_type = vm.task_type
+            task_idx = Task_type[vm_type].value
+            bw_task_x[task_idx] += vm.avg_bw
+            cr_task_x[task_idx] += vm.cpu_capacity
+
+        # check condition
+        return bw_task_x[voip_idx] >= max(T_voip_up, T_voip_down) and\
+            bw_task_x[ipVideo_idx] >= max(T_ipVideo_up, T_ipVideo_down) and\
+            bw_task_x[ftp_idx] >= max(T_ftp_up, T_ftp_down) and\
+            cr_task_x[voip_idx] >= cr_voip and\
+            cr_task_x[ipVideo_idx] >= cr_ipVideo and\
+            cr_task_x[ftp_idx] >= cr_ftp and\
+            bw_low <= sum(bw_task_x) * (1 + _theta) <= bw_high and\
+            cr_low <= sum(cr_task_x) * (1 * _theta) <= cr_high

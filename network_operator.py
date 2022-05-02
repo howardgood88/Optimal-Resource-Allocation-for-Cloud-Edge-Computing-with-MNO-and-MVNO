@@ -1,40 +1,44 @@
 from vm_assignment import VMAssignment
 import numpy as np
+from parameters import (_lambda, _mu, bw_low, bw_high, cr_low, cr_high)
+from utility import (printReturn, funcCall)
 
 class Contract:
     def __init__(self):
-        self.bw_low = 0
-        self.bw_high = 100
-        self.cr_low = 0
-        self.cr_high = 1
+        self.bw_low = bw_low
+        self.bw_high = bw_high
+        self.cr_low = cr_low
+        self.cr_high = cr_high
 
 class MVNO:
     def __init__(self):
-        pass
+        self.hold_vm_id = None
 
 class MNO:
-    def __init__(self, mvno: MVNO, machine_id_list: dict):
+    def __init__(self, mvno: MVNO, vm_id_list: list):
         self.mvno = mvno
-        self.vm_assignment = VMAssignment()
-        # the id of all vm own by MNO, transform to list because machine_list never changes.
-        self.total_machine_id = np.array(machine_id_list)
-    
-    def vm_assignment(self, contract: Contract, statistic_data: np.array, user_to_machine: dict, machine_attributes: dict):
+        self._vm_assignment = VMAssignment()
+        # the id of all vm own by MNO, transform to list because vm_id_list never changes.
+        self.total_vm_id = np.array(vm_id_list, dtype=list)
+        self.hold_vm_id = None
+
+    @funcCall
+    def vm_assignment(self, statistic_data: np.array, vm_list: dict) -> None:
         '''Process the data to needed format and delegate to class VMAssignment.'''
-        def make_machine_bw(user_to_machine: dict):
-            machine_bws = {}
-            for to_machine in user_to_machine.values():
-                for machine_id, data in to_machine.items():
-                    if machine_id not in machine_bws:
-                        machine_bws[machine_id] = []
-                    machine_bws[machine_id].append(data['bw'])
-
-            machine_bw = {}
-            for machine_id, bws in machine_bws.items():
-                machine_bw[machine_id] = sum(bws) / len(bws)
-
-            return machine_bw
+        def get_avg_vm_bw(vm_list: dict):
+            '''Calculate the average bw from all reachable user to vm.'''
+            for vm in vm_list.values():
+                bw_sum = 0
+                for data in vm.to_user.values():
+                    bw_sum += data['bw']
+                vm.avg_bw = bw_sum / len(vm.to_user)
 
         self.contract = Contract()
-        machine_bw = make_machine_bw(user_to_machine)
-        self.vm_assignment.run(contract, self.total_machine_id, statistic_data, machine_bw, machine_attributes)
+        get_avg_vm_bw(vm_list)
+        self.hold_vm_id, self.mvno.hold_vm_id = self._vm_assignment.run(self.contract, self.total_vm_id,
+                                                            statistic_data, vm_list)
+        print(f'mno vm id: {self.hold_vm_id}, mvno vm id: {self.mvno.hold_vm_id}')
+        
+        # the price mvno sells to its customers
+        for id in self.mvno.hold_vm_id:
+            vm_list[id].price = vm_list[id].price * _mu

@@ -9,8 +9,8 @@ The entry of each data file:
     1. machine_id
     1. cpu_request
     1. average_cpu_usage
-    1. uplink
-    1. downlink
+    1. bw_up
+    1. bw_down
 
 * machine_attributes
     1. machine_id
