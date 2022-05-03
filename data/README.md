@@ -11,6 +11,7 @@ The entry of each data file:
     1. average_cpu_usage
     1. bw_up
     1. bw_down
+    1. operator (runtime)
 
 * machine_attributes
     1. machine_id

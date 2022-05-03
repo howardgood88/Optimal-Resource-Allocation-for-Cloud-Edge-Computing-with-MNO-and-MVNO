@@ -1,8 +1,9 @@
 import json
 import numpy as np
-from utility import (printReturn, funcCall)
+from utils import (printReturn, funcCall)
 from network_operator import (MNO, MVNO)
-from parameters import (small_round_minutes, big_round_minutes, rnd_seed, Task_type, _alpha)
+from parameters import (small_round_minutes, big_round_minutes, rnd_seed, Task_type, _alpha,
+                        generated_bw_max, generated_bw_min, generated_delay_max, generated_delay_min)
 from vm import VM
 
 np.random.seed(rnd_seed)
@@ -95,14 +96,18 @@ def createVM(machine_attributes: dict) -> dict:
 
 @funcCall
 def update_user_to_vm(vm_list: dict, user_id_list: np.array) -> None:
-    '''Build table vm_to_user.'''
+    '''Build user to vm table.'''
     vm_id_list = vm_list.keys()
 
     for vm_id in vm_id_list:
         for user_id in user_id_list:
-            vm_to_user = vm_list[vm_id].to_user
-            if user_id not in vm_to_user:
-                vm_to_user[user_id] = {'bw':np.random.uniform(0, 1000), 'delay':np.random.uniform(0, 5)}
+            user_to_vm = vm_list[vm_id].from_user
+            if user_id not in user_to_vm:
+                user_to_vm[user_id] = {
+                    'bw_up':np.random.uniform(generated_bw_min, generated_bw_max),
+                    'bw_down':np.random.uniform(generated_bw_min, generated_bw_max),
+                    'delay':np.random.uniform(generated_delay_min, generated_delay_max)
+                }
 
 # load data & initialization
 dir = './data/case1/'
@@ -124,10 +129,10 @@ while system_time % big_round_minutes == 0:
     # VM Assignment
     mno.vm_assignment(statistic_data, vm_list)
 
-    break
     # Task Deployment
     mno.task_deployment(task_events, vm_list)
-    mvno.task_deployment()
+    mvno.task_deployment(task_events, vm_list)
+    break
 
     # update system time
     system_time += small_round_minutes

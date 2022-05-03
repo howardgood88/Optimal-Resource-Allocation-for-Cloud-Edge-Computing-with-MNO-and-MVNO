@@ -1,7 +1,8 @@
 import numpy as np
 from parameters import (rnd_seed, _theta, _lambda, Task_type)
 from optimizing import GeneticOptimizing
-from utility import (printReturn, funcCall)
+from utils import (printReturn, funcCall)
+from constract import Contract
 
 np.random.seed(rnd_seed)
 
@@ -10,7 +11,7 @@ class VMAssignment:
         self.optimizing = GeneticOptimizing() # TODO
     
     @funcCall
-    def run(self, contract, candidate_vm_id: np.array, statistic_data: np.array, vm_list: dict) -> None:
+    def run(self, contract: Contract, candidate_vm_id: np.array, statistic_data: np.array, vm_list: dict) -> None:
         '''
         Start running VMAssignment algorithm.
 
@@ -18,14 +19,12 @@ class VMAssignment:
         ----------
         contract : Contract
             Contract object that supply the upper bound and lower bound of bw and cr.
-        total_vm_id : np.array
-            The vms that MNO can supply.
+        candidate_vm_id : np.array
+            The candidate vm that MVNO can choose.
         statistic_data : np.array
             The statistic data of history data.
-        vm_bw : dict
-            The average bw to vm of all user in user_list.
-        vm_attributes : dict
-            The vm attributes in vm_attributes.json.
+        vm_list : dict
+            The dict of vm object.
         '''
         # TODO
         print('-----------Start of VM Assignment...------------')
@@ -43,7 +42,7 @@ class VMAssignment:
     @funcCall
     def choose_vm(self, candidate_vm_id: np.array) -> np.array:
         '''Choose a set of vm.'''
-        return np.random.choice([True, False], candidate_vm_id.shape, p = [0.5, 0.5])
+        return np.random.choice([True, False], candidate_vm_id.shape, p = [0.3, 0.7])
         #return np.array([True for i in range(6)])
 
     @funcCall
@@ -71,7 +70,8 @@ class VMAssignment:
         T_ftp_down = statistic_data[ftp_idx][2]
 
         ## vm bw and cr data of different task type
-        bw_task_x = [0 for i in range(len(Task_type))]
+        bw_up_task_x = [0 for i in range(len(Task_type))]
+        bw_down_task_x = [0 for i in range(len(Task_type))]
         cr_task_x = [0 for i in range(len(Task_type))]
         for id in selected_vm_id:
             vm = vm_list[id]
@@ -79,15 +79,22 @@ class VMAssignment:
             price = vm.price * _lambda
             vm_type = vm.task_type
             task_idx = Task_type[vm_type].value
-            bw_task_x[task_idx] += vm.avg_bw
-            cr_task_x[task_idx] += vm.cpu_capacity
+            bw_up_task_x[task_idx] += vm.avg_bw_up
+            bw_down_task_x[task_idx] += vm.avg_bw_down
+            cr_task_x[task_idx] += vm.cr
+        bw_up_sum = sum(bw_up_task_x)
+        bw_down_sum = sum(bw_down_task_x)
 
         # check condition
-        return bw_task_x[voip_idx] >= max(T_voip_up, T_voip_down) and\
-            bw_task_x[ipVideo_idx] >= max(T_ipVideo_up, T_ipVideo_down) and\
-            bw_task_x[ftp_idx] >= max(T_ftp_up, T_ftp_down) and\
+        return bw_up_task_x[voip_idx] >= T_voip_up and\
+            bw_up_task_x[ipVideo_idx] >= T_ipVideo_up and\
+            bw_up_task_x[ftp_idx] >= T_ftp_up and\
+            bw_down_task_x[voip_idx] >= T_voip_down and\
+            bw_down_task_x[ipVideo_idx] >= T_ipVideo_down and\
+            bw_down_task_x[ftp_idx] >= T_ftp_down and\
             cr_task_x[voip_idx] >= cr_voip and\
             cr_task_x[ipVideo_idx] >= cr_ipVideo and\
             cr_task_x[ftp_idx] >= cr_ftp and\
-            bw_low <= sum(bw_task_x) * (1 + _theta) <= bw_high and\
+            bw_low <= min(bw_up_sum, bw_down_sum) * (1 + _theta) and\
+            max(bw_up_sum, bw_down_sum) * (1 + _theta) <= bw_high and\
             cr_low <= sum(cr_task_x) * (1 * _theta) <= cr_high
