@@ -2,14 +2,18 @@ import abc
 from vm_assignment import VMAssignment
 from task_deployment import TaskDeployment
 import numpy as np
-from parameters import _mu
+from parameters import (_mu, small_round_minutes)
 from utils import (printReturn, funcCall)
 from constract import Contract
 
 class Network_operator(abc.ABC):
     @funcCall
-    def task_deployment(self, task_events: np.array, vm_list: dict) -> None:
-        self._task_deployment.run(self.hold_vm_id, task_events, vm_list)
+    def task_deployment(self, system_time: int, hour_tasks: np.array, vm_list: dict) -> None:
+        '''Try to redeploy the tasks remain from last round (last hour) and delegate to class TaskDeployment.'''
+        if len(self._task_deployment.unaccepted_task_queue) > 0:
+            self._task_deployment.run(system_time, self.hold_vm_id, np.array(self._task_deployment.unaccepted_task_queue)
+                                    , vm_list, unaccepted_mode=True)
+        self._task_deployment.run(system_time, self.hold_vm_id, hour_tasks, vm_list)
 
 class MVNO(Network_operator):
     def __init__(self):

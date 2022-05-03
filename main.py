@@ -3,7 +3,8 @@ import numpy as np
 from utils import (printReturn, funcCall)
 from network_operator import (MNO, MVNO)
 from parameters import (small_round_minutes, big_round_minutes, rnd_seed, Task_type, _alpha,
-                        generated_bw_max, generated_bw_min, generated_delay_max, generated_delay_min)
+                        generated_bw_max, generated_bw_min, generated_delay_max, generated_delay_min,
+                        big_round_number)
 from vm import VM
 
 np.random.seed(rnd_seed)
@@ -60,7 +61,7 @@ def data_preprocessing(history_data: np.array, system_time: int) -> tuple[np.arr
         hourly_tasks_data = [None for i in range(len(Task_type))]
         for task_type, task_idx in Task_type.__members__.items():
             # [average_cpu, bw_up, bw_down]
-            data = history_data[hour_mask & (history_data[:, 3] == task_type)][:, -3:]
+            data = history_data[hour_mask & (history_data[:, 3] == task_type)][:, -4:-1]
             hourly_data = np.zeros(3) if data.size == 0 else np.mean(data, axis=0)
             hourly_tasks_data[task_idx.value] = hourly_data
         hourly_history_data.append(hourly_tasks_data)
@@ -80,7 +81,7 @@ def data_preprocessing(history_data: np.array, system_time: int) -> tuple[np.arr
 @funcCall
 def get_statistic_data(hourly_history_data: np.array, statistic_data: np.array) -> np.array:
     '''Build/Update statistic data from hourly_history_data.'''
-    if not statistic_data:
+    if statistic_data is None:
         return np.mean(hourly_history_data, axis=0)
     return statistic_data * (1 -_alpha) + hourly_history_data[-1] * _alpha
 
@@ -110,6 +111,7 @@ def update_user_to_vm(vm_list: dict, user_id_list: np.array) -> None:
                 }
 
 # load data & initialization
+print('-----------Start of load data & initialization------------')
 dir = './data/case1/'
 machine_attributes = load_machine_data(dir + 'machine_attributes.json')
 history_data = load_task_data(dir + 'history_data.json')
@@ -121,18 +123,34 @@ mvno = MVNO()
 mno = MNO(mvno, list(vm_list.keys()))
 
 statistic_data = None
-while system_time % big_round_minutes == 0:
+while system_time <= (big_round_minutes * big_round_number):
     # prepare data
+    print('-----------Start of prepare data------------')
     statistic_data = get_statistic_data(hourly_history_data, statistic_data)
     update_user_to_vm(vm_list, user_id_list)
 
     # VM Assignment
+    print('-----------Start of VM Assignment------------')
     mno.vm_assignment(statistic_data, vm_list)
 
-    # Task Deployment
-    mno.task_deployment(task_events, vm_list)
-    mvno.task_deployment(task_events, vm_list)
-    break
+    while system_time == 0 or system_time % big_round_minutes != 0:
+        minutes_range = (system_time, system_time + small_round_minutes)
+        hour_mask = (minutes_range[0] <= task_events[:, 1]) & (task_events[:, 1] < minutes_range[1])
+        hour_tasks = task_events[hour_mask]
+        if hour_tasks.size == 0:
+            break
+        print(f'hour tasks: {hour_tasks[:, -1]}')
+        # Task Deployment
+        print(f'-----------Start of MNO Task Deployment------------')
+        mno.task_deployment(system_time, hour_tasks, vm_list)
+        print(f'-----------Start of MVNO Task Deployment------------')
+        mvno.task_deployment(system_time, hour_tasks, vm_list)
 
-    # update system time
-    system_time += small_round_minutes
+        # update system time
+        system_time += small_round_minutes
+        print(f'-----------Start of next round, system time: {system_time}, hour: {system_time // small_round_minutes}------------')
+        # if input() == 'b':
+        #     break
+    if hour_tasks.size == 0:
+        break
+    assert(system_time % big_round_minutes == 0)

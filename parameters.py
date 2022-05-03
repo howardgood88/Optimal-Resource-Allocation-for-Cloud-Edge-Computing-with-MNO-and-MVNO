@@ -6,6 +6,7 @@ rnd_seed = 1126
 small_round_minutes = 60
 # 60 * 24 * 7
 big_round_minutes = 10080
+big_round_number = 12
 generated_bw_max = 1000
 generated_bw_min = 0
 generated_delay_max = 5

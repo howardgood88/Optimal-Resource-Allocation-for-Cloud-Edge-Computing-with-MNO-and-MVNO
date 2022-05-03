@@ -7,6 +7,7 @@ from constract import Contract
 np.random.seed(rnd_seed)
 
 class VMAssignment:
+    '''VM Assignment!!!'''
     def __init__(self):
         self.optimizing = GeneticOptimizing() # TODO
     
@@ -27,7 +28,6 @@ class VMAssignment:
             The dict of vm object.
         '''
         # TODO
-        print('-----------Start of VM Assignment...------------')
         while 1:
             selected_vm = self.choose_vm(candidate_vm_id)
             print(f'try candidate vm: {selected_vm}...')
@@ -36,7 +36,6 @@ class VMAssignment:
                 mno_vm_id = candidate_vm_id[np.logical_not(selected_vm)]
                 break
             print('candidate vm not legal. try again...')
-        print('-----------End of VM Assignment...------------')
         return mno_vm_id, mvno_vm_id
 
     @funcCall
