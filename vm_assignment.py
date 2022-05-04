@@ -1,5 +1,5 @@
 import numpy as np
-from parameters import (rnd_seed, _theta, _lambda, Task_type)
+from parameters import (rnd_seed, _theta, _lambda, Task_type_index)
 from optimizing import GeneticOptimizing
 from utils import (printReturn, funcCall)
 from constract import Contract
@@ -35,7 +35,7 @@ class VMAssignment:
             if self.check_condition(mvno_vm_id, vm_list, contract, statistic_data):
                 mno_vm_id = candidate_vm_id[np.logical_not(selected_vm)]
                 break
-            print('candidate vm not legal. try again...')
+            print('candidate vm not legal. try again')
         return mno_vm_id, mvno_vm_id
 
     @funcCall
@@ -55,29 +55,29 @@ class VMAssignment:
         cr_high = contract.cr_high
 
         ## statistic data
-        voip_idx = Task_type.VoIP.value
+        voip_idx = Task_type_index.VoIP.value
         cr_voip = statistic_data[voip_idx][0]
         T_voip_up = statistic_data[voip_idx][1]
         T_voip_down = statistic_data[voip_idx][2]
-        ipVideo_idx = Task_type.IP_Video.value
+        ipVideo_idx = Task_type_index.IP_Video.value
         cr_ipVideo = statistic_data[ipVideo_idx][0]
         T_ipVideo_up = statistic_data[ipVideo_idx][1]
         T_ipVideo_down = statistic_data[ipVideo_idx][2]
-        ftp_idx = Task_type.FTP.value
+        ftp_idx = Task_type_index.FTP.value
         cr_ftp = statistic_data[ftp_idx][0]
         T_ftp_up = statistic_data[ftp_idx][1]
         T_ftp_down = statistic_data[ftp_idx][2]
 
         ## vm bw and cr data of different task type
-        bw_up_task_x = [0 for i in range(len(Task_type))]
-        bw_down_task_x = [0 for i in range(len(Task_type))]
-        cr_task_x = [0 for i in range(len(Task_type))]
+        bw_up_task_x = [0 for i in range(len(Task_type_index))]
+        bw_down_task_x = [0 for i in range(len(Task_type_index))]
+        cr_task_x = [0 for i in range(len(Task_type_index))]
         for id in selected_vm_id:
             vm = vm_list[id]
             # the price mvno buy from mno
             price = vm.price * _lambda
             vm_type = vm.task_type
-            task_idx = Task_type[vm_type].value
+            task_idx = Task_type_index[vm_type].value
             bw_up_task_x[task_idx] += vm.avg_bw_up
             bw_down_task_x[task_idx] += vm.avg_bw_down
             cr_task_x[task_idx] += vm.cr

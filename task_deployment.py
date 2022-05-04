@@ -2,7 +2,7 @@ import numpy as np
 from optimizing import GeneticOptimizing
 from utils import (printReturn, funcCall)
 from queue import Queue
-from parameters import (_gamma, _op_bw, _op_cr, generated_bw_max, generated_bw_min, Task_type)
+from parameters import (_gamma, _op_bw, _op_cr, generated_bw_max, generated_bw_min, Task_type_index, Task_event_index)
 from vm import VM
 
 class UtilityFunc:
@@ -104,22 +104,44 @@ class Runing_task_manager:
 
     def set_time(self, system_time: int) -> None:
         '''Check whether system_time trigger task release.'''
-        while not self.observers.empty() and self.observers.queue[0][2] < system_time:
+        while not self.observers.empty() and self.observers.queue[0][Task_event_index.end_time.value] < system_time:
             self.release_task()
     
     def release_task(self):
-        '''Release vm resource task by task.'''
+        '''Release vm resource used by task.'''
         task = self.observers.get()
         vm = self.vm_running_at.get()
-        print(f'release task{task[-1]} from vm {vm.id}, cr: {vm.cr} -> ', end = '')
-        vm.cr += task[7]
+
+        print(f'release task{task[Task_event_index.index.value]} from vm {vm.id},')
+        print(f'cr: {vm.cr} -> ', end = '')
+        vm.cr += task[Task_event_index.average_cpu_usage.value]
         print(f'{vm.cr}')
+
+        print(f'local_bw_up: {vm.local_bw_up} -> ', end = '')
+        vm.local_bw_up += task[Task_event_index.T_up.value]
+        print(f'{vm.local_bw_up}')
+
+        print(f'local_bw_down: {vm.local_bw_down} -> ', end = '')
+        vm.local_bw_down += task[Task_event_index.T_down.value]
+        print(f'{vm.local_bw_down}')
 
     def bind_task(self, task: np.array, selected_vm: VM):
         '''Consume resource of selected vm and make task as observer.'''
-        print(f', vm cr: {selected_vm.cr} -> ', end = '')
-        selected_vm.cr -= task[7]
+        task_cr = task[Task_event_index.average_cpu_usage]
+        print(f'task cr: {task_cr}, vm cr: {selected_vm.cr} -> ', end = '')
+        selected_vm.cr -= task[Task_event_index.average_cpu_usage.value]
         print(f'{selected_vm.cr}')
+
+        task_T_up = task[Task_event_index.T_up]
+        print(f'task bw_up: {task_T_up}, local_bw_up: {selected_vm.local_bw_up} -> ', end = '')
+        selected_vm.local_bw_up -= task[Task_event_index.T_up.value]
+        print(f'{selected_vm.local_bw_up}')
+
+        task_T_down = task[Task_event_index.T_down]
+        print(f'task bw_down: {task_T_down}, local_bw_down: {selected_vm.local_bw_down} -> ', end = '')
+        selected_vm.local_bw_down -= task[Task_event_index.T_down.value]
+        print(f'{selected_vm.local_bw_down}')
+
         self.observers.put(task)
         self.vm_running_at.put(selected_vm)
 
@@ -127,47 +149,47 @@ class TaskDeployment:
     '''Task Deployment!!!'''
     def __init__(self):
         self.optimizing = GeneticOptimizing() # TODO
-        self.unaccepted_task_queue = []
+        self.unaccepted_task_queue = Queue()
         self.task_manager = Runing_task_manager()
 
     @funcCall
-    def run(self, system_time: int, candidate_vm_id: np.array, input_tasks: np.array, vm_list: dict, unaccepted_mode: bool = False) -> None:
+    def run(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
         '''Start running TaskDeployment algorithm.'''
-        for task in input_tasks:
-            # check whether any running tasks need to release
-            self.task_manager.set_time(system_time)
+        start_time = task[Task_event_index.start_time.value]
+        print(f'system time: {start_time}')
+        task_type = task[Task_event_index.task_type.value]
+        user_id = task[Task_event_index.user_id.value]
+        cpu_request = task[Task_event_index.cpu_request.value]
+        # check whether any running tasks need to release
+        self.task_manager.set_time(start_time)
 
-            task_type = task[3]
-            user_id = task[4]
-            cpu_request = task[6]
-            max_utility = float('-inf')
-            selected_vm_id = None
-            for vm_id in candidate_vm_id:
-                vm = vm_list[vm_id]
-                # calculate utility
-                task_utility = UtilityFunc.get_task_utility(task_type)
-                bw_up = vm.from_user[user_id]['bw_up']
-                bw_down = vm.from_user[user_id]['bw_down']
-                utilities = [
-                    task_utility.bw_up(bw_up),
-                    task_utility.bw_down(bw_down),
-                    task_utility.cr(vm.cr),
-                    task_utility.price(vm.price),
-                    task_utility.delay(vm.from_user[user_id]['delay']),
-                    task_utility.cr_diff(abs(cpu_request - vm.cr))
-                ]
-                utility = sum([g * u for g, u in zip(_gamma[Task_type[task_type]], utilities)])
-                if utility > max_utility and min(bw_up, bw_down) >= _op_bw and vm.cr >= _op_cr:
-                    max_utility = utility
-                    selected_vm_id = vm_id
+        max_utility = float('-inf')
+        selected_vm_id = None
+        for vm_id in candidate_vm_id:
+            # print(vm_id)
+            vm = vm_list[vm_id]
+            # calculate utility
+            task_utility = UtilityFunc.get_task_utility(task_type)
+            bw_up = vm.from_user[user_id]['bw_up']
+            bw_down = vm.from_user[user_id]['bw_down']
+            utilities = [
+                task_utility.bw_up(bw_up),
+                task_utility.bw_down(bw_down),
+                task_utility.cr(vm.cr),
+                task_utility.price(vm.price),
+                task_utility.delay(vm.from_user[user_id]['delay']),
+                task_utility.cr_diff(abs(cpu_request - vm.cr))
+            ]
+            utility = sum([g * u for g, u in zip(_gamma[Task_type_index[task_type]], utilities)])
+            # print(utility)
+            if utility > max_utility and min(bw_up, bw_down) >= _op_bw and vm.cr >= _op_cr:
+                max_utility = utility
+                selected_vm_id = vm_id
 
-            # if no feasible solution
-            if selected_vm_id == None:
-                if unaccepted_mode:
-                    print(f'task{task[-1]} is dropped because still unaccepted...')
-                else:
-                    print(f'task{task[-1]} unaccepted...')
-                    self.unaccepted_task_queue.append(task)
-            else:
-                print(f'Deploy task{task[-1]} to vm {selected_vm_id}, ', end = '')
-                self.task_manager.bind_task(task, vm_list[selected_vm_id])
+        # if no feasible solution
+        if selected_vm_id == None:
+            print(f'task{task[Task_event_index.index.value]} unaccepted')
+            self.unaccepted_task_queue.put(task)
+        else:
+            print(f'Deploy task{task[Task_event_index.index.value]} to vm {selected_vm_id},')
+            self.task_manager.bind_task(task, vm_list[selected_vm_id])

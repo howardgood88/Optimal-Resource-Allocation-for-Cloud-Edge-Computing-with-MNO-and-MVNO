@@ -8,20 +8,19 @@ from constract import Contract
 
 class Network_operator(abc.ABC):
     @funcCall
-    def task_deployment(self, system_time: int, hour_tasks: np.array, vm_list: dict) -> None:
+    def task_deployment(self, task: np.array, vm_list: dict) -> None:
         '''Try to redeploy the tasks remain from last round (last hour) and delegate to class TaskDeployment.'''
-        if len(self._task_deployment.unaccepted_task_queue) > 0:
-            self._task_deployment.run(system_time, self.hold_vm_id, np.array(self._task_deployment.unaccepted_task_queue)
-                                    , vm_list, unaccepted_mode=True)
-        self._task_deployment.run(system_time, self.hold_vm_id, hour_tasks, vm_list)
+        self._task_deployment.run(self.hold_vm_id, task, vm_list)
 
 class MVNO(Network_operator):
     def __init__(self):
+        self.name = 'MVNO'
         self.hold_vm_id = None
         self._task_deployment = TaskDeployment()
 
 class MNO(Network_operator):
     def __init__(self, mvno: MVNO, vm_id_list: list):
+        self.name = 'MNO'
         self.mvno = mvno
         self._vm_assignment = VMAssignment()
         self._task_deployment = TaskDeployment()

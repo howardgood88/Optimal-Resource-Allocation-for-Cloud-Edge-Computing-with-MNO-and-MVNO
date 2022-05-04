@@ -7,14 +7,14 @@ small_round_minutes = 60
 # 60 * 24 * 7
 big_round_minutes = 10080
 big_round_number = 12
-generated_bw_max = 1000
-generated_bw_min = 0
+generated_bw_max = 100000 # Kbps
+generated_bw_min = 0 # Kbps
 generated_delay_max = 5
 generated_delay_min = 0
 
 # contract
 bw_low = 0
-bw_high = 10000
+bw_high = generated_bw_max * 100 # Kbps
 cr_low = 0
 cr_high = 5
 
@@ -36,8 +36,25 @@ _op_cr = 0.2 # GCU-second/second
 _alpha = 0.7
 
 @unique
-class Task_type(IntEnum):
+class Task_type_index(IntEnum):
     '''The task name maps to vector index.'''
     VoIP = 0
     IP_Video = 1
     FTP = 2
+
+@unique
+class Task_event_index(IntEnum):
+    '''The attribute name maps to vector index. (don't use dict for keeping np.array property.)'''
+    index = 0
+    round = 1
+    start_time = 2
+    end_time = 3
+    task_type = 4
+    user_id = 5
+    machine_id = 6
+    cpu_request = 7
+    average_cpu_usage = 8
+    T_up = 9
+    T_down = 10
+    operator = 11 # runtime
+    running_at = 12 # runtime

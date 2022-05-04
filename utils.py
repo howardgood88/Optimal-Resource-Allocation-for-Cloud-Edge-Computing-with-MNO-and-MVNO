@@ -9,7 +9,7 @@ def printReturn(func):
 
 def funcCall(func):
     def decorate(*args, **kwargs):
-        print(f'Function {func.__name__} is called...')
+        print(f'[Log] Function {func.__name__} is called...')
         data = func(*args, **kwargs)
         return data
     return decorate
