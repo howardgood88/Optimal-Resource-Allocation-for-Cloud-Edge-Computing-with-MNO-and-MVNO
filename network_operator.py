@@ -5,6 +5,7 @@ import numpy as np
 from parameters import (_mu, small_round_minutes)
 from utils import (printReturn, funcCall)
 from constract import Contract
+import logging
 
 class Network_operator(abc.ABC):
     @funcCall
@@ -46,7 +47,7 @@ class MNO(Network_operator):
         get_avg_vm_bw(vm_list)
         self.hold_vm_id, self.mvno.hold_vm_id = self._vm_assignment.run(self.contract, self.total_vm_id,
                                                             statistic_data, vm_list)
-        print(f'mno vm id: {self.hold_vm_id}, mvno vm id: {self.mvno.hold_vm_id}')
+        logging.info(f'mno vm id: {self.hold_vm_id}, mvno vm id: {self.mvno.hold_vm_id}')
         
         # the price mvno sells to its customers
         for id in self.mvno.hold_vm_id:

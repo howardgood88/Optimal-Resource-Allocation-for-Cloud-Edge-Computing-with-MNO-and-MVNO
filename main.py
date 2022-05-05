@@ -3,10 +3,13 @@ import numpy as np
 from utils import (printReturn, funcCall)
 from network_operator import (MNO, MVNO)
 from parameters import (small_round_minutes, big_round_minutes, rnd_seed, Task_type_index, Task_event_index, _alpha,
-                        generated_bw_max, generated_bw_min, generated_delay_max, generated_delay_min,
-                        big_round_number)
+                        generated_bw_max, generated_bw_min, generated_delay_cloud_max, generated_delay_cloud_min,
+                        generated_delay_edge_max, generated_delay_edge_min, big_round_number)
 from vm import VM
+import logging
+from datetime import datetime
 
+logging.basicConfig(filename=r'.\logs\log.txt', filemode='w', level=logging.DEBUG)
 np.random.seed(rnd_seed)
 
 @funcCall
@@ -64,7 +67,7 @@ def data_preprocessing(history_data: np.array, system_time: int) -> tuple[np.arr
     # each row with the set of user appeared in the hour
     hourly_user_id_list = []
     # all user had appeared
-    user_id_list = set()
+    user_id_set = set()
     # the selected time range
     minutes_range = (system_time, system_time + small_round_minutes)
     # index of task_event.json/history_data.json
@@ -84,12 +87,11 @@ def data_preprocessing(history_data: np.array, system_time: int) -> tuple[np.arr
         hourly_user_id_list.append(users)
 
         # user had appeared
-        user_id_list = user_id_list | users
+        user_id_set = user_id_set | users
 
         # update minutes_range to next hour
         minutes_range = (minutes_range[0] + small_round_minutes, minutes_range[1] + small_round_minutes)
-
-    return np.array(hourly_history_data, dtype=list), np.array(hourly_user_id_list, dtype=list), np.array(sorted(user_id_list))
+    return np.array(hourly_history_data, dtype=list), np.array(hourly_user_id_list, dtype=list), user_id_set
 
 @funcCall
 def update_data(hourly_history_data: np.array, hour_task_record: np.array, statistic_data: np.array) -> tuple[np.array, np.array]:
@@ -110,25 +112,32 @@ def createVM(machine_attributes: dict) -> dict:
         vm_list[id] = VM(machine_attributes[id])
     return vm_list
 
-def generate_user_to_vm_data():
-    return {
-                'bw_up':np.random.uniform(generated_bw_min, generated_bw_max),
-                'bw_down':np.random.uniform(generated_bw_min, generated_bw_max),
-                'delay':np.random.uniform(generated_delay_min, generated_delay_max)
-            }
+def generate_user_to_vm_data(location: str) -> dict:
+    if location == 'cloud':
+        return {
+                    'bw_up':np.random.uniform(generated_bw_min, generated_bw_max),
+                    'bw_down':np.random.uniform(generated_bw_min, generated_bw_max),
+                    'delay':np.random.uniform(generated_delay_cloud_min, generated_delay_cloud_max)
+                }
+    elif location == 'edge':
+        return {
+                    'bw_up':np.random.uniform(generated_bw_min, generated_bw_max),
+                    'bw_down':np.random.uniform(generated_bw_min, generated_bw_max),
+                    'delay':np.random.uniform(generated_delay_edge_min, generated_delay_edge_max)
+                }
+    else:
+        raise ValueError(f'invalid value {location} of location')
 
 @funcCall
-def update_user_to_vm(vm_list: dict, user_id_list: np.array) -> None:
+def update_user_to_vm(vm_id_list: list, user_id_list: np.array) -> None:
     '''Build user to vm table.'''
-    vm_id_list = vm_list.keys()
-
     for vm_id in vm_id_list:
         for user_id in user_id_list:
-            user_to_vm = vm_list[vm_id].from_user
-            user_to_vm.setdefault(user_id, generate_user_to_vm_data())
+            vm = vm_list[vm_id]
+            vm.from_user.setdefault(user_id, generate_user_to_vm_data(vm.location))
 
 @funcCall
-def task_deployment(hour_tasks, vm_list):
+def task_deployment(hour_tasks: np.array, vm_list: dict) -> None:
     '''Random assign task to operator and deploy the task.'''
     # try redeploy the unaccepted tasks.
     for operator in (mno, mvno):
@@ -140,56 +149,65 @@ def task_deployment(hour_tasks, vm_list):
             task[Task_event_index.end_time.value] = system_time + duration
             operator.task_deployment(task, vm_list)
             queue_size -= 1
+    # start hourly task deployment
     for task in hour_tasks:
-        operator = user_id_to_operator.setdefault(task[Task_event_index.user_id.value], np.random.choice([mno, mvno], 1, p = [0.7, 0.3])[0])
-        print(f'task{task[Task_event_index.index.value]} assign to {operator.name}')
+        user_id = task[Task_event_index.user_id.value]
+        operator = user_id_to_operator.setdefault(user_id, np.random.choice([mno, mvno], 1, p = [0.7, 0.3])[0])
+        if user_id not in user_id_set:
+            update_user_to_vm(operator.hold_vm_id, [user_id])
+            user_id_set.add(user_id)
+        logging.info(f'task{task[Task_event_index.index.value]} assign to {operator.name}')
         operator.task_deployment(task, vm_list)
 
 # load data & initialization
-print('-----------Start of load data & initialization------------')
+logging.info('------------Start of load data & initialization------------')
 dir = './data/case1/'
 machine_attributes = load_machine_data(dir + 'machine_attributes.json')
 history_data = load_task_data(dir + 'history_data.json')
 task_events = load_task_data(dir + 'task_events.json')
 vm_list = createVM(machine_attributes)
 system_time = 0
-hour_task_record, hourly_user_list, user_id_list = data_preprocessing(history_data, system_time)
+hour_task_record, hourly_user_list, user_id_set = data_preprocessing(history_data, system_time)
+user_id_list = np.array(sorted(user_id_set))
+update_user_to_vm(vm_list.keys(), user_id_list)
 mvno = MVNO()
 mno = MNO(mvno, list(vm_list.keys()))
 user_id_to_operator = {}
 
 statistic_data = np.zeros((3,3))
 hourly_history_data = None
+
 while system_time <= (big_round_minutes * big_round_number):
     # prepare data
-    print('-----------Start of prepare data------------')
+    logging.info('------------Start of prepare data------------')
     hourly_history_data, statistic_data = update_data(hourly_history_data, hour_task_record, statistic_data)
-    update_user_to_vm(vm_list, user_id_list)
 
     # VM Assignment
-    print('-----------Start of VM Assignment------------')
+    logging.info('------------Start of VM Assignment------------')
     mno.vm_assignment(statistic_data, vm_list)
 
     # Task Deployment
-    print(f'-----------Start of Task Deployment------------')
+    logging.info(f'------------Start of Task Deployment------------')
     hour_task_record = []
     while system_time == 0 or system_time % big_round_minutes != 0:
+        logging.info(f'-------Start of hour {system_time // small_round_minutes}, system time: {system_time}-------')
         minutes_range = (system_time, system_time + small_round_minutes)
         start_time_idx = Task_event_index.start_time.value
         hour_mask = (minutes_range[0] <= task_events[:, start_time_idx]) & (task_events[:, start_time_idx] < minutes_range[1])
         hour_tasks = task_events[hour_mask]
         if hour_tasks.size == 0:
-            break
-        print(f'hour tasks: {hour_tasks[:, Task_event_index.index.value]}')
-                
+            logging.info(f'Finish simulating...')
+            exit()
+        logging.info(f'hour tasks: {hour_tasks[:, Task_event_index.index.value]}')
+
         task_deployment(hour_tasks, vm_list)
 
         # update system time
         system_time += small_round_minutes
 
         hour_task_record.append(get_hourly_statistic_data(hour_tasks))
-        print(f'-----------Start of next round, system time: {system_time}, hour: {system_time // small_round_minutes}------------')
+    logging.info(f'------------Start of Updating Parameters------------')
+    # TODO!
+    logging.info(f'------------Start of Updating History Data------------')
     hourly_history_data = np.vstack([hourly_history_data, hour_task_record])
-    if hour_tasks.size == 0:
-        break
     assert(system_time % big_round_minutes == 0)

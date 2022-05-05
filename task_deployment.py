@@ -4,6 +4,7 @@ from utils import (printReturn, funcCall)
 from queue import Queue
 from parameters import (_gamma, _op_bw, _op_cr, generated_bw_max, generated_bw_min, Task_type_index, Task_event_index)
 from vm import VM
+import logging
 
 class UtilityFunc:
     '''Mapping from resource to utility from 0 to 100.'''
@@ -112,35 +113,38 @@ class Runing_task_manager:
         task = self.observers.get()
         vm = self.vm_running_at.get()
 
-        print(f'release task{task[Task_event_index.index.value]} from vm {vm.id},')
-        print(f'cr: {vm.cr} -> ', end = '')
+        _message = f'release task{task[Task_event_index.index.value]} from vm {vm.id},\n'
+        _message += f'cr: {vm.cr} -> '
         vm.cr += task[Task_event_index.average_cpu_usage.value]
-        print(f'{vm.cr}')
+        _message += f'{vm.cr}\n'
 
-        print(f'local_bw_up: {vm.local_bw_up} -> ', end = '')
+        _message += f'local_bw_up: {vm.local_bw_up} -> '
         vm.local_bw_up += task[Task_event_index.T_up.value]
-        print(f'{vm.local_bw_up}')
+        _message += f'{vm.local_bw_up}\n'
 
-        print(f'local_bw_down: {vm.local_bw_down} -> ', end = '')
+        _message += f'local_bw_down: {vm.local_bw_down} -> '
         vm.local_bw_down += task[Task_event_index.T_down.value]
-        print(f'{vm.local_bw_down}')
+        _message += f'{vm.local_bw_down}\n'
+        logging.info(_message)
 
     def bind_task(self, task: np.array, selected_vm: VM):
         '''Consume resource of selected vm and make task as observer.'''
+        _message = f'Deploy task{task[Task_event_index.index.value]} to vm {selected_vm.id},\n'
         task_cr = task[Task_event_index.average_cpu_usage]
-        print(f'task cr: {task_cr}, vm cr: {selected_vm.cr} -> ', end = '')
+        _message += f'task cr: {task_cr}, vm cr: {selected_vm.cr} -> '
         selected_vm.cr -= task[Task_event_index.average_cpu_usage.value]
-        print(f'{selected_vm.cr}')
+        _message += f'{selected_vm.cr}\n'
 
         task_T_up = task[Task_event_index.T_up]
-        print(f'task bw_up: {task_T_up}, local_bw_up: {selected_vm.local_bw_up} -> ', end = '')
+        _message += f'task bw_up: {task_T_up}, local_bw_up: {selected_vm.local_bw_up} -> '
         selected_vm.local_bw_up -= task[Task_event_index.T_up.value]
-        print(f'{selected_vm.local_bw_up}')
+        _message += f'{selected_vm.local_bw_up}\n'
 
         task_T_down = task[Task_event_index.T_down]
-        print(f'task bw_down: {task_T_down}, local_bw_down: {selected_vm.local_bw_down} -> ', end = '')
+        _message += f'task bw_down: {task_T_down}, local_bw_down: {selected_vm.local_bw_down} -> '
         selected_vm.local_bw_down -= task[Task_event_index.T_down.value]
-        print(f'{selected_vm.local_bw_down}')
+        _message += f'{selected_vm.local_bw_down}\n'
+        logging.info(_message)
 
         self.observers.put(task)
         self.vm_running_at.put(selected_vm)
@@ -156,7 +160,7 @@ class TaskDeployment:
     def run(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
         '''Start running TaskDeployment algorithm.'''
         start_time = task[Task_event_index.start_time.value]
-        print(f'system time: {start_time}')
+        logging.info(f'system time: {start_time}')
         task_type = task[Task_event_index.task_type.value]
         user_id = task[Task_event_index.user_id.value]
         cpu_request = task[Task_event_index.cpu_request.value]
@@ -166,8 +170,9 @@ class TaskDeployment:
         max_utility = float('-inf')
         selected_vm_id = None
         for vm_id in candidate_vm_id:
-            # print(vm_id)
             vm = vm_list[vm_id]
+            if vm.task_type != task_type:
+                continue
             # calculate utility
             task_utility = UtilityFunc.get_task_utility(task_type)
             bw_up = vm.from_user[user_id]['bw_up']
@@ -181,15 +186,13 @@ class TaskDeployment:
                 task_utility.cr_diff(abs(cpu_request - vm.cr))
             ]
             utility = sum([g * u for g, u in zip(_gamma[Task_type_index[task_type]], utilities)])
-            # print(utility)
             if utility > max_utility and min(bw_up, bw_down) >= _op_bw and vm.cr >= _op_cr:
                 max_utility = utility
                 selected_vm_id = vm_id
 
         # if no feasible solution
         if selected_vm_id == None:
-            print(f'task{task[Task_event_index.index.value]} unaccepted')
+            logging.info(f'task{task[Task_event_index.index.value]} unaccepted')
             self.unaccepted_task_queue.put(task)
         else:
-            print(f'Deploy task{task[Task_event_index.index.value]} to vm {selected_vm_id},')
             self.task_manager.bind_task(task, vm_list[selected_vm_id])

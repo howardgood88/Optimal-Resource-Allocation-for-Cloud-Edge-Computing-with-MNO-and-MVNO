@@ -1,0 +1,188 @@
+INFO:root:------------Start of load data & initialization------------
+DEBUG:root:[Log] Function load_machine_data is called...
+DEBUG:root:[Log] Function load_task_data is called...
+DEBUG:root:[Log] Function load_task_data is called...
+DEBUG:root:[Log] Function createVM is called...
+DEBUG:root:[Log] Function data_preprocessing is called...
+DEBUG:root:[Log] Function update_user_to_vm is called...
+INFO:root:------------Start of prepare data------------
+DEBUG:root:[Log] Function update_data is called...
+INFO:root:------------Start of VM Assignment------------
+DEBUG:root:[Log] Function vm_assignment is called...
+DEBUG:root:[Log] Function run is called...
+DEBUG:root:[Log] Function choose_vm is called...
+INFO:root:try candidate vm: [False  True  True False  True  True]...
+DEBUG:root:[Log] Function check_condition is called...
+INFO:root:candidate vm not legal. try again
+DEBUG:root:[Log] Function choose_vm is called...
+INFO:root:try candidate vm: [False False False  True False False]...
+DEBUG:root:[Log] Function check_condition is called...
+INFO:root:candidate vm not legal. try again
+DEBUG:root:[Log] Function choose_vm is called...
+INFO:root:try candidate vm: [False  True  True False False False]...
+DEBUG:root:[Log] Function check_condition is called...
+INFO:root:candidate vm not legal. try again
+DEBUG:root:[Log] Function choose_vm is called...
+INFO:root:try candidate vm: [False  True False False  True False]...
+DEBUG:root:[Log] Function check_condition is called...
+INFO:root:candidate vm not legal. try again
+DEBUG:root:[Log] Function choose_vm is called...
+INFO:root:try candidate vm: [False  True False False False  True]...
+DEBUG:root:[Log] Function check_condition is called...
+INFO:root:candidate vm not legal. try again
+DEBUG:root:[Log] Function choose_vm is called...
+INFO:root:try candidate vm: [False  True  True False  True False]...
+DEBUG:root:[Log] Function check_condition is called...
+INFO:root:candidate vm not legal. try again
+DEBUG:root:[Log] Function choose_vm is called...
+INFO:root:try candidate vm: [False False False  True  True  True]...
+DEBUG:root:[Log] Function check_condition is called...
+INFO:root:mno vm id: ['1' '2' '3'], mvno vm id: ['4' '5' '6']
+INFO:root:------------Start of Task Deployment------------
+INFO:root:-------Start of hour 0, system time: 0-------
+INFO:root:hour tasks: [0 1 2 3]
+DEBUG:root:[Log] Function task_deployment is called...
+INFO:root:task0 assign to MNO
+DEBUG:root:[Log] Function task_deployment is called...
+DEBUG:root:[Log] Function run is called...
+INFO:root:system time: 10
+INFO:root:Deploy task0 to vm 1,
+task cr: 0.02, vm cr: 0.7 -> 0.6799999999999999
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:root:task1 assign to MNO
+DEBUG:root:[Log] Function task_deployment is called...
+DEBUG:root:[Log] Function run is called...
+INFO:root:system time: 15
+INFO:root:Deploy task1 to vm 2,
+task cr: 0.06, vm cr: 0.6 -> 0.54
+task bw_up: 20, local_bw_up: 100000 -> 99980
+task bw_down: 900, local_bw_down: 100000 -> 99100
+
+INFO:root:task2 assign to MNO
+DEBUG:root:[Log] Function task_deployment is called...
+DEBUG:root:[Log] Function run is called...
+INFO:root:system time: 30
+INFO:root:release task0 from vm 1,
+cr: 0.6799999999999999 -> 0.7
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:root:Deploy task2 to vm 3,
+task cr: 0.08, vm cr: 0.8 -> 0.7200000000000001
+task bw_up: 35, local_bw_up: 100000 -> 99965
+task bw_down: 1000, local_bw_down: 100000 -> 99000
+
+INFO:root:task3 assign to MNO
+DEBUG:root:[Log] Function task_deployment is called...
+DEBUG:root:[Log] Function run is called...
+INFO:root:system time: 50
+INFO:root:release task1 from vm 2,
+cr: 0.54 -> 0.6000000000000001
+local_bw_up: 99980 -> 100000
+local_bw_down: 99100 -> 100000
+
+INFO:root:release task2 from vm 3,
+cr: 0.7200000000000001 -> 0.8
+local_bw_up: 99965 -> 100000
+local_bw_down: 99000 -> 100000
+
+INFO:root:Deploy task3 to vm 1,
+task cr: 0.05, vm cr: 0.7 -> 0.6499999999999999
+task bw_up: 300, local_bw_up: 100000 -> 99700
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:root:-------Start of hour 1, system time: 60-------
+INFO:root:hour tasks: [4 5]
+DEBUG:root:[Log] Function task_deployment is called...
+INFO:root:task4 assign to MVNO
+DEBUG:root:[Log] Function task_deployment is called...
+DEBUG:root:[Log] Function run is called...
+INFO:root:system time: 64
+INFO:root:Deploy task4 to vm 5,
+task cr: 0.09, vm cr: 0.35 -> 0.26
+task bw_up: 31, local_bw_up: 100000 -> 99969
+task bw_down: 850, local_bw_down: 100000 -> 99150
+
+INFO:root:task5 assign to MNO
+DEBUG:root:[Log] Function task_deployment is called...
+DEBUG:root:[Log] Function run is called...
+INFO:root:system time: 100
+INFO:root:release task3 from vm 1,
+cr: 0.6499999999999999 -> 0.7
+local_bw_up: 99700 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:root:Deploy task5 to vm 3,
+task cr: 0.12, vm cr: 0.8 -> 0.68
+task bw_up: 25, local_bw_up: 100000 -> 99975
+task bw_down: 1300, local_bw_down: 100000 -> 98700
+
+INFO:root:-------Start of hour 2, system time: 120-------
+INFO:root:hour tasks: [6]
+DEBUG:root:[Log] Function task_deployment is called...
+INFO:root:task6 assign to MVNO
+DEBUG:root:[Log] Function task_deployment is called...
+DEBUG:root:[Log] Function run is called...
+INFO:root:system time: 150
+INFO:root:release task4 from vm 5,
+cr: 0.26 -> 0.35
+local_bw_up: 99969 -> 100000
+local_bw_down: 99150 -> 100000
+
+INFO:root:Deploy task6 to vm 5,
+task cr: 0.05, vm cr: 0.35 -> 0.3
+task bw_up: 24, local_bw_up: 100000 -> 99976
+task bw_down: 1065, local_bw_down: 100000 -> 98935
+
+INFO:root:-------Start of hour 3, system time: 180-------
+INFO:root:hour tasks: [7 8]
+DEBUG:root:[Log] Function task_deployment is called...
+INFO:root:task7 assign to MNO
+DEBUG:root:[Log] Function task_deployment is called...
+DEBUG:root:[Log] Function run is called...
+INFO:root:system time: 200
+INFO:root:release task5 from vm 3,
+cr: 0.68 -> 0.8
+local_bw_up: 99975 -> 100000
+local_bw_down: 98700 -> 100000
+
+INFO:root:Deploy task7 to vm 1,
+task cr: 0.02, vm cr: 0.7 -> 0.6799999999999999
+task bw_up: 246, local_bw_up: 100000 -> 99754
+task bw_down: 15, local_bw_down: 100000 -> 99985
+
+INFO:root:task8 assign to MVNO
+DEBUG:root:[Log] Function task_deployment is called...
+DEBUG:root:[Log] Function run is called...
+INFO:root:system time: 230
+INFO:root:release task6 from vm 5,
+cr: 0.3 -> 0.35
+local_bw_up: 99976 -> 100000
+local_bw_down: 98935 -> 100000
+
+INFO:root:Deploy task8 to vm 6,
+task cr: 0.1, vm cr: 0.55 -> 0.45000000000000007
+task bw_up: 26, local_bw_up: 100000 -> 99974
+task bw_down: 790, local_bw_down: 100000 -> 99210
+
+INFO:root:-------Start of hour 4, system time: 240-------
+INFO:root:hour tasks: [9]
+DEBUG:root:[Log] Function task_deployment is called...
+INFO:root:task9 assign to MNO
+DEBUG:root:[Log] Function task_deployment is called...
+DEBUG:root:[Log] Function run is called...
+INFO:root:system time: 245
+INFO:root:release task7 from vm 1,
+cr: 0.6799999999999999 -> 0.7
+local_bw_up: 99754 -> 100000
+local_bw_down: 99985 -> 100000
+
+INFO:root:Deploy task9 to vm 1,
+task cr: 0.04, vm cr: 0.7 -> 0.6599999999999999
+task bw_up: 450, local_bw_up: 100000 -> 99550
+task bw_down: 17, local_bw_down: 100000 -> 99983
+
+INFO:root:-------Start of hour 5, system time: 300-------
+INFO:root:Finish simulating...

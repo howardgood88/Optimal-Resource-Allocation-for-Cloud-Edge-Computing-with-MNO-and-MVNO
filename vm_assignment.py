@@ -3,6 +3,7 @@ from parameters import (rnd_seed, _theta, _lambda, Task_type_index)
 from optimizing import GeneticOptimizing
 from utils import (printReturn, funcCall)
 from constract import Contract
+import logging
 
 np.random.seed(rnd_seed)
 
@@ -30,12 +31,12 @@ class VMAssignment:
         # TODO
         while 1:
             selected_vm = self.choose_vm(candidate_vm_id)
-            print(f'try candidate vm: {selected_vm}...')
+            logging.info(f'try candidate vm: {selected_vm}...')
             mvno_vm_id = candidate_vm_id[selected_vm]
             if self.check_condition(mvno_vm_id, vm_list, contract, statistic_data):
                 mno_vm_id = candidate_vm_id[np.logical_not(selected_vm)]
                 break
-            print('candidate vm not legal. try again')
+            logging.info('candidate vm not legal. try again')
         return mno_vm_id, mvno_vm_id
 
     @funcCall

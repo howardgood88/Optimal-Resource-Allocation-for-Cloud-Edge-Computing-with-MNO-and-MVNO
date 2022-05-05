@@ -9,8 +9,10 @@ big_round_minutes = 10080
 big_round_number = 12
 generated_bw_max = 100000 # Kbps
 generated_bw_min = 0 # Kbps
-generated_delay_max = 5
-generated_delay_min = 0
+generated_delay_cloud_max = 5
+generated_delay_cloud_min = 0
+generated_delay_edge_max = 5
+generated_delay_edge_min = 0
 
 # contract
 bw_low = 0
