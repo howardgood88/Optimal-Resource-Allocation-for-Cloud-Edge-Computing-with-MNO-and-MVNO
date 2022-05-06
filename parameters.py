@@ -2,11 +2,11 @@ from enum import (IntEnum, unique)
 
 rnd_seed = 1126
 
+test_data_dir = './data/case1/'
 # round time
 small_round_minutes = 60
 # 60 * 24 * 7
-big_round_minutes = 10080
-big_round_number = 12
+big_round_minutes = small_round_minutes * 2
 generated_bw_max = 100000 # Kbps
 generated_bw_min = 0 # Kbps
 generated_delay_cloud_max = 5

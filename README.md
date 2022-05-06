@@ -8,5 +8,7 @@
 * implement vm_assignment vm choosing
 * implement optimizing algorithm
 * implement utility function
-* test case that more than one week
 * implement update parameters
+* unittest
+* draw new flow chart, make ppt
+* adding debugging message

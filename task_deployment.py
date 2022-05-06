@@ -160,11 +160,11 @@ class TaskDeployment:
     def run(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
         '''Start running TaskDeployment algorithm.'''
         start_time = task[Task_event_index.start_time.value]
-        logging.info(f'system time: {start_time}')
         task_type = task[Task_event_index.task_type.value]
         user_id = task[Task_event_index.user_id.value]
         cpu_request = task[Task_event_index.cpu_request.value]
         # check whether any running tasks need to release
+        logging.info(f'system time: {start_time}')
         self.task_manager.set_time(start_time)
 
         max_utility = float('-inf')
