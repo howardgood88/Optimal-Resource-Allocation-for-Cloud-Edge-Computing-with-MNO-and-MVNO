@@ -171,7 +171,6 @@ user_id_list = np.array(sorted(user_id_set))
 update_user_to_vm(user_id_list)
 logging.debug(f'vm_list generated! content:')
 print_vm_list(vm_list)
-assert()
 mvno = MVNO()
 mno = MNO(mvno, list(vm_list.keys()))
 user_id_to_operator = {}
