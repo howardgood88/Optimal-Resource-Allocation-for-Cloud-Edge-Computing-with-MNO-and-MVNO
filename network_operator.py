@@ -54,7 +54,7 @@ class MNO(Network_operator):
                     bw_down_sum += data['bw_down']
                 vm.avg_bw_up = bw_up_sum / len(vm.from_user)
                 vm.avg_bw_down = bw_down_sum / len(vm.from_user)
-
+        # TODO, update contract?
         self.contract = Contract()
         get_avg_vm_bw(vm_list)
         self.hold_vm_id, self.mvno.hold_vm_id = self._vm_assignment.run(self.contract, self.total_vm_id,

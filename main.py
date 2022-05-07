@@ -179,7 +179,7 @@ start_time = system_time
 while system_time // big_round_minutes < big_round_times:
     logging.info(f'-----------------Start of Round {system_time // big_round_minutes + 1}-----------------')
     # prepare data
-    logging.info('------------Start of prepare data------------')
+    logging.info('------------Start of updating data------------')
     # update history data and statistic data
     hourly_history_data, statistic_data = update_data(hourly_history_data, hour_task_record, statistic_data)
 
