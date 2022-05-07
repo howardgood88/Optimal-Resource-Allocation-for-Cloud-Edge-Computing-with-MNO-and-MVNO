@@ -2,15 +2,27 @@ import abc
 from vm_assignment import VMAssignment
 from task_deployment import TaskDeployment
 import numpy as np
-from parameters import (_mu, small_round_minutes)
+from parameters import (_mu, Task_event_index)
 from utils import (printReturn, funcCall)
 from constract import Contract
 import logging
 
 class Network_operator(abc.ABC):
     @funcCall
+    def redeploy(self, vm_list: dict, system_time: int) -> None:
+        '''Redeploy the unaccepted tasks.'''
+        queue_size = self._task_deployment.unaccepted_task_queue.qsize()
+        while queue_size > 0:
+            task = self._task_deployment.unaccepted_task_queue.get()
+            duration = task[Task_event_index.end_time.value] - task[Task_event_index.start_time.value]
+            task[Task_event_index.start_time.value] = system_time
+            task[Task_event_index.end_time.value] = system_time + duration
+            self.task_deployment(task, vm_list)
+            queue_size -= 1
+
+    @funcCall
     def task_deployment(self, task: np.array, vm_list: dict) -> None:
-        '''Try to redeploy the tasks remain from last round (last hour) and delegate to class TaskDeployment.'''
+        '''Delegate to class TaskDeployment.'''
         self._task_deployment.run(self.hold_vm_id, task, vm_list)
 
 class MVNO(Network_operator):
@@ -33,7 +45,7 @@ class MNO(Network_operator):
     def vm_assignment(self, statistic_data: np.array, vm_list: dict) -> None:
         '''Calculate average vm bw and delegate to class VMAssignment.'''
         def get_avg_vm_bw(vm_list: dict):
-            '''Calculate the average bw from all reachable user to vm.'''
+            '''Calculate the average bw from all user to vm.'''
             for vm in vm_list.values():
                 bw_up_sum = 0
                 bw_down_sum = 0

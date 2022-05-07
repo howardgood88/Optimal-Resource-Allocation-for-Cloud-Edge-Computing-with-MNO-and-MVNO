@@ -8,6 +8,7 @@ import logging
 
 class UtilityFunc:
     '''Mapping from resource to utility from 0 to 100.'''
+    '''TODO'''
     class VoIP:
         @staticmethod
         def bw_up(bw: float) -> float:
@@ -87,7 +88,7 @@ class UtilityFunc:
             return (_range - diff) / (_range) * 100
 
     @classmethod
-    def get_task_utility(cls, task_type: str):
+    def get_task_utility_func(cls, task_type: str):
         '''Get task utility class by task name.'''
         if task_type == 'VoIP':
             task_utilities = cls.VoIP
@@ -108,7 +109,7 @@ class Runing_task_manager:
         while not self.observers.empty() and self.observers.queue[0][Task_event_index.end_time.value] < system_time:
             self.release_task()
     
-    def release_task(self):
+    def release_task(self) -> None:
         '''Release vm resource used by task.'''
         task = self.observers.get()
         vm = self.vm_running_at.get()
@@ -127,7 +128,7 @@ class Runing_task_manager:
         _message += f'{vm.local_bw_down}\n'
         logging.info(_message)
 
-    def bind_task(self, task: np.array, selected_vm: VM):
+    def bind_task(self, task: np.array, selected_vm: VM) -> None:
         '''Consume resource of selected vm and make task as observer.'''
         _message = f'Deploy task{task[Task_event_index.index.value]} to vm {selected_vm.id},\n'
         task_cr = task[Task_event_index.average_cpu_usage]
@@ -159,11 +160,12 @@ class TaskDeployment:
     @funcCall
     def run(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
         '''Start running TaskDeployment algorithm.'''
+        # get index in task_events.json
         start_time = task[Task_event_index.start_time.value]
         task_type = task[Task_event_index.task_type.value]
         user_id = task[Task_event_index.user_id.value]
         cpu_request = task[Task_event_index.cpu_request.value]
-        # check whether any running tasks need to release
+        # check if there are completed tasks and release it
         logging.info(f'system time: {start_time}')
         self.task_manager.set_time(start_time)
 
@@ -173,8 +175,8 @@ class TaskDeployment:
             vm = vm_list[vm_id]
             if vm.task_type != task_type:
                 continue
-            # calculate utility
-            task_utility = UtilityFunc.get_task_utility(task_type)
+            # calculate the utilities
+            task_utility = UtilityFunc.get_task_utility_func(task_type)
             bw_up = vm.from_user[user_id]['bw_up']
             bw_down = vm.from_user[user_id]['bw_down']
             utilities = [

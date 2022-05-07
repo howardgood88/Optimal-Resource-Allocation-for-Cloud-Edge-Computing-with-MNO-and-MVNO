@@ -1,12 +1,16 @@
 from enum import (IntEnum, unique)
+import logging
 
 rnd_seed = 1126
-
+logging_level = logging.INFO
 test_data_dir = './data/case1/'
 # round time
 small_round_minutes = 60
 # 60 * 24 * 7
 big_round_minutes = small_round_minutes * 2
+big_round_times = 2
+
+# user to vm generating data
 generated_bw_max = 100000 # Kbps
 generated_bw_min = 0 # Kbps
 generated_delay_cloud_max = 5

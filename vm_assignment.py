@@ -46,7 +46,7 @@ class VMAssignment:
         #return np.array([True for i in range(6)])
 
     @funcCall
-    def check_condition(self, selected_vm_id: np.array, vm_list: dict, contract, statistic_data: np.array) -> bool:
+    def check_condition(self, selected_vm_id: np.array, vm_list: dict, contract: Contract, statistic_data: np.array) -> bool:
         '''Check whether the vm set assign to mvno fit the conditions.'''
         # get needed value
         ## contract content
