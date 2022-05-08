@@ -5,7 +5,7 @@
 
 # Future Work
 * is better way to print ---------start of algo--------------
-* implement vm_assignment vm choosing
+* implement vm_assignment vm choosing, and no feasible solution of vm choosing
 * implement optimizing algorithm
 * implement utility function
 * implement update parameters
