@@ -3,7 +3,7 @@ import numpy as np
 from utils import (printReturn, funcCall, print_vm_list)
 from network_operator import (MNO, MVNO)
 from parameters import (test_data_dir, small_round_minutes, big_round_minutes, big_round_times, rnd_seed, Task_type_index, Task_event_index,
-                        _alpha, generated_bw_max, generated_bw_min, generated_delay_cloud_max, generated_delay_cloud_min,
+                        _phi, generated_bw_max, generated_bw_min, generated_delay_cloud_max, generated_delay_cloud_min,
                         generated_delay_edge_max, generated_delay_edge_min, logging_level)
 from vm import VM
 import logging
@@ -96,7 +96,7 @@ def update_data(hourly_history_data: np.array, hour_task_record: np.array, stati
         hourly_history_data = hour_task_record
     else:
         hourly_history_data = np.vstack([hourly_history_data, hour_task_record])
-    return hourly_history_data, statistic_data * (1 -_alpha) + np.mean(hour_task_record, axis=0) * _alpha
+    return hourly_history_data, statistic_data * (1 -_phi) + np.mean(hour_task_record, axis=0) * _phi
 
 @funcCall
 def createVM(machine_attributes: dict) -> dict:
@@ -157,15 +157,19 @@ logging.info('------------Start of load data & initialization------------')
 machine_attributes = load_machine_data(test_data_dir + 'machine_attributes.json')
 history_data = load_task_data(test_data_dir + 'history_data.json')
 task_events = load_task_data(test_data_dir + 'task_events.json')
+logging.info('Finished loading data.')
 # create dict map from vm_id to VM instance
 vm_list = createVM(machine_attributes)
+logging.info('Finished creating vm instance, store in vm_list that map from vm_id to vm instance.')
 system_time = 0
 hour_task_record, user_id_set = data_preprocessing(history_data, system_time)
+logging.info('Finished data preprocessing, get hour_task_record as hourly history data and user_id_set.')
 # sort the set to make simulation reproducible. (or will get different user_to_vm)
 user_id_list = np.array(sorted(user_id_set))
 
 # build user_to_vm
 update_user_to_vm(user_id_list)
+logging.info('Finished building user to vm data into vm_list.from_user.')
 # make MNO and MVNO instance
 mvno = MVNO()
 mno = MNO(mvno, list(vm_list.keys()))
@@ -182,10 +186,12 @@ while system_time // big_round_minutes < big_round_times:
     logging.info('------------Start of updating data------------')
     # update history data and statistic data
     hourly_history_data, statistic_data = update_data(hourly_history_data, hour_task_record, statistic_data)
+    logging.info('Finished update hourly_history_data and statistic_data.')
 
     # VM Assignment
     logging.info('------------Start of VM Assignment------------')
     mno.vm_assignment(statistic_data, vm_list)
+    logging.info('Finished vm assignment.')
 
     # Task Deployment
     logging.info(f'------------Start of Task Deployment------------')
@@ -206,6 +212,7 @@ while system_time // big_round_minutes < big_round_times:
         system_time += small_round_minutes
         hourly_statistic_data = get_hourly_statistic_data(hour_tasks)
         hour_task_record.append(hourly_statistic_data)
+    logging.info('Finished task deployment.')
 
     logging.info(f'------------Start of Updating Parameters------------')
     # TODO!

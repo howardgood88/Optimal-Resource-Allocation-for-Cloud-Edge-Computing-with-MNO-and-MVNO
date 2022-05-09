@@ -9,8 +9,8 @@ class VM:
         self.price = attributes['price']
         self.local_bw_up = 100000 # Kbps
         self.local_bw_down = 100000 # Kbps
-        # the bw and daley to user (runtime generate in main.update_user_to_vm())
+        # the bw and daley to user (runtime)
         self.from_user = {}
-        # the average bw of all user (runtime generate in network_operator.MNO.vm_assignment.make_vm_bw())
+        # the average bw of all user (runtime)
         self.avg_bw_up = None
         self.avg_bw_down = None

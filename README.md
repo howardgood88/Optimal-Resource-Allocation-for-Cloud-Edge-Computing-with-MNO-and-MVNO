@@ -8,7 +8,9 @@
 * implement vm_assignment vm choosing, and no feasible solution of vm choosing
 * implement optimizing algorithm
 * implement utility function
+* implement random distribution
 * implement update parameters
+* remake the contract
 * unittest
 * draw new flow chart, make ppt
 * adding debugging message

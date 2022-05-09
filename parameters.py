@@ -39,7 +39,7 @@ _op_bw = 300 # Kbps
 _op_cr = 0.2 # GCU-second/second
 
 # update history data
-_alpha = 0.7
+_phi = 0.7
 
 @unique
 class Task_type_index(IntEnum):
@@ -50,7 +50,10 @@ class Task_type_index(IntEnum):
 
 @unique
 class Task_event_index(IntEnum):
-    '''The attribute name maps to vector index. (don't use dict for keeping np.array property.)'''
+    '''
+    The attribute name maps to vector index.
+    (don't use dict for keeping np.array property.)
+    '''
     index = 0
     round = 1
     start_time = 2
@@ -62,5 +65,3 @@ class Task_event_index(IntEnum):
     average_cpu_usage = 8
     T_up = 9
     T_down = 10
-    operator = 11 # runtime
-    running_at = 12 # runtime
