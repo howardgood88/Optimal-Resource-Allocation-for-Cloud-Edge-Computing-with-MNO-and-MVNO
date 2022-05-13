@@ -172,7 +172,7 @@ update_user_to_vm(user_id_list)
 logging.info('Finished building user to vm data into vm_list.from_user.')
 # make MNO and MVNO instance
 mvno = MVNO()
-mno = MNO(mvno, list(vm_list.keys()))
+mno = MNO(mvno, list(vm_list.keys()), vm_list)
 # for keeping the mapping from user_id to the operator within task deployment
 user_id_to_operator = {}
 

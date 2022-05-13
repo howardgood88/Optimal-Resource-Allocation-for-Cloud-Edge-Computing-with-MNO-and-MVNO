@@ -19,7 +19,7 @@ generated_delay_edge_max = 5
 generated_delay_edge_min = 0
 
 # contract
-bw_low = 0
+bw_low = 5
 bw_high = generated_bw_max * 100 # Kbps
 cr_low = 0
 cr_high = 5
@@ -44,6 +44,7 @@ _phi = 0.7
 # optimizing
 optimizing_times = 100
 offspring_number = 4
+mutate_rate = 0.05
 
 @unique
 class Task_type_index(IntEnum):

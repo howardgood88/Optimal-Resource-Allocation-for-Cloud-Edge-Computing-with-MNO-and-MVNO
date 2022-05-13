@@ -153,7 +153,7 @@ class Runing_task_manager:
 class TaskDeployment:
     '''Task Deployment!!!'''
     def __init__(self):
-        self.optimizing = GeneticOptimizing() # TODO
+        # self.optimizing = GeneticOptimizing() # TODO
         self.unaccepted_task_queue = Queue()
         self.task_manager = Runing_task_manager()
 

@@ -32,19 +32,20 @@ class MVNO(Network_operator):
         self._task_deployment = TaskDeployment()
 
 class MNO(Network_operator):
-    def __init__(self, mvno: MVNO, vm_id_list: list, statistic_data: np.array, vm_list: dict):
+    def __init__(self, mvno: MVNO, vm_id_list: list, vm_list: dict):
         self.name = 'MNO'
         self.mvno = mvno
-        self._vm_assignment = VMAssignment(self.contract, self.total_vm_id, statistic_data, vm_list)
-        self._task_deployment = TaskDeployment()
         # the id of all vm own by MNO, transform to list because vm_id_list never changes.
         self.total_vm_id = np.array(vm_id_list, dtype=list)
         self.hold_vm_id = None
+        self.contract = Contract()
+        self._vm_assignment = VMAssignment(self.contract, self.total_vm_id, vm_list)
+        self._task_deployment = TaskDeployment()
 
     @funcCall
     def vm_assignment(self, statistic_data: np.array, vm_list: dict) -> None:
         '''Calculate average vm bw and delegate to class VMAssignment.'''
-        def get_avg_vm_bw(vm_list: dict):
+        def get_avg_vm_bw():
             '''Calculate the average bw from all user to vm.'''
             for vm in vm_list.values():
                 bw_up_sum = 0
@@ -55,10 +56,8 @@ class MNO(Network_operator):
                 vm.avg_bw_up = bw_up_sum / len(vm.from_user)
                 vm.avg_bw_down = bw_down_sum / len(vm.from_user)
         # TODO, update contract?
-        self.contract = Contract()
-        get_avg_vm_bw(vm_list)
-        self.hold_vm_id, self.mvno.hold_vm_id = self._vm_assignment.run(self.contract, self.total_vm_id,
-                                                            statistic_data, vm_list)
+        get_avg_vm_bw()
+        self.hold_vm_id, self.mvno.hold_vm_id = self._vm_assignment.run(statistic_data)
         logging.info(f'mno vm id: {self.hold_vm_id}, mvno vm id: {self.mvno.hold_vm_id}')
         
         # the price mvno sells to its customers

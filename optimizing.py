@@ -1,7 +1,11 @@
 import abc
 import numpy as np
-from parameters import (offspring_number, funcCall, Task_type_index, _theta, _lambda)
+from parameters import (offspring_number, Task_type_index, _theta, _lambda, mutate_rate, rnd_seed)
+from utils import funcCall
 from constract import Contract
+import math
+
+np.random.seed(rnd_seed)
 
 class GeneticOptimizing(abc.ABC):
     
@@ -19,59 +23,88 @@ class GeneticOptimizing(abc.ABC):
 
 class VMAssignmentOptimizing(GeneticOptimizing):
 
-    def __init__(self, contract: Contract, candidate_vm_id: np.array, statistic_data: np.array, vm_list: dict):
+    def __init__(self, contract: Contract, candidate_vm_id: np.array, vm_list: dict):
         self.contract = contract
         self.candidate_vm_id = candidate_vm_id
-        self.statistic_data = statistic_data
         self.vm_list = vm_list
 
         self.new_populations = None
         self.fitness = [0 for i in range(offspring_number)]
         self.best_population = None
-        self.best_fitness = float('-inf')
+        self.best_fitness = float('inf')
 
     @funcCall
-    def step(self):
-        if self.new_populations == None:
-            self.new_populations = [self.choose_vm(self.candidate_vm_id) for _ in range(offspring_number)]
+    def step(self, statistic_data: np.array):
+        if self.new_populations is None:
+            self.new_populations = np.array([self.choose_vm(self.candidate_vm_id, statistic_data) for _ in range(offspring_number)], dtype=bool)
             return self.new_populations
         else:
-            self.selection()
-            self.crossover()
-            self.mutation()
+            flag = False
+            while not flag:
+                parents = self.selection()
+                offsprings = self.crossover(parents)
+                offsprings = self.mutation(offsprings)
+                flag = True
+                for offspring in offsprings:
+                    if not self.check_condition(offspring, statistic_data):
+                        flag = False
+            return offsprings
 
     @funcCall
-    def choose_vm(self, candidate_vm_id: np.array) -> np.array:
+    def choose_vm(self, candidate_vm_id: np.array, statistic_data: np.array) -> np.array:
         '''Random choose a set of vm that fit the condition.'''
         selected_vm = np.zeros(candidate_vm_id.shape, dtype=bool)
-        while self.check_condition(selected_vm):
-            selected_vm = np.random.choice([True, False], candidate_vm_id.shape, p = [0.3, 0.7])
+        while not self.check_condition(selected_vm, statistic_data):
+            selected_vm = np.random.choice([True, False], candidate_vm_id.shape, p=[0.3, 0.7])
         return selected_vm
     
     @funcCall
     def selection(self):
-        pass
+        '''Stochastic universal sampling.'''
+        def SUS(Population: np.array):
+            F = sum(self.fitness)
+            N = offspring_number
+            P = int(F // N)
+            Start = np.random.randint(0, P)
+            return np.array([Population[Start + i * P] for i in range(N)])
+
+        wheels = []
+        for fitness, population in zip(self.fitness, self.new_populations):
+            wheel = np.full((math.ceil(fitness), *population.shape), population)
+            wheels.append(wheel)
+        wheel = np.vstack(wheels)
+        wheel = wheel.reshape((-1, *self.new_populations[0].shape))
+        return SUS(wheel)
 
     @funcCall
-    def crossover(self):
-        pass
+    def crossover(self, parents: np.array):
+        points = [np.random.randint(0, len(parents[0])) for _ in range(2)]
+        left, right = min(points), max(points)
+        selected_gene = np.zeros((offspring_number, right - left + 1))
+        for idx, parent in enumerate(parents):
+            selected_gene[idx] = parent[left:right + 1]
+        np.random.shuffle(selected_gene)
+        parents[:, left:right + 1] = selected_gene
+        return parents
 
     @funcCall
-    def mutation(self):
-        pass
+    def mutation(self, offsprings: np.array):
+        for i in range(len(offsprings)):
+            mutate = np.random.choice([True, False], offsprings[i].shape, p=[mutate_rate, 1 - mutate_rate])
+            for j in range(len(offsprings[i])):
+                if mutate[i]:
+                    offsprings[i, j] = np.logical_not(offsprings[i, j])
+        return offsprings
 
     @funcCall
-    def check_condition(self, selected_vm: np.array) -> bool:
+    def check_condition(self, selected_vm: np.array, statistic_data: np.array) -> bool:
         '''Check whether the vm set assign to mvno fit the conditions.'''
-        contract = self.contract
-        statistic_data = self.statistic_data
-        vm_list = self.vm_list
         # get needed value
         ## contract content
-        bw_low = contract.bw_low
-        bw_high = contract.bw_high
-        cr_low = contract.cr_low
-        cr_high = contract.cr_high
+        bw_low = self.contract.bw_low
+        bw_high = self.contract.bw_high
+        cr_low = self.contract.cr_low
+        cr_high = self.contract.cr_high
 
         ## statistic data
         voip_idx = Task_type_index.VoIP.value
@@ -92,7 +125,7 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         bw_down_task_x = [0 for i in range(len(Task_type_index))]
         cr_task_x = [0 for i in range(len(Task_type_index))]
         for id in self.candidate_vm_id[selected_vm]:
-            vm = vm_list[id]
+            vm = self.vm_list[id]
             # the price mvno buy from mno
             price = vm.price * _lambda
             vm_type = vm.task_type
