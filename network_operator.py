@@ -32,10 +32,10 @@ class MVNO(Network_operator):
         self._task_deployment = TaskDeployment()
 
 class MNO(Network_operator):
-    def __init__(self, mvno: MVNO, vm_id_list: list):
+    def __init__(self, mvno: MVNO, vm_id_list: list, statistic_data: np.array, vm_list: dict):
         self.name = 'MNO'
         self.mvno = mvno
-        self._vm_assignment = VMAssignment()
+        self._vm_assignment = VMAssignment(self.contract, self.total_vm_id, statistic_data, vm_list)
         self._task_deployment = TaskDeployment()
         # the id of all vm own by MNO, transform to list because vm_id_list never changes.
         self.total_vm_id = np.array(vm_id_list, dtype=list)

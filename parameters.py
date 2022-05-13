@@ -41,6 +41,10 @@ _op_cr = 0.2 # GCU-second/second
 # update history data
 _phi = 0.7
 
+# optimizing
+optimizing_times = 100
+offspring_number = 4
+
 @unique
 class Task_type_index(IntEnum):
     '''The task name maps to vector index.'''
