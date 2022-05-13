@@ -179,15 +179,18 @@ class TaskDeployment:
             task_utility = UtilityFunc.get_task_utility_func(task_type)
             bw_up = vm.from_user[user_id]['bw_up']
             bw_down = vm.from_user[user_id]['bw_down']
+            delay = vm.from_user[user_id]['delay']
+            cr_diff = abs(cpu_request - vm.cr)
             utilities = [
                 task_utility.bw_up(bw_up),
                 task_utility.bw_down(bw_down),
                 task_utility.cr(vm.cr),
                 task_utility.price(vm.price),
-                task_utility.delay(vm.from_user[user_id]['delay']),
-                task_utility.cr_diff(abs(cpu_request - vm.cr))
+                task_utility.delay(delay),
+                task_utility.cr_diff(cr_diff)
             ]
             utility = sum([g * u for g, u in zip(_gamma[Task_type_index[task_type]], utilities)])
+            
             if utility > max_utility and min(bw_up, bw_down) >= _op_bw and vm.cr >= _op_cr:
                 max_utility = utility
                 selected_vm_id = vm_id
