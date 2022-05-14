@@ -153,11 +153,10 @@ class Runing_task_manager:
 class TaskDeployment:
     '''Task Deployment!!!'''
     def __init__(self):
-        self.optimizing = GeneticOptimizing() # TODO
+        # self.optimizing = GeneticOptimizing() # TODO
         self.unaccepted_task_queue = Queue()
         self.task_manager = Runing_task_manager()
 
-    @funcCall
     def run(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
         '''Start running TaskDeployment algorithm.'''
         # get index in task_events.json
