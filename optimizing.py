@@ -1,6 +1,7 @@
 import abc
 import numpy as np
-from parameters import (offspring_number, Task_type_index, _theta, _lambda, mutate_rate, rnd_seed)
+from parameters import (offspring_number, Task_type_index, _theta, _lambda, mutate_rate, rnd_seed,
+                        _gamma, _op_bw, _op_cr)
 from utils import funcCall
 from constract import Contract
 import math
@@ -9,6 +10,10 @@ import logging
 np.random.seed(rnd_seed)
 
 class GeneticOptimizing(abc.ABC):
+
+    @abc.abstractmethod
+    def step(self):
+        pass
     
     @abc.abstractmethod
     def selection(self):
@@ -36,7 +41,8 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         self.min_population_len = None
         self.valid_evolution_message = None
 
-    def step(self, statistic_data: np.array):
+    def step(self, statistic_data: np.array) -> np.array:
+        '''Get the next valid offsprings.'''
         if self.new_populations is None:
             self.new_populations = np.array([self.choose_vm(self.candidate_vm_id, statistic_data) for _ in range(offspring_number)], dtype=bool)
             self.min_population_len = min(len(population) for population in self.new_populations)
@@ -62,7 +68,7 @@ class VMAssignmentOptimizing(GeneticOptimizing):
             selected_vm = np.random.choice([True, False], candidate_vm_id.shape, p=[0.3, 0.7])
         return selected_vm
     
-    def selection(self):
+    def selection(self) -> np.array:
         '''Stochastic universal sampling.'''
         def SUS(Population: np.array):
             F = sum(self.fitness)
@@ -80,7 +86,7 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         self.valid_evolution_message += f'selected parents:\n{parents}\n'
         return parents
 
-    def crossover(self, parents: np.array):
+    def crossover(self, parents: np.array) -> np.array:
         '''Two-points crossover'''
         points = [np.random.randint(0, self.min_population_len) for _ in range(2)]
         left, right = min(points), max(points)
@@ -93,7 +99,7 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         self.valid_evolution_message += f'new offsprings:\n{parents}\n'
         return parents
 
-    def mutation(self, offsprings: np.array):
+    def mutation(self, offsprings: np.array) -> np.array:
         for i in range(len(offsprings)):
             mutate = np.random.choice([True, False], offsprings[i].shape, p=[mutate_rate, 1 - mutate_rate])
             self.valid_evolution_message += f'offspring {i + 1} mutate at {np.arange(*offsprings[i].shape)[mutate]} bit\n'
@@ -172,17 +178,67 @@ class VMAssignmentOptimizing(GeneticOptimizing):
 class TaskDeploymentParametersOptimizing(GeneticOptimizing):
 
     def __init__(self):
-        self.parent_population = []
-        self.best_population = None
+        self.best_gamma = np.array(_gamma, dtype=list)
+        self.best_op_bw = _op_bw
+        self.best_op_cr = _op_cr
+
+        self.new_populations = np.array([self.get_parameters() for _ in range(offspring_number)])
+        self.fitness = [0 for i in range(offspring_number)]
+        self.best_population = np.concatenate((self.best_gamma.flatten(), [self.best_op_bw, self.best_op_cr]))
+        self.best_fitness = float('-inf')
+
+    def get_parameters(self):
+        new_gamma = np.random.uniform(0, 5, self.best_gamma.size)
+        new_op_bw = np.random.uniform(200, 400, 1)
+        new_op_cr = np.random.uniform(0, 0.4, 1)
+        return np.concatenate((new_gamma, new_op_bw, new_op_cr))
     
-    @funcCall
-    def selection(self):
-        pass
+    def step(self) -> None:
+        '''Get the next valid offsprings.'''
+        parents = self.selection()
+        offsprings = self.crossover(parents)
+        self.new_populations = self.mutation(offsprings)
 
-    @funcCall
-    def crossover(self):
-        pass
+    def selection(self) -> np.array:
+        '''Stochastic universal sampling.'''
+        def SUS(Population: np.array):
+            F = sum(self.fitness)
+            N = offspring_number
+            P = int(F // N)
+            Start = np.random.randint(0, P)
+            return np.array([Population[Start + i * P] for i in range(N)])
+        wheels = []
+        for fitness, population in zip(self.fitness, self.new_populations):
+            wheel = np.full((math.ceil(fitness), *population.shape), population)
+            wheels.append(wheel)
+        wheel = np.vstack(wheels)
+        wheel = wheel.reshape((-1, *self.new_populations[0].shape))
+        parents = SUS(wheel)
+        logging.debug(f'selected parents:\n{parents}')
+        return parents
 
-    @funcCall
-    def mutation(self):
-        pass
+    def crossover(self, parents) -> np.array:
+        '''Two-points crossover'''
+        points = [np.random.randint(0, len(parents[0])) for _ in range(2)]
+        left, right = min(points), max(points)
+        logging.info(f'selected points: ({left}, {right})')
+        selected_gene = np.zeros((offspring_number, right - left + 1))
+        for idx, parent in enumerate(parents):
+            selected_gene[idx] = parent[left:right + 1]
+        np.random.shuffle(selected_gene)
+        parents[:, left:right + 1] = selected_gene
+        logging.debug(f'new offsprings:\n{parents}')
+        return parents
+
+    def mutation(self, offsprings) -> np.array:
+        for i in range(len(offsprings)):
+            mutate = np.random.choice([True, False], offsprings[i].shape, p=[mutate_rate, 1 - mutate_rate])
+            logging.debug(f'offspring {i + 1} mutate at {np.arange(*offsprings[i].shape)[mutate]} bit')
+            for j in range(len(offsprings[i])):
+                if mutate[j]:
+                    if np.random.random() < 0.5:
+                        offsprings[i, j] = offsprings[i, j] * 1.2
+                    else:
+                        offsprings[i, j] = offsprings[i, j] * 0.8
+        logging.debug(f'new offsprings:\n{offsprings}')
+        return offsprings

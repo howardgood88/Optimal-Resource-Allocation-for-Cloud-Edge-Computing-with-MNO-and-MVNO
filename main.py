@@ -10,6 +10,7 @@ import logging
 
 logging.basicConfig(filename = test_data_dir + 'log.txt', filemode='w', level=logging_level)
 np.random.seed(rnd_seed)
+np.set_printoptions(precision=3, suppress=True)
 
 def load_task_data(filename: str) -> np.array:
     '''Load task_events.json and history_data.json from filename'''
@@ -192,7 +193,7 @@ while system_time // big_round_minutes < big_round_times:
     hour_task_record = []
     while system_time == start_time or system_time % big_round_minutes != 0:
         # hourly task deployment
-        logging.info(f'-------Start of hour {system_time // small_round_minutes}, system time: {system_time}-------')
+        logging.info(f'-------Start of hour {system_time // small_round_minutes + 1}, system time: {system_time}-------')
         ## get the hour tasks data
         minutes_range = (system_time, system_time + small_round_minutes)
         start_time_idx = Task_event_index.start_time.value
@@ -200,16 +201,19 @@ while system_time // big_round_minutes < big_round_times:
         hour_tasks = task_events[hour_mask]
         logging.info(f'hour tasks: {hour_tasks[:, Task_event_index.index.value]}')
         if not hour_tasks.size == 0:
+            logging.info(f'mno best population {mno._task_deployment.optimizing.best_population} with cost: {mno._task_deployment.optimizing.best_fitness}')
+            logging.info(f'mvno best population {mvno._task_deployment.optimizing.best_population} with cost: {mvno._task_deployment.optimizing.best_fitness}')
             task_deployment(hour_tasks)
+
+        logging.info(f'------------Start of Updating Parameters------------')
+        mno.update_parameters()
+        mvno.update_parameters()
 
         # update system time
         system_time += small_round_minutes
         hourly_statistic_data = get_hourly_statistic_data(hour_tasks)
         hour_task_record.append(hourly_statistic_data)
     logging.info('Finished task deployment.')
-
-    logging.info(f'------------Start of Updating Parameters------------')
-    # TODO!
 
     hour_task_record = np.array(hour_task_record, dtype=list)
     start_time = system_time

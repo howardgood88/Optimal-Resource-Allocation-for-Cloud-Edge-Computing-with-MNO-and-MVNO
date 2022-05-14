@@ -2,7 +2,9 @@ import numpy as np
 from optimizing import GeneticOptimizing
 from utils import (printReturn, funcCall)
 from queue import Queue
-from parameters import (_gamma, _op_bw, _op_cr, generated_bw_max, generated_bw_min, Task_type_index, Task_event_index)
+from parameters import (generated_bw_max, generated_bw_min,
+                        generated_delay_cloud_max, generated_delay_cloud_min, Task_type_index, Task_event_index)
+from optimizing import TaskDeploymentParametersOptimizing
 from vm import VM
 import logging
 
@@ -20,15 +22,16 @@ class UtilityFunc:
 
         @staticmethod
         def cr(cr: float) -> float:
-            return cr / (generated_bw_max - generated_bw_min) * 100
+            return cr * 100
 
         @staticmethod
-        def price(c: float) -> float:
-            return c / (generated_bw_max - generated_bw_min) * 100
+        def price(p: float) -> float:
+            max_price = 150
+            return (max_price - p) / max_price * 100
 
         @staticmethod
         def delay(d: float) -> float:
-            return d / (generated_bw_max - generated_bw_min) * 100
+            return (generated_delay_cloud_max - d) / (generated_delay_cloud_max - generated_delay_cloud_min) * 100
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -46,15 +49,16 @@ class UtilityFunc:
 
         @staticmethod
         def cr(cr: float) -> float:
-            return cr / (generated_bw_max - generated_bw_min) * 100
+            return cr * 100
 
         @staticmethod
-        def price(c: float) -> float:
-            return c / (generated_bw_max - generated_bw_min) * 100
+        def price(p: float) -> float:
+            max_price = 150
+            return (max_price - p) / max_price * 100
 
         @staticmethod
         def delay(d: float) -> float:
-            return d / (generated_bw_max - generated_bw_min) * 100
+            return (generated_delay_cloud_max - d) / (generated_delay_cloud_max - generated_delay_cloud_min) * 100
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -72,15 +76,16 @@ class UtilityFunc:
 
         @staticmethod
         def cr(cr: float) -> float:
-            return cr / (generated_bw_max - generated_bw_min) * 100
+            return cr * 100
 
         @staticmethod
-        def price(c: float) -> float:
-            return c / (generated_bw_max - generated_bw_min) * 100
+        def price(p: float) -> float:
+            max_price = 150
+            return (max_price - p) / max_price * 100
 
         @staticmethod
         def delay(d: float) -> float:
-            return d / (generated_bw_max - generated_bw_min) * 100
+            return (generated_delay_cloud_max - d) / (generated_delay_cloud_max - generated_delay_cloud_min) * 100
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -153,7 +158,7 @@ class Runing_task_manager:
 class TaskDeployment:
     '''Task Deployment!!!'''
     def __init__(self):
-        # self.optimizing = GeneticOptimizing() # TODO
+        self.optimizing = TaskDeploymentParametersOptimizing()
         self.unaccepted_task_queue = Queue()
         self.task_manager = Runing_task_manager()
 
@@ -180,6 +185,8 @@ class TaskDeployment:
             bw_down = vm.from_user[user_id]['bw_down']
             delay = vm.from_user[user_id]['delay']
             cr_diff = abs(cpu_request - vm.cr)
+            if min(bw_up, bw_down) < self.optimizing.best_op_bw and vm.cr < self.optimizing.best_op_cr:
+                continue
             utilities = [
                 task_utility.bw_up(bw_up),
                 task_utility.bw_down(bw_down),
@@ -188,9 +195,19 @@ class TaskDeployment:
                 task_utility.delay(delay),
                 task_utility.cr_diff(cr_diff)
             ]
-            utility = sum([g * u for g, u in zip(_gamma[Task_type_index[task_type]], utilities)])
+            utility = sum([g * u for g, u in zip(self.optimizing.best_gamma[Task_type_index[task_type]], utilities)])
+            self.optimizing.best_fitness = utility
+            for idx, population in enumerate(self.optimizing.new_populations):
+                _op_bw, _op_cr = population[-2], population[-1]
+                if min(bw_up, bw_down) < _op_bw and vm.cr < _op_cr:
+                    # negative utility of six utility functions
+                    self.optimizing.fitness += -600
+                    continue
+                _gamma = [population[0:6], population[6:12], population[12:18]]
+                _utility = sum([g * u for g, u in zip(_gamma[Task_type_index[task_type]], utilities)])
+                self.optimizing.fitness[idx] += _utility
             
-            if utility > max_utility and min(bw_up, bw_down) >= _op_bw and vm.cr >= _op_cr:
+            if utility > max_utility:
                 max_utility = utility
                 selected_vm_id = vm_id
 
@@ -200,3 +217,14 @@ class TaskDeployment:
             self.unaccepted_task_queue.put(task)
         else:
             self.task_manager.bind_task(task, vm_list[selected_vm_id])
+
+    def update_parameters(self) -> None:
+        # update best population
+        _optimizing = self.optimizing
+        for fitness, population in zip(_optimizing.fitness, _optimizing.new_populations):
+            logging.info(f'population {population} with fitness: {fitness}')
+            if fitness > _optimizing.best_fitness:
+                logging.debug(f'better population found, update best population to {population}!')
+                _optimizing.best_fitness = fitness
+                _optimizing.best_population = population
+        _optimizing.step()

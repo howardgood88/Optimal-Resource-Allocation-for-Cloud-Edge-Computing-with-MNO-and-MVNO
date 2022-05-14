@@ -2,7 +2,7 @@ from enum import (IntEnum, unique)
 import logging
 
 rnd_seed = 1126
-logging_level = logging.INFO
+logging_level = logging.DEBUG
 test_data_dir = './data/case1/'
 # round time
 small_round_minutes = 60

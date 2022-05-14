@@ -11,4 +11,3 @@
 * implement update parameters
 * remake the contract
 * implement the assignment of the general purpose VM.
-* check operating value when task deployment

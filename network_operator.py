@@ -23,6 +23,10 @@ class Network_operator(abc.ABC):
         '''Delegate to class TaskDeployment.'''
         self._task_deployment.run(self.hold_vm_id, task, vm_list)
 
+    def update_parameters(self) -> None:
+        logging.info(f'---{self.name} start updating parameters---')
+        self._task_deployment.update_parameters()
+
 class MVNO(Network_operator):
     def __init__(self):
         self.name = 'MVNO'
