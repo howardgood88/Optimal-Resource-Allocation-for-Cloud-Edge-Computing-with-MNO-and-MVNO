@@ -8,7 +8,7 @@ test_data_dir = './data/case1/'
 small_round_minutes = 60
 # 60 * 24 * 7
 big_round_minutes = small_round_minutes * 2
-big_round_times = 2
+big_round_times = 3
 
 # user to vm generating data
 generated_bw_max = 100000 # Kbps

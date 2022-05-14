@@ -131,6 +131,7 @@ def task_deployment(hour_tasks: np.array) -> None:
     '''Random assign task to operator and deploy the task.'''
     # try to redeploy the unaccepted tasks
     for operator in (mno, mvno):
+        logging.info(f'------Start trying to redeploy undone tasks of {operator.name}------')
         operator.redeploy(vm_list, system_time)
     # start hourly task deployment
     for task in hour_tasks:
