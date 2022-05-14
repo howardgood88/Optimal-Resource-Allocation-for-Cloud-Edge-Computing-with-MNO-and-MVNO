@@ -42,7 +42,7 @@ _op_cr = 0.2 # GCU-second/second
 _phi = 0.7
 
 # optimizing
-optimizing_times = 100
+optimizing_times = 10
 offspring_number = 4
 mutate_rate = 0.05
 

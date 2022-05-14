@@ -11,14 +11,12 @@ import logging
 logging.basicConfig(filename = test_data_dir + 'log.txt', filemode='w', level=logging_level)
 np.random.seed(rnd_seed)
 
-@funcCall
 def load_task_data(filename: str) -> np.array:
     '''Load task_events.json and history_data.json from filename'''
     with open(filename, 'r') as f:
         data = json.load(f)
     return np.array(data, dtype=list)
 
-@funcCall
 def load_machine_data(filename: str) -> dict:
     '''Load machine_attributes.json from filename'''
     with open(filename, 'r') as f:
@@ -39,7 +37,6 @@ def get_hourly_statistic_data(hourly_tasks: np.array) -> np.array:
         hourly_statistic_data[task_idx.value] = data
     return np.array(hourly_statistic_data, dtype=list)
 
-@funcCall
 def data_preprocessing(history_data: np.array, system_time: int) -> tuple[np.array, np.array, set]:
     '''
     Transform task-level history data into hourly history data, and generate user list.
@@ -88,7 +85,6 @@ def data_preprocessing(history_data: np.array, system_time: int) -> tuple[np.arr
         minutes_range = (minutes_range[0] + small_round_minutes, minutes_range[1] + small_round_minutes)
     return np.array(hourly_history_data, dtype=list), user_id_set
 
-@funcCall
 def update_data(hourly_history_data: np.array, hour_task_record: np.array, statistic_data: np.array) -> tuple[np.array, np.array]:
     '''Update hourly_history_data, and update statistic_data by hour_task_record.'''
     logging.debug(f'add hour_task_record {hour_task_record} into hourly_history_data and update statistic_data')
@@ -98,7 +94,6 @@ def update_data(hourly_history_data: np.array, hour_task_record: np.array, stati
         hourly_history_data = np.vstack([hourly_history_data, hour_task_record])
     return hourly_history_data, statistic_data * (1 -_phi) + np.mean(hour_task_record, axis=0) * _phi
 
-@funcCall
 def createVM(machine_attributes: dict) -> dict:
     '''Create dict map from vm_id to VM instance.'''
     vm_list = {}
@@ -125,7 +120,6 @@ def generate_user_to_vm_data(location: str) -> dict:
     else:
         raise ValueError(f'invalid value {location} of location')
 
-@funcCall
 def update_user_to_vm(user_id_list: np.array) -> None:
     '''Build user to vm table.'''
     for vm_id in vm_list:
@@ -133,7 +127,6 @@ def update_user_to_vm(user_id_list: np.array) -> None:
         for user_id in user_id_list:
             vm.from_user.setdefault(user_id, generate_user_to_vm_data(vm.location))
 
-@funcCall
 def task_deployment(hour_tasks: np.array) -> None:
     '''Random assign task to operator and deploy the task.'''
     # try to redeploy the unaccepted tasks

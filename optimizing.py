@@ -4,6 +4,7 @@ from parameters import (offspring_number, Task_type_index, _theta, _lambda, muta
 from utils import funcCall
 from constract import Contract
 import math
+import logging
 
 np.random.seed(rnd_seed)
 
@@ -31,16 +32,19 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         self.new_populations = None
         self.fitness = [0 for i in range(offspring_number)]
         self.best_population = None
-        self.best_fitness = float('inf')
+        self.best_fitness = float('-inf')
+        self.min_population_len = None
+        self.valid_evolution_message = None
 
-    @funcCall
     def step(self, statistic_data: np.array):
         if self.new_populations is None:
             self.new_populations = np.array([self.choose_vm(self.candidate_vm_id, statistic_data) for _ in range(offspring_number)], dtype=bool)
+            self.min_population_len = min(len(population) for population in self.new_populations)
             return self.new_populations
         else:
             flag = False
             while not flag:
+                self.valid_evolution_message = ''
                 parents = self.selection()
                 offsprings = self.crossover(parents)
                 offsprings = self.mutation(offsprings)
@@ -48,9 +52,9 @@ class VMAssignmentOptimizing(GeneticOptimizing):
                 for offspring in offsprings:
                     if not self.check_condition(offspring, statistic_data):
                         flag = False
+            logging.debug(self.valid_evolution_message)
             return offsprings
 
-    @funcCall
     def choose_vm(self, candidate_vm_id: np.array, statistic_data: np.array) -> np.array:
         '''Random choose a set of vm that fit the condition.'''
         selected_vm = np.zeros(candidate_vm_id.shape, dtype=bool)
@@ -58,7 +62,6 @@ class VMAssignmentOptimizing(GeneticOptimizing):
             selected_vm = np.random.choice([True, False], candidate_vm_id.shape, p=[0.3, 0.7])
         return selected_vm
     
-    @funcCall
     def selection(self):
         '''Stochastic universal sampling.'''
         def SUS(Population: np.array):
@@ -67,36 +70,39 @@ class VMAssignmentOptimizing(GeneticOptimizing):
             P = int(F // N)
             Start = np.random.randint(0, P)
             return np.array([Population[Start + i * P] for i in range(N)])
-
         wheels = []
         for fitness, population in zip(self.fitness, self.new_populations):
             wheel = np.full((math.ceil(fitness), *population.shape), population)
             wheels.append(wheel)
         wheel = np.vstack(wheels)
         wheel = wheel.reshape((-1, *self.new_populations[0].shape))
-        return SUS(wheel)
+        parents = SUS(wheel)
+        self.valid_evolution_message += f'selected parents:\n{parents}\n'
+        return parents
 
-    @funcCall
     def crossover(self, parents: np.array):
-        points = [np.random.randint(0, len(parents[0])) for _ in range(2)]
+        '''Two-points crossover'''
+        points = [np.random.randint(0, self.min_population_len) for _ in range(2)]
         left, right = min(points), max(points)
+        self.valid_evolution_message += f'selected points: ({left}, {right})\n'
         selected_gene = np.zeros((offspring_number, right - left + 1))
         for idx, parent in enumerate(parents):
             selected_gene[idx] = parent[left:right + 1]
         np.random.shuffle(selected_gene)
         parents[:, left:right + 1] = selected_gene
+        self.valid_evolution_message += f'new offsprings:\n{parents}\n'
         return parents
 
-    @funcCall
     def mutation(self, offsprings: np.array):
         for i in range(len(offsprings)):
             mutate = np.random.choice([True, False], offsprings[i].shape, p=[mutate_rate, 1 - mutate_rate])
+            self.valid_evolution_message += f'offspring {i + 1} mutate at {np.arange(*offsprings[i].shape)[mutate]} bit\n'
             for j in range(len(offsprings[i])):
-                if mutate[i]:
+                if mutate[j]:
                     offsprings[i, j] = np.logical_not(offsprings[i, j])
+        self.valid_evolution_message += f'new offsprings:\n{offsprings}\n'
         return offsprings
 
-    @funcCall
     def check_condition(self, selected_vm: np.array, statistic_data: np.array) -> bool:
         '''Check whether the vm set assign to mvno fit the conditions.'''
         # get needed value

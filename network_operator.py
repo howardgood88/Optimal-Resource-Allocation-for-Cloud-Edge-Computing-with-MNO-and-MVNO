@@ -8,7 +8,6 @@ from constract import Contract
 import logging
 
 class Network_operator(abc.ABC):
-    @funcCall
     def redeploy(self, vm_list: dict, system_time: int) -> None:
         '''Redeploy the unaccepted tasks.'''
         queue_size = self._task_deployment.unaccepted_task_queue.qsize()
@@ -20,7 +19,6 @@ class Network_operator(abc.ABC):
             self.task_deployment(task, vm_list)
             queue_size -= 1
 
-    @funcCall
     def task_deployment(self, task: np.array, vm_list: dict) -> None:
         '''Delegate to class TaskDeployment.'''
         self._task_deployment.run(self.hold_vm_id, task, vm_list)
@@ -42,7 +40,6 @@ class MNO(Network_operator):
         self._vm_assignment = VMAssignment(self.contract, self.total_vm_id, vm_list)
         self._task_deployment = TaskDeployment()
 
-    @funcCall
     def vm_assignment(self, statistic_data: np.array, vm_list: dict) -> None:
         '''Calculate average vm bw and delegate to class VMAssignment.'''
         def get_avg_vm_bw():

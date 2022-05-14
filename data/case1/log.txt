@@ -7,6 +7,67 @@ INFO:root:-----------------Start of Round 1-----------------
 INFO:root:------------Start of updating data------------
 INFO:root:Finished update hourly_history_data and statistic_data.
 INFO:root:------------Start of VM Assignment------------
+INFO:root:-----Evolution 1-----
+INFO:root:best population [['1' '2' '3' '4' '5' '6']] with cost: -inf
+INFO:root:population ['4' '5' '6'] with cost: 90.0, fitness: 390.0
+INFO:root:better population found, update best population to ['4' '5' '6']!
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '2' '4' '6'] with cost: 180.0, fitness: 300.0
+INFO:root:-----Evolution 2-----
+INFO:root:best population ['4' '5' '6'] with cost: 390.0
+INFO:root:population ['2' '3' '4' '6'] with cost: 210.0, fitness: 270.0
+INFO:root:population ['1' '5' '6'] with cost: 120.0, fitness: 360.0
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:-----Evolution 3-----
+INFO:root:best population ['4' '5' '6'] with cost: 390.0
+INFO:root:population ['4' '5' '6'] with cost: 90.0, fitness: 390.0
+INFO:root:population ['3' '4' '5'] with cost: 138.0, fitness: 342.0
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '2' '3' '6'] with cost: 240.0, fitness: 240.0
+INFO:root:-----Evolution 4-----
+INFO:root:best population ['4' '5' '6'] with cost: 390.0
+INFO:root:population ['4' '5' '6'] with cost: 90.0, fitness: 390.0
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '2' '4' '6'] with cost: 180.0, fitness: 300.0
+INFO:root:-----Evolution 5-----
+INFO:root:best population ['4' '5' '6'] with cost: 390.0
+INFO:root:population ['1' '4' '5' '6'] with cost: 150.0, fitness: 330.0
+INFO:root:population ['1' '2' '3' '4' '5'] with cost: 246.0, fitness: 234.0
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '2' '4' '6'] with cost: 180.0, fitness: 300.0
+INFO:root:-----Evolution 6-----
+INFO:root:best population ['4' '5' '6'] with cost: 390.0
+INFO:root:population ['4' '5' '6'] with cost: 90.0, fitness: 390.0
+INFO:root:population ['4' '5' '6'] with cost: 90.0, fitness: 390.0
+INFO:root:population ['1' '2' '4' '6'] with cost: 180.0, fitness: 300.0
+INFO:root:population ['1' '2' '3' '6'] with cost: 240.0, fitness: 240.0
+INFO:root:-----Evolution 7-----
+INFO:root:best population ['4' '5' '6'] with cost: 390.0
+INFO:root:population ['1' '4' '5' '6'] with cost: 150.0, fitness: 330.0
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['2' '4' '6'] with cost: 120.0, fitness: 360.0
+INFO:root:-----Evolution 8-----
+INFO:root:best population ['4' '5' '6'] with cost: 390.0
+INFO:root:population ['1' '2' '4' '6'] with cost: 180.0, fitness: 300.0
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['4' '5' '6'] with cost: 90.0, fitness: 390.0
+INFO:root:-----Evolution 9-----
+INFO:root:best population ['4' '5' '6'] with cost: 390.0
+INFO:root:population ['2' '4' '6'] with cost: 120.0, fitness: 360.0
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['1' '4' '5' '6'] with cost: 150.0, fitness: 330.0
+INFO:root:-----Evolution 10-----
+INFO:root:best population ['4' '5' '6'] with cost: 390.0
+INFO:root:population ['3' '4' '5' '6'] with cost: 180.0, fitness: 300.0
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '2' '4' '6'] with cost: 180.0, fitness: 300.0
 INFO:root:mno vm id: ['1' '2' '3'], mvno vm id: ['4' '5' '6']
 INFO:root:Finished vm assignment.
 INFO:root:------------Start of Task Deployment------------
@@ -19,31 +80,31 @@ task cr: 0.02, vm cr: 0.7 -> 0.6799999999999999
 task bw_up: 370, local_bw_up: 100000 -> 99630
 task bw_down: 16, local_bw_down: 100000 -> 99984
 
-INFO:root:task1 assign to MVNO
+INFO:root:task1 assign to MNO
 INFO:root:system time: 15
-INFO:root:Deploy task1 to vm 5,
-task cr: 0.06, vm cr: 0.35 -> 0.29
+INFO:root:Deploy task1 to vm 2,
+task cr: 0.06, vm cr: 0.6 -> 0.54
 task bw_up: 20, local_bw_up: 100000 -> 99980
 task bw_down: 900, local_bw_down: 100000 -> 99100
 
-INFO:root:task2 assign to MNO
+INFO:root:task2 assign to MVNO
 INFO:root:system time: 30
-INFO:root:release task0 from vm 1,
-cr: 0.6799999999999999 -> 0.7
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:root:Deploy task2 to vm 3,
-task cr: 0.08, vm cr: 0.8 -> 0.7200000000000001
+INFO:root:Deploy task2 to vm 6,
+task cr: 0.08, vm cr: 0.55 -> 0.47000000000000003
 task bw_up: 35, local_bw_up: 100000 -> 99965
 task bw_down: 1000, local_bw_down: 100000 -> 99000
 
 INFO:root:task3 assign to MNO
 INFO:root:system time: 50
-INFO:root:release task2 from vm 3,
-cr: 0.7200000000000001 -> 0.8
-local_bw_up: 99965 -> 100000
-local_bw_down: 99000 -> 100000
+INFO:root:release task0 from vm 1,
+cr: 0.6799999999999999 -> 0.7
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:root:release task1 from vm 2,
+cr: 0.54 -> 0.6000000000000001
+local_bw_up: 99980 -> 100000
+local_bw_down: 99100 -> 100000
 
 INFO:root:Deploy task3 to vm 1,
 task cr: 0.05, vm cr: 0.7 -> 0.6499999999999999
@@ -60,14 +121,14 @@ local_bw_up: 99700 -> 100000
 local_bw_down: 99984 -> 100000
 
 INFO:root:Deploy task4 to vm 2,
-task cr: 0.09, vm cr: 0.6 -> 0.51
+task cr: 0.09, vm cr: 0.6000000000000001 -> 0.5100000000000001
 task bw_up: 31, local_bw_up: 100000 -> 99969
 task bw_down: 850, local_bw_down: 100000 -> 99150
 
 INFO:root:task5 assign to MNO
 INFO:root:system time: 100
 INFO:root:release task4 from vm 2,
-cr: 0.51 -> 0.6
+cr: 0.5100000000000001 -> 0.6000000000000001
 local_bw_up: 99969 -> 100000
 local_bw_down: 99150 -> 100000
 
@@ -82,20 +143,81 @@ INFO:root:-----------------Start of Round 2-----------------
 INFO:root:------------Start of updating data------------
 INFO:root:Finished update hourly_history_data and statistic_data.
 INFO:root:------------Start of VM Assignment------------
+INFO:root:-----Evolution 1-----
+INFO:root:best population ['4' '5' '6'] with cost: 390.0
+INFO:root:population ['4' '5' '6'] with cost: 72.0, fitness: 408.0
+INFO:root:better population found, update best population to ['4' '5' '6']!
+INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '2' '4' '5' '6'] with cost: 180.0, fitness: 300.0
+INFO:root:-----Evolution 2-----
+INFO:root:best population ['4' '5' '6'] with cost: 408.0
+INFO:root:population ['4' '5' '6'] with cost: 72.0, fitness: 408.0
+INFO:root:population ['4' '5' '6'] with cost: 72.0, fitness: 408.0
+INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
+INFO:root:population ['1' '2' '4' '6'] with cost: 165.6, fitness: 314.4
+INFO:root:-----Evolution 3-----
+INFO:root:best population ['4' '5' '6'] with cost: 408.0
+INFO:root:population ['4' '5' '6'] with cost: 72.0, fitness: 408.0
+INFO:root:population ['1' '4' '5' '6'] with cost: 132.0, fitness: 348.0
+INFO:root:population ['1' '2' '3' '5'] with cost: 212.4, fitness: 267.6
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:-----Evolution 4-----
+INFO:root:best population ['4' '5' '6'] with cost: 408.0
+INFO:root:population ['4' '5' '6'] with cost: 72.0, fitness: 408.0
+INFO:root:population ['4' '5' '6'] with cost: 72.0, fitness: 408.0
+INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
+INFO:root:population ['1' '2' '4' '6'] with cost: 165.6, fitness: 314.4
+INFO:root:-----Evolution 5-----
+INFO:root:best population ['4' '5' '6'] with cost: 408.0
+INFO:root:population ['3' '4' '5' '6'] with cost: 162.0, fitness: 318.0
+INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '2' '3' '4'] with cost: 222.0, fitness: 258.0
+INFO:root:-----Evolution 6-----
+INFO:root:best population ['4' '5' '6'] with cost: 408.0
+INFO:root:population ['4' '5' '6'] with cost: 72.0, fitness: 408.0
+INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '2' '4' '6'] with cost: 165.6, fitness: 314.4
+INFO:root:-----Evolution 7-----
+INFO:root:best population ['4' '5' '6'] with cost: 408.0
+INFO:root:population ['1' '2' '4' '6'] with cost: 165.6, fitness: 314.4
+INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
+INFO:root:population ['1' '2' '3' '6'] with cost: 231.6, fitness: 248.4
+INFO:root:population ['4' '5' '6'] with cost: 72.0, fitness: 408.0
+INFO:root:-----Evolution 8-----
+INFO:root:best population ['4' '5' '6'] with cost: 408.0
+INFO:root:population ['4' '5' '6'] with cost: 72.0, fitness: 408.0
+INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '2' '4' '6'] with cost: 165.6, fitness: 314.4
+INFO:root:-----Evolution 9-----
+INFO:root:best population ['4' '5' '6'] with cost: 408.0
+INFO:root:population ['4' '5' '6'] with cost: 72.0, fitness: 408.0
+INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '2' '4' '6'] with cost: 165.6, fitness: 314.4
+INFO:root:-----Evolution 10-----
+INFO:root:best population ['4' '5' '6'] with cost: 408.0
+INFO:root:population ['1' '2' '3'] with cost: 198.0, fitness: 282.0
+INFO:root:population ['1' '2' '4' '6'] with cost: 165.6, fitness: 314.4
+INFO:root:population ['1' '3' '4' '5' '6'] with cost: 222.0, fitness: 258.0
+INFO:root:population ['3' '4' '5' '6'] with cost: 162.0, fitness: 318.0
 INFO:root:mno vm id: ['1' '2' '3'], mvno vm id: ['4' '5' '6']
 INFO:root:Finished vm assignment.
 INFO:root:------------Start of Task Deployment------------
 INFO:root:-------Start of hour 2, system time: 120-------
 INFO:root:hour tasks: [6]
-INFO:root:task6 assign to MNO
+INFO:root:task6 assign to MVNO
 INFO:root:system time: 150
-INFO:root:release task5 from vm 3,
-cr: 0.68 -> 0.8
-local_bw_up: 99975 -> 100000
-local_bw_down: 98700 -> 100000
+INFO:root:release task2 from vm 6,
+cr: 0.47000000000000003 -> 0.55
+local_bw_up: 99965 -> 100000
+local_bw_down: 99000 -> 100000
 
-INFO:root:Deploy task6 to vm 2,
-task cr: 0.05, vm cr: 0.6 -> 0.5499999999999999
+INFO:root:Deploy task6 to vm 5,
+task cr: 0.05, vm cr: 0.35 -> 0.3
 task bw_up: 24, local_bw_up: 100000 -> 99976
 task bw_down: 1065, local_bw_down: 100000 -> 98935
 
@@ -103,25 +225,25 @@ INFO:root:-------Start of hour 3, system time: 180-------
 INFO:root:hour tasks: [7 8]
 INFO:root:task7 assign to MNO
 INFO:root:system time: 200
-INFO:root:release task6 from vm 2,
-cr: 0.5499999999999999 -> 0.6
-local_bw_up: 99976 -> 100000
-local_bw_down: 98935 -> 100000
+INFO:root:release task5 from vm 3,
+cr: 0.68 -> 0.8
+local_bw_up: 99975 -> 100000
+local_bw_down: 98700 -> 100000
 
 INFO:root:Deploy task7 to vm 1,
 task cr: 0.02, vm cr: 0.7 -> 0.6799999999999999
 task bw_up: 246, local_bw_up: 100000 -> 99754
 task bw_down: 15, local_bw_down: 100000 -> 99985
 
-INFO:root:task8 assign to MVNO
+INFO:root:task8 assign to MNO
 INFO:root:system time: 230
-INFO:root:release task1 from vm 5,
-cr: 0.29 -> 0.35
-local_bw_up: 99980 -> 100000
-local_bw_down: 99100 -> 100000
+INFO:root:release task7 from vm 1,
+cr: 0.6799999999999999 -> 0.7
+local_bw_up: 99754 -> 100000
+local_bw_down: 99985 -> 100000
 
-INFO:root:Deploy task8 to vm 6,
-task cr: 0.1, vm cr: 0.55 -> 0.45000000000000007
+INFO:root:Deploy task8 to vm 3,
+task cr: 0.1, vm cr: 0.8 -> 0.7000000000000001
 task bw_up: 26, local_bw_up: 100000 -> 99974
 task bw_down: 790, local_bw_down: 100000 -> 99210
 
