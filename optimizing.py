@@ -192,6 +192,17 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
         new_op_bw = np.random.uniform(200, 400, 1)
         new_op_cr = np.random.uniform(0, 0.4, 1)
         return np.concatenate((new_gamma, new_op_bw, new_op_cr))
+
+    def update_best_population(self):
+        # update best population
+        for fitness, population in zip(self.fitness, self.new_populations):
+            logging.info(f'population {population} with fitness: {fitness}')
+            if fitness > self.best_fitness:
+                logging.info(f'better population found, update best population to {population}!')
+                self.best_fitness = fitness
+                self.best_population = population
+                self.best_gamma = [population[0:6], population[6:12], population[12:18]]
+                self.best_op_bw, self.best_op_cr = population[-2], population[-1]
     
     def step(self) -> None:
         '''Get the next valid offsprings.'''
@@ -221,7 +232,7 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
         '''Two-points crossover'''
         points = [np.random.randint(0, len(parents[0])) for _ in range(2)]
         left, right = min(points), max(points)
-        logging.info(f'selected points: ({left}, {right})')
+        logging.debug(f'selected points: ({left}, {right})')
         selected_gene = np.zeros((offspring_number, right - left + 1))
         for idx, parent in enumerate(parents):
             selected_gene[idx] = parent[left:right + 1]

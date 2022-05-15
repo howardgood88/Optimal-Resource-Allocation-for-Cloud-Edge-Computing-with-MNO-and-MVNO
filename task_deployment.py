@@ -219,12 +219,7 @@ class TaskDeployment:
             self.task_manager.bind_task(task, vm_list[selected_vm_id])
 
     def update_parameters(self) -> None:
-        # update best population
-        _optimizing = self.optimizing
-        for fitness, population in zip(_optimizing.fitness, _optimizing.new_populations):
-            logging.info(f'population {population} with fitness: {fitness}')
-            if fitness > _optimizing.best_fitness:
-                logging.debug(f'better population found, update best population to {population}!')
-                _optimizing.best_fitness = fitness
-                _optimizing.best_population = population
-        _optimizing.step()
+        self.optimizing.step()
+
+    def update_best_population(self) -> None:
+        self.optimizing.update_best_population()

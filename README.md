@@ -4,10 +4,8 @@
 * simulation data time start at 0
 
 # Future Work
-* implement vm_assignment vm choosing, and no feasible solution of vm choosing
-* implement optimizing algorithm
+* implement  no feasible solution for vm choosing? (remake the contract)
 * implement utility function
 * implement random distribution
-* implement update parameters
-* remake the contract
-* implement the assignment of the general purpose VM.
+* implement the assignment of the general purpose VM
+* optimizing task deployment utility (softmax?)
