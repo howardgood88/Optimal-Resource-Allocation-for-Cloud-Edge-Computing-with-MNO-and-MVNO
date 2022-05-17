@@ -83,6 +83,7 @@ INFO:root:-------Start of hour 1, system time: 0-------
 INFO:root:hour tasks: [0 1 2 3]
 INFO:root:------Start trying to redeploy undone tasks of MNO------
 INFO:root:------Start trying to redeploy undone tasks of MVNO------
+INFO:root:Finished redeployment.
 INFO:root:mno best population [3 1 1 3 5 3 0.5 3 2 3 2 3 3 0.5 1 3 1 3 300.0 0.2] with fitness: -inf
 INFO:root:mvno best population [3 1 1 3 5 3 0.5 3 2 3 2 3 3 0.5 1 3 1 3 300.0 0.2] with fitness: -inf
 INFO:root:task0 assign to MNO
@@ -158,6 +159,7 @@ INFO:root:-------Start of hour 2, system time: 60-------
 INFO:root:hour tasks: [4 5]
 INFO:root:------Start trying to redeploy undone tasks of MNO------
 INFO:root:------Start trying to redeploy undone tasks of MVNO------
+INFO:root:Finished redeployment.
 INFO:root:mno best population [  4.68   3.97   0.87   3.67   1.73   3.02   2.32   3.73   3.98   0.83
    0.33   1.68   2.69   3.98   2.8    3.21   0.85   3.92 201.66   0.14] with fitness: 2240.6335026162687
 INFO:root:mvno best population [  0.73   0.15   3.25   1.59   0.15   3.81   3.83   0.31   4.4    1.6
@@ -299,6 +301,7 @@ INFO:root:-------Start of hour 3, system time: 120-------
 INFO:root:hour tasks: [6]
 INFO:root:------Start trying to redeploy undone tasks of MNO------
 INFO:root:------Start trying to redeploy undone tasks of MVNO------
+INFO:root:Finished redeployment.
 INFO:root:mno best population [  4.68   3.97   0.87   3.67   1.73   3.02   2.5    3.31   4.55   3.23
    1.99   4.2    4.48   2.48   4.27   2.19   2.45   3.92 201.66   0.14] with fitness: 4411.23613515911
 INFO:root:mvno best population [  0.73   0.15   3.25   1.59   0.15   3.81   3.83   0.31   4.4    1.6
@@ -349,6 +352,7 @@ INFO:root:-------Start of hour 4, system time: 180-------
 INFO:root:hour tasks: [7 8]
 INFO:root:------Start trying to redeploy undone tasks of MNO------
 INFO:root:------Start trying to redeploy undone tasks of MVNO------
+INFO:root:Finished redeployment.
 INFO:root:mno best population [  4.68   3.97   0.87   3.67   1.73   2.42   2.5    3.31   4.55   3.23
    1.99   4.2    4.48   2.48   4.27   2.19   2.45   3.92 201.66   0.14] with fitness: 5717.758463618651
 INFO:root:mvno best population [  0.73   0.15   3.25   1.59   0.15   3.81   3.83   0.31   4.4    1.6
@@ -487,6 +491,7 @@ INFO:root:-------Start of hour 5, system time: 240-------
 INFO:root:hour tasks: [9]
 INFO:root:------Start trying to redeploy undone tasks of MNO------
 INFO:root:------Start trying to redeploy undone tasks of MVNO------
+INFO:root:Finished redeployment.
 INFO:root:mno best population [  4.68   3.97   0.87   3.67   1.73   2.42   2.5    3.31   4.55   0.66
    0.33   1.68   2.69   2.46   1.32   2.42   1.33   3.75 245.69   0.14] with fitness: 7417.658860992095
 INFO:root:mvno best population [  0.73   0.15   3.25   1.59   0.15   3.81   3.83   0.31   4.4    1.6

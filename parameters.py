@@ -3,7 +3,7 @@ import logging
 
 rnd_seed = 1126
 logging_level = logging.INFO
-test_data_dir = './data/case1/'
+test_data_dir = './data/case2/'
 # round time
 small_round_minutes = 60
 # 60 * 24 * 7
@@ -31,9 +31,9 @@ _mu = 0.8
 
 # task deployment
 _gamma = [
-    [3, 1, 1, 3, 5, 3], # VoIP
-    [0.5, 3, 2, 3, 2, 3], # IP Video
-    [3, 0.5, 1, 3, 1, 3] # FTP
+    [3.0, 1.0, 1.0, 3.0, 5.0, 3.0], # VoIP
+    [0.5, 3.0, 2.0, 3.0, 2.0, 3.0], # IP Video
+    [3.0, 0.5, 1.0, 3.0, 1.0, 3.0] # FTP
 ]
 _op_bw = 300 # Kbps
 _op_cr = 0.2 # GCU-second/second

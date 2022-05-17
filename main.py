@@ -1,10 +1,10 @@
 import json
 import numpy as np
-from utils import (printReturn, funcCall, print_vm_list)
+from utils import (printReturn, funcCall, print_vm_list, toSoftmax)
 from network_operator import (MNO, MVNO)
 from parameters import (test_data_dir, small_round_minutes, big_round_minutes, big_round_times, rnd_seed, Task_type_index, Task_event_index,
                         _phi, generated_bw_max, generated_bw_min, generated_delay_cloud_max, generated_delay_cloud_min,
-                        generated_delay_edge_max, generated_delay_edge_min, logging_level)
+                        generated_delay_edge_max, generated_delay_edge_min, logging_level, offspring_number)
 from vm import VM
 import logging
 
@@ -135,11 +135,15 @@ def task_deployment(hour_tasks: np.array) -> None:
     '''Random assign task to operator and deploy the task.'''
     # try to redeploy the unaccepted tasks
     for operator in (mno, mvno):
+        # initialization
+        operator._task_deployment.hour_utility = 0
+        operator._task_deployment.hour_task_num = 0
         logging.info(f'------Start trying to redeploy undone tasks of {operator.name}------')
         operator.redeploy(vm_list, system_time)
+    logging.info('Finished redeployment.')
     # start hourly task deployment
-    logging.info(f'mno best population {mno._task_deployment.optimizing.best_population} with fitness: {mno._task_deployment.optimizing.best_fitness}')
-    logging.info(f'mvno best population {mvno._task_deployment.optimizing.best_population} with fitness: {mvno._task_deployment.optimizing.best_fitness}')
+    logging.info(f'mno best population {toSoftmax(mno._task_deployment.optimizing.best_population)} with fitness: {mno._task_deployment.optimizing.best_fitness}')
+    logging.info(f'mvno best population {toSoftmax(mvno._task_deployment.optimizing.best_population)} with fitness: {mvno._task_deployment.optimizing.best_fitness}')
     for task in hour_tasks:
         user_id = task[Task_event_index.user_id.value]
         # get/assign the operator to the task
@@ -151,8 +155,12 @@ def task_deployment(hour_tasks: np.array) -> None:
             user_id_set.add(user_id)
         # delegate to operator
         operator.task_deployment(task, vm_list)
-    logging.info(f'mno overall utility: {mno._task_deployment.optimizing.best_fitness}')
-    logging.info(f'mvno overall utility: {mvno._task_deployment.optimizing.best_fitness}')
+    
+    mno.end_task_deployment()
+    mvno.end_task_deployment()
+
+    logging.info(f'mno overall hour utility: {mno._task_deployment.hour_utility}, hour fitness: {mno._task_deployment.hour_fitness}')
+    logging.info(f'mvno overall hour utility: {mvno._task_deployment.hour_utility}, hour fitness: {mvno._task_deployment.hour_fitness}')
 
     # update best population based on the operating(deploy utility) of this hour
     logging.info(f'------------Start of Updating best population------------')

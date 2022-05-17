@@ -2,7 +2,7 @@ import abc
 import numpy as np
 from parameters import (offspring_number, Task_type_index, _theta, _lambda, mutate_rate, rnd_seed,
                         _gamma, _op_bw, _op_cr)
-from utils import funcCall
+from utils import (funcCall, toSoftmax)
 from constract import Contract
 import math
 import logging
@@ -178,12 +178,13 @@ class VMAssignmentOptimizing(GeneticOptimizing):
 class TaskDeploymentParametersOptimizing(GeneticOptimizing):
 
     def __init__(self):
-        self.best_gamma = np.array(_gamma, dtype=list)
+        self.best_gamma = np.array(_gamma)
         self.best_op_bw = _op_bw
         self.best_op_cr = _op_cr
 
+        # Save the populations without softmax
         self.new_populations = np.array([self.get_parameters() for _ in range(offspring_number)])
-        self.fitness = [0 for i in range(offspring_number)]
+        self.fitness = [0 for _ in range(offspring_number)]
         self.best_population = np.concatenate((self.best_gamma.flatten(), [self.best_op_bw, self.best_op_cr]))
         self.best_fitness = float('-inf')
 
@@ -195,10 +196,10 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
 
     def update_best_population(self):
         # update best population
-        for fitness, population in zip(self.fitness, self.new_populations):
-            logging.info(f'population {population} with fitness: {fitness}')
+        for idx, (fitness, population) in enumerate(zip(self.fitness, self.new_populations)):
+            logging.info(f'population {idx} {toSoftmax(population)} with fitness: {fitness}')
             if fitness > self.best_fitness:
-                logging.info(f'better population found, update best population to {population}!')
+                logging.info(f'better population found, update best population to {toSoftmax(population)}!')
                 self.best_fitness = fitness
                 self.best_population = population
                 self.best_gamma = [population[0:6], population[6:12], population[12:18]]
@@ -206,9 +207,15 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
     
     def step(self) -> None:
         '''Get the next valid offsprings.'''
+        if sum(self.fitness) // offspring_number == 0:
+            logging.info('data not enough for updating, skip updating.')
+            return self.new_populations
         parents = self.selection()
         offsprings = self.crossover(parents)
         self.new_populations = self.mutation(offsprings)
+        for idx, population in enumerate(self.new_populations):
+            logging.info(f'new population {idx}: {population}')
+        self.fitness = [0 for _ in range(offspring_number)]
 
     def selection(self) -> np.array:
         '''Stochastic universal sampling.'''

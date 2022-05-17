@@ -1,6 +1,6 @@
 import numpy as np
 from optimizing import GeneticOptimizing
-from utils import (printReturn, funcCall)
+from utils import (printReturn, funcCall, softmax, toSoftmax)
 from queue import Queue
 from parameters import (generated_bw_max, generated_bw_min,
                         generated_delay_cloud_max, generated_delay_cloud_min, Task_type_index, Task_event_index)
@@ -161,9 +161,13 @@ class TaskDeployment:
         self.optimizing = TaskDeploymentParametersOptimizing()
         self.unaccepted_task_queue = Queue()
         self.task_manager = Runing_task_manager()
+        self.hour_utility = 0
+        self.hour_fitness = 0
+        self.hour_task_num = 0
 
     def run(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
         '''Start running TaskDeployment algorithm.'''
+        self.hour_task_num += 1
         # get index in task_events.json
         start_time = task[Task_event_index.start_time.value]
         task_type = task[Task_event_index.task_type.value]
@@ -195,9 +199,10 @@ class TaskDeployment:
                 task_utility.delay(delay),
                 task_utility.cr_diff(cr_diff)
             ]
-            utility = sum([g * u for g, u in zip(self.optimizing.best_gamma[Task_type_index[task_type]], utilities)])
-            self.optimizing.best_fitness = utility
+            utility = sum([g * u for g, u in zip(softmax(self.optimizing.best_gamma[Task_type_index[task_type]]), utilities)])
+            self.hour_utility += utility
             for idx, population in enumerate(self.optimizing.new_populations):
+                population = toSoftmax(population)
                 _op_bw, _op_cr = population[-2], population[-1]
                 if min(bw_up, bw_down) < _op_bw and vm.cr < _op_cr:
                     # negative utility of six utility functions
@@ -218,8 +223,17 @@ class TaskDeployment:
         else:
             self.task_manager.bind_task(task, vm_list[selected_vm_id])
 
-    def update_parameters(self) -> None:
-        self.optimizing.step()
+    def end(self) -> None:
+        if self.hour_task_num == 0:
+            self.hour_task_num = 1
+        # average the utility
+        self.hour_fitness = self.hour_utility / self.hour_task_num
+        for idx in range(len(self.optimizing.fitness)):
+            self.optimizing.fitness[idx] /= self.hour_task_num
 
     def update_best_population(self) -> None:
+        self.optimizing.best_fitness = self.hour_fitness
         self.optimizing.update_best_population()
+
+    def update_parameters(self) -> None:
+        self.optimizing.step()
