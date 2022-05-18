@@ -13,10 +13,10 @@ big_round_times = 3
 # user to vm generating data
 generated_bw_max = 100000 # Kbps
 generated_bw_min = 0 # Kbps
-generated_delay_cloud_max = 5
-generated_delay_cloud_min = 0
-generated_delay_edge_max = 5
-generated_delay_edge_min = 0
+generated_delay_cloud_max = 50
+generated_delay_cloud_min = 49
+generated_delay_edge_max = 2
+generated_delay_edge_min = 1
 
 # contract
 bw_low = 5
