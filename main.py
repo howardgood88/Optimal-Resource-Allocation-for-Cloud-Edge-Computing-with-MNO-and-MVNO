@@ -4,12 +4,19 @@ from utils import (printReturn, funcCall, print_vm_list, toSoftmax)
 from network_operator import (MNO, MVNO)
 from parameters import (test_data_dir, small_round_minutes, big_round_minutes, big_round_times, rnd_seed, Task_type_index, Task_event_index,
                         Event_type, _phi, generated_bw_max, generated_bw_min, generated_delay_cloud_max, generated_delay_cloud_min,
-                        generated_delay_edge_max, generated_delay_edge_min, logging_level, offspring_number, mno_rate)
+                        generated_delay_edge_max, generated_delay_edge_min, logging_level, offspring_number, mno_rate, Global)
 from vm import VM
 from task_handler import Task_handler
 import logging
 
-logging.basicConfig(filename = test_data_dir + 'log.txt', filemode='w', level=logging_level)
+logging.basicConfig(format=f'%(levelname)s:Time %(system_time)s:%(message)s', filename=test_data_dir + 'log.txt'
+                    , filemode='w', level=logging_level)
+logger = logging.getLogger('root')
+class ContextFileter(logging.Filter):
+    def filter(self, record):
+        record.system_time = Global.system_time
+        return True
+logger.addFilter(ContextFileter())
 np.random.seed(rnd_seed)
 np.set_printoptions(precision=2, suppress=True)
 
@@ -60,7 +67,7 @@ def get_hourly_statistic_data(hourly_tasks: np.array) -> np.array:
         hourly_statistic_data[task_idx.value] = data
     return np.array(hourly_statistic_data, dtype=list)
 
-def data_preprocessing(history_data: np.array, system_time: int) -> tuple[np.array, np.array, set]:
+def data_preprocessing(history_data: np.array) -> tuple[np.array, np.array, set]:
     '''
     Transform task-level history data into hourly history data, and generate user list.
     For N = number of tasks, H = number of hours.
@@ -86,7 +93,7 @@ def data_preprocessing(history_data: np.array, system_time: int) -> tuple[np.arr
     # all user had appeared
     user_id_set = set()
     # the selected time range
-    minutes_range = (system_time, system_time + small_round_minutes)
+    minutes_range = (Global.system_time, Global.system_time + small_round_minutes)
     # index of task_event.json/history_data.json
     start_time_idx = Task_event_index.event_time.value
     user_id_idx = Task_event_index.user_id.value
@@ -134,14 +141,13 @@ def update_user_to_vm(user_id_list: np.array) -> None:
 
 def update_data(hourly_history_data: np.array, hour_task_record: np.array, statistic_data: np.array) -> tuple[np.array, np.array]:
     '''Update hourly_history_data, and update statistic_data by hour_task_record.'''
-    logging.debug(f'add hour_task_record {hour_task_record} into hourly_history_data and update statistic_data')
     if hourly_history_data is None:
         hourly_history_data = hour_task_record
     else:
         hourly_history_data = np.vstack([hourly_history_data, hour_task_record])
-    logging.info(f'add hour data\n{np.mean(hour_task_record, axis=0)} into statistic data')
+    _message = f'add hour data\n{np.mean(hour_task_record, axis=0)} into statistic data, '
     statistic_data = statistic_data * (1 -_phi) + np.mean(hour_task_record, axis=0) * _phi
-    logging.info(f'statistic data becomes:\n{statistic_data}')
+    logging.debug(_message + f'statistic data becomes:\n{statistic_data}')
     return hourly_history_data, statistic_data
 
 def task_deployment(hour_events: np.array) -> None:
@@ -152,12 +158,13 @@ def task_deployment(hour_events: np.array) -> None:
         operator._task_deployment.hour_utility = 0
         operator._task_deployment.hour_task_num = 0
         logging.info(f'------Start trying to redeploy undone tasks of {operator.name}------')
-        operator.redeploy(vm_list, system_time)
-    logging.info('Finished redeployment.')
+        operator.redeploy(vm_list)
+        logging.info(f'Finished {operator.name} redeployment.')
     # start hourly task deployment
     logging.info(f'mno best population {toSoftmax(mno._task_deployment.optimizing.best_population)} with fitness: {mno._task_deployment.optimizing.best_fitness}')
     logging.info(f'mvno best population {toSoftmax(mvno._task_deployment.optimizing.best_population)} with fitness: {mvno._task_deployment.optimizing.best_fitness}')
     for event in hour_events:
+        Global.system_time = event[Task_event_index.event_time.value]
         user_id = event[Task_event_index.user_id.value]
         if event[Task_event_index.event_type.value] == Event_type.start:
             # get/assign the operator to the task
@@ -172,15 +179,6 @@ def task_deployment(hour_events: np.array) -> None:
         elif event[Task_event_index.event_type.value] == Event_type.end:
             operator = user_id_to_operator[user_id]
             operator.release_task(event)
-    # notify operator task deployment is end and calculate the statistic performance of this hour
-    mno.end_task_deployment()
-    mvno.end_task_deployment()
-    logging.info(f'mno overall hour utility: {mno._task_deployment.hour_utility}, hour fitness: {mno._task_deployment.hour_fitness}')
-    logging.info(f'mvno overall hour utility: {mvno._task_deployment.hour_utility}, hour fitness: {mvno._task_deployment.hour_fitness}')
-
-    logging.info(f'------------Start of Updating Parameters------------')
-    mno.update_task_deployment_parameters()
-    mvno.update_task_deployment_parameters()
 
 # load data & initialization
 logging.info('------------Start of load data & initialization------------')
@@ -188,11 +186,11 @@ machine_attributes = load_machine_data(test_data_dir + 'machine_attributes.json'
 history_data = load_task_data(test_data_dir + 'history_data.json')
 task_events = load_task_data(test_data_dir + 'task_events.json')
 logging.info('Finished loading data.')
+Global.system_time = 0
 # create dict map from vm_id to VM instance
 vm_list = createVM(machine_attributes)
 logging.info('Finished creating vm instance, store in vm_list that map from vm_id to vm instance.')
-system_time = 0
-hour_task_record, user_id_set = data_preprocessing(history_data, system_time)
+hour_task_record, user_id_set = data_preprocessing(history_data)
 logging.info('Finished data preprocessing, get hour_task_record as hourly history data and user_id_set.')
 # sort the set to make simulation reproducible. (or will get different user_to_vm)
 user_id_list = np.array(sorted(user_id_set))
@@ -211,14 +209,14 @@ Task_handler.task_events = task_events
 # initialize
 statistic_data = np.zeros((3,3))
 hourly_history_data = None
-start_time = system_time
-while system_time // big_round_minutes < big_round_times:
-    logging.info(f'-----------------Start of Round {system_time // big_round_minutes + 1}-----------------')
+start_time = Global.system_time
+while Global.system_time // big_round_minutes < big_round_times:
+    logging.info(f'-----------------Start of Round {Global.system_time // big_round_minutes + 1}-----------------')
     # prepare data
-    logging.info('------------Start of updating data------------')
+    logging.info('------------Start of updating history data------------')
     # update history data and statistic data
     hourly_history_data, statistic_data = update_data(hourly_history_data, hour_task_record, statistic_data)
-    logging.info('Finished update hourly_history_data and statistic_data.')
+    logging.info('Finished update history data and statistic data.')
 
     # VM Assignment
     logging.info('------------Start of VM Assignment------------')
@@ -226,27 +224,39 @@ while system_time // big_round_minutes < big_round_times:
     logging.info('Finished vm assignment.')
 
     # Task Deployment
-    logging.info(f'------------Start of Task Deployment round {system_time // big_round_minutes + 1}------------')
+    logging.info(f'------------Start of Task Deployment round {Global.system_time // big_round_minutes + 1}------------')
     hour_task_record = []
-    while system_time == start_time or system_time % big_round_minutes != 0:
+    while Global.system_time == start_time or Global.system_time % big_round_minutes != 0:
+        temp_time = Global.system_time
         # hourly task deployment
-        logging.info(f'-------Start of hour {system_time // small_round_minutes + 1}, system time: {system_time}-------')
+        logging.info(f'-------Start of hour {Global.system_time // small_round_minutes + 1}, system time: {Global.system_time}-------')
         ## get the hour tasks data
-        minutes_range = (system_time, system_time + small_round_minutes)
+        minutes_range = (Global.system_time, Global.system_time + small_round_minutes)
         event_time_idx = Task_event_index.event_time.value
         hour_mask = (minutes_range[0] <= task_events[:, event_time_idx]) & (task_events[:, event_time_idx] < minutes_range[1])
         hour_events = task_events[hour_mask]
-        logging.info(f'hour events: {hour_events[:, Task_event_index.index.value : Task_event_index.event_time.value + 1]}')
+        logging.info(f'Get hour events:\nid,type,time\n{hour_events[:, Task_event_index.index.value : Task_event_index.event_time.value + 1]}')
         if not hour_events.size == 0:
             task_deployment(hour_events)
+
         # prepare for next round
-        system_time += small_round_minutes
+        Global.system_time = temp_time + small_round_minutes
+
+        # notify operator task deployment is end and calculate the statistic performance of this hour
+        mno.end_task_deployment()
+        mvno.end_task_deployment()
+        logging.info(f'mno overall hour utility: {mno._task_deployment.hour_utility}, hour fitness: {mno._task_deployment.hour_fitness}')
+        logging.info(f'mvno overall hour utility: {mvno._task_deployment.hour_utility}, hour fitness: {mvno._task_deployment.hour_fitness}')
+        logging.info(f'------------Start of Updating Parameters------------')
+        mno.update_task_deployment_parameters()
+        mvno.update_task_deployment_parameters()
+
         hourly_statistic_data = get_hourly_statistic_data(hour_events)
         hour_task_record.append(hourly_statistic_data)
-    logging.info(f'Finished task deployment {system_time // big_round_minutes}.')
+        logging.info(f'Finished task deployment {Global.system_time // big_round_minutes}.')
 
     hour_task_record = np.array(hour_task_record, dtype=list)
-    start_time = system_time
-    assert(system_time % big_round_minutes == 0)
+    start_time = Global.system_time
+    assert(Global.system_time % big_round_minutes == 0)
 
 logging.info(f'Finish simulating...')

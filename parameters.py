@@ -1,9 +1,12 @@
 from enum import (IntEnum, unique)
 import logging
 
+class Global:
+    system_time = 0
+
 rnd_seed = 1126
 logging_level = logging.INFO
-test_data_dir = './data/case1/'
+test_data_dir = './data/case2/'
 # round time
 small_round_minutes = 60
 # 60 * 24 * 7
