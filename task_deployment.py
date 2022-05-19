@@ -6,6 +6,7 @@ from parameters import (generated_bw_max, generated_bw_min,
                         generated_delay_cloud_max, generated_delay_cloud_min, Task_type_index, Task_event_index)
 from optimizing import TaskDeploymentParametersOptimizing
 from vm import VM
+from task_handler import Task_handler
 import logging
 
 class UtilityFunc:
@@ -103,79 +104,29 @@ class UtilityFunc:
             task_utilities = cls.FTP
         return task_utilities
 
-class Runing_task_manager:
-    '''Manage the tasks running at vm.'''
-    def __init__(self):
-        self.observers = Queue()
-        self.vm_running_at = Queue()
-
-    def set_time(self, system_time: int) -> None:
-        '''Check whether system_time trigger task release.'''
-        while not self.observers.empty() and self.observers.queue[0][Task_event_index.end_time.value] < system_time:
-            self.release_task()
-    
-    def release_task(self) -> None:
-        '''Release vm resource used by task.'''
-        task = self.observers.get()
-        vm = self.vm_running_at.get()
-
-        _message = f'release task{task[Task_event_index.index.value]} from vm {vm.id},\n'
-        _message += f'cr: {vm.cr} -> '
-        vm.cr += task[Task_event_index.average_cpu_usage.value]
-        _message += f'{vm.cr}\n'
-
-        _message += f'local_bw_up: {vm.local_bw_up} -> '
-        vm.local_bw_up += task[Task_event_index.T_up.value]
-        _message += f'{vm.local_bw_up}\n'
-
-        _message += f'local_bw_down: {vm.local_bw_down} -> '
-        vm.local_bw_down += task[Task_event_index.T_down.value]
-        _message += f'{vm.local_bw_down}\n'
-        logging.info(_message)
-
-    def bind_task(self, task: np.array, selected_vm: VM) -> None:
-        '''Consume resource of selected vm and make task as observer.'''
-        _message = f'Deploy task{task[Task_event_index.index.value]} to vm {selected_vm.id},\n'
-        task_cr = task[Task_event_index.average_cpu_usage]
-        _message += f'task cr: {task_cr}, vm cr: {selected_vm.cr} -> '
-        selected_vm.cr -= task[Task_event_index.average_cpu_usage.value]
-        _message += f'{selected_vm.cr}\n'
-
-        task_T_up = task[Task_event_index.T_up]
-        _message += f'task bw_up: {task_T_up}, local_bw_up: {selected_vm.local_bw_up} -> '
-        selected_vm.local_bw_up -= task[Task_event_index.T_up.value]
-        _message += f'{selected_vm.local_bw_up}\n'
-
-        task_T_down = task[Task_event_index.T_down]
-        _message += f'task bw_down: {task_T_down}, local_bw_down: {selected_vm.local_bw_down} -> '
-        selected_vm.local_bw_down -= task[Task_event_index.T_down.value]
-        _message += f'{selected_vm.local_bw_down}\n'
-        logging.info(_message)
-
-        self.observers.put(task)
-        self.vm_running_at.put(selected_vm)
-
 class TaskDeployment:
     '''Task Deployment!!!'''
     def __init__(self):
         self.optimizing = TaskDeploymentParametersOptimizing()
+        # each element with two inner element: start event and end event of a task
         self.unaccepted_task_queue = Queue()
-        self.task_manager = Runing_task_manager()
+        # the sum of utility in an hour
         self.hour_utility = 0
-        self.hour_fitness = 0
+        # the number of valid task in an hour
         self.hour_task_num = 0
+        # the average of hour_utility
+        self.hour_fitness = 0
+        # keep the mapping of task id to vm it runs
+        self.running_task_id_to_vm = {}
 
-    def run(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
+    def deploy(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
         '''Start running TaskDeployment algorithm.'''
         self.hour_task_num += 1
         # get index in task_events.json
-        start_time = task[Task_event_index.start_time.value]
+        start_time = task[Task_event_index.event_time.value]
         task_type = task[Task_event_index.task_type.value]
         user_id = task[Task_event_index.user_id.value]
         cpu_request = task[Task_event_index.cpu_request.value]
-        # check if there are completed tasks and release it
-        logging.info(f'system time: {start_time}')
-        self.task_manager.set_time(start_time)
 
         max_utility = float('-inf')
         selected_vm_id = None
@@ -218,12 +169,62 @@ class TaskDeployment:
 
         # if no feasible solution
         if selected_vm_id == None:
-            logging.info(f'task{task[Task_event_index.index.value]} unaccepted')
-            self.unaccepted_task_queue.put(task)
+            task_id = task[Task_event_index.index.value]
+            logging.info(f'task{task_id} unaccepted')
+            Task_handler.set_mask(task_id)
+            events = Task_handler.get_deleted_events()
+            assert(len(events) == 2)
+            self.unaccepted_task_queue.put(events)
+            Task_handler.delete_events()
         else:
-            self.task_manager.bind_task(task, vm_list[selected_vm_id])
+            self.bind_task(task, vm_list[selected_vm_id])
+
+    def bind_task(self, task: np.array, selected_vm: VM) -> None:
+        '''Consume resource of selected vm and make task as observer.'''
+        task_id = task[Task_event_index.index.value]
+        _message = f'Deploy task{task_id} to vm {selected_vm.id},\n'
+
+        task_cr = task[Task_event_index.average_cpu_usage]
+        _message += f'task cr: {task_cr}, vm cr: {selected_vm.cr} -> '
+        selected_vm.cr -= task[Task_event_index.average_cpu_usage.value]
+        _message += f'{selected_vm.cr}\n'
+
+        task_T_up = task[Task_event_index.T_up]
+        _message += f'task bw_up: {task_T_up}, local_bw_up: {selected_vm.local_bw_up} -> '
+        selected_vm.local_bw_up -= task[Task_event_index.T_up.value]
+        _message += f'{selected_vm.local_bw_up}\n'
+
+        task_T_down = task[Task_event_index.T_down]
+        _message += f'task bw_down: {task_T_down}, local_bw_down: {selected_vm.local_bw_down} -> '
+        selected_vm.local_bw_down -= task[Task_event_index.T_down.value]
+        _message += f'{selected_vm.local_bw_down}\n'
+        logging.info(_message)
+
+        self.running_task_id_to_vm[task_id] = selected_vm
+
+    def release(self, task: np.array) -> None:
+        '''Release vm resource used by task.'''
+        task_id = task[Task_event_index.index.value]
+        vm = self.running_task_id_to_vm[task_id]
+
+        _message = f'release task{task_id} from vm {vm.id},\n'
+        _message += f'cr: {vm.cr} -> '
+        vm.cr += task[Task_event_index.average_cpu_usage.value]
+        _message += f'{vm.cr}\n'
+
+        _message += f'local_bw_up: {vm.local_bw_up} -> '
+        vm.local_bw_up += task[Task_event_index.T_up.value]
+        _message += f'{vm.local_bw_up}\n'
+
+        _message += f'local_bw_down: {vm.local_bw_down} -> '
+        vm.local_bw_down += task[Task_event_index.T_down.value]
+        _message += f'{vm.local_bw_down}\n'
+        logging.info(_message)
+
+        del self.running_task_id_to_vm[task_id]
 
     def end(self) -> None:
+        '''Get the statistic fitness of optimizing populations at the end of an hour.'''
         if self.hour_task_num == 0:
             self.hour_task_num = 1
         # average the utility
@@ -231,9 +232,10 @@ class TaskDeployment:
         for idx in range(len(self.optimizing.fitness)):
             self.optimizing.fitness[idx] /= self.hour_task_num
 
-    def update_best_population(self) -> None:
+    def update_parameters(self) -> None:
+        '''Update the parameters based on the performance of optimizing offsprings of this hour.'''
+        logging.info('-----Updating best population-----')
         self.optimizing.best_fitness = self.hour_fitness
         self.optimizing.update_best_population()
-
-    def update_parameters(self) -> None:
+        logging.info('-----Generate new offsprings-----')
         self.optimizing.step()

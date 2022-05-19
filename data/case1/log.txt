@@ -80,144 +80,183 @@ INFO:root:mno vm id: ['1' '3' '5'], mvno vm id: ['2' '4' '6']
 INFO:root:Finished vm assignment.
 INFO:root:------------Start of Task Deployment round 1------------
 INFO:root:-------Start of hour 1, system time: 0-------
-INFO:root:hour tasks: [0 1 2 3]
+INFO:root:hour events: [[0 0 10]
+ [1 0 15]
+ [0 1 20]
+ [2 0 30]
+ [1 1 35]
+ [2 1 40]
+ [3 0 50]
+ [3 1 57]]
 INFO:root:------Start trying to redeploy undone tasks of MNO------
 INFO:root:------Start trying to redeploy undone tasks of MVNO------
 INFO:root:Finished redeployment.
-INFO:root:mno best population [3 1 1 3 5 3 0.5 3 2 3 2 3 3 0.5 1 3 1 3 300.0 0.2] with fitness: -inf
-INFO:root:mvno best population [3 1 1 3 5 3 0.5 3 2 3 2 3 3 0.5 1 3 1 3 300.0 0.2] with fitness: -inf
+INFO:root:mno best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: -inf
+INFO:root:mvno best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: -inf
 INFO:root:task0 assign to MNO
-INFO:root:system time: 10
 INFO:root:Deploy task0 to vm 1,
 task cr: 0.02, vm cr: 0.7 -> 0.6799999999999999
 task bw_up: 370, local_bw_up: 100000 -> 99630
 task bw_down: 16, local_bw_down: 100000 -> 99984
 
 INFO:root:task1 assign to MVNO
-INFO:root:system time: 15
 INFO:root:Deploy task1 to vm 2,
 task cr: 0.06, vm cr: 0.6 -> 0.54
 task bw_up: 20, local_bw_up: 100000 -> 99980
 task bw_down: 900, local_bw_down: 100000 -> 99100
 
-INFO:root:task2 assign to MVNO
-INFO:root:system time: 30
-INFO:root:Deploy task2 to vm 6,
-task cr: 0.08, vm cr: 0.55 -> 0.47000000000000003
-task bw_up: 35, local_bw_up: 100000 -> 99965
-task bw_down: 1000, local_bw_down: 100000 -> 99000
-
-INFO:root:task3 assign to MNO
-INFO:root:system time: 50
 INFO:root:release task0 from vm 1,
 cr: 0.6799999999999999 -> 0.7
 local_bw_up: 99630 -> 100000
 local_bw_down: 99984 -> 100000
 
+INFO:root:task2 assign to MVNO
+INFO:root:Deploy task2 to vm 6,
+task cr: 0.08, vm cr: 0.55 -> 0.47000000000000003
+task bw_up: 35, local_bw_up: 100000 -> 99965
+task bw_down: 1000, local_bw_down: 100000 -> 99000
+
+INFO:root:release task1 from vm 2,
+cr: 0.54 -> 0.6000000000000001
+local_bw_up: 99980 -> 100000
+local_bw_down: 99100 -> 100000
+
+INFO:root:release task2 from vm 6,
+cr: 0.47000000000000003 -> 0.55
+local_bw_up: 99965 -> 100000
+local_bw_down: 99000 -> 100000
+
+INFO:root:task3 assign to MNO
 INFO:root:Deploy task3 to vm 1,
 task cr: 0.05, vm cr: 0.7 -> 0.6499999999999999
 task bw_up: 300, local_bw_up: 100000 -> 99700
 task bw_down: 16, local_bw_down: 100000 -> 99984
 
-INFO:root:mno overall utility: 898.1221889988735
-INFO:root:mvno overall utility: 657.706504504346
-INFO:root:------------Start of Updating best population------------
-INFO:root:---MNO start updating best population---
-INFO:root:population [  0.55   3.04   2.91   0.13   3.57   4.21   1.02   4.45   1.12   3.58
-   1.78   4.88   4.85   2.05   1.32   2.42   1.33   1.84 340.24   0.27] with fitness: 1805.748705246077
-INFO:root:better population found, update best population to [  0.55   3.04   2.91   0.13   3.57   4.21   1.02   4.45   1.12   3.58
-   1.78   4.88   4.85   2.05   1.32   2.42   1.33   1.84 340.24   0.27]!
-INFO:root:population [  1.63   1.4    1.63   4.85   4.09   4.54   2.5    3.31   4.55   4.04
-   1.99   4.2    3.73   2.48   4.27   2.19   2.45   4.68 245.69   0.32] with fitness: 2069.9371248846833
-INFO:root:better population found, update best population to [  1.63   1.4    1.63   4.85   4.09   4.54   2.5    3.31   4.55   4.04
-   1.99   4.2    3.73   2.48   4.27   2.19   2.45   4.68 245.69   0.32]!
-INFO:root:population [  4.68   3.97   0.87   3.67   1.73   3.02   2.32   3.73   3.98   0.83
-   0.33   1.68   2.69   3.98   2.8    3.21   0.85   3.92 201.66   0.14] with fitness: 2240.6335026162687
-INFO:root:better population found, update best population to [  4.68   3.97   0.87   3.67   1.73   3.02   2.32   3.73   3.98   0.83
-   0.33   1.68   2.69   3.98   2.8    3.21   0.85   3.92 201.66   0.14]!
-INFO:root:population [  0.76   3.3    0.75   3.75   2.99   2.89   0.28   1.81   4.5    4.03
-   1.75   2.62   2.75   3.23   0.4    2.48   2.51   0.4  218.8    0.31] with fitness: 1512.3975914258294
-INFO:root:---MVNO start updating best population---
-INFO:root:population [  1.62   0.75   1.04   3.96   0.42   1.38   2.76   2.44   2.66   0.91
-   3.64   2.1    4.93   0.76   0.75   4.66   2.5    3.91 280.5    0.06] with fitness: 2004.8006757966841
-INFO:root:better population found, update best population to [  1.62   0.75   1.04   3.96   0.42   1.38   2.76   2.44   2.66   0.91
-   3.64   2.1    4.93   0.76   0.75   4.66   2.5    3.91 280.5    0.06]!
-INFO:root:population [  1.66   3.32   1.15   2.2    2.     0.61   1.6    2.4    3.03   0.97
-   4.34   0.7    0.14   4.02   1.24   3.99   2.7    3.28 382.65   0.12] with fitness: 2017.9083989303936
-INFO:root:better population found, update best population to [  1.66   3.32   1.15   2.2    2.     0.61   1.6    2.4    3.03   0.97
-   4.34   0.7    0.14   4.02   1.24   3.99   2.7    3.28 382.65   0.12]!
-INFO:root:population [  0.73   0.15   3.25   1.59   0.15   3.81   3.83   0.31   4.4    1.6
-   3.7    0.54   0.58   4.77   4.49   4.46   2.32   4.84 249.65   0.16] with fitness: 2414.5498870330657
-INFO:root:better population found, update best population to [  0.73   0.15   3.25   1.59   0.15   3.81   3.83   0.31   4.4    1.6
-   3.7    0.54   0.58   4.77   4.49   4.46   2.32   4.84 249.65   0.16]!
-INFO:root:population [  3.09   2.58   4.11   1.66   4.83   3.55   1.39   3.56   2.07   3.14
-   0.17   2.     2.01   2.55   3.47   1.81   2.11   2.67 395.22   0.39] with fitness: 1863.981036410985
-INFO:root:------------Start of Updating Parameters------------
-INFO:root:---MNO start updating parameters---
-INFO:root:---MVNO start updating parameters---
-INFO:root:-------Start of hour 2, system time: 60-------
-INFO:root:hour tasks: [4 5]
-INFO:root:------Start trying to redeploy undone tasks of MNO------
-INFO:root:------Start trying to redeploy undone tasks of MVNO------
-INFO:root:Finished redeployment.
-INFO:root:mno best population [  4.68   3.97   0.87   3.67   1.73   3.02   2.32   3.73   3.98   0.83
-   0.33   1.68   2.69   3.98   2.8    3.21   0.85   3.92 201.66   0.14] with fitness: 2240.6335026162687
-INFO:root:mvno best population [  0.73   0.15   3.25   1.59   0.15   3.81   3.83   0.31   4.4    1.6
-   3.7    0.54   0.58   4.77   4.49   4.46   2.32   4.84 249.65   0.16] with fitness: 2414.5498870330657
-INFO:root:task4 assign to MNO
-INFO:root:system time: 64
 INFO:root:release task3 from vm 1,
 cr: 0.6499999999999999 -> 0.7
 local_bw_up: 99700 -> 100000
 local_bw_down: 99984 -> 100000
 
-INFO:root:Deploy task4 to vm 5,
-task cr: 0.09, vm cr: 0.35 -> 0.26
+INFO:root:mno overall hour utility: 77.38627600452699, hour fitness: 38.693138002263495
+INFO:root:mvno overall hour utility: 329.6397018228908, hour fitness: 164.8198509114454
+INFO:root:------------Start of Updating Parameters------------
+INFO:root:---MNO start updating parameters---
+INFO:root:-----Updating best population-----
+INFO:root:population 0 [  0.01   0.14   0.13   0.01   0.24   0.46   0.01   0.32   0.01   0.13
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27] with fitness: 69.08487527577907
+INFO:root:better population found, update best population to [  0.01   0.14   0.13   0.01   0.24   0.46   0.01   0.32   0.01   0.13
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27]!
+INFO:root:population 1 [  0.02   0.01   0.02   0.43   0.2    0.32   0.05   0.1    0.36   0.21
+   0.03   0.25   0.16   0.05   0.28   0.04   0.05   0.43 245.69   0.32] with fitness: 54.29659434284948
+INFO:root:population 2 [  0.47   0.23   0.01   0.17   0.02   0.09   0.09   0.36   0.47   0.02
+   0.01   0.05   0.09   0.33   0.1    0.15   0.01   0.31 201.66   0.14] with fitness: 68.07654789661052
+INFO:root:population 3 [  0.02   0.24   0.02   0.38   0.18   0.16   0.01   0.04   0.52   0.32
+   0.03   0.08   0.23   0.37   0.02   0.18   0.18   0.02 218.8    0.31] with fitness: 47.203961752019495
+INFO:root:-----Generate new offsprings-----
+INFO:root:new population 0: [  0.55   3.65   2.91   0.13   3.57   4.21   2.32   3.73   3.98   0.83
+   0.33   1.68   4.85   2.05   1.32   2.42   1.33   1.84 340.24   0.27]
+INFO:root:new population 1: [  0.55   3.04   2.91   0.13   3.57   4.21   1.22   4.45   1.12   3.58
+   1.78   4.88   4.85   2.05   1.32   2.42   1.33   1.84 340.24   0.27]
+INFO:root:new population 2: [  1.96   1.4    1.63   4.85   4.09   4.54   1.02   4.45   1.12   3.58
+   1.42   4.88   3.73   2.97   4.27   2.19   2.45   4.68 245.69   0.32]
+INFO:root:new population 3: [  4.68   3.97   0.87   3.67   1.73   3.02   2.5    3.31   4.55   4.04
+   1.99   4.2    2.69   3.98   3.36   3.21   0.85   3.92 201.66   0.14]
+INFO:root:---MVNO start updating parameters---
+INFO:root:-----Updating best population-----
+INFO:root:population 0 [  0.07   0.03   0.04   0.77   0.02   0.06   0.18   0.13   0.16   0.03
+   0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.06] with fitness: 149.46176074908607
+INFO:root:population 1 [  0.1    0.51   0.06   0.17   0.14   0.03   0.04   0.09   0.17   0.02
+   0.65   0.02   0.01   0.36   0.02   0.35   0.1    0.17 382.65   0.12] with fitness: 297.4214124740526
+INFO:root:better population found, update best population to [  0.1    0.51   0.06   0.17   0.14   0.03   0.04   0.09   0.17   0.02
+   0.65   0.02   0.01   0.36   0.02   0.35   0.1    0.17 382.65   0.12]!
+INFO:root:population 2 [  0.03   0.01   0.32   0.06   0.01   0.56   0.26   0.01   0.46   0.03
+   0.23   0.01   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16] with fitness: 124.4922247168667
+INFO:root:population 3 [  0.08   0.05   0.23   0.02   0.48   0.13   0.05   0.45   0.1    0.29
+   0.02   0.09   0.09   0.16   0.4    0.08   0.1    0.18 395.22   0.39] with fitness: 316.2258610012666
+INFO:root:better population found, update best population to [  0.08   0.05   0.23   0.02   0.48   0.13   0.05   0.45   0.1    0.29
+   0.02   0.09   0.09   0.16   0.4    0.08   0.1    0.18 395.22   0.39]!
+INFO:root:-----Generate new offsprings-----
+INFO:root:new population 0: [  1.62   0.75   1.04   3.96   0.42   1.38   2.76   2.44   2.66   0.91
+   3.64   2.1    4.93   0.76   0.75   4.66   2.5    3.91 280.5    0.08]
+INFO:root:new population 1: [  1.66   3.32   1.15   2.2    2.     0.61   3.83   0.31   3.03   0.97
+   4.34   0.7    0.14   4.02   1.24   3.99   2.7    3.28 382.65   0.12]
+INFO:root:new population 2: [  0.73   0.15   3.25   1.59   0.15   3.81   1.39   3.56   4.4    1.6
+   3.7    0.54   0.58   4.77   4.49   4.46   2.32   4.84 249.65   0.16]
+INFO:root:new population 3: [  3.09   2.58   4.11   1.66   4.83   3.55   1.6    2.4    2.07   3.14
+   0.14   2.     2.01   2.55   3.47   1.81   2.11   2.67 316.18   0.39]
+INFO:root:-------Start of hour 2, system time: 60-------
+INFO:root:hour events: [[4 0 64]
+ [4 1 69]
+ [5 0 100]]
+INFO:root:------Start trying to redeploy undone tasks of MNO------
+INFO:root:------Start trying to redeploy undone tasks of MVNO------
+INFO:root:Finished redeployment.
+INFO:root:mno best population [  0.01   0.14   0.13   0.01   0.24   0.46   0.01   0.32   0.01   0.13
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27] with fitness: 69.08487527577907
+INFO:root:mvno best population [  0.08   0.05   0.23   0.02   0.48   0.13   0.05   0.45   0.1    0.29
+   0.02   0.09   0.09   0.16   0.4    0.08   0.1    0.18 395.22   0.39] with fitness: 316.2258610012666
+INFO:root:task4 assign to MVNO
+INFO:root:Deploy task4 to vm 2,
+task cr: 0.09, vm cr: 0.6000000000000001 -> 0.5100000000000001
 task bw_up: 31, local_bw_up: 100000 -> 99969
 task bw_down: 850, local_bw_down: 100000 -> 99150
 
-INFO:root:task5 assign to MNO
-INFO:root:system time: 100
-INFO:root:release task4 from vm 5,
-cr: 0.26 -> 0.35
+INFO:root:release task4 from vm 2,
+cr: 0.5100000000000001 -> 0.6000000000000001
 local_bw_up: 99969 -> 100000
 local_bw_down: 99150 -> 100000
 
+INFO:root:task5 assign to MNO
 INFO:root:Deploy task5 to vm 3,
 task cr: 0.12, vm cr: 0.8 -> 0.68
 task bw_up: 25, local_bw_up: 100000 -> 99975
 task bw_down: 1300, local_bw_down: 100000 -> 98700
 
-INFO:root:mno overall utility: 1034.5211343189537
-INFO:root:mvno overall utility: 2414.5498870330657
-INFO:root:------------Start of Updating best population------------
-INFO:root:---MNO start updating best population---
-INFO:root:population [  0.44   3.04   2.91   0.13   3.57   4.21   2.32   3.73   3.98   0.83
-   0.33   1.68   2.69   3.98   2.8    3.21   0.85   1.84 340.24   0.27] with fitness: 3180.4740905263434
-INFO:root:better population found, update best population to [  0.44   3.04   2.91   0.13   3.57   4.21   2.32   3.73   3.98   0.83
-   0.33   1.68   2.69   3.98   2.8    3.21   0.85   1.84 340.24   0.27]!
-INFO:root:population [  1.63   1.4    1.63   4.85   4.09   5.45   1.02   4.45   1.12   3.58
-   1.78   4.88   4.85   2.05   1.32   2.42   1.33   4.68 245.69   0.32] with fitness: 3940.2341036518346
-INFO:root:better population found, update best population to [  1.63   1.4    1.63   4.85   4.09   5.45   1.02   4.45   1.12   3.58
-   1.78   4.88   4.85   2.05   1.32   2.42   1.33   4.68 245.69   0.32]!
-INFO:root:population [  4.68   3.97   0.87   3.67   1.73   3.02   2.5    3.31   4.55   3.23
-   1.99   4.2    4.48   2.48   4.27   2.19   2.45   3.92 201.66   0.14] with fitness: 4411.23613515911
-INFO:root:better population found, update best population to [  4.68   3.97   0.87   3.67   1.73   3.02   2.5    3.31   4.55   3.23
-   1.99   4.2    4.48   2.48   4.27   2.19   2.45   3.92 201.66   0.14]!
-INFO:root:population [  0.76   3.3    0.75   3.75   2.99   2.89   0.28   1.81   4.5    4.03
-   1.75   2.62   2.75   3.23   0.48   2.48   2.51   0.4  218.8    0.31] with fitness: 2870.098844191428
-INFO:root:---MVNO start updating best population---
-INFO:root:population [  1.62   0.75   1.04   3.96   0.42   1.38   2.76   2.44   2.66   0.91
-   3.64   0.54   0.58   4.77   4.49   4.46   2.32   5.81 249.65   0.16] with fitness: 2004.8006757966841
-INFO:root:population [  1.66   3.32   1.15   2.2    2.     0.61   1.6    2.4    3.03   0.97
-   4.34   0.7    0.14   4.02   1.24   3.99   2.7    3.28 382.65   0.12] with fitness: 2017.9083989303936
-INFO:root:population [  0.73   0.15   3.25   1.59   0.15   3.81   3.83   0.31   4.4    1.6
-   3.7    2.     2.01   2.55   3.47   1.81   2.11   2.67 395.22   0.39] with fitness: 2414.5498870330657
-INFO:root:population [  3.09   2.58   4.11   1.66   4.83   3.55   1.39   3.56   1.65   3.14
-   0.17   2.1    4.93   0.76   0.75   4.66   3.     3.91 280.5    0.06] with fitness: 1863.981036410985
+INFO:root:mno overall hour utility: 15.837109051651769, hour fitness: 15.837109051651769
+INFO:root:mvno overall hour utility: 76.02152513480497, hour fitness: 76.02152513480497
 INFO:root:------------Start of Updating Parameters------------
 INFO:root:---MNO start updating parameters---
+INFO:root:-----Updating best population-----
+INFO:root:population 0 [  0.01   0.24   0.11   0.01   0.22   0.41   0.09   0.36   0.47   0.02
+   0.01   0.05   0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27] with fitness: 15.837109051651769
+INFO:root:population 1 [  0.01   0.14   0.13   0.01   0.24   0.46   0.01   0.32   0.01   0.13
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27] with fitness: 15.837109051651769
+INFO:root:population 2 [  0.02   0.01   0.02   0.43   0.2    0.32   0.01   0.33   0.01   0.14
+   0.02   0.5    0.16   0.07   0.27   0.03   0.04   0.41 245.69   0.32] with fitness: 72.49591462341384
+INFO:root:better population found, update best population to [  0.02   0.01   0.02   0.43   0.2    0.32   0.01   0.33   0.01   0.14
+   0.02   0.5    0.16   0.07   0.27   0.03   0.04   0.41 245.69   0.32]!
+INFO:root:population 3 [  0.47   0.23   0.01   0.17   0.02   0.09   0.05   0.1    0.36   0.21
+   0.03   0.25   0.08   0.31   0.17   0.14   0.01   0.29 201.66   0.14] with fitness: 72.21379118704762
+INFO:root:-----Generate new offsprings-----
+INFO:root:new population 0: [  0.55   3.04   2.91   0.13   3.57   3.02   2.5    3.31   3.64   4.04
+   1.99   4.2    4.85   2.05   1.32   2.42   1.33   1.84 340.24   0.27]
+INFO:root:new population 1: [  1.96   1.4    1.63   4.85   4.09   3.02   2.5    3.31   4.55   4.04
+   1.99   4.2    3.73   2.97   4.27   2.19   2.45   4.68 196.55   0.32]
+INFO:root:new population 2: [  4.68   3.97   0.87   3.67   1.73   4.21   1.22   4.45   1.12   3.58
+   1.78   4.88   2.69   3.98   3.36   3.21   0.85   3.92 201.66   0.14]
+INFO:root:new population 3: [  4.68   3.97   0.87   3.67   1.73   4.54   1.02   4.45   1.12   3.58
+   1.42   4.88   2.69   3.98   3.36   3.21   0.85   3.92 201.66   0.14]
 INFO:root:---MVNO start updating parameters---
+INFO:root:-----Updating best population-----
+INFO:root:population 0 [  0.07   0.03   0.04   0.77   0.02   0.06   0.18   0.13   0.16   0.03
+   0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.08] with fitness: 71.86377983617876
+INFO:root:population 1 [  0.1    0.51   0.06   0.17   0.14   0.03   0.31   0.01   0.14   0.02
+   0.51   0.01   0.01   0.36   0.02   0.35   0.1    0.17 382.65   0.12] with fitness: 64.48551360875877
+INFO:root:population 2 [  0.03   0.01   0.32   0.06   0.01   0.56   0.02   0.21   0.48   0.03
+   0.24   0.01   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16] with fitness: 70.68639455890813
+INFO:root:population 3 [  0.08   0.05   0.23   0.02   0.48   0.13   0.09   0.2    0.14   0.42
+   0.02   0.13   0.09   0.16   0.4    0.08   0.1    0.18 316.18   0.39] with fitness: 69.08408423890495
+INFO:root:-----Generate new offsprings-----
+INFO:root:new population 0: [  3.09   2.58   3.29   1.66   4.83   1.38   2.76   2.44   2.66   0.91
+   3.64   2.1    4.93   0.6    0.75   4.66   2.5    3.91 280.5    0.08]
+INFO:root:new population 1: [  1.62   0.75   1.04   3.96   0.42   0.61   3.83   0.31   3.03   0.97
+   4.34   0.7    0.14   4.02   1.24   3.99   2.7    3.28 459.18   0.12]
+INFO:root:new population 2: [  0.73   0.15   3.25   1.59   0.15   3.81   1.39   3.56   4.4    1.6
+   3.7    0.54   0.58   4.77   4.49   4.46   2.32   4.84 249.65   0.2 ]
+INFO:root:new population 3: [  1.66   3.32   1.15   2.2    2.     3.55   1.6    2.4    2.07   3.14
+   0.14   2.     2.01   2.04   3.47   1.81   2.11   2.67 316.18   0.39]
 INFO:root:Finished task deployment 1.
 INFO:root:-----------------Start of Round 2-----------------
 INFO:root:------------Start of updating data------------
@@ -233,307 +272,349 @@ INFO:root:Finished update hourly_history_data and statistic_data.
 INFO:root:------------Start of VM Assignment------------
 INFO:root:-----Evolution 1-----
 INFO:root:best population ['2' '4' '6'] with cost: 360.0
-INFO:root:population ['1' '2' '3' '4' '5' '6'] with cost: 264.0, fitness: 216.0
-INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
-INFO:root:population ['1' '2' '3' '4' '5'] with cost: 230.4, fitness: 249.6
-INFO:root:population ['2' '3' '4'] with cost: 152.4, fitness: 327.6
-INFO:root:-----Evolution 2-----
-INFO:root:best population ['2' '4' '6'] with cost: 360.0
-INFO:root:population ['2' '4' '5' '6'] with cost: 114.0, fitness: 366.0
-INFO:root:better population found, update best population to ['2' '4' '5' '6']!
-INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
-INFO:root:population ['1' '2' '3' '5'] with cost: 206.4, fitness: 273.6
-INFO:root:population ['2' '3' '4' '5'] with cost: 170.4, fitness: 309.6
-INFO:root:-----Evolution 3-----
-INFO:root:best population ['2' '4' '5' '6'] with cost: 366.0
 INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
 INFO:root:better population found, update best population to ['2' '4' '6']!
+INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
+INFO:root:population ['1' '2' '3' '5'] with cost: 206.4, fitness: 273.6
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:-----Evolution 2-----
+INFO:root:best population ['2' '4' '6'] with cost: 384.0
 INFO:root:population ['1' '2' '3' '5'] with cost: 206.4, fitness: 273.6
 INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
 INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
+INFO:root:population ['1' '2' '3' '4' '5'] with cost: 230.4, fitness: 249.6
+INFO:root:-----Evolution 3-----
+INFO:root:best population ['2' '4' '6'] with cost: 384.0
+INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
+INFO:root:population ['1' '3' '5' '6'] with cost: 201.6, fitness: 278.4
+INFO:root:population ['2' '3' '4' '5'] with cost: 170.4, fitness: 309.6
+INFO:root:population ['1' '2' '3' '5'] with cost: 206.4, fitness: 273.6
 INFO:root:-----Evolution 4-----
 INFO:root:best population ['2' '4' '6'] with cost: 384.0
 INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
 INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['2' '3' '4' '5' '6'] with cost: 204.0, fitness: 276.0
 INFO:root:population ['1' '2' '3' '5'] with cost: 206.4, fitness: 273.6
-INFO:root:population ['2' '3' '4' '5'] with cost: 170.4, fitness: 309.6
 INFO:root:-----Evolution 5-----
 INFO:root:best population ['2' '4' '6'] with cost: 384.0
 INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
+INFO:root:population ['1' '2' '3' '5'] with cost: 206.4, fitness: 273.6
+INFO:root:population ['3' '4' '5'] with cost: 132.0, fitness: 348.0
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:-----Evolution 6-----
+INFO:root:best population ['2' '4' '6'] with cost: 384.0
+INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['3' '4' '5'] with cost: 132.0, fitness: 348.0
+INFO:root:population ['1' '2' '3' '5'] with cost: 206.4, fitness: 273.6
+INFO:root:-----Evolution 7-----
+INFO:root:best population ['2' '4' '6'] with cost: 384.0
+INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
 INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
 INFO:root:population ['2' '3' '4' '5'] with cost: 170.4, fitness: 309.6
+INFO:root:population ['1' '2' '3' '4' '5'] with cost: 230.4, fitness: 249.6
+INFO:root:-----Evolution 8-----
+INFO:root:best population ['2' '4' '6'] with cost: 384.0
+INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
 INFO:root:population ['1' '2' '3' '5'] with cost: 206.4, fitness: 273.6
-INFO:root:-----Evolution 6-----
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['1' '2' '3' '4' '5'] with cost: 230.4, fitness: 249.6
+INFO:root:-----Evolution 9-----
 INFO:root:best population ['2' '4' '6'] with cost: 384.0
 INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
 INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
 INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
 INFO:root:population ['2' '3' '4' '5'] with cost: 170.4, fitness: 309.6
-INFO:root:-----Evolution 7-----
+INFO:root:-----Evolution 10-----
 INFO:root:best population ['2' '4' '6'] with cost: 384.0
 INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
 INFO:root:population ['1' '2' '3' '5'] with cost: 206.4, fitness: 273.6
 INFO:root:population ['3' '4' '5'] with cost: 132.0, fitness: 348.0
 INFO:root:population ['2' '3' '4' '5'] with cost: 170.4, fitness: 309.6
-INFO:root:-----Evolution 8-----
-INFO:root:best population ['2' '4' '6'] with cost: 384.0
-INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
-INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
-INFO:root:population ['2' '3' '4' '5'] with cost: 170.4, fitness: 309.6
-INFO:root:population ['2' '3' '4' '5'] with cost: 170.4, fitness: 309.6
-INFO:root:-----Evolution 9-----
-INFO:root:best population ['2' '4' '6'] with cost: 384.0
-INFO:root:population ['1' '2' '3' '5'] with cost: 206.4, fitness: 273.6
-INFO:root:population ['2' '3' '4' '5'] with cost: 170.4, fitness: 309.6
-INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
-INFO:root:population ['2' '4' '6'] with cost: 96.0, fitness: 384.0
-INFO:root:-----Evolution 10-----
-INFO:root:best population ['2' '4' '6'] with cost: 384.0
-INFO:root:population ['4' '5' '6'] with cost: 75.6, fitness: 404.4
-INFO:root:better population found, update best population to ['4' '5' '6']!
-INFO:root:population ['1' '2' '3' '5'] with cost: 206.4, fitness: 273.6
-INFO:root:population ['1' '2' '3' '5'] with cost: 206.4, fitness: 273.6
-INFO:root:population ['2' '3' '4' '5'] with cost: 170.4, fitness: 309.6
-INFO:root:mno vm id: ['1' '2' '3'], mvno vm id: ['4' '5' '6']
+INFO:root:mno vm id: ['1' '3' '5'], mvno vm id: ['2' '4' '6']
 INFO:root:Finished vm assignment.
 INFO:root:------------Start of Task Deployment round 2------------
 INFO:root:-------Start of hour 3, system time: 120-------
-INFO:root:hour tasks: [6]
+INFO:root:hour events: [[5 1 120]
+ [6 0 150]
+ [6 1 163]]
 INFO:root:------Start trying to redeploy undone tasks of MNO------
 INFO:root:------Start trying to redeploy undone tasks of MVNO------
 INFO:root:Finished redeployment.
-INFO:root:mno best population [  4.68   3.97   0.87   3.67   1.73   3.02   2.5    3.31   4.55   3.23
-   1.99   4.2    4.48   2.48   4.27   2.19   2.45   3.92 201.66   0.14] with fitness: 4411.23613515911
-INFO:root:mvno best population [  0.73   0.15   3.25   1.59   0.15   3.81   3.83   0.31   4.4    1.6
-   3.7    0.54   0.58   4.77   4.49   4.46   2.32   4.84 249.65   0.16] with fitness: 2414.5498870330657
-INFO:root:task6 assign to MNO
-INFO:root:system time: 150
+INFO:root:mno best population [  0.02   0.01   0.02   0.43   0.2    0.32   0.01   0.33   0.01   0.14
+   0.02   0.5    0.16   0.07   0.27   0.03   0.04   0.41 245.69   0.32] with fitness: 72.49591462341384
+INFO:root:mvno best population [  0.08   0.05   0.23   0.02   0.48   0.13   0.05   0.45   0.1    0.29
+   0.02   0.09   0.09   0.16   0.4    0.08   0.1    0.18 395.22   0.39] with fitness: 76.02152513480497
 INFO:root:release task5 from vm 3,
 cr: 0.68 -> 0.8
 local_bw_up: 99975 -> 100000
 local_bw_down: 98700 -> 100000
 
-INFO:root:Deploy task6 to vm 2,
-task cr: 0.05, vm cr: 0.54 -> 0.49000000000000005
-task bw_up: 24, local_bw_up: 99980 -> 99956
-task bw_down: 1065, local_bw_down: 99100 -> 98035
+INFO:root:task6 assign to MNO
+INFO:root:Deploy task6 to vm 5,
+task cr: 0.05, vm cr: 0.35 -> 0.3
+task bw_up: 24, local_bw_up: 100000 -> 99976
+task bw_down: 1065, local_bw_down: 100000 -> 98935
 
-INFO:root:mno overall utility: 1306.5223284595415
-INFO:root:mvno overall utility: 2414.5498870330657
-INFO:root:------------Start of Updating best population------------
-INFO:root:---MNO start updating best population---
-INFO:root:population [  0.44   3.04   2.91   4.85   4.09   5.45   1.02   4.45   1.12   3.58
-   1.78   4.88   4.85   3.98   2.8    2.57   0.85   1.84 340.24   0.27] with fitness: 4273.581959825312
-INFO:root:better population found, update best population to [  0.44   3.04   2.91   4.85   4.09   5.45   1.02   4.45   1.12   3.58
-   1.78   4.88   4.85   3.98   2.8    2.57   0.85   1.84 340.24   0.27]!
-INFO:root:population [  1.63   1.4    1.63   0.13   3.57   4.21   2.32   3.73   3.98   0.66
-   0.33   1.68   2.69   2.05   1.32   2.42   1.33   4.68 245.69   0.32] with fitness: 4715.688897868932
-INFO:root:better population found, update best population to [  1.63   1.4    1.63   0.13   3.57   4.21   2.32   3.73   3.98   0.66
-   0.33   1.68   2.69   2.05   1.32   2.42   1.33   4.68 245.69   0.32]!
-INFO:root:population [  4.68   3.97   0.87   3.67   1.73   2.42   2.5    3.31   4.55   3.23
-   1.99   4.2    4.48   2.48   4.27   2.19   2.45   3.92 201.66   0.14] with fitness: 5717.758463618651
-INFO:root:better population found, update best population to [  4.68   3.97   0.87   3.67   1.73   2.42   2.5    3.31   4.55   3.23
-   1.99   4.2    4.48   2.48   4.27   2.19   2.45   3.92 201.66   0.14]!
-INFO:root:population [  4.68   3.97   0.87   3.67   1.73   3.02   2.5    3.31   4.55   3.23
-   1.99   4.2    4.48   2.48   4.27   2.19   2.45   3.92 201.66   0.14] with fitness: 4176.621172650969
-INFO:root:---MVNO start updating best population---
-INFO:root:population [  1.62   0.75   1.04   3.96   0.42   3.55   1.39   3.56   1.65   3.14
-   0.17   2.53   4.93   0.76   0.75   3.73   3.     3.91 280.5    0.06] with fitness: 2004.8006757966841
-INFO:root:population [  1.66   3.32   1.15   2.2    2.     1.38   2.76   2.44   2.66   0.91
-   4.37   0.54   0.58   4.77   5.39   4.46   2.32   5.81 249.65   0.16] with fitness: 2017.9083989303936
-INFO:root:population [  0.73   0.15   3.25   1.59   0.15   3.81   4.59   0.31   4.4    1.6
-   3.7    2.     2.01   2.55   3.47   1.81   2.11   2.67 395.22   0.39] with fitness: 2414.5498870330657
-INFO:root:population [  3.09   2.58   4.11   1.66   4.83   0.61   1.6    2.4    3.03   0.97
-   4.34   0.7    0.14   4.02   1.24   3.99   2.7    3.28 382.65   0.12] with fitness: 1863.981036410985
+INFO:root:release task6 from vm 5,
+cr: 0.3 -> 0.35
+local_bw_up: 99976 -> 100000
+local_bw_down: 98935 -> 100000
+
+INFO:root:mno overall hour utility: 146.92747098091039, hour fitness: 146.92747098091039
+INFO:root:mvno overall hour utility: 0, hour fitness: 0.0
 INFO:root:------------Start of Updating Parameters------------
 INFO:root:---MNO start updating parameters---
+INFO:root:-----Updating best population-----
+INFO:root:population 0 [  0.02   0.21   0.19   0.01   0.36   0.21   0.06   0.13   0.18   0.27
+   0.03   0.32   0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27] with fitness: 235.9310723310218
+INFO:root:better population found, update best population to [  0.02   0.21   0.19   0.01   0.36   0.21   0.06   0.13   0.18   0.27
+   0.03   0.32   0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27]!
+INFO:root:population 1 [  0.03   0.02   0.02   0.57   0.27   0.09   0.05   0.1    0.36   0.21
+   0.03   0.25   0.16   0.07   0.27   0.03   0.04   0.41 196.55   0.32] with fitness: 193.13955488498863
+INFO:root:population 2 [  0.39   0.19   0.01   0.14   0.02   0.24   0.01   0.32   0.01   0.13
+   0.02   0.5    0.08   0.31   0.17   0.14   0.01   0.29 201.66   0.14] with fitness: 178.11337336808134
+INFO:root:population 3 [  0.36   0.18   0.01   0.13   0.02   0.31   0.01   0.33   0.01   0.14
+   0.02   0.5    0.08   0.31   0.17   0.14   0.01   0.29 201.66   0.14] with fitness: 146.92747098091039
+INFO:root:-----Generate new offsprings-----
+INFO:root:new population 0: [  0.44   3.04   2.91   0.13   3.57   3.02   2.5    3.31   3.64   4.04
+   1.99   5.86   2.15   3.98   3.36   3.21   0.85   1.84 340.24   0.27]
+INFO:root:new population 1: [  1.96   1.4    1.63   4.85   4.09   3.02   2.5    3.31   4.55   4.04
+   1.99   4.2    3.73   2.97   4.27   2.19   2.45   4.68 196.55   0.32]
+INFO:root:new population 2: [  4.68   3.97   0.87   3.67   1.73   4.21   1.22   4.45   1.12   3.58
+   1.78   4.2    4.85   2.05   1.32   2.42   1.33   3.92 201.66   0.12]
+INFO:root:new population 3: [  4.68   3.97   0.87   3.67   1.73   4.54   1.02   4.45   1.12   3.58
+   1.42   4.88   2.69   3.98   3.36   3.21   0.85   3.92 201.66   0.14]
 INFO:root:---MVNO start updating parameters---
+INFO:root:-----Updating best population-----
+INFO:root:population 0 [  0.11   0.07   0.14   0.03   0.64   0.02   0.18   0.13   0.16   0.03
+   0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.08] with fitness: 0.0
+INFO:root:population 1 [  0.08   0.03   0.04   0.8    0.02   0.03   0.31   0.01   0.14   0.02
+   0.51   0.01   0.01   0.36   0.02   0.35   0.1    0.17 459.18   0.12] with fitness: 0.0
+INFO:root:population 2 [  0.03   0.01   0.32   0.06   0.01   0.56   0.02   0.21   0.48   0.03
+   0.24   0.01   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.2 ] with fitness: 0.0
+INFO:root:population 3 [  0.06   0.32   0.04   0.1    0.08   0.4    0.09   0.2    0.14   0.42
+   0.02   0.13   0.1    0.1    0.42   0.08   0.11   0.19 316.18   0.39] with fitness: 0.0
+INFO:root:-----Generate new offsprings-----
+INFO:root:data not enough for updating, skip updating.
 INFO:root:-------Start of hour 4, system time: 180-------
-INFO:root:hour tasks: [7 8]
+INFO:root:hour events: [[7 0 200]
+ [7 1 209]
+ [8 0 230]]
 INFO:root:------Start trying to redeploy undone tasks of MNO------
 INFO:root:------Start trying to redeploy undone tasks of MVNO------
 INFO:root:Finished redeployment.
-INFO:root:mno best population [  4.68   3.97   0.87   3.67   1.73   2.42   2.5    3.31   4.55   3.23
-   1.99   4.2    4.48   2.48   4.27   2.19   2.45   3.92 201.66   0.14] with fitness: 5717.758463618651
-INFO:root:mvno best population [  0.73   0.15   3.25   1.59   0.15   3.81   3.83   0.31   4.4    1.6
-   3.7    0.54   0.58   4.77   4.49   4.46   2.32   4.84 249.65   0.16] with fitness: 2414.5498870330657
-INFO:root:task7 assign to MNO
-INFO:root:system time: 200
-INFO:root:release task6 from vm 2,
-cr: 0.49000000000000005 -> 0.54
-local_bw_up: 99956 -> 99980
-local_bw_down: 98035 -> 99100
-
-INFO:root:Deploy task7 to vm 1,
-task cr: 0.02, vm cr: 0.7 -> 0.6799999999999999
+INFO:root:mno best population [  0.02   0.21   0.19   0.01   0.36   0.21   0.06   0.13   0.18   0.27
+   0.03   0.32   0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27] with fitness: 235.9310723310218
+INFO:root:mvno best population [  0.08   0.05   0.23   0.02   0.48   0.13   0.05   0.45   0.1    0.29
+   0.02   0.09   0.09   0.16   0.4    0.08   0.1    0.18 395.22   0.39] with fitness: 0.0
+INFO:root:task7 assign to MVNO
+INFO:root:Deploy task7 to vm 4,
+task cr: 0.02, vm cr: 0.5 -> 0.48
 task bw_up: 246, local_bw_up: 100000 -> 99754
 task bw_down: 15, local_bw_down: 100000 -> 99985
 
-INFO:root:task8 assign to MNO
-INFO:root:system time: 230
-INFO:root:release task7 from vm 1,
-cr: 0.6799999999999999 -> 0.7
+INFO:root:release task7 from vm 4,
+cr: 0.48 -> 0.5
 local_bw_up: 99754 -> 100000
 local_bw_down: 99985 -> 100000
 
+INFO:root:task8 assign to MNO
 INFO:root:Deploy task8 to vm 3,
 task cr: 0.1, vm cr: 0.8 -> 0.7000000000000001
 task bw_up: 26, local_bw_up: 100000 -> 99974
 task bw_down: 790, local_bw_down: 100000 -> 99210
 
-INFO:root:mno overall utility: 1349.1644510606948
-INFO:root:mvno overall utility: 2414.5498870330657
-INFO:root:------------Start of Updating best population------------
-INFO:root:---MNO start updating best population---
-INFO:root:population [  0.44   3.04   2.91   4.85   4.09   5.45   1.02   4.45   1.12   3.58
-   1.78   4.88   4.85   3.98   2.8    2.57   0.85   1.84 340.24   0.27] with fitness: 6395.5527984728515
-INFO:root:better population found, update best population to [  0.44   3.04   2.91   4.85   4.09   5.45   1.02   4.45   1.12   3.58
-   1.78   4.88   4.85   3.98   2.8    2.57   0.85   1.84 340.24   0.27]!
-INFO:root:population [  1.63   1.4    1.63   0.13   3.57   5.05   2.32   3.73   3.98   3.23
-   1.99   4.2    4.48   2.48   4.27   1.75   2.45   3.92 201.66   0.32] with fitness: 6913.590945711922
-INFO:root:better population found, update best population to [  1.63   1.4    1.63   0.13   3.57   5.05   2.32   3.73   3.98   3.23
-   1.99   4.2    4.48   2.48   4.27   1.75   2.45   3.92 201.66   0.32]!
-INFO:root:population [  4.68   3.97   0.87   3.67   1.73   2.42   2.5    3.31   4.55   0.66
-   0.33   1.68   2.69   2.46   1.32   2.42   1.33   3.75 245.69   0.14] with fitness: 7417.658860992095
-INFO:root:better population found, update best population to [  4.68   3.97   0.87   3.67   1.73   2.42   2.5    3.31   4.55   0.66
-   0.33   1.68   2.69   2.46   1.32   2.42   1.33   3.75 245.69   0.14]!
-INFO:root:population [  4.68   3.97   0.87   3.67   1.73   2.42   2.5    3.31   4.55   3.23
-   1.99   4.2    4.48   2.48   4.27   2.19   2.45   3.92 201.66   0.14] with fitness: 6370.767499811784
-INFO:root:---MVNO start updating best population---
-INFO:root:population [  1.62   0.75   1.04   3.96   0.42   3.55   1.39   3.56   1.65   3.14
-   0.17   2.53   4.93   0.76   3.47   1.81   3.     3.91 224.4    0.06] with fitness: 2004.8006757966841
-INFO:root:population [  1.66   3.32   1.15   2.2    2.     1.38   2.76   2.44   2.66   0.73
-   4.37   0.54   0.58   4.77   0.75   3.73   2.32   5.81 249.65   0.16] with fitness: 2017.9083989303936
-INFO:root:population [  0.73   0.15   3.25   1.59   0.15   3.81   4.59   0.31   4.4    1.6
-   2.96   2.     2.01   2.55   5.39   4.46   2.11   3.2  395.22   0.39] with fitness: 2414.5498870330657
-INFO:root:population [  0.73   0.15   3.25   1.59   0.15   3.81   4.59   0.31   4.4    1.6
-   3.7    2.     2.01   2.55   3.47   1.81   2.11   2.67 395.22   0.39] with fitness: 1863.981036410985
+INFO:root:mno overall hour utility: 73.10413065448995, hour fitness: 73.10413065448995
+INFO:root:mvno overall hour utility: 2340.571440583114, hour fitness: 2340.571440583114
 INFO:root:------------Start of Updating Parameters------------
 INFO:root:---MNO start updating parameters---
+INFO:root:-----Updating best population-----
+INFO:root:population 0 [  0.02   0.21   0.19   0.01   0.36   0.21   0.02   0.06   0.08   0.12
+   0.01   0.71   0.07   0.43   0.23   0.2    0.02   0.05 340.24   0.27] with fitness: 38.613006026620546
+INFO:root:population 1 [  0.03   0.02   0.02   0.57   0.27   0.09   0.05   0.1    0.36   0.21
+   0.03   0.25   0.16   0.07   0.27   0.03   0.04   0.41 196.55   0.32] with fitness: 81.2750732852635
+INFO:root:better population found, update best population to [  0.03   0.02   0.02   0.57   0.27   0.09   0.05   0.1    0.36   0.21
+   0.03   0.25   0.16   0.07   0.27   0.03   0.04   0.41 196.55   0.32]!
+INFO:root:population 2 [  0.39   0.19   0.01   0.14   0.02   0.24   0.02   0.43   0.02   0.18
+   0.03   0.33   0.62   0.04   0.02   0.05   0.02   0.25 201.66   0.12] with fitness: 78.884282659218
+INFO:root:population 3 [  0.36   0.18   0.01   0.13   0.02   0.31   0.01   0.33   0.01   0.14
+   0.02   0.5    0.08   0.31   0.17   0.14   0.01   0.29 201.66   0.14] with fitness: 55.582278232264
+INFO:root:-----Generate new offsprings-----
+INFO:root:new population 0: [  0.44   3.04   2.91   0.13   3.57   3.02   2.5    3.31   3.64   3.58
+   1.78   5.86   2.15   3.98   3.36   3.21   0.85   1.84 340.24   0.27]
+INFO:root:new population 1: [  2.35   1.4    1.63   4.85   4.09   3.02   3.01   3.31   3.64   4.04
+   1.99   4.2    2.98   2.97   4.27   2.19   2.45   4.68 196.55   0.32]
+INFO:root:new population 2: [  4.68   3.97   0.87   3.67   1.73   4.21   1.22   4.45   1.12   3.58
+   1.42   3.36   4.85   2.05   1.32   2.42   1.33   3.92 201.66   0.12]
+INFO:root:new population 3: [  4.68   3.97   0.87   3.67   1.73   4.54   1.02   4.45   1.12   4.04
+   1.99   4.88   2.69   3.98   3.36   3.21   0.85   3.92 201.66   0.14]
 INFO:root:---MVNO start updating parameters---
+INFO:root:-----Updating best population-----
+INFO:root:population 0 [  0.11   0.07   0.14   0.03   0.64   0.02   0.18   0.13   0.16   0.03
+   0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.08] with fitness: 3095.2181929062667
+INFO:root:better population found, update best population to [  0.11   0.07   0.14   0.03   0.64   0.02   0.18   0.13   0.16   0.03
+   0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.08]!
+INFO:root:population 1 [  0.08   0.03   0.04   0.8    0.02   0.03   0.31   0.01   0.14   0.02
+   0.51   0.01   0.01   0.36   0.02   0.35   0.1    0.17 459.18   0.12] with fitness: 180.5815769133264
+INFO:root:population 2 [  0.03   0.01   0.32   0.06   0.01   0.56   0.02   0.21   0.48   0.03
+   0.24   0.01   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.2 ] with fitness: 147.64943222563926
+INFO:root:population 3 [  0.06   0.32   0.04   0.1    0.08   0.4    0.09   0.2    0.14   0.42
+   0.02   0.13   0.1    0.1    0.42   0.08   0.11   0.19 316.18   0.39] with fitness: 460.0603467603731
+INFO:root:-----Generate new offsprings-----
+INFO:root:new population 0: [  3.09   2.58   3.29   1.99   4.83   1.38   2.76   2.44   2.66   0.91
+   3.64   2.1    4.93   0.6    0.75   4.66   2.5    3.91 280.5    0.08]
+INFO:root:new population 1: [  3.09   2.58   3.29   1.66   4.83   1.38   2.76   2.44   2.66   0.91
+   3.64   2.1    4.93   0.6    0.75   4.66   2.5    3.91 280.5    0.08]
+INFO:root:new population 2: [  3.09   2.58   3.29   1.66   4.83   1.38   2.76   2.44   2.66   1.09
+   3.64   1.68   4.93   0.6    0.75   4.66   2.5    3.91 280.5    0.08]
+INFO:root:new population 3: [  3.09   2.58   3.29   1.66   4.83   1.38   2.76   2.44   2.66   0.91
+   3.64   2.1    4.93   0.6    0.75   4.66   2.5    3.91 280.5    0.08]
 INFO:root:Finished task deployment 2.
 INFO:root:-----------------Start of Round 3-----------------
 INFO:root:------------Start of updating data------------
 INFO:root:add hour data
 [[0.01 123.0 7.5]
  [0.025 12.0 532.5]
- [0.05 13.0 395.0]] into statistic data
+ [0.11 25.5 1045.0]] into statistic data
 INFO:root:statistic data becomes:
 [[0.011872 134.2656 7.534800000000001]
  [0.035769999999999996 14.7 591.969]
- [0.05978 16.483600000000003 556.934]]
+ [0.10178 25.2336 1011.934]]
 INFO:root:Finished update hourly_history_data and statistic_data.
 INFO:root:------------Start of VM Assignment------------
 INFO:root:-----Evolution 1-----
-INFO:root:best population ['4' '5' '6'] with cost: 404.4
-INFO:root:population ['2' '4' '6'] with cost: 84.47999999999999, fitness: 395.52
-INFO:root:population ['2' '4' '6'] with cost: 84.47999999999999, fitness: 395.52
-INFO:root:population ['2' '3' '4' '5'] with cost: 162.0, fitness: 318.0
-INFO:root:population ['1' '2' '3' '4' '5'] with cost: 222.0, fitness: 258.0
+INFO:root:best population ['2' '4' '6'] with cost: 384.0
+INFO:root:population ['2' '4' '6'] with cost: 76.80000000000001, fitness: 403.2
+INFO:root:better population found, update best population to ['2' '4' '6']!
+INFO:root:population ['1' '2' '3' '5'] with cost: 198.72, fitness: 281.28
+INFO:root:population ['2' '3' '4' '5'] with cost: 157.92, fitness: 322.08000000000004
+INFO:root:population ['1' '3' '5' '6'] with cost: 194.88, fitness: 285.12
 INFO:root:-----Evolution 2-----
-INFO:root:best population ['4' '5' '6'] with cost: 404.4
-INFO:root:population ['2' '3' '4' '6'] with cost: 174.48, fitness: 305.52
-INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
-INFO:root:population ['1' '2' '3' '5' '6'] with cost: 229.68, fitness: 250.32
-INFO:root:population ['1' '2' '3' '4' '5'] with cost: 222.0, fitness: 258.0
+INFO:root:best population ['2' '4' '6'] with cost: 403.2
+INFO:root:population ['2' '4' '6'] with cost: 76.80000000000001, fitness: 403.2
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['2' '3' '4' '5'] with cost: 157.92, fitness: 322.08000000000004
+INFO:root:population ['1' '2' '3' '5'] with cost: 198.72, fitness: 281.28
 INFO:root:-----Evolution 3-----
-INFO:root:best population ['4' '5' '6'] with cost: 404.4
-INFO:root:population ['2' '4' '6'] with cost: 84.47999999999999, fitness: 395.52
-INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
-INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
-INFO:root:population ['1' '2' '3' '5'] with cost: 202.8, fitness: 277.2
+INFO:root:best population ['2' '4' '6'] with cost: 403.2
+INFO:root:population ['2' '3' '4' '5'] with cost: 157.92, fitness: 322.08000000000004
+INFO:root:population ['1' '2' '3' '5'] with cost: 198.72, fitness: 281.28
+INFO:root:population ['1' '3' '4' '5' '6'] with cost: 214.07999999999998, fitness: 265.92
+INFO:root:population ['2' '3' '4' '6'] with cost: 166.79999999999998, fitness: 313.20000000000005
 INFO:root:-----Evolution 4-----
-INFO:root:best population ['4' '5' '6'] with cost: 404.4
-INFO:root:population ['2' '4' '5' '6'] with cost: 98.88, fitness: 381.12
-INFO:root:population ['1' '3' '4' '5' '6'] with cost: 210.48, fitness: 269.52
-INFO:root:population ['2' '3' '4' '5'] with cost: 162.0, fitness: 318.0
-INFO:root:population ['1' '2' '3' '5'] with cost: 202.8, fitness: 277.2
+INFO:root:best population ['2' '4' '6'] with cost: 403.2
+INFO:root:population ['2' '4' '5' '6'] with cost: 94.80000000000001, fitness: 385.2
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['1' '2' '3' '5'] with cost: 198.72, fitness: 281.28
+INFO:root:population ['1' '2' '3' '4'] with cost: 199.92, fitness: 280.08000000000004
 INFO:root:-----Evolution 5-----
-INFO:root:best population ['4' '5' '6'] with cost: 404.4
-INFO:root:population ['2' '4' '6'] with cost: 84.47999999999999, fitness: 395.52
-INFO:root:population ['2' '4' '6'] with cost: 84.47999999999999, fitness: 395.52
-INFO:root:population ['2' '3' '4' '5'] with cost: 162.0, fitness: 318.0
-INFO:root:population ['1' '2' '3' '5'] with cost: 202.8, fitness: 277.2
+INFO:root:best population ['2' '4' '6'] with cost: 403.2
+INFO:root:population ['2' '4' '6'] with cost: 76.80000000000001, fitness: 403.2
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['3' '4' '5'] with cost: 127.2, fitness: 352.8
+INFO:root:population ['1' '2' '3' '5'] with cost: 198.72, fitness: 281.28
 INFO:root:-----Evolution 6-----
-INFO:root:best population ['4' '5' '6'] with cost: 404.4
-INFO:root:population ['2' '4' '6'] with cost: 84.47999999999999, fitness: 395.52
-INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
-INFO:root:population ['1' '2' '3' '5'] with cost: 202.8, fitness: 277.2
-INFO:root:population ['2' '3' '4'] with cost: 147.6, fitness: 332.4
+INFO:root:best population ['2' '4' '6'] with cost: 403.2
+INFO:root:population ['2' '4' '6'] with cost: 76.80000000000001, fitness: 403.2
+INFO:root:population ['1' '2' '3' '5'] with cost: 198.72, fitness: 281.28
+INFO:root:population ['3' '4' '5'] with cost: 127.2, fitness: 352.8
+INFO:root:population ['1' '2' '3' '5'] with cost: 198.72, fitness: 281.28
 INFO:root:-----Evolution 7-----
-INFO:root:best population ['4' '5' '6'] with cost: 404.4
-INFO:root:population ['2' '4' '5' '6'] with cost: 98.88, fitness: 381.12
-INFO:root:population ['1' '3' '4' '5'] with cost: 183.6, fitness: 296.4
-INFO:root:population ['2' '3' '4'] with cost: 147.6, fitness: 332.4
-INFO:root:population ['1' '2' '3' '5'] with cost: 202.8, fitness: 277.2
+INFO:root:best population ['2' '4' '6'] with cost: 403.2
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['1' '2' '4' '6'] with cost: 136.8, fitness: 343.2
+INFO:root:population ['2' '3' '4' '5'] with cost: 157.92, fitness: 322.08000000000004
+INFO:root:population ['1' '2' '3' '5'] with cost: 198.72, fitness: 281.28
 INFO:root:-----Evolution 8-----
-INFO:root:best population ['4' '5' '6'] with cost: 404.4
-INFO:root:population ['1' '2' '3' '5'] with cost: 202.8, fitness: 277.2
-INFO:root:population ['1' '2' '3' '5'] with cost: 202.8, fitness: 277.2
-INFO:root:population ['3' '4' '5'] with cost: 123.6, fitness: 356.4
-INFO:root:population ['2' '3' '4'] with cost: 147.6, fitness: 332.4
+INFO:root:best population ['2' '4' '6'] with cost: 403.2
+INFO:root:population ['2' '4' '6'] with cost: 76.80000000000001, fitness: 403.2
+INFO:root:population ['1' '3' '4' '5'] with cost: 187.2, fitness: 292.8
+INFO:root:population ['1' '3' '5' '6'] with cost: 194.88, fitness: 285.12
+INFO:root:population ['1' '2' '3' '5'] with cost: 198.72, fitness: 281.28
 INFO:root:-----Evolution 9-----
-INFO:root:best population ['4' '5' '6'] with cost: 404.4
-INFO:root:population ['2' '4' '6'] with cost: 84.47999999999999, fitness: 395.52
-INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
-INFO:root:population ['2' '3' '4' '5'] with cost: 162.0, fitness: 318.0
-INFO:root:population ['1' '2' '3' '5'] with cost: 202.8, fitness: 277.2
+INFO:root:best population ['2' '4' '6'] with cost: 403.2
+INFO:root:population ['2' '4' '6'] with cost: 76.80000000000001, fitness: 403.2
+INFO:root:population ['2' '4' '6'] with cost: 76.80000000000001, fitness: 403.2
+INFO:root:population ['1' '3' '4' '5'] with cost: 187.2, fitness: 292.8
+INFO:root:population ['2' '3' '4' '5'] with cost: 157.92, fitness: 322.08000000000004
 INFO:root:-----Evolution 10-----
-INFO:root:best population ['4' '5' '6'] with cost: 404.4
-INFO:root:population ['2' '4' '6'] with cost: 84.47999999999999, fitness: 395.52
-INFO:root:population ['1' '3' '5'] with cost: 164.4, fitness: 315.6
-INFO:root:population ['2' '3' '4' '5'] with cost: 162.0, fitness: 318.0
-INFO:root:population ['1' '2' '3' '5'] with cost: 202.8, fitness: 277.2
-INFO:root:mno vm id: ['1' '2' '3'], mvno vm id: ['4' '5' '6']
+INFO:root:best population ['2' '4' '6'] with cost: 403.2
+INFO:root:population ['2' '4' '6'] with cost: 76.80000000000001, fitness: 403.2
+INFO:root:population ['1' '3' '5'] with cost: 168.0, fitness: 312.0
+INFO:root:population ['2' '3' '4' '5'] with cost: 157.92, fitness: 322.08000000000004
+INFO:root:population ['1' '3' '4' '5'] with cost: 187.2, fitness: 292.8
+INFO:root:mno vm id: ['1' '3' '5'], mvno vm id: ['2' '4' '6']
 INFO:root:Finished vm assignment.
 INFO:root:------------Start of Task Deployment round 3------------
 INFO:root:-------Start of hour 5, system time: 240-------
-INFO:root:hour tasks: [9]
+INFO:root:hour events: [[9 0 245]
+ [8 1 250]
+ [9 1 256]]
 INFO:root:------Start trying to redeploy undone tasks of MNO------
 INFO:root:------Start trying to redeploy undone tasks of MVNO------
 INFO:root:Finished redeployment.
-INFO:root:mno best population [  4.68   3.97   0.87   3.67   1.73   2.42   2.5    3.31   4.55   0.66
-   0.33   1.68   2.69   2.46   1.32   2.42   1.33   3.75 245.69   0.14] with fitness: 7417.658860992095
-INFO:root:mvno best population [  0.73   0.15   3.25   1.59   0.15   3.81   3.83   0.31   4.4    1.6
-   3.7    0.54   0.58   4.77   4.49   4.46   2.32   4.84 249.65   0.16] with fitness: 2414.5498870330657
+INFO:root:mno best population [  0.03   0.02   0.02   0.57   0.27   0.09   0.05   0.1    0.36   0.21
+   0.03   0.25   0.16   0.07   0.27   0.03   0.04   0.41 196.55   0.32] with fitness: 81.2750732852635
+INFO:root:mvno best population [  0.11   0.07   0.14   0.03   0.64   0.02   0.18   0.13   0.16   0.03
+   0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.08] with fitness: 3095.2181929062667
 INFO:root:task9 assign to MNO
-INFO:root:system time: 245
 INFO:root:Deploy task9 to vm 1,
 task cr: 0.04, vm cr: 0.7 -> 0.6599999999999999
 task bw_up: 450, local_bw_up: 100000 -> 99550
 task bw_down: 17, local_bw_down: 100000 -> 99983
 
-INFO:root:mno overall utility: 1059.8761568136758
-INFO:root:mvno overall utility: 2414.5498870330657
-INFO:root:------------Start of Updating best population------------
-INFO:root:---MNO start updating best population---
-INFO:root:population [  0.44   3.04   2.91   4.85   4.09   5.45   1.02   4.45   5.46   0.66
-   0.33   1.68   2.69   2.46   1.32   2.42   0.85   1.84 340.24   0.27] with fitness: 7582.561596337198
-INFO:root:better population found, update best population to [  0.44   3.04   2.91   4.85   4.09   5.45   1.02   4.45   5.46   0.66
-   0.33   1.68   2.69   2.46   1.32   2.42   0.85   1.84 340.24   0.27]!
-INFO:root:population [  1.63   1.4    1.63   0.1    3.57   5.05   2.32   3.73   3.98   3.23
-   1.99   4.2    4.48   2.48   4.27   1.75   2.45   3.92 201.66   0.32] with fitness: 7828.853771759694
-INFO:root:better population found, update best population to [  1.63   1.4    1.63   0.1    3.57   5.05   2.32   3.73   3.98   3.23
-   1.99   4.2    4.48   2.48   4.27   1.75   2.45   3.92 201.66   0.32]!
-INFO:root:population [  5.62   3.97   0.87   3.67   1.73   2.42   2.5    3.31   1.12   3.58
-   1.42   4.88   4.85   3.98   2.8    2.57   1.33   3.75 245.69   0.14] with fitness: 8559.636919697938
-INFO:root:better population found, update best population to [  5.62   3.97   0.87   3.67   1.73   2.42   2.5    3.31   1.12   3.58
-   1.42   4.88   4.85   3.98   2.8    2.57   1.33   3.75 245.69   0.14]!
-INFO:root:population [  4.68   3.97   0.87   3.67   1.73   2.42   2.5    3.31   4.55   3.23
-   1.99   4.2    4.48   2.48   4.27   2.19   2.45   3.92 201.66   0.14] with fitness: 7430.64365662546
-INFO:root:---MVNO start updating best population---
-INFO:root:population [  1.62   0.75   1.04   3.96   0.42   3.55   1.39   3.56   1.65   3.14
-   0.17   2.53   4.93   0.91   4.16   1.81   3.     3.91 224.4    0.06] with fitness: 2004.8006757966841
-INFO:root:population [  1.66   3.32   1.15   2.2    2.     1.38   2.76   2.44   4.4    1.6
-   4.44   2.     2.01   2.55   3.47   1.81   2.11   5.81 249.65   0.16] with fitness: 2017.9083989303936
-INFO:root:population [  0.73   0.15   3.25   1.59   0.15   3.81   4.59   0.31   4.4    1.6
-   2.96   2.     2.01   2.55   5.39   4.46   2.11   3.2  395.22   0.39] with fitness: 2414.5498870330657
-INFO:root:population [  0.73   0.15   3.25   1.59   0.15   3.81   4.59   0.31   2.66   0.73
-   4.37   0.54   0.58   4.77   0.75   3.73   2.32   2.67 395.22   0.39] with fitness: 1863.981036410985
+INFO:root:release task8 from vm 3,
+cr: 0.7000000000000001 -> 0.8
+local_bw_up: 99974 -> 100000
+local_bw_down: 99210 -> 100000
+
+INFO:root:release task9 from vm 1,
+cr: 0.6599999999999999 -> 0.7
+local_bw_up: 99550 -> 100000
+local_bw_down: 99983 -> 100000
+
+INFO:root:mno overall hour utility: 39.66815967748355, hour fitness: 39.66815967748355
+INFO:root:mvno overall hour utility: 0, hour fitness: 0.0
 INFO:root:------------Start of Updating Parameters------------
 INFO:root:---MNO start updating parameters---
+INFO:root:-----Updating best population-----
+INFO:root:population 0 [  0.02   0.21   0.19   0.01   0.36   0.21   0.03   0.06   0.08   0.08
+   0.01   0.75   0.07   0.43   0.23   0.2    0.02   0.05 340.24   0.27] with fitness: 54.32925665108158
+INFO:root:better population found, update best population to [  0.02   0.21   0.19   0.01   0.36   0.21   0.03   0.06   0.08   0.08
+   0.01   0.75   0.07   0.43   0.23   0.2    0.02   0.05 340.24   0.27]!
+INFO:root:population 1 [  0.05   0.02   0.02   0.56   0.26   0.09   0.09   0.13   0.18   0.26
+   0.03   0.31   0.08   0.08   0.3    0.04   0.05   0.45 196.55   0.32] with fitness: 40.387929575403966
+INFO:root:population 2 [  0.39   0.19   0.01   0.14   0.02   0.24   0.02   0.53   0.02   0.22
+   0.03   0.18   0.62   0.04   0.02   0.05   0.02   0.25 201.66   0.12] with fitness: 73.4879707270813
+INFO:root:better population found, update best population to [  0.39   0.19   0.01   0.14   0.02   0.24   0.02   0.53   0.02   0.22
+   0.03   0.18   0.62   0.04   0.02   0.05   0.02   0.25 201.66   0.12]!
+INFO:root:population 3 [  0.36   0.18   0.01   0.13   0.02   0.31   0.01   0.3    0.01   0.2
+   0.03   0.46   0.08   0.31   0.17   0.14   0.01   0.29 201.66   0.14] with fitness: 75.8151647669999
+INFO:root:better population found, update best population to [  0.36   0.18   0.01   0.13   0.02   0.31   0.01   0.3    0.01   0.2
+   0.03   0.46   0.08   0.31   0.17   0.14   0.01   0.29 201.66   0.14]!
+INFO:root:-----Generate new offsprings-----
+INFO:root:new population 0: [  4.68   3.97   0.87   3.67   1.73   4.21   1.22   3.56   1.34   3.58
+   1.42   3.36   4.85   2.05   1.32   2.42   1.33   1.84 340.24   0.27]
+INFO:root:new population 1: [  4.68   3.97   0.87   3.67   1.73   4.21   1.22   4.45   1.12   3.58
+   1.42   3.36   4.85   1.64   1.32   2.42   1.06   3.92 201.66   0.12]
+INFO:root:new population 2: [  4.68   3.97   0.87   3.67   1.73   4.54   1.02   4.45   1.12   4.04
+   1.99   4.88   2.69   3.98   3.36   3.21   0.85   3.92 201.66   0.12]
+INFO:root:new population 3: [  0.44   3.04   2.91   0.13   3.57   3.63   2.5    3.31   3.64   3.58
+   1.78   5.86   2.15   3.98   3.36   3.21   0.85   3.92 201.66   0.14]
 INFO:root:---MVNO start updating parameters---
+INFO:root:-----Updating best population-----
+INFO:root:population 0 [  0.11   0.07   0.14   0.04   0.63   0.02   0.18   0.13   0.16   0.03
+   0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.08] with fitness: 0.0
+INFO:root:population 1 [  0.11   0.07   0.14   0.03   0.64   0.02   0.18   0.13   0.16   0.03
+   0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.08] with fitness: 0.0
+INFO:root:population 2 [  0.11   0.07   0.14   0.03   0.64   0.02   0.18   0.13   0.16   0.03
+   0.43   0.06   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.08] with fitness: 0.0
+INFO:root:population 3 [  0.11   0.07   0.14   0.03   0.64   0.02   0.18   0.13   0.16   0.03
+   0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.08] with fitness: 0.0
+INFO:root:-----Generate new offsprings-----
+INFO:root:data not enough for updating, skip updating.
 INFO:root:-------Start of hour 6, system time: 300-------
-INFO:root:hour tasks: []
+INFO:root:hour events: []
 INFO:root:Finished task deployment 3.
 INFO:root:Finish simulating...

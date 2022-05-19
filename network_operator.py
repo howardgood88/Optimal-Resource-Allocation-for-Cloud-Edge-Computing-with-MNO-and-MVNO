@@ -4,31 +4,35 @@ from task_deployment import TaskDeployment
 import numpy as np
 from parameters import (_mu, Task_event_index)
 from utils import (printReturn, funcCall)
-from constract import Contract
+from contract import Contract
+from task_handler import Task_handler
 import logging
 
 class Network_operator(abc.ABC):
     def redeploy(self, vm_list: dict, system_time: int) -> None:
         '''Redeploy the unaccepted tasks.'''
         queue_size = self._task_deployment.unaccepted_task_queue.qsize()
+        task_id_index = Task_event_index.event_time.value
         while queue_size > 0:
-            task = self._task_deployment.unaccepted_task_queue.get()
-            duration = task[Task_event_index.end_time.value] - task[Task_event_index.start_time.value]
-            task[Task_event_index.start_time.value] = system_time
-            task[Task_event_index.end_time.value] = system_time + duration
-            self.task_deployment(task, vm_list)
+            start_event, end_event = self._task_deployment.unaccepted_task_queue.get()
+            duration = end_event[task_id_index] - start_event[task_id_index]
+            start_event[task_id_index] = system_time
+            end_event[task_id_index] = system_time + duration
+            Task_handler.insert_event(end_event)
+            self.task_deployment(start_event, vm_list)
             queue_size -= 1
 
-    def task_deployment(self, task: np.array, vm_list: dict) -> None:
+    def deploy_task(self, task: np.array, vm_list: dict) -> None:
         '''Delegate to class TaskDeployment.'''
-        self._task_deployment.run(self.hold_vm_id, task, vm_list)
+        self._task_deployment.deploy(self.hold_vm_id, task, vm_list)
+
+    def release_task(self, task: np.array) -> None:
+        '''Delegate to class TaskDeployment.'''
+        self._task_deployment.release(task)
 
     def end_task_deployment(self):
+        '''Delegate to class TaskDeployment.'''
         self._task_deployment.end()
-
-    def update_task_deployment_best_population(self):
-        logging.info(f'---{self.name} start updating best population---')
-        self._task_deployment.update_best_population()
 
     def update_task_deployment_parameters(self) -> None:
         logging.info(f'---{self.name} start updating parameters---')

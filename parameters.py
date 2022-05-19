@@ -3,7 +3,7 @@ import logging
 
 rnd_seed = 1126
 logging_level = logging.INFO
-test_data_dir = './data/case2/'
+test_data_dir = './data/case1/'
 # round time
 small_round_minutes = 60
 # 60 * 24 * 7
@@ -25,6 +25,7 @@ cr_low = 0
 cr_high = 5
 
 # vm assignment
+mno_rate = 0.7
 _theta = 0.3
 _lambda = 0.6
 _mu = 0.8
@@ -54,19 +55,24 @@ class Task_type_index(IntEnum):
     FTP = 2
 
 @unique
+class Event_type(IntEnum):
+    '''The event type of task.'''
+    start = 0
+    end = 1
+
+@unique
 class Task_event_index(IntEnum):
     '''
     The attribute name maps to vector index.
     (don't use dict for keeping np.array property.)
     '''
     index = 0
-    round = 1
-    start_time = 2
-    end_time = 3
-    task_type = 4
-    user_id = 5
-    machine_id = 6
-    cpu_request = 7
-    average_cpu_usage = 8
-    T_up = 9
-    T_down = 10
+    event_type = 1
+    event_time = 2
+    task_type = 3
+    user_id = 4
+    machine_id = 5
+    cpu_request = 6
+    average_cpu_usage = 7
+    T_up = 8
+    T_down = 9
