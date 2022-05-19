@@ -157,9 +157,6 @@ def task_deployment(hour_events: np.array) -> None:
         # initialization
         operator._task_deployment.hour_utility = 0
         operator._task_deployment.hour_task_num = 0
-        logging.info(f'------Start trying to redeploy undone tasks of {operator.name}------')
-        operator.redeploy(vm_list)
-        logging.info(f'Finished {operator.name} redeployment.')
     # start hourly task deployment
     logging.info(f'mno best population {toSoftmax(mno._task_deployment.optimizing.best_population)} with fitness: {mno._task_deployment.optimizing.best_fitness}')
     logging.info(f'mvno best population {toSoftmax(mvno._task_deployment.optimizing.best_population)} with fitness: {mvno._task_deployment.optimizing.best_fitness}')

@@ -9,19 +9,6 @@ from task_handler import Task_handler
 import logging
 
 class Network_operator(abc.ABC):
-    def redeploy(self, vm_list: dict) -> None:
-        '''Redeploy the unaccepted tasks.'''
-        queue_size = self._task_deployment.unaccepted_task_queue.qsize()
-        task_id_index = Task_event_index.event_time.value
-        while queue_size > 0:
-            start_event, end_event = self._task_deployment.unaccepted_task_queue.get()
-            duration = end_event[task_id_index] - start_event[task_id_index]
-            start_event[task_id_index] = Global.system_time
-            end_event[task_id_index] = Global.system_time + duration
-            Task_handler.insert_event(end_event)
-            self.task_deployment(start_event, vm_list)
-            queue_size -= 1
-
     def deploy_task(self, task: np.array, vm_list: dict) -> None:
         '''Delegate to class TaskDeployment.'''
         self._task_deployment.deploy(self.hold_vm_id, task, vm_list)

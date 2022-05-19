@@ -162,7 +162,7 @@ class TaskDeployment:
                 _gamma = [population[0:6], population[6:12], population[12:18]]
                 _utility = sum([g * u for g, u in zip(_gamma[Task_type_index[task_type]], utilities)])
                 self.optimizing.fitness[idx] += _utility
-            
+
             if utility > max_utility:
                 max_utility = utility
                 selected_vm_id = vm_id
@@ -170,12 +170,18 @@ class TaskDeployment:
         # if no feasible solution
         if selected_vm_id == None:
             task_id = task[Task_event_index.index.value]
-            logging.info(f'task{task_id} unaccepted')
             Task_handler.set_mask(task_id)
             events = Task_handler.get_deleted_events()
             assert(len(events) == 2)
-            self.unaccepted_task_queue.put(events)
             Task_handler.delete_events()
+            retry_offset = np.random.randint(0, 60)
+            logging.info(f'Task{task_id} unaccepted, retry after {retry_offset} minutes.')
+            start_event, end_event = events
+            event_time_idx = Task_event_index.event_time.value
+            start_event[event_time_idx] = start_time[event_time_idx] + retry_offset
+            end_event[event_time_idx] = end_event[event_time_idx] + retry_offset
+            Task_handler.insert_event(start_event)
+            Task_handler.insert_event(end_event)
         else:
             self.bind_task(task, vm_list[selected_vm_id])
 

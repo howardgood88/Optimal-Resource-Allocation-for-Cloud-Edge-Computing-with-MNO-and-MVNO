@@ -21,10 +21,6 @@ id,type,time
  [2 1 40]
  [3 0 50]
  [3 1 57]]
-INFO:Time 0:------Start trying to redeploy undone tasks of MNO------
-INFO:Time 0:Finished MNO redeployment.
-INFO:Time 0:------Start trying to redeploy undone tasks of MVNO------
-INFO:Time 0:Finished MVNO redeployment.
 INFO:Time 0:mno best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
    0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: -inf
 INFO:Time 0:mvno best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
@@ -125,10 +121,6 @@ id,type,time
 [[4 0 64]
  [4 1 69]
  [5 0 100]]
-INFO:Time 60:------Start trying to redeploy undone tasks of MNO------
-INFO:Time 60:Finished MNO redeployment.
-INFO:Time 60:------Start trying to redeploy undone tasks of MVNO------
-INFO:Time 60:Finished MVNO redeployment.
 INFO:Time 60:mno best population [  0.     0.36   0.     0.02   0.52   0.08   0.1    0.28   0.5    0.05
    0.04   0.03   0.08   0.28   0.04   0.04   0.15   0.42 340.19   0.28] with fitness: 2547.9504613413046
 INFO:Time 60:mvno best population [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
@@ -202,10 +194,6 @@ id,type,time
 [[5 1 120]
  [6 0 150]
  [6 1 163]]
-INFO:Time 120:------Start trying to redeploy undone tasks of MNO------
-INFO:Time 120:Finished MNO redeployment.
-INFO:Time 120:------Start trying to redeploy undone tasks of MVNO------
-INFO:Time 120:Finished MVNO redeployment.
 INFO:Time 120:mno best population [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.11   0.     0.19
    0.31   0.39   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 2248.412456868475
 INFO:Time 120:mvno best population [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
@@ -269,10 +257,6 @@ id,type,time
 [[7 0 200]
  [7 1 209]
  [8 0 230]]
-INFO:Time 180:------Start trying to redeploy undone tasks of MNO------
-INFO:Time 180:Finished MNO redeployment.
-INFO:Time 180:------Start trying to redeploy undone tasks of MVNO------
-INFO:Time 180:Finished MVNO redeployment.
 INFO:Time 180:mno best population [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
    0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 3521.748813597503
 INFO:Time 180:mvno best population [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
@@ -344,10 +328,6 @@ id,type,time
 [[9 0 245]
  [8 1 250]
  [9 1 256]]
-INFO:Time 240:------Start trying to redeploy undone tasks of MNO------
-INFO:Time 240:Finished MNO redeployment.
-INFO:Time 240:------Start trying to redeploy undone tasks of MVNO------
-INFO:Time 240:Finished MVNO redeployment.
 INFO:Time 240:mno best population [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
    0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 0.0
 INFO:Time 240:mvno best population [  0.03   0.01   0.04   0.66   0.01   0.26   0.49   0.03   0.01   0.3
@@ -412,10 +392,6 @@ id,type,time
  [11 0 310]
  [11 1 315]
  [10 1 320]]
-INFO:Time 300:------Start trying to redeploy undone tasks of MNO------
-INFO:Time 300:Finished MNO redeployment.
-INFO:Time 300:------Start trying to redeploy undone tasks of MVNO------
-INFO:Time 300:Finished MVNO redeployment.
 INFO:Time 300:mno best population [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
    0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 0.0
 INFO:Time 300:mvno best population [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.8    0.06   0.01
