@@ -2,22 +2,22 @@ import abc
 from vm_assignment import VMAssignment
 from task_deployment import TaskDeployment
 import numpy as np
-from parameters import (_mu, Task_event_index)
+from parameters import (_mu, Task_event_index, Global)
 from utils import (printReturn, funcCall)
 from contract import Contract
 from task_handler import Task_handler
 import logging
 
 class Network_operator(abc.ABC):
-    def redeploy(self, vm_list: dict, system_time: int) -> None:
+    def redeploy(self, vm_list: dict) -> None:
         '''Redeploy the unaccepted tasks.'''
         queue_size = self._task_deployment.unaccepted_task_queue.qsize()
         task_id_index = Task_event_index.event_time.value
         while queue_size > 0:
             start_event, end_event = self._task_deployment.unaccepted_task_queue.get()
             duration = end_event[task_id_index] - start_event[task_id_index]
-            start_event[task_id_index] = system_time
-            end_event[task_id_index] = system_time + duration
+            start_event[task_id_index] = Global.system_time
+            end_event[task_id_index] = Global.system_time + duration
             Task_handler.insert_event(end_event)
             self.task_deployment(start_event, vm_list)
             queue_size -= 1
@@ -35,7 +35,7 @@ class Network_operator(abc.ABC):
         self._task_deployment.end()
 
     def update_task_deployment_parameters(self) -> None:
-        logging.info(f'---{self.name} start updating parameters---')
+        logging.info(f'-------{self.name} start updating parameters-------')
         self._task_deployment.update_parameters()
 
 class MVNO(Network_operator):
