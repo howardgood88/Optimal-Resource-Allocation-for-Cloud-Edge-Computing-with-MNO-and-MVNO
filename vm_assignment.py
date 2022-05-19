@@ -2,7 +2,7 @@ import numpy as np
 from parameters import (rnd_seed, _theta, _lambda, Task_type_index, optimizing_times, _lambda)
 from optimizing import VMAssignmentOptimizing
 from utils import (printReturn, funcCall, softmax)
-from constract import Contract
+from contract import Contract
 import logging
 
 np.random.seed(rnd_seed)

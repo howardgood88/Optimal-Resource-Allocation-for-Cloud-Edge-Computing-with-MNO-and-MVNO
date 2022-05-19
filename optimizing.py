@@ -3,7 +3,7 @@ import numpy as np
 from parameters import (offspring_number, Task_type_index, _theta, _lambda, mutate_rate, rnd_seed,
                         _gamma, _op_bw, _op_cr)
 from utils import (funcCall, toSoftmax)
-from constract import Contract
+from contract import Contract
 import math
 import logging
 

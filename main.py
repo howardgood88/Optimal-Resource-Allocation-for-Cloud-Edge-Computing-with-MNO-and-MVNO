@@ -3,9 +3,10 @@ import numpy as np
 from utils import (printReturn, funcCall, print_vm_list, toSoftmax)
 from network_operator import (MNO, MVNO)
 from parameters import (test_data_dir, small_round_minutes, big_round_minutes, big_round_times, rnd_seed, Task_type_index, Task_event_index,
-                        _phi, generated_bw_max, generated_bw_min, generated_delay_cloud_max, generated_delay_cloud_min,
-                        generated_delay_edge_max, generated_delay_edge_min, logging_level, offspring_number)
+                        Event_type, _phi, generated_bw_max, generated_bw_min, generated_delay_cloud_max, generated_delay_cloud_min,
+                        generated_delay_edge_max, generated_delay_edge_min, logging_level, offspring_number, mno_rate)
 from vm import VM
+from task_handler import Task_handler
 import logging
 
 logging.basicConfig(filename = test_data_dir + 'log.txt', filemode='w', level=logging_level)
@@ -24,8 +25,29 @@ def load_machine_data(filename: str) -> dict:
         data = json.load(f)
     return data
 
+def createVM(machine_attributes: dict) -> dict:
+    '''Create dict map from vm_id to VM instance.'''
+    vm_list = {}
+    machine_id_list = machine_attributes.keys()
+
+    for id in machine_id_list:
+        vm_list[id] = VM(machine_attributes[id])
+    return vm_list
+
 def get_hourly_statistic_data(hourly_tasks: np.array) -> np.array:
-    '''Calculate hourly average_cpu_usage, bw_up, bw_down of different task from history data'''
+    '''
+    Calculate hourly average_cpu_usage, bw_up, bw_down of hour tasks.
+    
+    Parameters
+    ----------
+    hourly_tasks : np.array, shape: (N, 10)
+        Task-level hour data.
+
+    Returns
+    ----------
+    hourly_tasks : np.array, shape: (3,3)
+        The hourly average history data.
+    '''
     task_type_idx = Task_event_index.task_type.value
     average_cpu_usage_idx = Task_event_index.average_cpu_usage.value
     T_down_idx = Task_event_index.T_down.value
@@ -48,7 +70,7 @@ def data_preprocessing(history_data: np.array, system_time: int) -> tuple[np.arr
     history_data : np.array, shape: (N, 10)
         Task-level history data.
     system_time : int
-        The descrete system time.
+        The discrete system time.
     
     Returns
     ----------
@@ -66,7 +88,7 @@ def data_preprocessing(history_data: np.array, system_time: int) -> tuple[np.arr
     # the selected time range
     minutes_range = (system_time, system_time + small_round_minutes)
     # index of task_event.json/history_data.json
-    start_time_idx = Task_event_index.start_time.value
+    start_time_idx = Task_event_index.event_time.value
     user_id_idx = Task_event_index.user_id.value
     while history_data[history_data[:, start_time_idx] > minutes_range[0]].size != 0:
         # hourly mask that fit the minutes_range
@@ -85,27 +107,6 @@ def data_preprocessing(history_data: np.array, system_time: int) -> tuple[np.arr
         # update minutes_range to next hour
         minutes_range = (minutes_range[0] + small_round_minutes, minutes_range[1] + small_round_minutes)
     return np.array(hourly_history_data, dtype=list), user_id_set
-
-def update_data(hourly_history_data: np.array, hour_task_record: np.array, statistic_data: np.array) -> tuple[np.array, np.array]:
-    '''Update hourly_history_data, and update statistic_data by hour_task_record.'''
-    logging.debug(f'add hour_task_record {hour_task_record} into hourly_history_data and update statistic_data')
-    if hourly_history_data is None:
-        hourly_history_data = hour_task_record
-    else:
-        hourly_history_data = np.vstack([hourly_history_data, hour_task_record])
-    logging.info(f'add hour data\n{np.mean(hour_task_record, axis=0)} into statistic data')
-    statistic_data = statistic_data * (1 -_phi) + np.mean(hour_task_record, axis=0) * _phi
-    logging.info(f'statistic data becomes:\n{statistic_data}')
-    return hourly_history_data, statistic_data
-
-def createVM(machine_attributes: dict) -> dict:
-    '''Create dict map from vm_id to VM instance.'''
-    vm_list = {}
-    machine_id_list = machine_attributes.keys()
-
-    for id in machine_id_list:
-        vm_list[id] = VM(machine_attributes[id])
-    return vm_list
 
 def generate_user_to_vm_data(location: str) -> dict:
     '''Random generate the data from user to vm when new user arrival.'''
@@ -131,7 +132,19 @@ def update_user_to_vm(user_id_list: np.array) -> None:
         for user_id in user_id_list:
             vm.from_user.setdefault(user_id, generate_user_to_vm_data(vm.location))
 
-def task_deployment(hour_tasks: np.array) -> None:
+def update_data(hourly_history_data: np.array, hour_task_record: np.array, statistic_data: np.array) -> tuple[np.array, np.array]:
+    '''Update hourly_history_data, and update statistic_data by hour_task_record.'''
+    logging.debug(f'add hour_task_record {hour_task_record} into hourly_history_data and update statistic_data')
+    if hourly_history_data is None:
+        hourly_history_data = hour_task_record
+    else:
+        hourly_history_data = np.vstack([hourly_history_data, hour_task_record])
+    logging.info(f'add hour data\n{np.mean(hour_task_record, axis=0)} into statistic data')
+    statistic_data = statistic_data * (1 -_phi) + np.mean(hour_task_record, axis=0) * _phi
+    logging.info(f'statistic data becomes:\n{statistic_data}')
+    return hourly_history_data, statistic_data
+
+def task_deployment(hour_events: np.array) -> None:
     '''Random assign task to operator and deploy the task.'''
     # try to redeploy the unaccepted tasks
     for operator in (mno, mvno):
@@ -144,28 +157,26 @@ def task_deployment(hour_tasks: np.array) -> None:
     # start hourly task deployment
     logging.info(f'mno best population {toSoftmax(mno._task_deployment.optimizing.best_population)} with fitness: {mno._task_deployment.optimizing.best_fitness}')
     logging.info(f'mvno best population {toSoftmax(mvno._task_deployment.optimizing.best_population)} with fitness: {mvno._task_deployment.optimizing.best_fitness}')
-    for task in hour_tasks:
-        user_id = task[Task_event_index.user_id.value]
-        # get/assign the operator to the task
-        operator = user_id_to_operator.setdefault(user_id, np.random.choice([mno, mvno], 1, p = [0.7, 0.3])[0])
-        logging.info(f'task{task[Task_event_index.index.value]} assign to {operator.name}')
-        # generate the user to vm data if new user not in history data arrival
-        if user_id not in user_id_set:
-            update_user_to_vm([user_id])
-            user_id_set.add(user_id)
-        # delegate to operator
-        operator.task_deployment(task, vm_list)
-    
+    for event in hour_events:
+        user_id = event[Task_event_index.user_id.value]
+        if event[Task_event_index.event_type.value] == Event_type.start:
+            # get/assign the operator to the task
+            operator = user_id_to_operator.setdefault(user_id, np.random.choice([mno, mvno], 1, p = [mno_rate, 1 - mno_rate])[0])
+            logging.info(f'task{event[Task_event_index.index.value]} assign to {operator.name}')
+            # generate the user to vm data if new user not in history data arrival
+            if user_id not in user_id_set:
+                update_user_to_vm([user_id])
+                user_id_set.add(user_id)
+            # delegate to operator
+            operator.deploy_task(event, vm_list)
+        elif event[Task_event_index.event_type.value] == Event_type.end:
+            operator = user_id_to_operator[user_id]
+            operator.release_task(event)
+    # notify operator task deployment is end and calculate the statistic performance of this hour
     mno.end_task_deployment()
     mvno.end_task_deployment()
-
     logging.info(f'mno overall hour utility: {mno._task_deployment.hour_utility}, hour fitness: {mno._task_deployment.hour_fitness}')
     logging.info(f'mvno overall hour utility: {mvno._task_deployment.hour_utility}, hour fitness: {mvno._task_deployment.hour_fitness}')
-
-    # update best population based on the operating(deploy utility) of this hour
-    logging.info(f'------------Start of Updating best population------------')
-    mno.update_task_deployment_best_population()
-    mvno.update_task_deployment_best_population()
 
     logging.info(f'------------Start of Updating Parameters------------')
     mno.update_task_deployment_parameters()
@@ -194,6 +205,8 @@ mvno = MVNO()
 mno = MNO(mvno, list(vm_list.keys()), vm_list)
 # for keeping the mapping from user_id to the operator within task deployment
 user_id_to_operator = {}
+# save the overall task events to process the unsatisfied tasks.
+Task_handler.task_events = task_events
 
 # initialize
 statistic_data = np.zeros((3,3))
@@ -220,15 +233,15 @@ while system_time // big_round_minutes < big_round_times:
         logging.info(f'-------Start of hour {system_time // small_round_minutes + 1}, system time: {system_time}-------')
         ## get the hour tasks data
         minutes_range = (system_time, system_time + small_round_minutes)
-        start_time_idx = Task_event_index.start_time.value
-        hour_mask = (minutes_range[0] <= task_events[:, start_time_idx]) & (task_events[:, start_time_idx] < minutes_range[1])
-        hour_tasks = task_events[hour_mask]
-        logging.info(f'hour tasks: {hour_tasks[:, Task_event_index.index.value]}')
-        if not hour_tasks.size == 0:
-            task_deployment(hour_tasks)
+        event_time_idx = Task_event_index.event_time.value
+        hour_mask = (minutes_range[0] <= task_events[:, event_time_idx]) & (task_events[:, event_time_idx] < minutes_range[1])
+        hour_events = task_events[hour_mask]
+        logging.info(f'hour events: {hour_events[:, Task_event_index.index.value : Task_event_index.event_time.value + 1]}')
+        if not hour_events.size == 0:
+            task_deployment(hour_events)
         # prepare for next round
         system_time += small_round_minutes
-        hourly_statistic_data = get_hourly_statistic_data(hour_tasks)
+        hourly_statistic_data = get_hourly_statistic_data(hour_events)
         hour_task_record.append(hourly_statistic_data)
     logging.info(f'Finished task deployment {system_time // big_round_minutes}.')
 
