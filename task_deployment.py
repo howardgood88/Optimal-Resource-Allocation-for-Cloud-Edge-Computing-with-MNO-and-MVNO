@@ -242,5 +242,6 @@ class TaskDeployment:
         logging.info(f'{"Updating best population":-^{title3}}')
         self.optimizing.best_fitness = self.hour_fitness
         self.optimizing.update_best_population()
+        logging.info(f'Finished updating best population to: {toSoftmax(self.optimizing.best_population)}.')
         logging.info(f'{"Generate new offsprings":-^{title3}}')
         self.optimizing.step()

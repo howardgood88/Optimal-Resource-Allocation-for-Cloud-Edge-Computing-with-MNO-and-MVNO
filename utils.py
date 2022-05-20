@@ -23,9 +23,9 @@ def toSoftmax(population: np.array) -> np.array:
 def softmax(x: np.array) -> np.array:
     return np.exp(x) / sum(np.exp(x))
 
-def log_TD_populations_msg(msg: str, populations: np.array) -> None:
+def get_TD_populations_log_msg(msg: str, populations: np.array) -> None:
     ''''Log the Task Deployment populations by toSoftmax.'''
     msg += ':\n'
     for idx, population in enumerate(populations):
         msg += f'{idx + 1}: {toSoftmax(population)}\n'
-    logging.debug(msg)
+    return msg

@@ -2,7 +2,7 @@ import abc
 import numpy as np
 from parameters import (offspring_number, Task_type_index, _theta, _lambda, mutate_rate, rnd_seed,
                         _gamma, _op_bw, _op_cr)
-from utils import (toSoftmax, log_TD_populations_msg)
+from utils import (toSoftmax, get_TD_populations_log_msg)
 from contract import Contract
 import math
 import logging
@@ -200,9 +200,9 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
     def update_best_population(self):
         # update best population
         for idx, (fitness, population) in enumerate(zip(self.fitness, self.new_populations)):
-            logging.info(f'population {idx + 1} {toSoftmax(population)} with fitness: {fitness}')
+            logging.debug(f'population {idx + 1} {toSoftmax(population)} with fitness: {fitness}')
             if fitness > self.best_fitness:
-                logging.info(f'better population found, update best population to {toSoftmax(population)}!')
+                logging.debug(f'better population found, update best population to {toSoftmax(population)}!')
                 self.best_fitness = fitness
                 self.best_population = population
                 self.best_gamma = [population[0:6], population[6:12], population[12:18]]
@@ -216,7 +216,7 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
         parents = self.selection()
         offsprings = self.crossover(parents)
         self.new_populations = self.mutation(offsprings)
-        log_TD_populations_msg('final new population', self.new_populations)
+        logging.info(get_TD_populations_log_msg('final new offspring', self.new_populations))
         self.fitness = [0 for _ in range(offspring_number)]
 
     def selection(self) -> np.array:
@@ -234,7 +234,7 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
         wheel = np.vstack(wheels)
         wheel = wheel.reshape((-1, *self.new_populations[0].shape))
         parents = SUS(wheel)
-        log_TD_populations_msg('selected parents', parents)
+        logging.debug(get_TD_populations_log_msg('selected parents', parents))
         return parents
 
     def crossover(self, parents) -> np.array:
@@ -250,7 +250,7 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
         logging.debug(f'order after shuffle: {randomize}')
         selected_gene = selected_gene[randomize]
         parents[:, left:right + 1] = selected_gene
-        log_TD_populations_msg('new offsprings after crossover', parents)
+        logging.debug(get_TD_populations_log_msg('new offsprings after crossover', parents))
         return parents
 
     def mutation(self, offsprings) -> np.array:
@@ -266,5 +266,5 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
                         _message += f' 0.8'
                         offsprings[i, j] = offsprings[i, j] * 0.8
             logging.debug(_message)
-        log_TD_populations_msg('new offsprings after mutation', offsprings)
+        logging.debug(get_TD_populations_log_msg('new offsprings after mutation', offsprings))
         return offsprings
