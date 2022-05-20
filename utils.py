@@ -29,3 +29,23 @@ def get_TD_populations_log_msg(msg: str, populations: np.array) -> None:
     for idx, population in enumerate(populations):
         msg += f'{idx + 1}: {toSoftmax(population)}\n'
     return msg
+
+class step_logger:
+    '''
+    INFO level logging of algorithm step that need start and end message.
+    Something like:
+    ----start of xxx----
+    ...
+    Finished xxx.
+    '''
+    def __init__(self, in_msg: str, in_title: int, out_msg: str, logger=logging.info):
+        self.in_msg = in_msg
+        self.in_title = in_title
+        self.out_msg = out_msg
+        self.logger = logger
+
+    def __enter__(self):
+        self.logger(f'{self.in_msg:-^{self.in_title}}')
+
+    def __exit__(self, type, value, traceback):
+        self.logger(self.out_msg)

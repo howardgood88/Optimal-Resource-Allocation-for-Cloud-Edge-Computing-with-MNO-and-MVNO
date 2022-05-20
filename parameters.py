@@ -8,7 +8,7 @@ rnd_seed = 1126
 logging_level = logging.INFO
 test_data_dir = './data/case2/'
 # the length of log with filling "-"
-title1, title2, title3 = 130, 110, 90
+title1, title2, title3, title4, title5 = 130, 115, 100, 85, 70
 # round time
 small_round_minutes = 60
 # 60 * 24 * 7
