@@ -2,7 +2,7 @@ import abc
 import numpy as np
 from parameters import (offspring_number, Task_type_index, _theta, _lambda, mutate_rate, rnd_seed,
                         _gamma, _op_bw, _op_cr)
-from utils import (funcCall, toSoftmax)
+from utils import (toSoftmax, log_TD_populations_msg)
 from contract import Contract
 import math
 import logging
@@ -94,9 +94,12 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         selected_gene = np.zeros((offspring_number, right - left + 1))
         for idx, parent in enumerate(parents):
             selected_gene[idx] = parent[left:right + 1]
-        np.random.shuffle(selected_gene)
+        randomize = np.arange(len(selected_gene))
+        np.random.shuffle(randomize)
+        self.valid_evolution_message += f'order after shuffle: {randomize}, '
+        selected_gene = selected_gene[randomize]
         parents[:, left:right + 1] = selected_gene
-        self.valid_evolution_message += f'new offsprings:\n{parents}\n'
+        self.valid_evolution_message += f'new offsprings after crossover:\n{parents}\n'
         return parents
 
     def mutation(self, offsprings: np.array) -> np.array:
@@ -197,7 +200,7 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
     def update_best_population(self):
         # update best population
         for idx, (fitness, population) in enumerate(zip(self.fitness, self.new_populations)):
-            logging.info(f'population {idx} {toSoftmax(population)} with fitness: {fitness}')
+            logging.info(f'population {idx + 1} {toSoftmax(population)} with fitness: {fitness}')
             if fitness > self.best_fitness:
                 logging.info(f'better population found, update best population to {toSoftmax(population)}!')
                 self.best_fitness = fitness
@@ -213,8 +216,7 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
         parents = self.selection()
         offsprings = self.crossover(parents)
         self.new_populations = self.mutation(offsprings)
-        for idx, population in enumerate(self.new_populations):
-            logging.info(f'new population {idx}: {population}')
+        log_TD_populations_msg('final new population', self.new_populations)
         self.fitness = [0 for _ in range(offspring_number)]
 
     def selection(self) -> np.array:
@@ -232,7 +234,7 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
         wheel = np.vstack(wheels)
         wheel = wheel.reshape((-1, *self.new_populations[0].shape))
         parents = SUS(wheel)
-        logging.debug(f'selected parents:\n{parents}')
+        log_TD_populations_msg('selected parents', parents)
         return parents
 
     def crossover(self, parents) -> np.array:
@@ -243,20 +245,26 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
         selected_gene = np.zeros((offspring_number, right - left + 1))
         for idx, parent in enumerate(parents):
             selected_gene[idx] = parent[left:right + 1]
-        np.random.shuffle(selected_gene)
+        randomize = np.arange(len(selected_gene))
+        np.random.shuffle(randomize)
+        logging.debug(f'order after shuffle: {randomize}')
+        selected_gene = selected_gene[randomize]
         parents[:, left:right + 1] = selected_gene
-        logging.debug(f'new offsprings:\n{parents}')
+        log_TD_populations_msg('new offsprings after crossover', parents)
         return parents
 
     def mutation(self, offsprings) -> np.array:
         for i in range(len(offsprings)):
             mutate = np.random.choice([True, False], offsprings[i].shape, p=[mutate_rate, 1 - mutate_rate])
-            logging.debug(f'offspring {i + 1} mutate at {np.arange(*offsprings[i].shape)[mutate]} bit')
+            _message = f'offspring {i + 1} mutate at {np.arange(*offsprings[i].shape)[mutate]} bit, multiply by'
             for j in range(len(offsprings[i])):
                 if mutate[j]:
                     if np.random.random() < 0.5:
+                        _message += f' 1.2'
                         offsprings[i, j] = offsprings[i, j] * 1.2
                     else:
+                        _message += f' 0.8'
                         offsprings[i, j] = offsprings[i, j] * 0.8
-        logging.debug(f'new offsprings:\n{offsprings}')
+            logging.debug(_message)
+        log_TD_populations_msg('new offsprings after mutation', offsprings)
         return offsprings

@@ -1,16 +1,16 @@
-INFO:Time 0:------------Start of load data & initialization------------
+INFO:Time 0:-----------------------------------------------Start of load data & initialization------------------------------------------------
 INFO:Time 0:Finished loading data.
 INFO:Time 0:Finished creating vm instance, store in vm_list that map from vm_id to vm instance.
-INFO:Time 0:Finished data preprocessing, get hour_task_record as hourly history data and user_id_set.
-INFO:Time 0:Finished building user to vm data into vm_list.from_user.
-INFO:Time 0:-----------------Start of Round 1-----------------
-INFO:Time 0:------------Start of updating history data------------
+INFO:Time 0:Finished data preprocessing, get hour_task_record as hourly history data and record user has appeared.
+INFO:Time 0:Finished map from user to vm in vm_list.from_user.
+INFO:Time 0:---------------------------------------------------------Start of Round 1---------------------------------------------------------
+INFO:Time 0:--------------------------------------------------Start of updating history data--------------------------------------------------
 INFO:Time 0:Finished update history data and statistic data.
-INFO:Time 0:------------Start of VM Assignment------------
+INFO:Time 0:------------------------------------------------------Start of VM Assignment------------------------------------------------------
 INFO:Time 0:mno vm id: ['1' '2' '4' '6' '7' '8' '9' '10' '11' '12' '15' '16' '17' '18' '20' '21'], mvno vm id: ['3' '5' '13' '14' '19']
 INFO:Time 0:Finished vm assignment.
-INFO:Time 0:------------Start of Task Deployment round 1------------
-INFO:Time 0:-------Start of hour 1, system time: 0-------
+INFO:Time 0:-------------------------------------------------Start of Task Deployment round 1-------------------------------------------------
+INFO:Time 0:---------------------------------------Start of hour 1, system time: 0----------------------------------------
 INFO:Time 0:Get hour events:
 id,type,time
 [[0 0 10]
@@ -21,9 +21,9 @@ id,type,time
  [2 1 40]
  [3 0 50]
  [3 1 57]]
-INFO:Time 0:mno best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+INFO:Time 0:mno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
    0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: -inf
-INFO:Time 0:mvno best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+INFO:Time 0:mvno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
    0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: -inf
 INFO:Time 10:task0 assign to MVNO
 INFO:Time 10:Deploy task0 to vm 13,
@@ -71,59 +71,43 @@ local_bw_down: 99984 -> 100000
 
 INFO:Time 60:mno overall hour utility: 931.69366709777, hour fitness: 931.69366709777
 INFO:Time 60:mvno overall hour utility: 820.9656304798146, hour fitness: 273.65521015993824
-INFO:Time 60:------------Start of Updating Parameters------------
-INFO:Time 60:-------MNO start updating parameters-------
-INFO:Time 60:-----Updating best population-----
-INFO:Time 60:population 0 [  0.     0.36   0.     0.02   0.52   0.08   0.1    0.28   0.5    0.05
+INFO:Time 60:---------------------------------------------------Start of Updating Parameters---------------------------------------------------
+INFO:Time 60:----------------------------------------MNO start updating parameters-----------------------------------------
+INFO:Time 60:---------------------------------Updating best population---------------------------------
+INFO:Time 60:population 1 [  0.     0.36   0.     0.02   0.52   0.08   0.1    0.28   0.5    0.05
    0.04   0.03   0.08   0.28   0.04   0.04   0.15   0.42 340.19   0.28] with fitness: 2547.9504613413046
 INFO:Time 60:better population found, update best population to [  0.     0.36   0.     0.02   0.52   0.08   0.1    0.28   0.5    0.05
    0.04   0.03   0.08   0.28   0.04   0.04   0.15   0.42 340.19   0.28]!
-INFO:Time 60:population 1 [  0.51   0.24   0.05   0.06   0.02   0.12   0.19   0.05   0.44   0.04
+INFO:Time 60:population 2 [  0.51   0.24   0.05   0.06   0.02   0.12   0.19   0.05   0.44   0.04
    0.28   0.01   0.05   0.02   0.02   0.01   0.03   0.87 337.52   0.08] with fitness: 1048.3055766562636
-INFO:Time 60:population 2 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.11   0.     0.19
+INFO:Time 60:population 3 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.11   0.     0.19
    0.31   0.39   0.16   0.07   0.12   0.02   0.05   0.58 221.5    0.38] with fitness: 1169.3984324420517
-INFO:Time 60:population 3 [  0.01   0.82   0.05   0.02   0.08   0.02   0.03   0.05   0.04   0.58
+INFO:Time 60:population 4 [  0.01   0.82   0.05   0.02   0.08   0.02   0.03   0.05   0.04   0.58
    0.02   0.28   0.01   0.02   0.56   0.29   0.01   0.1  263.74   0.32] with fitness: 492.8104441475343
-INFO:Time 60:-----Generate new offsprings-----
-INFO:Time 60:new population 0: [  0.24   4.58   0.2    1.81   4.95   3.06   1.48   2.5    3.1    0.83
-   0.52   0.36   1.36   2.66   0.64   0.65   1.99   2.43 340.19   0.28]
-INFO:Time 60:new population 1: [  0.24   4.58   0.2    1.81   4.95   3.06   1.48   2.5    3.1    0.83
-   0.52   0.36   1.36   2.66   0.64   0.65   1.99   3.04 340.19   0.28]
-INFO:Time 60:new population 2: [  4.73   3.96   2.46   2.61   1.7    3.27   4.11   2.75   4.96   2.5
-   3.61   1.15   1.72   1.02   0.74   0.48   1.4    3.71 337.52   0.08]
-INFO:Time 60:new population 3: [  4.08   3.69   3.54   0.38   4.51   1.72   0.17   3.62   0.19   4.12
-   4.62   4.84   2.27   1.17   2.02   0.34   1.08   3.56 221.5    0.38]
-INFO:Time 60:-------MVNO start updating parameters-------
-INFO:Time 60:-----Updating best population-----
-INFO:Time 60:population 0 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
+INFO:Time 60:---------------------------------Generate new offsprings----------------------------------
+INFO:Time 60:----------------------------------------MVNO start updating parameters----------------------------------------
+INFO:Time 60:---------------------------------Updating best population---------------------------------
+INFO:Time 60:population 1 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
    0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29] with fitness: 261.791722916711
-INFO:Time 60:population 1 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
+INFO:Time 60:population 2 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
    0.08   0.02   0.22   0.18   0.02   0.12   0.46   0.01 219.12   0.38] with fitness: 278.4613639034081
 INFO:Time 60:better population found, update best population to [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
    0.08   0.02   0.22   0.18   0.02   0.12   0.46   0.01 219.12   0.38]!
-INFO:Time 60:population 2 [  0.03   0.01   0.04   0.66   0.01   0.26   0.31   0.05   0.01   0.4
+INFO:Time 60:population 3 [  0.03   0.01   0.04   0.66   0.01   0.26   0.31   0.05   0.01   0.4
    0.04   0.19   0.02   0.02   0.06   0.07   0.81   0.01 258.38   0.23] with fitness: 200.84456973253046
-INFO:Time 60:population 3 [  0.05   0.49   0.13   0.12   0.06   0.16   0.24   0.31   0.34   0.01
+INFO:Time 60:population 4 [  0.05   0.49   0.13   0.12   0.06   0.16   0.24   0.31   0.34   0.01
    0.02   0.08   0.26   0.06   0.63   0.01   0.02   0.01 384.7    0.32] with fitness: 138.09566516958708
-INFO:Time 60:-----Generate new offsprings-----
-INFO:Time 60:new population 0: [  2.48   3.92   0.51   1.38   0.94   4.69   0.19   4.96   2.33   1.11
-   2.58   2.19   3.38   3.84   0.77   4.41   4.45   2.61 211.89   0.34]
-INFO:Time 60:new population 1: [  2.48   3.92   0.64   1.38   0.94   4.69   0.19   4.96   2.33   1.11
-   2.58   2.19   3.38   3.84   0.77   4.41   4.45   0.24 219.12   0.38]
-INFO:Time 60:new population 2: [  0.11   4.21   0.86   0.03   0.35   4.59   1.05   3.77   0.46   4.8
-   2.77   1.19   3.72   3.55   1.5    3.1    3.58   0.81 258.38   0.23]
-INFO:Time 60:new population 3: [  1.66   0.07   2.03   4.89   0.91   3.98   4.67   1.97   0.81   4.16
-   1.81   3.41   1.45   1.42   2.38   2.47   4.93   2.61 211.89   0.29]
+INFO:Time 60:---------------------------------Generate new offsprings----------------------------------
 INFO:Time 60:Finished task deployment 0.
-INFO:Time 60:-------Start of hour 2, system time: 60-------
+INFO:Time 60:---------------------------------------Start of hour 2, system time: 60---------------------------------------
 INFO:Time 60:Get hour events:
 id,type,time
 [[4 0 64]
  [4 1 69]
  [5 0 100]]
-INFO:Time 60:mno best population [  0.     0.36   0.     0.02   0.52   0.08   0.1    0.28   0.5    0.05
+INFO:Time 60:mno deploy with best population [  0.     0.36   0.     0.02   0.52   0.08   0.1    0.28   0.5    0.05
    0.04   0.03   0.08   0.28   0.04   0.04   0.15   0.42 340.19   0.28] with fitness: 2547.9504613413046
-INFO:Time 60:mvno best population [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
+INFO:Time 60:mvno deploy with best population [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
    0.08   0.02   0.22   0.18   0.02   0.12   0.46   0.01 219.12   0.38] with fitness: 278.4613639034081
 INFO:Time 64:task4 assign to MNO
 INFO:Time 64:Deploy task4 to vm 17,
@@ -144,59 +128,51 @@ task bw_down: 1300, local_bw_down: 100000 -> 98700
 
 INFO:Time 120:mno overall hour utility: 3218.6096617230346, hour fitness: 1609.3048308615173
 INFO:Time 120:mvno overall hour utility: 0, hour fitness: 0.0
-INFO:Time 120:------------Start of Updating Parameters------------
-INFO:Time 120:-------MNO start updating parameters-------
-INFO:Time 120:-----Updating best population-----
-INFO:Time 120:population 0 [  0.     0.36   0.     0.02   0.52   0.08   0.1    0.28   0.5    0.05
+INFO:Time 120:---------------------------------------------------Start of Updating Parameters---------------------------------------------------
+INFO:Time 120:----------------------------------------MNO start updating parameters-----------------------------------------
+INFO:Time 120:---------------------------------Updating best population---------------------------------
+INFO:Time 120:population 1 [  0.     0.36   0.     0.02   0.52   0.08   0.1    0.28   0.5    0.05
    0.04   0.03   0.1    0.35   0.05   0.05   0.18   0.28 340.19   0.28] with fitness: 1837.8129844175216
 INFO:Time 120:better population found, update best population to [  0.     0.36   0.     0.02   0.52   0.08   0.1    0.28   0.5    0.05
    0.04   0.03   0.1    0.35   0.05   0.05   0.18   0.28 340.19   0.28]!
-INFO:Time 120:population 1 [  0.     0.36   0.     0.02   0.52   0.08   0.1    0.28   0.5    0.05
+INFO:Time 120:population 2 [  0.     0.36   0.     0.02   0.52   0.08   0.1    0.28   0.5    0.05
    0.04   0.03   0.08   0.28   0.04   0.04   0.15   0.42 340.19   0.28] with fitness: 1609.3048308615173
-INFO:Time 120:population 2 [  0.51   0.24   0.05   0.06   0.02   0.12   0.22   0.06   0.52   0.05
+INFO:Time 120:population 3 [  0.51   0.24   0.05   0.06   0.02   0.12   0.22   0.06   0.52   0.05
    0.14   0.01   0.1    0.05   0.04   0.03   0.07   0.72 337.52   0.08] with fitness: 1578.4622075932887
-INFO:Time 120:population 3 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.11   0.     0.19
+INFO:Time 120:population 4 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.11   0.     0.19
    0.31   0.39   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 2248.412456868475
 INFO:Time 120:better population found, update best population to [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.11   0.     0.19
    0.31   0.39   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38]!
-INFO:Time 120:-----Generate new offsprings-----
-INFO:Time 120:new population 0: [  0.24   4.58   0.2    1.81   4.95   3.06   1.18   2.5    3.1    0.83
-   0.52   0.36   1.36   2.66   0.64   0.65   1.99   2.43 340.19   0.28]
-INFO:Time 120:new population 1: [  0.24   4.58   0.2    1.81   4.95   3.06   1.48   3.     3.1    0.83
-   0.52   0.36   1.36   2.66   0.64   0.65   1.99   3.04 340.19   0.28]
-INFO:Time 120:new population 2: [  4.73   3.17   2.46   2.61   1.7    3.27   4.11   2.75   4.96   2.5
-   3.61   1.15   1.72   1.02   0.74   0.48   1.4    3.71 337.52   0.08]
-INFO:Time 120:new population 3: [  4.08   3.69   3.54   0.38   4.51   1.72   0.17   2.9    0.19   4.12
-   4.62   4.84   2.27   1.17   2.02   0.34   1.08   3.56 221.5    0.38]
-INFO:Time 120:-------MVNO start updating parameters-------
-INFO:Time 120:-----Updating best population-----
-INFO:Time 120:population 0 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.34] with fitness: 0.0
+INFO:Time 120:---------------------------------Generate new offsprings----------------------------------
+INFO:Time 120:----------------------------------------MVNO start updating parameters----------------------------------------
+INFO:Time 120:---------------------------------Updating best population---------------------------------
 INFO:Time 120:population 1 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
+   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.34] with fitness: 0.0
+INFO:Time 120:population 2 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
    0.07   0.05   0.12   0.19   0.01   0.33   0.35   0.01 219.12   0.38] with fitness: 0.0
-INFO:Time 120:population 2 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
+INFO:Time 120:population 3 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
    0.08   0.02   0.29   0.25   0.03   0.16   0.25   0.02 258.38   0.23] with fitness: 0.0
-INFO:Time 120:population 3 [  0.03   0.01   0.04   0.66   0.01   0.26   0.49   0.03   0.01   0.3
+INFO:Time 120:population 4 [  0.03   0.01   0.04   0.66   0.01   0.26   0.49   0.03   0.01   0.3
    0.03   0.14   0.02   0.02   0.06   0.06   0.76   0.07 211.89   0.29] with fitness: 0.0
-INFO:Time 120:-----Generate new offsprings-----
+INFO:Time 120:---------------------------------Generate new offsprings----------------------------------
 INFO:Time 120:data not enough for updating, skip updating.
 INFO:Time 120:Finished task deployment 1.
-INFO:Time 120:-----------------Start of Round 2-----------------
-INFO:Time 120:------------Start of updating history data------------
+INFO:Time 120:---------------------------------------------------------Start of Round 2---------------------------------------------------------
+INFO:Time 120:--------------------------------------------------Start of updating history data--------------------------------------------------
 INFO:Time 120:Finished update history data and statistic data.
-INFO:Time 120:------------Start of VM Assignment------------
+INFO:Time 120:------------------------------------------------------Start of VM Assignment------------------------------------------------------
 INFO:Time 120:mno vm id: ['1' '2' '4' '6' '7' '8' '9' '10' '11' '12' '15' '16' '17' '18' '20' '21'], mvno vm id: ['3' '5' '13' '14' '19']
 INFO:Time 120:Finished vm assignment.
-INFO:Time 120:------------Start of Task Deployment round 2------------
-INFO:Time 120:-------Start of hour 3, system time: 120-------
+INFO:Time 120:-------------------------------------------------Start of Task Deployment round 2-------------------------------------------------
+INFO:Time 120:--------------------------------------Start of hour 3, system time: 120---------------------------------------
 INFO:Time 120:Get hour events:
 id,type,time
 [[5 1 120]
  [6 0 150]
  [6 1 163]]
-INFO:Time 120:mno best population [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.11   0.     0.19
+INFO:Time 120:mno deploy with best population [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.11   0.     0.19
    0.31   0.39   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 2248.412456868475
-INFO:Time 120:mvno best population [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
+INFO:Time 120:mvno deploy with best population [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
    0.08   0.02   0.22   0.18   0.02   0.12   0.46   0.01 219.12   0.38] with fitness: 0.0
 INFO:Time 120:release task5 from vm 18,
 cr: 0.53 -> 0.65
@@ -216,50 +192,42 @@ local_bw_down: 98935 -> 100000
 
 INFO:Time 180:mno overall hour utility: 3329.9518961233894, hour fitness: 3329.9518961233894
 INFO:Time 180:mvno overall hour utility: 0, hour fitness: 0.0
-INFO:Time 180:------------Start of Updating Parameters------------
-INFO:Time 180:-------MNO start updating parameters-------
-INFO:Time 180:-----Updating best population-----
-INFO:Time 180:population 0 [  0.     0.36   0.     0.02   0.52   0.08   0.08   0.28   0.52   0.05
+INFO:Time 180:---------------------------------------------------Start of Updating Parameters---------------------------------------------------
+INFO:Time 180:----------------------------------------MNO start updating parameters-----------------------------------------
+INFO:Time 180:---------------------------------Updating best population---------------------------------
+INFO:Time 180:population 1 [  0.     0.36   0.     0.02   0.52   0.08   0.08   0.28   0.52   0.05
    0.04   0.03   0.1    0.35   0.05   0.05   0.18   0.28 340.19   0.28] with fitness: 662.8849887865174
-INFO:Time 180:population 1 [  0.     0.36   0.     0.02   0.52   0.08   0.08   0.39   0.43   0.04
+INFO:Time 180:population 2 [  0.     0.36   0.     0.02   0.52   0.08   0.08   0.39   0.43   0.04
    0.03   0.03   0.08   0.28   0.04   0.04   0.15   0.42 340.19   0.28] with fitness: 593.0684372381102
-INFO:Time 180:population 2 [  0.58   0.12   0.06   0.07   0.03   0.14   0.22   0.06   0.52   0.05
+INFO:Time 180:population 3 [  0.58   0.12   0.06   0.07   0.03   0.14   0.22   0.06   0.52   0.05
    0.14   0.01   0.1    0.05   0.04   0.03   0.07   0.72 337.52   0.08] with fitness: 1626.6859497728392
-INFO:Time 180:population 3 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
+INFO:Time 180:population 4 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
    0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 3521.748813597503
 INFO:Time 180:better population found, update best population to [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
    0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38]!
-INFO:Time 180:-----Generate new offsprings-----
-INFO:Time 180:new population 0: [  0.24   3.17   0.2    1.81   4.95   3.06   1.18   2.5    3.1    0.83
-   0.52   0.36   1.36   2.66   0.64   0.65   1.99   2.43 340.19   0.28]
-INFO:Time 180:new population 1: [  4.73   4.58   2.46   2.61   1.7    3.27   4.11   2.75   4.96   2.5
-   3.61   1.15   1.72   1.02   0.74   0.48   1.4    3.71 337.52   0.08]
-INFO:Time 180:new population 2: [  4.08   3.69   3.54   0.38   4.51   1.72   0.17   2.9    0.19   4.12
-   4.62   4.84   2.27   1.17   2.02   0.34   1.08   3.56 221.5    0.38]
-INFO:Time 180:new population 3: [  4.08   3.69   3.54   0.38   4.51   1.72   0.17   2.9    0.19   4.12
-   4.62   4.84   2.27   1.17   2.02   0.34   1.29   3.56 221.5    0.38]
-INFO:Time 180:-------MVNO start updating parameters-------
-INFO:Time 180:-----Updating best population-----
-INFO:Time 180:population 0 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.34] with fitness: 0.0
+INFO:Time 180:---------------------------------Generate new offsprings----------------------------------
+INFO:Time 180:----------------------------------------MVNO start updating parameters----------------------------------------
+INFO:Time 180:---------------------------------Updating best population---------------------------------
 INFO:Time 180:population 1 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
+   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.34] with fitness: 0.0
+INFO:Time 180:population 2 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
    0.07   0.05   0.12   0.19   0.01   0.33   0.35   0.01 219.12   0.38] with fitness: 0.0
-INFO:Time 180:population 2 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
+INFO:Time 180:population 3 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
    0.08   0.02   0.29   0.25   0.03   0.16   0.25   0.02 258.38   0.23] with fitness: 0.0
-INFO:Time 180:population 3 [  0.03   0.01   0.04   0.66   0.01   0.26   0.49   0.03   0.01   0.3
+INFO:Time 180:population 4 [  0.03   0.01   0.04   0.66   0.01   0.26   0.49   0.03   0.01   0.3
    0.03   0.14   0.02   0.02   0.06   0.06   0.76   0.07 211.89   0.29] with fitness: 0.0
-INFO:Time 180:-----Generate new offsprings-----
+INFO:Time 180:---------------------------------Generate new offsprings----------------------------------
 INFO:Time 180:data not enough for updating, skip updating.
 INFO:Time 180:Finished task deployment 1.
-INFO:Time 180:-------Start of hour 4, system time: 180-------
+INFO:Time 180:--------------------------------------Start of hour 4, system time: 180---------------------------------------
 INFO:Time 180:Get hour events:
 id,type,time
 [[7 0 200]
  [7 1 209]
  [8 0 230]]
-INFO:Time 180:mno best population [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
+INFO:Time 180:mno deploy with best population [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
    0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 3521.748813597503
-INFO:Time 180:mvno best population [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
+INFO:Time 180:mvno deploy with best population [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
    0.08   0.02   0.22   0.18   0.02   0.12   0.46   0.01 219.12   0.38] with fitness: 0.0
 INFO:Time 200:task7 assign to MVNO
 INFO:Time 200:Deploy task7 to vm 19,
@@ -280,57 +248,49 @@ task bw_down: 790, local_bw_down: 100000 -> 99210
 
 INFO:Time 240:mno overall hour utility: 0, hour fitness: 0.0
 INFO:Time 240:mvno overall hour utility: 225.45941367233513, hour fitness: 112.72970683616757
-INFO:Time 240:------------Start of Updating Parameters------------
-INFO:Time 240:-------MNO start updating parameters-------
-INFO:Time 240:-----Updating best population-----
-INFO:Time 240:population 0 [  0.01   0.12   0.01   0.03   0.72   0.11   0.08   0.28   0.52   0.05
+INFO:Time 240:---------------------------------------------------Start of Updating Parameters---------------------------------------------------
+INFO:Time 240:----------------------------------------MNO start updating parameters-----------------------------------------
+INFO:Time 240:---------------------------------Updating best population---------------------------------
+INFO:Time 240:population 1 [  0.01   0.12   0.01   0.03   0.72   0.11   0.08   0.28   0.52   0.05
    0.04   0.03   0.1    0.35   0.05   0.05   0.18   0.28 340.19   0.28] with fitness: 0.0
-INFO:Time 240:population 1 [  0.42   0.37   0.04   0.05   0.02   0.1    0.22   0.06   0.52   0.05
+INFO:Time 240:population 2 [  0.42   0.37   0.04   0.05   0.02   0.1    0.22   0.06   0.52   0.05
    0.14   0.01   0.1    0.05   0.04   0.03   0.07   0.72 337.52   0.08] with fitness: 0.0
-INFO:Time 240:population 2 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
-   0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 0.0
 INFO:Time 240:population 3 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
+   0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 0.0
+INFO:Time 240:population 4 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
    0.33   0.41   0.16   0.05   0.12   0.02   0.06   0.58 221.5    0.38] with fitness: 0.0
-INFO:Time 240:-----Generate new offsprings-----
+INFO:Time 240:---------------------------------Generate new offsprings----------------------------------
 INFO:Time 240:data not enough for updating, skip updating.
-INFO:Time 240:-------MVNO start updating parameters-------
-INFO:Time 240:-----Updating best population-----
-INFO:Time 240:population 0 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.34] with fitness: 109.53826658443168
+INFO:Time 240:----------------------------------------MVNO start updating parameters----------------------------------------
+INFO:Time 240:---------------------------------Updating best population---------------------------------
 INFO:Time 240:population 1 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
+   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.34] with fitness: 109.53826658443168
+INFO:Time 240:population 2 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
    0.07   0.05   0.12   0.19   0.01   0.33   0.35   0.01 219.12   0.38] with fitness: 108.44450882991013
-INFO:Time 240:population 2 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
+INFO:Time 240:population 3 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
    0.08   0.02   0.29   0.25   0.03   0.16   0.25   0.02 258.38   0.23] with fitness: 109.40787747374955
-INFO:Time 240:population 3 [  0.03   0.01   0.04   0.66   0.01   0.26   0.49   0.03   0.01   0.3
+INFO:Time 240:population 4 [  0.03   0.01   0.04   0.66   0.01   0.26   0.49   0.03   0.01   0.3
    0.03   0.14   0.02   0.02   0.06   0.06   0.76   0.07 211.89   0.29] with fitness: 117.8634812881711
 INFO:Time 240:better population found, update best population to [  0.03   0.01   0.04   0.66   0.01   0.26   0.49   0.03   0.01   0.3
    0.03   0.14   0.02   0.02   0.06   0.06   0.76   0.07 211.89   0.29]!
-INFO:Time 240:-----Generate new offsprings-----
-INFO:Time 240:new population 0: [  2.48   3.92   0.51   1.38   0.94   4.69   0.19   4.96   2.33   0.89
-   2.58   2.19   3.38   3.84   0.77   4.41   4.45   3.14 211.89   0.34]
-INFO:Time 240:new population 1: [  2.48   3.92   0.64   1.38   0.91   3.98   4.67   1.97   0.81   4.16
-   1.81   3.41   1.45   1.42   0.77   4.41   4.45   0.24 219.12   0.38]
-INFO:Time 240:new population 2: [  0.09   4.21   0.86   0.03   0.35   4.59   1.05   3.77   0.46   4.8
-   2.77   1.19   3.72   3.55   1.5    3.1    3.58   0.81 258.38   0.23]
-INFO:Time 240:new population 3: [  1.66   0.09   2.03   4.89   0.94   4.69   0.19   4.96   2.33   1.11
-   2.58   2.19   3.38   3.84   2.38   2.47   4.93   2.61 211.89   0.29]
+INFO:Time 240:---------------------------------Generate new offsprings----------------------------------
 INFO:Time 240:Finished task deployment 2.
-INFO:Time 240:-----------------Start of Round 3-----------------
-INFO:Time 240:------------Start of updating history data------------
+INFO:Time 240:---------------------------------------------------------Start of Round 3---------------------------------------------------------
+INFO:Time 240:--------------------------------------------------Start of updating history data--------------------------------------------------
 INFO:Time 240:Finished update history data and statistic data.
-INFO:Time 240:------------Start of VM Assignment------------
+INFO:Time 240:------------------------------------------------------Start of VM Assignment------------------------------------------------------
 INFO:Time 240:mno vm id: ['3' '4' '6' '7' '8' '9' '10' '11' '12' '15' '16' '17' '19' '20' '21'], mvno vm id: ['1' '2' '5' '13' '14' '18']
 INFO:Time 240:Finished vm assignment.
-INFO:Time 240:------------Start of Task Deployment round 3------------
-INFO:Time 240:-------Start of hour 5, system time: 240-------
+INFO:Time 240:-------------------------------------------------Start of Task Deployment round 3-------------------------------------------------
+INFO:Time 240:--------------------------------------Start of hour 5, system time: 240---------------------------------------
 INFO:Time 240:Get hour events:
 id,type,time
 [[9 0 245]
  [8 1 250]
  [9 1 256]]
-INFO:Time 240:mno best population [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
+INFO:Time 240:mno deploy with best population [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
    0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 0.0
-INFO:Time 240:mvno best population [  0.03   0.01   0.04   0.66   0.01   0.26   0.49   0.03   0.01   0.3
+INFO:Time 240:mvno deploy with best population [  0.03   0.01   0.04   0.66   0.01   0.26   0.49   0.03   0.01   0.3
    0.03   0.14   0.02   0.02   0.06   0.06   0.76   0.07 211.89   0.29] with fitness: 117.8634812881711
 INFO:Time 245:task9 assign to MVNO
 INFO:Time 245:Deploy task9 to vm 13,
@@ -350,51 +310,43 @@ local_bw_down: 99983 -> 100000
 
 INFO:Time 300:mno overall hour utility: 0, hour fitness: 0.0
 INFO:Time 300:mvno overall hour utility: 150.0609052746051, hour fitness: 150.0609052746051
-INFO:Time 300:------------Start of Updating Parameters------------
-INFO:Time 300:-------MNO start updating parameters-------
-INFO:Time 300:-----Updating best population-----
-INFO:Time 300:population 0 [  0.01   0.12   0.01   0.03   0.72   0.11   0.08   0.28   0.52   0.05
+INFO:Time 300:---------------------------------------------------Start of Updating Parameters---------------------------------------------------
+INFO:Time 300:----------------------------------------MNO start updating parameters-----------------------------------------
+INFO:Time 300:---------------------------------Updating best population---------------------------------
+INFO:Time 300:population 1 [  0.01   0.12   0.01   0.03   0.72   0.11   0.08   0.28   0.52   0.05
    0.04   0.03   0.1    0.35   0.05   0.05   0.18   0.28 340.19   0.28] with fitness: 0.0
-INFO:Time 300:population 1 [  0.42   0.37   0.04   0.05   0.02   0.1    0.22   0.06   0.52   0.05
+INFO:Time 300:population 2 [  0.42   0.37   0.04   0.05   0.02   0.1    0.22   0.06   0.52   0.05
    0.14   0.01   0.1    0.05   0.04   0.03   0.07   0.72 337.52   0.08] with fitness: 0.0
-INFO:Time 300:population 2 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
-   0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 0.0
 INFO:Time 300:population 3 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
+   0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 0.0
+INFO:Time 300:population 4 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
    0.33   0.41   0.16   0.05   0.12   0.02   0.06   0.58 221.5    0.38] with fitness: 0.0
-INFO:Time 300:-----Generate new offsprings-----
+INFO:Time 300:---------------------------------Generate new offsprings----------------------------------
 INFO:Time 300:data not enough for updating, skip updating.
-INFO:Time 300:-------MVNO start updating parameters-------
-INFO:Time 300:-----Updating best population-----
-INFO:Time 300:population 0 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.8    0.06   0.01
+INFO:Time 300:----------------------------------------MVNO start updating parameters----------------------------------------
+INFO:Time 300:---------------------------------Updating best population---------------------------------
+INFO:Time 300:population 1 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.8    0.06   0.01
    0.07   0.05   0.11   0.17   0.01   0.3    0.32   0.09 211.89   0.34] with fitness: 166.11249214497076
 INFO:Time 300:better population found, update best population to [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.8    0.06   0.01
    0.07   0.05   0.11   0.17   0.01   0.3    0.32   0.09 211.89   0.34]!
-INFO:Time 300:population 1 [  0.1    0.4    0.02   0.03   0.02   0.43   0.49   0.03   0.01   0.3
+INFO:Time 300:population 2 [  0.1    0.4    0.02   0.03   0.02   0.43   0.49   0.03   0.01   0.3
    0.03   0.14   0.02   0.02   0.01   0.46   0.48   0.01 219.12   0.38] with fitness: 150.95080633269873
-INFO:Time 300:population 2 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
+INFO:Time 300:population 3 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
    0.08   0.02   0.29   0.25   0.03   0.16   0.25   0.02 258.38   0.23] with fitness: 159.6869918893879
-INFO:Time 300:population 3 [  0.02   0.     0.03   0.51   0.01   0.42   0.01   0.79   0.06   0.02
+INFO:Time 300:population 4 [  0.02   0.     0.03   0.51   0.01   0.42   0.01   0.79   0.06   0.02
    0.07   0.05   0.12   0.19   0.04   0.05   0.55   0.05 211.89   0.29] with fitness: 160.7418610718639
-INFO:Time 300:-----Generate new offsprings-----
-INFO:Time 300:new population 0: [  2.48   3.92   0.51   1.38   0.94   4.69   0.19   4.96   2.33   0.89
-   2.58   2.19   3.38   3.84   0.77   4.41   4.45   3.14 211.89   0.34]
-INFO:Time 300:new population 1: [  2.48   3.92   0.64   1.38   0.91   3.98   4.67   1.97   0.81   4.16
-   1.81   3.41   1.45   1.42   1.5    3.1    3.58   0.81 219.12   0.38]
-INFO:Time 300:new population 2: [  0.09   4.21   0.86   0.03   0.35   4.59   1.05   3.77   0.46   4.8
-   2.77   1.19   3.72   4.26   0.77   4.41   4.45   0.24 258.38   0.23]
-INFO:Time 300:new population 3: [  1.66   0.09   2.43   4.89   0.94   4.69   0.19   4.96   2.33   1.11
-   2.58   2.19   3.38   3.84   2.38   2.47   4.93   2.61 211.89   0.29]
+INFO:Time 300:---------------------------------Generate new offsprings----------------------------------
 INFO:Time 300:Finished task deployment 2.
-INFO:Time 300:-------Start of hour 6, system time: 300-------
+INFO:Time 300:--------------------------------------Start of hour 6, system time: 300---------------------------------------
 INFO:Time 300:Get hour events:
 id,type,time
 [[10 0 300]
  [11 0 310]
  [11 1 315]
  [10 1 320]]
-INFO:Time 300:mno best population [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
+INFO:Time 300:mno deploy with best population [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
    0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 0.0
-INFO:Time 300:mvno best population [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.8    0.06   0.01
+INFO:Time 300:mvno deploy with best population [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.8    0.06   0.01
    0.07   0.05   0.11   0.17   0.01   0.3    0.32   0.09 211.89   0.34] with fitness: 166.11249214497076
 INFO:Time 300:task10 assign to MNO
 INFO:Time 300:Deploy task10 to vm 16,
@@ -420,39 +372,31 @@ local_bw_down: 99984 -> 100000
 
 INFO:Time 360:mno overall hour utility: 11866.172825059148, hour fitness: 5933.086412529574
 INFO:Time 360:mvno overall hour utility: 0, hour fitness: 0.0
-INFO:Time 360:------------Start of Updating Parameters------------
-INFO:Time 360:-------MNO start updating parameters-------
-INFO:Time 360:-----Updating best population-----
-INFO:Time 360:population 0 [  0.01   0.12   0.01   0.03   0.72   0.11   0.08   0.28   0.52   0.05
+INFO:Time 360:---------------------------------------------------Start of Updating Parameters---------------------------------------------------
+INFO:Time 360:----------------------------------------MNO start updating parameters-----------------------------------------
+INFO:Time 360:---------------------------------Updating best population---------------------------------
+INFO:Time 360:population 1 [  0.01   0.12   0.01   0.03   0.72   0.11   0.08   0.28   0.52   0.05
    0.04   0.03   0.1    0.35   0.05   0.05   0.18   0.28 340.19   0.28] with fitness: 10749.353704022018
 INFO:Time 360:better population found, update best population to [  0.01   0.12   0.01   0.03   0.72   0.11   0.08   0.28   0.52   0.05
    0.04   0.03   0.1    0.35   0.05   0.05   0.18   0.28 340.19   0.28]!
-INFO:Time 360:population 1 [  0.42   0.37   0.04   0.05   0.02   0.1    0.22   0.06   0.52   0.05
+INFO:Time 360:population 2 [  0.42   0.37   0.04   0.05   0.02   0.1    0.22   0.06   0.52   0.05
    0.14   0.01   0.1    0.05   0.04   0.03   0.07   0.72 337.52   0.08] with fitness: 597.1047220715694
-INFO:Time 360:population 2 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
-   0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 5933.086412529574
 INFO:Time 360:population 3 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
+   0.33   0.41   0.16   0.05   0.13   0.02   0.05   0.59 221.5    0.38] with fitness: 5933.086412529574
+INFO:Time 360:population 4 [  0.26   0.17   0.15   0.01   0.39   0.02   0.     0.06   0.     0.2
    0.33   0.41   0.16   0.05   0.12   0.02   0.06   0.58 221.5    0.38] with fitness: 5933.086412529574
-INFO:Time 360:-----Generate new offsprings-----
-INFO:Time 360:new population 0: [  0.24   3.17   0.2    1.81   4.95   3.06   1.18   3.     3.1    0.83
-   0.52   0.36   1.09   2.66   0.64   0.65   1.08   3.56 221.5    0.38]
-INFO:Time 360:new population 1: [  0.24   3.17   0.2    1.81   4.95   3.06   1.18   2.5    3.1    0.83
-   0.52   0.36   1.36   2.66   0.64   0.65   1.99   2.43 340.19   0.28]
-INFO:Time 360:new population 2: [  4.08   3.69   3.54   0.38   4.51   1.72   0.17   2.9    0.19   4.12
-   4.62   4.84   2.27   1.41   2.02   0.4    1.99   2.43 340.19   0.28]
-INFO:Time 360:new population 3: [  4.08   3.69   3.54   0.38   4.51   1.72   0.17   3.48   0.19   4.12
-   4.62   4.84   2.27   1.17   2.02   0.34   1.29   3.56 221.5    0.38]
-INFO:Time 360:-------MVNO start updating parameters-------
-INFO:Time 360:-----Updating best population-----
-INFO:Time 360:population 0 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.8    0.06   0.01
+INFO:Time 360:---------------------------------Generate new offsprings----------------------------------
+INFO:Time 360:----------------------------------------MVNO start updating parameters----------------------------------------
+INFO:Time 360:---------------------------------Updating best population---------------------------------
+INFO:Time 360:population 1 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.8    0.06   0.01
    0.07   0.05   0.11   0.17   0.01   0.3    0.32   0.09 211.89   0.34] with fitness: 0.0
-INFO:Time 360:population 1 [  0.1    0.4    0.02   0.03   0.02   0.43   0.49   0.03   0.01   0.3
+INFO:Time 360:population 2 [  0.1    0.4    0.02   0.03   0.02   0.43   0.49   0.03   0.01   0.3
    0.03   0.14   0.06   0.06   0.06   0.3    0.49   0.03 219.12   0.38] with fitness: 0.0
-INFO:Time 360:population 2 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
+INFO:Time 360:population 3 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
    0.08   0.02   0.15   0.25   0.01   0.29   0.3    0.   258.38   0.23] with fitness: 0.0
-INFO:Time 360:population 3 [  0.02   0.     0.04   0.51   0.01   0.42   0.01   0.79   0.06   0.02
+INFO:Time 360:population 4 [  0.02   0.     0.04   0.51   0.01   0.42   0.01   0.79   0.06   0.02
    0.07   0.05   0.12   0.19   0.04   0.05   0.55   0.05 211.89   0.29] with fitness: 0.0
-INFO:Time 360:-----Generate new offsprings-----
+INFO:Time 360:---------------------------------Generate new offsprings----------------------------------
 INFO:Time 360:data not enough for updating, skip updating.
 INFO:Time 360:Finished task deployment 3.
 INFO:Time 360:Finish simulating...

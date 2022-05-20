@@ -1,8 +1,7 @@
 import numpy as np
-from optimizing import GeneticOptimizing
-from utils import (printReturn, funcCall, softmax, toSoftmax)
+from utils import (softmax, toSoftmax)
 from queue import Queue
-from parameters import (generated_bw_max, generated_bw_min,
+from parameters import (generated_bw_max, generated_bw_min, title3,
                         generated_delay_cloud_max, generated_delay_cloud_min, Task_type_index, Task_event_index)
 from optimizing import TaskDeploymentParametersOptimizing
 from vm import VM
@@ -240,8 +239,8 @@ class TaskDeployment:
 
     def update_parameters(self) -> None:
         '''Update the parameters based on the performance of optimizing offsprings of this hour.'''
-        logging.info('-----Updating best population-----')
+        logging.info(f'{"Updating best population":-^{title3}}')
         self.optimizing.best_fitness = self.hour_fitness
         self.optimizing.update_best_population()
-        logging.info('-----Generate new offsprings-----')
+        logging.info(f'{"Generate new offsprings":-^{title3}}')
         self.optimizing.step()

@@ -2,10 +2,8 @@ import abc
 from vm_assignment import VMAssignment
 from task_deployment import TaskDeployment
 import numpy as np
-from parameters import (_mu, Task_event_index, Global)
-from utils import (printReturn, funcCall)
+from parameters import (_mu, title2)
 from contract import Contract
-from task_handler import Task_handler
 import logging
 
 class Network_operator(abc.ABC):
@@ -22,7 +20,7 @@ class Network_operator(abc.ABC):
         self._task_deployment.end()
 
     def update_task_deployment_parameters(self) -> None:
-        logging.info(f'-------{self.name} start updating parameters-------')
+        logging.info(f'{f"-------{self.name} start updating parameters-------":-^{title2}}')
         self._task_deployment.update_parameters()
 
 class MVNO(Network_operator):

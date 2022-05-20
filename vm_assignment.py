@@ -1,7 +1,6 @@
 import numpy as np
-from parameters import (rnd_seed, _theta, _lambda, Task_type_index, optimizing_times, _lambda)
+from parameters import (rnd_seed, _theta, _lambda, Task_type_index, optimizing_times, _lambda, title3)
 from optimizing import VMAssignmentOptimizing
-from utils import (printReturn, funcCall, softmax)
 from contract import Contract
 import logging
 
@@ -30,9 +29,10 @@ class VMAssignment:
     def run(self, statistic_data: np.array) -> None:
         '''Start running VM Assignment algorithm.'''
         for _ in range(optimizing_times):
-            _message = f'-----Evolution {_ + 1}-----'
+            logging.debug(f'{f"-----Evolution {_ + 1}-----":-^{title3}}')
             new_populations = self.optimizing.step(statistic_data)
-            _message += f'best population {self.candidate_vm_id[self.optimizing.best_population]} with cost: {self.optimizing.best_fitness}'
+            logging.debug(f'best population {self.candidate_vm_id[self.optimizing.best_population]} '\
+                f'with cost {self.vm_highest_price - self.optimizing.best_fitness}, with fitness: {self.optimizing.best_fitness}')
             for idx, population in enumerate(new_populations):
                 selected_vm_id = self.candidate_vm_id[population]
                 cost = 0
@@ -41,13 +41,12 @@ class VMAssignment:
                     # _lambda is the discount MNO provide to MVNO
                     cost += self.vm_list[vm_id].price * _lambda
                 fitness = self.vm_highest_price - cost
-                _message += f'population {selected_vm_id} with cost: {cost}, fitness: {fitness}'
+                logging.debug(f'population {idx + 1} {selected_vm_id} with cost: {cost}, fitness: {fitness}')
                 self.optimizing.fitness[idx] = fitness
                 # save the population with minimum cost
                 if fitness > self.optimizing.best_fitness:
                     self.optimizing.best_fitness = fitness
                     self.optimizing.best_population = population
-                    _message += f'better population found, update best population to {selected_vm_id}!'
-            logging.debug(_message)
+                    logging.debug(f'better population found, update best population to {selected_vm_id}!')
         return self.candidate_vm_id[np.logical_not(self.optimizing.best_population)], self.candidate_vm_id[self.optimizing.best_population]
         
