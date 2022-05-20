@@ -1,7 +1,7 @@
 import numpy as np
-from utils import (softmax, toSoftmax)
+from utils import (softmax, toSoftmax, step_logger, get_TD_populations_log_msg)
 from queue import Queue
-from parameters import (generated_bw_max, generated_bw_min, title3,
+from parameters import (generated_bw_max, generated_bw_min, title5,
                         generated_delay_cloud_max, generated_delay_cloud_min, Task_type_index, Task_event_index)
 from optimizing import TaskDeploymentParametersOptimizing
 from vm import VM
@@ -244,9 +244,8 @@ class TaskDeployment:
 
     def update_parameters(self) -> None:
         '''Update the parameters based on the performance of optimizing offsprings of this hour.'''
-        logging.info(f'{"Updating best population":-^{title3}}')
-        self.optimizing.best_fitness = self.hour_fitness
-        self.optimizing.update_best_population()
-        logging.info(f'Finished updating best population to: {toSoftmax(self.optimizing.best_population)}.')
-        logging.info(f'{"Generate new offsprings":-^{title3}}')
-        self.optimizing.step()
+        with step_logger('Updating best population', title5, f'Finished updating best population as {toSoftmax(self.optimizing.best_population)}.') as _:
+            self.optimizing.best_fitness = self.hour_fitness
+            self.optimizing.update_best_population()
+        with step_logger('Generate new offsprings', title5, get_TD_populations_log_msg('final new offspring', self.optimizing.new_populations)):
+            self.optimizing.step()

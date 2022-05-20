@@ -216,7 +216,6 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
         parents = self.selection()
         offsprings = self.crossover(parents)
         self.new_populations = self.mutation(offsprings)
-        logging.info(get_TD_populations_log_msg('final new offspring', self.new_populations))
         self.fitness = [0 for _ in range(offspring_number)]
 
     def selection(self) -> np.array:

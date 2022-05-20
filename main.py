@@ -3,11 +3,11 @@ import numpy as np
 from network_operator import (MNO, MVNO)
 from vm import VM
 from task_handler import Task_handler
-from utils import (toSoftmax)
+from utils import (toSoftmax, step_logger)
 from parameters import (test_data_dir, small_round_minutes, big_round_minutes, big_round_times, rnd_seed, Task_type_index, Task_event_index,
                         Event_type, _phi, generated_bw_max, generated_bw_min, generated_delay_cloud_max, generated_delay_cloud_min,
                         generated_delay_edge_max, generated_delay_edge_min, logging_level, mno_rate, Global,
-                        title1, title2)
+                        title1, title2, title3)
 # initial setting for logging
 import logging
 logging.basicConfig(format=f'%(levelname)s:Time %(system_time)s:%(message)s', filename=test_data_dir + 'log.txt'
@@ -180,11 +180,10 @@ def task_deployment(hour_events: np.array) -> None:
             operator.release_task(event)
 
 # load data & initialization
-logging.info(f'{"Start of load data & initialization":-^{title1}}')
-machine_attributes = load_machine_data(test_data_dir + 'machine_attributes.json')
-history_data = load_task_data(test_data_dir + 'history_data.json')
-task_events = load_task_data(test_data_dir + 'task_events.json')
-logging.info('Finished loading data.')
+with step_logger('Start of load data & initialization', title1, 'Finished loading data.') as _:
+    machine_attributes = load_machine_data(test_data_dir + 'machine_attributes.json')
+    history_data = load_task_data(test_data_dir + 'history_data.json')
+    task_events = load_task_data(test_data_dir + 'task_events.json')
 Global.system_time = 0
 # create dict map from vm_id to VM instance
 vm_list = createVM(machine_attributes)
@@ -210,49 +209,43 @@ statistic_data = np.zeros((3,3))
 hourly_history_data = None
 start_time = Global.system_time
 while Global.system_time // big_round_minutes < big_round_times:
-    logging.info(f'{f"Start of Round {Global.system_time // big_round_minutes + 1}":-^{title1}}')
-    # prepare data
-    logging.info(f'{"Start of updating history data":-^{title1}}')
-    # update history data and statistic data
-    hourly_history_data, statistic_data = update_history_data(hourly_history_data, hour_task_record, statistic_data)
-    logging.info('Finished update history data and statistic data.')
+    round = Global.system_time // big_round_minutes + 1
+    with step_logger(f'Start of Round {round}', title1, f'Finished Round {round}.') as _:
+        with step_logger('Start of updating history data', title2, 'Finished update history data.') as _:
+            hourly_history_data, statistic_data = update_history_data(hourly_history_data, hour_task_record, statistic_data)
 
-    # VM Assignment
-    logging.info(f'{"Start of VM Assignment":-^{title1}}')
-    mno.vm_assignment(statistic_data, vm_list)
-    logging.info('Finished vm assignment.')
+        with step_logger('Start of VM Assignment', title2, 'Finished vm assignment.') as _:
+            mno.vm_assignment(statistic_data, vm_list)
+            
+        with step_logger('Start of Task Deployment', title2, f'Finished Task Deployment.') as _:
+            hour_task_record = []
+            while Global.system_time == start_time or Global.system_time % big_round_minutes != 0:
+                hour_num = Global.system_time // small_round_minutes + 1
+                temp_time = Global.system_time
+                # get the hour tasks data
+                minutes_range = (Global.system_time, Global.system_time + small_round_minutes)
+                event_time_idx = Task_event_index.event_time.value
+                hour_mask = (minutes_range[0] <= task_events[:, event_time_idx]) & (task_events[:, event_time_idx] < minutes_range[1])
+                hour_events = task_events[hour_mask]
+                hour_events_resent = hour_events[:, Task_event_index.index.value : Task_event_index.event_time.value + 1]
 
-    # Task Deployment
-    logging.info(f'{f"Start of Task Deployment round {Global.system_time // big_round_minutes + 1}":-^{title1}}')
-    hour_task_record = []
-    while Global.system_time == start_time or Global.system_time % big_round_minutes != 0:
-        temp_time = Global.system_time
-        # hourly task deployment
-        logging.info(f'{f"Start of hour {Global.system_time // small_round_minutes + 1}, system time: {Global.system_time}":-^{title2}}')
-        ## get the hour tasks data
-        minutes_range = (Global.system_time, Global.system_time + small_round_minutes)
-        event_time_idx = Task_event_index.event_time.value
-        hour_mask = (minutes_range[0] <= task_events[:, event_time_idx]) & (task_events[:, event_time_idx] < minutes_range[1])
-        hour_events = task_events[hour_mask]
-        logging.info(f'Get hour events:\nid,type,time\n{hour_events[:, Task_event_index.index.value : Task_event_index.event_time.value + 1]}')
-        if not hour_events.size == 0:
-            with mno._task_deployment as _, mvno._task_deployment as __:
-                task_deployment(hour_events)
-        # prepare for next round
-        Global.system_time = temp_time + small_round_minutes
-        logging.info(f'mno overall hour utility: {mno._task_deployment.hour_utility}, hour fitness: {mno._task_deployment.hour_fitness}')
-        logging.info(f'mvno overall hour utility: {mvno._task_deployment.hour_utility}, hour fitness: {mvno._task_deployment.hour_fitness}')
-        logging.info(f'{"Start of Updating Parameters":-^{title1}}')
-        mno.update_task_deployment_parameters()
-        mvno.update_task_deployment_parameters()
-        logging.info('Finished updating MNO and MVNO parameters.')
+                with mno._task_deployment as _, mvno._task_deployment as _, step_logger(f'Start of hour {hour_num}, system time: {Global.system_time}\n'
+                    f'Get hour events:\nid,type,time\n{hour_events_resent}', title3, f'Finished hour {hour_num}') as _:
+                    if not hour_events.size == 0:
+                        task_deployment(hour_events)
 
-        hourly_statistic_data = get_hourly_statistic_data(hour_events)
-        hour_task_record.append(hourly_statistic_data)
-        logging.info('Finished task deployment.')
+                # prepare for next round
+                Global.system_time = temp_time + small_round_minutes
+                logging.info(f'mno overall hour utility: {mno._task_deployment.hour_utility}, hour fitness: {mno._task_deployment.hour_fitness}')
+                logging.info(f'mvno overall hour utility: {mvno._task_deployment.hour_utility}, hour fitness: {mvno._task_deployment.hour_fitness}')
 
-    hour_task_record = np.array(hour_task_record, dtype=list)
-    start_time = Global.system_time
-    assert(Global.system_time % big_round_minutes == 0)
+                with step_logger(f'Start of Updating Parameters', title3, 'Finished updating MNO and MVNO parameters.'):
+                    mno.update_task_deployment_parameters()
+                    mvno.update_task_deployment_parameters()
 
+                hourly_statistic_data = get_hourly_statistic_data(hour_events)
+                hour_task_record.append(hourly_statistic_data)
+        hour_task_record = np.array(hour_task_record, dtype=list)
+        start_time = Global.system_time
+        assert(Global.system_time % big_round_minutes == 0)
 logging.info(f'Finish simulating...')
