@@ -15,10 +15,6 @@ class Network_operator(abc.ABC):
         '''Delegate to class TaskDeployment.'''
         self._task_deployment.release(task)
 
-    def end_task_deployment(self):
-        '''Delegate to class TaskDeployment.'''
-        self._task_deployment.end()
-
     def update_task_deployment_parameters(self) -> None:
         logging.info(f'{f"-------{self.name} start updating parameters-------":-^{title2}}')
         self._task_deployment.update_parameters()

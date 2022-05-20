@@ -118,6 +118,20 @@ class TaskDeployment:
         # keep the mapping of task id to vm it runs
         self.running_task_id_to_vm = {}
 
+    def __enter__(self):
+        '''Initialization.'''
+        self.hour_utility = 0
+        self.hour_task_num = 0
+
+    def __exit__(self, type, value, traceback):
+        '''Get the statistic fitness of optimizing populations at the end of an hour.'''
+        if self.hour_task_num == 0:
+            self.hour_task_num = 1
+        # average the utility
+        self.hour_fitness = self.hour_utility / self.hour_task_num
+        for idx in range(len(self.optimizing.fitness)):
+            self.optimizing.fitness[idx] /= self.hour_task_num
+
     def deploy(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
         '''Start running TaskDeployment algorithm.'''
         self.hour_task_num += 1
@@ -227,15 +241,6 @@ class TaskDeployment:
         logging.info(_message)
 
         del self.running_task_id_to_vm[task_id]
-
-    def end(self) -> None:
-        '''Get the statistic fitness of optimizing populations at the end of an hour.'''
-        if self.hour_task_num == 0:
-            self.hour_task_num = 1
-        # average the utility
-        self.hour_fitness = self.hour_utility / self.hour_task_num
-        for idx in range(len(self.optimizing.fitness)):
-            self.optimizing.fitness[idx] /= self.hour_task_num
 
     def update_parameters(self) -> None:
         '''Update the parameters based on the performance of optimizing offsprings of this hour.'''

@@ -157,10 +157,6 @@ def update_history_data(hourly_history_data: np.array, hour_task_record: np.arra
 
 def task_deployment(hour_events: np.array) -> None:
     '''Random assign task to operator and deploy the task.'''
-    # initialization
-    for operator in (mno, mvno):
-        operator._task_deployment.hour_utility = 0
-        operator._task_deployment.hour_task_num = 0
     # start hourly task deployment
     logging.info(f'mno deploy with best population {toSoftmax(mno._task_deployment.optimizing.best_population)} '
                     f'with fitness: {mno._task_deployment.optimizing.best_fitness}')
@@ -240,14 +236,10 @@ while Global.system_time // big_round_minutes < big_round_times:
         hour_events = task_events[hour_mask]
         logging.info(f'Get hour events:\nid,type,time\n{hour_events[:, Task_event_index.index.value : Task_event_index.event_time.value + 1]}')
         if not hour_events.size == 0:
-            task_deployment(hour_events)
-
+            with mno._task_deployment as _, mvno._task_deployment as __:
+                task_deployment(hour_events)
         # prepare for next round
         Global.system_time = temp_time + small_round_minutes
-
-        # notify operator task deployment is end and calculate the statistic performance of this hour
-        mno.end_task_deployment()
-        mvno.end_task_deployment()
         logging.info(f'mno overall hour utility: {mno._task_deployment.hour_utility}, hour fitness: {mno._task_deployment.hour_fitness}')
         logging.info(f'mvno overall hour utility: {mvno._task_deployment.hour_utility}, hour fitness: {mvno._task_deployment.hour_fitness}')
         logging.info(f'{"Start of Updating Parameters":-^{title1}}')
