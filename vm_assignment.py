@@ -10,18 +10,6 @@ np.random.seed(rnd_seed)
 class VMAssignment:
     '''VM Assignment!!!'''
     def __init__(self, contract: Contract, candidate_vm_id: np.array, vm_list: dict):
-        '''
-        Parameters
-        ----------
-        contract : Contract
-            Contract object that supply the upper bound and lower bound of bw and cr.
-        candidate_vm_id : np.array
-            The candidate vm that MVNO can choose.
-        statistic_data : np.array
-            The statistic data of history data.
-        vm_list : dict
-            The dict of vm object.
-        '''
         self.optimizing = VMAssignmentOptimizing(contract, candidate_vm_id, vm_list)
         self.candidate_vm_id = candidate_vm_id
         self.vm_list = vm_list
@@ -30,7 +18,7 @@ class VMAssignment:
     def run(self, statistic_data: np.array) -> None:
         '''Start running VM Assignment algorithm.'''
         for i in range(optimizing_times):
-            with step_logger(f'-----Evolution {i + 1}-----', title4, f'Finished Evolution {i + 1}', logger=logging.debug) as _:
+            with step_logger(f'-----Evolution {i + 1}-----', title4, f'Finished Evolution {i + 1}', logger=logging.debug):
                 new_populations = self.optimizing.step(statistic_data)
                 logging.debug(f'best population {self.candidate_vm_id[self.optimizing.best_population]} '\
                     f'with cost {self.vm_highest_price - self.optimizing.best_fitness}, with fitness: {self.optimizing.best_fitness}')

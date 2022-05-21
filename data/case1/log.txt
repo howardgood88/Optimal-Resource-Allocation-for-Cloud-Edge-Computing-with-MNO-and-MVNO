@@ -1,8 +1,10 @@
-INFO:Time 0:-----------------------------------------------Start of load data & initialization------------------------------------------------
+INFO:Time 0:--------------------------------------------------------Start of load data--------------------------------------------------------
 INFO:Time 0:Finished loading data.
+INFO:Time 0:-----------------------------------------------------Start of Initialization------------------------------------------------------
 INFO:Time 0:Finished creating vm instance, store in vm_list that map from vm_id to vm instance.
 INFO:Time 0:Finished data preprocessing, get hour_task_record as hourly history data and record user has appeared.
-INFO:Time 0:Finished map from user to vm in vm_list.from_user.
+INFO:Time 0:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 0:Finished initialization.
 INFO:Time 0:---------------------------------------------------------Start of Round 1---------------------------------------------------------
 INFO:Time 0:------------------------------------------Start of updating history data-------------------------------------------
 INFO:Time 0:Finished update history data.

@@ -40,9 +40,9 @@ def createVM(machine_attributes: dict) -> dict:
     '''Create dict that map from vm_id to VM instance.'''
     vm_list = {}
     machine_id_list = machine_attributes.keys()
-
     for id in machine_id_list:
         vm_list[id] = VM(machine_attributes[id])
+    logging.info('Finished creating vm instance, store in vm_list that map from vm_id to vm instance.')
     return vm_list
 
 def get_hourly_statistic_data(hour_events: np.array) -> np.array:
@@ -93,29 +93,23 @@ def data_preprocessing(history_data: np.array) -> tuple[np.array, set]:
     '''
     # each row with hourly VoIP, IP_Video, FTP data
     hourly_history_data = []
-    # all user had appeared
     user_id_set = set()
-    # the selected time range
     minutes_range = (Global.system_time, Global.system_time + small_round_minutes)
-    # index of task_event.json/history_data.json
+
     start_time_idx = Task_event_index.event_time.value
     user_id_idx = Task_event_index.user_id.value
     while history_data[history_data[:, start_time_idx] > minutes_range[0]].size != 0:
         # hourly mask that fit the minutes_range
         hour_mask = (minutes_range[0] <= history_data[:, start_time_idx]) & (history_data[:, start_time_idx] < minutes_range[1])
         hour_tasks = history_data[hour_mask]
-
         # calculate hourly average_cpu_usage, bw_up, bw_down of different task from history data
         hourly_statistic_data = get_hourly_statistic_data(hour_tasks)
         hourly_history_data.append(hourly_statistic_data)
-
-        # user appeared in this hour
-        users = set(history_data[hour_mask][:, user_id_idx])
         # user had appeared
-        user_id_set = user_id_set | users
-
+        user_id_set = user_id_set | set(history_data[hour_mask][:, user_id_idx])
         # update minutes_range to next hour
         minutes_range = (minutes_range[0] + small_round_minutes, minutes_range[1] + small_round_minutes)
+    logging.info('Finished data preprocessing, get hour_task_record as hourly history data and record user has appeared.')
     return np.array(hourly_history_data, dtype=list), user_id_set
 
 def generate_user_to_vm_data(location: str) -> dict:
@@ -141,6 +135,7 @@ def update_user_to_vm(user_id_list: np.array) -> None:
         vm = vm_list[vm_id]
         for user_id in user_id_list:
             vm.from_user.setdefault(user_id, generate_user_to_vm_data(vm.location))
+    logging.info('New user/users detected, finished updating vm_list.from_user.')
 
 def update_history_data(hourly_history_data: np.array, hour_task_record: np.array, statistic_data: np.array) -> tuple[np.array, np.array]:
     '''Append hour_task_record into hourly_history_data, and update statistic_data by hour_task_record.'''
@@ -179,30 +174,29 @@ def task_deployment(hour_events: np.array) -> None:
             operator = user_id_to_operator[user_id]
             operator.release_task(event)
 
-# load data & initialization
-with step_logger('Start of load data & initialization', title1, 'Finished loading data.') as _:
+# load data
+with step_logger('Start of load data', title1, 'Finished loading data.') as _:
     machine_attributes = load_machine_data(test_data_dir + 'machine_attributes.json')
     history_data = load_task_data(test_data_dir + 'history_data.json')
     task_events = load_task_data(test_data_dir + 'task_events.json')
-Global.system_time = 0
-# create dict map from vm_id to VM instance
-vm_list = createVM(machine_attributes)
-logging.info('Finished creating vm instance, store in vm_list that map from vm_id to vm instance.')
-hour_task_record, user_id_set = data_preprocessing(history_data)
-logging.info('Finished data preprocessing, get hour_task_record as hourly history data and record user has appeared.')
-# sort the set to make simulation reproducible. (or will get different user_to_vm)
-user_id_list = np.array(sorted(user_id_set))
 
-# build user_to_vm
-update_user_to_vm(user_id_list)
-logging.info('Finished map from user to vm in vm_list.from_user.')
-# make MNO and MVNO instance
-mvno = MVNO()
-mno = MNO(mvno, list(vm_list.keys()), vm_list)
-# for keeping the mapping from user_id to the operator within task deployment
-user_id_to_operator = {}
-# save the overall task events to process the unsatisfied tasks.
-Task_handler.task_events = task_events
+# initialization
+with step_logger('Start of Initialization', title1, 'Finished initialization.'):
+    Global.system_time = 0
+    # create dict map from vm_id to VM instance
+    vm_list = createVM(machine_attributes)
+    hour_task_record, user_id_set = data_preprocessing(history_data)
+    # sort the set to make simulation reproducible. (or will get different user_to_vm)
+    user_id_list = np.array(sorted(user_id_set))
+    # build user_to_vm
+    update_user_to_vm(user_id_list)
+    # make MNO and MVNO instance
+    mvno = MVNO()
+    mno = MNO(mvno, list(vm_list.keys()), vm_list)
+    # for keeping the mapping from user_id to the operator within task deployment
+    user_id_to_operator = {}
+    # save the overall task events to process the unsatisfied tasks.
+    Task_handler.task_events = task_events
 
 # initialize
 statistic_data = np.zeros((3,3))
@@ -210,14 +204,14 @@ hourly_history_data = None
 start_time = Global.system_time
 while Global.system_time // big_round_minutes < big_round_times:
     round = Global.system_time // big_round_minutes + 1
-    with step_logger(f'Start of Round {round}', title1, f'Finished Round {round}.') as _:
-        with step_logger('Start of updating history data', title2, 'Finished update history data.') as _:
+    with step_logger(f'Start of Round {round}', title1, f'Finished Round {round}.'):
+        with step_logger('Start of updating history data', title2, 'Finished update history data.'):
             hourly_history_data, statistic_data = update_history_data(hourly_history_data, hour_task_record, statistic_data)
 
-        with step_logger('Start of VM Assignment', title2, 'Finished vm assignment.') as _:
+        with step_logger('Start of VM Assignment', title2, 'Finished vm assignment.'):
             mno.vm_assignment(statistic_data, vm_list)
             
-        with step_logger('Start of Task Deployment', title2, f'Finished Task Deployment.') as _:
+        with step_logger('Start of Task Deployment', title2, f'Finished Task Deployment.'):
             hour_task_record = []
             while Global.system_time == start_time or Global.system_time % big_round_minutes != 0:
                 hour_num = Global.system_time // small_round_minutes + 1
@@ -228,9 +222,9 @@ while Global.system_time // big_round_minutes < big_round_times:
                 hour_mask = (minutes_range[0] <= task_events[:, event_time_idx]) & (task_events[:, event_time_idx] < minutes_range[1])
                 hour_events = task_events[hour_mask]
                 hour_events_resent = hour_events[:, Task_event_index.index.value : Task_event_index.event_time.value + 1]
-
-                with mno._task_deployment as _, mvno._task_deployment as _, step_logger(f'Start of hour {hour_num}, system time: {Global.system_time}\n'
-                    f'Get hour events:\nid,type,time\n{hour_events_resent}', title3, f'Finished hour {hour_num}') as _:
+                
+                with mno._task_deployment, mvno._task_deployment, step_logger(f'Start of hour {hour_num}, system time: {Global.system_time}\n'
+                    f'Get hour events:\nid,type,time\n{hour_events_resent}', title3, f'Finished hour {hour_num}'):
                     if not hour_events.size == 0:
                         task_deployment(hour_events)
 

@@ -48,8 +48,10 @@ class VMAssignmentOptimizing(GeneticOptimizing):
             self.min_population_len = min(len(population) for population in self.new_populations)
             return self.new_populations
         else:
+            # to ensure all offsprings fit the conditions
             flag = False
             while not flag:
+                # print overall message only if all offsprings fit the conditions
                 self.valid_evolution_message = ''
                 parents = self.selection()
                 offsprings = self.crossover(parents)
@@ -164,7 +166,7 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         bw_low_cond = bw_low <= min(bw_up_sum, bw_down_sum) * (1 + _theta)
         bw_high_cond = max(bw_up_sum, bw_down_sum) * (1 + _theta) <= bw_high
         cr_cond = cr_low <= sum(cr_task_x) * (1 * _theta) <= cr_high
-        
+
         return bw_up_voip_cond and\
             bw_up_ipVideo_cond and\
             bw_up_ftp_cond and\
@@ -197,7 +199,7 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
         new_op_cr = np.random.uniform(0, 0.4, 1)
         return np.concatenate((new_gamma, new_op_bw, new_op_cr))
 
-    def update_best_population(self):
+    def update_best_population(self) -> None:
         # update best population
         for idx, (fitness, population) in enumerate(zip(self.fitness, self.new_populations)):
             logging.debug(f'population {idx + 1} {toSoftmax(population)} with fitness: {fitness}')

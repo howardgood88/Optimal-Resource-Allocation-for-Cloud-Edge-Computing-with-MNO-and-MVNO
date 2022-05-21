@@ -136,7 +136,6 @@ class TaskDeployment:
         '''Start running TaskDeployment algorithm.'''
         self.hour_task_num += 1
         # get index in task_events.json
-        start_time = task[Task_event_index.event_time.value]
         task_type = task[Task_event_index.task_type.value]
         user_id = task[Task_event_index.user_id.value]
         cpu_request = task[Task_event_index.cpu_request.value]
@@ -144,10 +143,12 @@ class TaskDeployment:
         max_utility = float('-inf')
         selected_vm_id = None
         for vm_id in candidate_vm_id:
+            # deployment by best population
             vm = vm_list[vm_id]
+            ## only accept vm of the same type
             if vm.task_type != task_type:
                 continue
-            # calculate the utilities
+            ## calculate the utilities
             task_utility = UtilityFunc.get_task_utility_func(task_type)
             bw_up = vm.from_user[user_id]['bw_up']
             bw_down = vm.from_user[user_id]['bw_down']
@@ -165,6 +166,7 @@ class TaskDeployment:
             ]
             utility = sum([g * u for g, u in zip(softmax(self.optimizing.best_gamma[Task_type_index[task_type]]), utilities)])
             self.hour_utility += utility
+            # virtual deployment by offsprings
             for idx, population in enumerate(self.optimizing.new_populations):
                 population = toSoftmax(population)
                 _op_bw, _op_cr = population[-2], population[-1]
@@ -175,28 +177,31 @@ class TaskDeployment:
                 _gamma = [population[0:6], population[6:12], population[12:18]]
                 _utility = sum([g * u for g, u in zip(_gamma[Task_type_index[task_type]], utilities)])
                 self.optimizing.fitness[idx] += _utility
-
+            # keep the best vm
             if utility > max_utility:
                 max_utility = utility
                 selected_vm_id = vm_id
 
         # if no feasible solution
         if selected_vm_id == None:
-            task_id = task[Task_event_index.index.value]
-            Task_handler.set_mask(task_id)
-            events = Task_handler.get_deleted_events()
-            assert(len(events) == 2)
-            Task_handler.delete_events()
-            retry_offset = np.random.randint(0, 60)
-            logging.info(f'Task{task_id} unaccepted, retry after {retry_offset} minutes.')
-            start_event, end_event = events
-            event_time_idx = Task_event_index.event_time.value
-            start_event[event_time_idx] = start_time[event_time_idx] + retry_offset
-            end_event[event_time_idx] = end_event[event_time_idx] + retry_offset
-            Task_handler.insert_event(start_event)
-            Task_handler.insert_event(end_event)
+            self.reschedule_task(task)
         else:
             self.bind_task(task, vm_list[selected_vm_id])
+
+    def reschedule_task(self, task: np.array) -> None:
+        task_id = task[Task_event_index.index.value]
+        Task_handler.set_mask(task_id)
+        events = Task_handler.get_deleted_events()
+        assert(len(events) == 2)
+        Task_handler.delete_events()
+        retry_offset = np.random.randint(0, 60)
+        logging.info(f'Task{task_id} unaccepted, retry after {retry_offset} minutes.')
+        start_event, end_event = events
+        event_time_idx = Task_event_index.event_time.value
+        start_event[event_time_idx] = start_event[event_time_idx] + retry_offset
+        end_event[event_time_idx] = end_event[event_time_idx] + retry_offset
+        Task_handler.insert_event(start_event)
+        Task_handler.insert_event(end_event)
 
     def bind_task(self, task: np.array, selected_vm: VM) -> None:
         '''Consume resource of selected vm and make task as observer.'''
@@ -244,7 +249,7 @@ class TaskDeployment:
 
     def update_parameters(self) -> None:
         '''Update the parameters based on the performance of optimizing offsprings of this hour.'''
-        with step_logger('Updating best population', title5, f'Finished updating best population as {toSoftmax(self.optimizing.best_population)}.') as _:
+        with step_logger('Updating best population', title5, f'Finished updating best population as {toSoftmax(self.optimizing.best_population)}.'):
             self.optimizing.best_fitness = self.hour_fitness
             self.optimizing.update_best_population()
         with step_logger('Generate new offsprings', title5, get_TD_populations_log_msg('final new offspring', self.optimizing.new_populations)):
