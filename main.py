@@ -3,7 +3,7 @@ import numpy as np
 from network_operator import (MNO, MVNO)
 from vm import VM
 from task_handler import Task_handler
-from utils import (toSoftmax, step_logger)
+from utils import (toSoftmax, step_logger, timer)
 from parameters import (test_data_dir, small_round_minutes, big_round_minutes, big_round_times, rnd_seed, Task_type_index, Task_event_index,
                         Event_type, _phi, generated_bw_max, generated_bw_min, generated_delay_cloud_max, generated_delay_cloud_min,
                         generated_delay_edge_max, generated_delay_edge_min, logging_level, mno_rate, Global,
@@ -150,14 +150,17 @@ def update_history_data(hourly_history_data: np.array, hour_task_record: np.arra
     logging.debug(_message + f'statistic data becomes:\n{statistic_data}')
     return hourly_history_data, statistic_data
 
-def task_deployment(hour_events: np.array) -> None:
+def task_deployment(hour_events: np.array, minutes_range: tuple) -> None:
     '''Random assign task to operator and deploy the task.'''
     # start hourly task deployment
     logging.info(f'mno deploy with best population {toSoftmax(mno._task_deployment.optimizing.best_population)} '
                     f'with fitness: {mno._task_deployment.optimizing.best_fitness}')
     logging.info(f'mvno deploy with best population {toSoftmax(mvno._task_deployment.optimizing.best_population)} '
                     f'with fitness: {mvno._task_deployment.optimizing.best_fitness}')
-    for event in hour_events:
+    global task_events
+    idx = 0
+    while idx < len(hour_events):
+        event = hour_events[idx]
         Global.system_time = event[Task_event_index.event_time.value]
         user_id = event[Task_event_index.user_id.value]
         if event[Task_event_index.event_type.value] == Event_type.start:
@@ -173,6 +176,15 @@ def task_deployment(hour_events: np.array) -> None:
         elif event[Task_event_index.event_type.value] == Event_type.end:
             operator = user_id_to_operator[user_id]
             operator.release_task(event)
+
+        if Task_handler.changed:
+            task_events = Task_handler.task_events
+            event_time_idx = Task_event_index.event_time.value
+            hour_mask = (minutes_range[0] <= task_events[:, event_time_idx]) & (task_events[:, event_time_idx] < minutes_range[1])
+            hour_events = task_events[hour_mask]
+            Task_handler.changed = False
+        else:
+            idx += 1
 
 # load data
 with step_logger('Start of load data', title1, 'Finished loading data.') as _:
@@ -221,12 +233,12 @@ while Global.system_time // big_round_minutes < big_round_times:
                 event_time_idx = Task_event_index.event_time.value
                 hour_mask = (minutes_range[0] <= task_events[:, event_time_idx]) & (task_events[:, event_time_idx] < minutes_range[1])
                 hour_events = task_events[hour_mask]
-                hour_events_resent = hour_events[:, Task_event_index.index.value : Task_event_index.event_time.value + 1]
                 
-                with mno._task_deployment, mvno._task_deployment, step_logger(f'Start of hour {hour_num}, system time: {Global.system_time}\n'
-                    f'Get hour events:\nid,type,time\n{hour_events_resent}', title3, f'Finished hour {hour_num}'):
+                with mno._task_deployment, mvno._task_deployment, step_logger(f'Start of hour {hour_num}\n'
+                    f'Get hour events:\nid,type,time\n{hour_events}', title3, f'Finished hour {hour_num}'):
                     if not hour_events.size == 0:
-                        task_deployment(hour_events)
+                        task_deployment(hour_events, minutes_range)
+                task_events = Task_handler.task_events
 
                 # prepare for next round
                 Global.system_time = temp_time + small_round_minutes

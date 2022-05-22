@@ -1,0 +1,8 @@
+{
+    "1":{"id":"1","task_type":"VoIP","location":"cloud","cpu_capacity":0.2,"price":100},
+    "2":{"id":"2","task_type":"IP_Video","location":"cloud","cpu_capacity":0.2,"price":80},
+    "3":{"id":"3","task_type":"FTP","location":"cloud","cpu_capacity":0.2,"price":150},
+    "4":{"id":"4","task_type":"VoIP","location":"edge","cpu_capacity":0.2,"price":50},
+    "5":{"id":"5","task_type":"IP_Video","location":"edge","cpu_capacity":0.2,"price":30},
+    "6":{"id":"6","task_type":"FTP","location":"edge","cpu_capacity":0.2,"price":70}
+}

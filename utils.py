@@ -1,5 +1,6 @@
-import logging
 import numpy as np
+from time import time
+import logging
 
 def printReturn(func):
     def decorate(*args, **kwargs):
@@ -49,3 +50,19 @@ class step_logger:
 
     def __exit__(self, type, value, traceback):
         self.logger(self.out_msg)
+
+def get_total_resource(vm_id_list: np.array, vm_list: dict):
+    bw_up_sum, bw_down_sum, cr_sum = 0, 0, 0
+    for vm_id in vm_id_list:
+        vm = vm_list[vm_id]
+        bw_up_sum += vm.avg_bw_up
+        bw_down_sum += vm.avg_bw_down
+        cr_sum += vm.cr
+    return bw_up_sum, bw_down_sum, cr_sum
+
+def timer(func):
+    def decorate(*args, **kwargs):
+        t1 = time()
+        result = func(*args, **kwargs)
+        logging.info(f'Function {func.__name__} executed in {time() - t1:.4f}s')
+    return decorate

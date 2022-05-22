@@ -1,10 +1,10 @@
 import abc
 import numpy as np
-from parameters import (offspring_number, Task_type_index, _theta, _lambda, mutate_rate, rnd_seed,
-                        _gamma, _op_bw, _op_cr)
-from utils import (toSoftmax, get_TD_populations_log_msg)
-from contract import Contract
 import math
+from contract import Contract
+from utils import (toSoftmax, get_TD_populations_log_msg)
+from parameters import (offspring_number, Task_type_index, _theta, _lambda, mutate_rate, rnd_seed,
+                        _gamma, _op_bw, _op_cr, max_searching_times)
 import logging
 
 np.random.seed(rnd_seed)
@@ -50,7 +50,12 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         else:
             # to ensure all offsprings fit the conditions
             flag = False
+            cnt = 0
             while not flag:
+                if cnt > max_searching_times:
+                    logging.warning('Cannot find valid vm assignment.')
+                    exit()
+                cnt += 1
                 # print overall message only if all offsprings fit the conditions
                 self.valid_evolution_message = ''
                 parents = self.selection()
@@ -138,15 +143,12 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         T_ftp_down = statistic_data[ftp_idx][2]
 
         ## vm bw and cr data of different task type
-        bw_up_task_x = [0 for i in range(len(Task_type_index))]
-        bw_down_task_x = [0 for i in range(len(Task_type_index))]
-        cr_task_x = [0 for i in range(len(Task_type_index))]
+        bw_up_task_x = [0 for _ in range(len(Task_type_index))]
+        bw_down_task_x = [0 for _ in range(len(Task_type_index))]
+        cr_task_x = [0 for _ in range(len(Task_type_index))]
         for id in self.candidate_vm_id[selected_vm]:
             vm = self.vm_list[id]
-            # the price mvno buy from mno
-            price = vm.price * _lambda
-            vm_type = vm.task_type
-            task_idx = Task_type_index[vm_type].value
+            task_idx = Task_type_index[vm.task_type].value
             bw_up_task_x[task_idx] += vm.avg_bw_up
             bw_down_task_x[task_idx] += vm.avg_bw_down
             cr_task_x[task_idx] += vm.cr
@@ -201,14 +203,18 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
 
     def update_best_population(self) -> None:
         # update best population
+        flag = True
         for idx, (fitness, population) in enumerate(zip(self.fitness, self.new_populations)):
             logging.debug(f'population {idx + 1} {toSoftmax(population)} with fitness: {fitness}')
             if fitness > self.best_fitness:
-                logging.debug(f'better population found, update best population to {toSoftmax(population)}!')
+                flag = False
+                logging.info(f'better population {idx + 1} found, update best population!')
                 self.best_fitness = fitness
                 self.best_population = population
                 self.best_gamma = [population[0:6], population[6:12], population[12:18]]
                 self.best_op_bw, self.best_op_cr = population[-2], population[-1]
+        if flag:
+            logging.info(f'No better population found, keep origin.')
     
     def step(self) -> None:
         '''Get the next valid offsprings.'''
@@ -230,7 +236,7 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
             return np.array([Population[Start + i * P] for i in range(N)])
         wheels = []
         for fitness, population in zip(self.fitness, self.new_populations):
-            wheel = np.full((math.ceil(fitness), *population.shape), population)
+            wheel = np.full((math.ceil(max(0, fitness)), *population.shape), population)
             wheels.append(wheel)
         wheel = np.vstack(wheels)
         wheel = wheel.reshape((-1, *self.new_populations[0].shape))

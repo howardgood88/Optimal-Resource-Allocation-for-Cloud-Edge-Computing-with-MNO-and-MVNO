@@ -1,0 +1,992 @@
+INFO:Time 0:--------------------------------------------------------Start of load data--------------------------------------------------------
+INFO:Time 0:Finished loading data.
+INFO:Time 0:-----------------------------------------------------Start of Initialization------------------------------------------------------
+INFO:Time 0:Finished creating vm instance, store in vm_list that map from vm_id to vm instance.
+INFO:Time 0:Finished data preprocessing, get hour_task_record as hourly history data and record user has appeared.
+INFO:Time 0:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 0:Finished initialization.
+INFO:Time 0:---------------------------------------------------------Start of Round 1---------------------------------------------------------
+INFO:Time 0:------------------------------------------Start of updating history data-------------------------------------------
+INFO:Time 0:Finished update history data.
+INFO:Time 0:----------------------------------------------Start of VM Assignment-----------------------------------------------
+INFO:Time 0:mno vm id: ['1' '2' '3'], total resource (bw_up, bw_down, cr): (146446.33305915206, 159247.79441001694, 0.6000000000000001)
+INFO:Time 0:mvno vm id: ['4' '5' '6'], total resource (bw_up, bw_down, cr): (131188.16525327874, 121787.38297111126, 0.6000000000000001), cost: 90.0
+INFO:Time 0:contract: bw_high: 1000000, bw_low: 5, cr_high: 10, cr_low: 0
+INFO:Time 0:Function vm_assignment executed in 0.3088s
+INFO:Time 0:Finished vm assignment.
+INFO:Time 0:---------------------------------------------Start of Task Deployment----------------------------------------------
+INFO:Time 0:Start of hour 1
+Get hour events:
+id,type,time
+[[0 0 10 'VoIP' '1' '1' 0.1 0.02 370 16]
+ [1 0 15 'IP_Video' '2' '2' 0.1 0.06 20 900]
+ [2 0 15 'FTP' '3' '3' 0.2 0.08 35 1000]
+ [3 0 21 'VoIP' '1' '3' 0.1 0.05 300 16]
+ [4 0 26 'IP_Video' '4' '4' 0.15 0.09 31 850]
+ [5 0 27 'FTP' '5' '5' 0.3 0.12 25 1300]
+ [6 0 30 'IP_Video' '6' '6' 0.08 0.05 24 1065]
+ [7 0 32 'VoIP' '7' '2' 0.05 0.02 246 15]
+ [8 0 33 'FTP' '8' '4' 0.15 0.1 26 790]
+ [9 0 35 'VoIP' '1' '6' 0.07 0.04 450 17]
+ [10 0 41 'VoIP' '9' '1' 0.1 0.02 370 16]
+ [11 0 45 'VoIP' '10' '1' 0.1 0.02 370 16]
+ [12 0 45 'IP_Video' '11' '10' 0.08 0.05 24 1065]
+ [13 0 45 'FTP' '12' '12' 0.3 0.12 25 1300]
+ [0 1 45 'VoIP' '1' '1' 0.1 0.02 370 16]
+ [1 1 48 'IP_Video' '2' '2' 0.1 0.06 20 900]
+ [2 1 49 'FTP' '3' '3' 0.2 0.08 35 1000]
+ [8 1 49 'FTP' '8' '4' 0.15 0.1 26 790]
+ [4 1 50 'IP_Video' '4' '4' 0.15 0.09 31 850]
+ [7 1 50 'VoIP' '7' '2' 0.05 0.02 246 15]
+ [5 1 50 'FTP' '5' '5' 0.3 0.12 25 1300]
+ [3 1 50 'VoIP' '1' '3' 0.1 0.05 300 16]
+ [11 1 51 'VoIP' '10' '1' 0.1 0.02 370 16]
+ [10 1 52 'VoIP' '9' '1' 0.1 0.02 370 16]
+ [6 1 53 'IP_Video' '6' '6' 0.08 0.05 24 1065]
+ [9 1 53 'VoIP' '1' '6' 0.07 0.04 450 17]
+ [12 1 53 'IP_Video' '11' '10' 0.08 0.05 24 1065]
+ [13 1 55 'FTP' '12' '12' 0.3 0.12 25 1300]
+ [14 0 55 'FTP' '13' '9' 0.3 0.12 25 1300]
+ [15 0 55 'FTP' '14' '6' 0.3 0.12 25 1300]
+ [14 1 59 'FTP' '13' '9' 0.3 0.12 25 1300]]
+INFO:Time 0:mno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: -inf
+INFO:Time 0:mvno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: -inf
+INFO:Time 10:task0 assign to MNO
+INFO:Time 10:Deploy task0 to vm 1,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 15:task1 assign to MVNO
+INFO:Time 15:Deploy task1 to vm 5,
+task cr: 0.06, vm cr: 0.2 -> 0.14
+task bw_up: 20, local_bw_up: 100000 -> 99980
+task bw_down: 900, local_bw_down: 100000 -> 99100
+
+INFO:Time 15:task2 assign to MNO
+INFO:Time 15:Deploy task2 to vm 3,
+task cr: 0.08, vm cr: 0.2 -> 0.12000000000000001
+task bw_up: 35, local_bw_up: 100000 -> 99965
+task bw_down: 1000, local_bw_down: 100000 -> 99000
+
+INFO:Time 21:task3 assign to MNO
+INFO:Time 21:Task3 unaccepted, retry after 100 minutes.
+INFO:Time 26:task4 assign to MNO
+INFO:Time 26:Deploy task4 to vm 2,
+task cr: 0.09, vm cr: 0.2 -> 0.11000000000000001
+task bw_up: 31, local_bw_up: 100000 -> 99969
+task bw_down: 850, local_bw_down: 100000 -> 99150
+
+INFO:Time 27:task5 assign to MNO
+INFO:Time 27:Task5 unaccepted, retry after 69 minutes.
+INFO:Time 30:task6 assign to MNO
+INFO:Time 30:Task6 unaccepted, retry after 65 minutes.
+INFO:Time 32:task7 assign to MVNO
+INFO:Time 32:Deploy task7 to vm 4,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 246, local_bw_up: 100000 -> 99754
+task bw_down: 15, local_bw_down: 100000 -> 99985
+
+INFO:Time 33:task8 assign to MVNO
+INFO:Time 33:Deploy task8 to vm 6,
+task cr: 0.1, vm cr: 0.2 -> 0.1
+task bw_up: 26, local_bw_up: 100000 -> 99974
+task bw_down: 790, local_bw_down: 100000 -> 99210
+
+INFO:Time 35:task9 assign to MNO
+INFO:Time 35:Task9 unaccepted, retry after 61 minutes.
+INFO:Time 41:task10 assign to MNO
+INFO:Time 41:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 41:Task10 unaccepted, retry after 61 minutes.
+INFO:Time 45:task11 assign to MNO
+INFO:Time 45:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 45:Task11 unaccepted, retry after 114 minutes.
+INFO:Time 45:task12 assign to MNO
+INFO:Time 45:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 45:Task12 unaccepted, retry after 78 minutes.
+INFO:Time 45:task13 assign to MVNO
+INFO:Time 45:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 45:Task13 unaccepted, retry after 101 minutes.
+INFO:Time 45:release task0 from vm 1,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:Time 48:release task1 from vm 5,
+cr: 0.14 -> 0.2
+local_bw_up: 99980 -> 100000
+local_bw_down: 99100 -> 100000
+
+INFO:Time 49:release task2 from vm 3,
+cr: 0.12000000000000001 -> 0.2
+local_bw_up: 99965 -> 100000
+local_bw_down: 99000 -> 100000
+
+INFO:Time 49:release task8 from vm 6,
+cr: 0.1 -> 0.2
+local_bw_up: 99974 -> 100000
+local_bw_down: 99210 -> 100000
+
+INFO:Time 50:release task4 from vm 2,
+cr: 0.11000000000000001 -> 0.2
+local_bw_up: 99969 -> 100000
+local_bw_down: 99150 -> 100000
+
+INFO:Time 50:release task7 from vm 4,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99754 -> 100000
+local_bw_down: 99985 -> 100000
+
+INFO:Time 55:task14 assign to MNO
+INFO:Time 55:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 55:Deploy task14 to vm 3,
+task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
+task bw_up: 25, local_bw_up: 100000 -> 99975
+task bw_down: 1300, local_bw_down: 100000 -> 98700
+
+INFO:Time 55:task15 assign to MNO
+INFO:Time 55:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 55:Task15 unaccepted, retry after 69 minutes.
+INFO:Time 59:release task14 from vm 3,
+cr: 0.08000000000000002 -> 0.2
+local_bw_up: 99975 -> 100000
+local_bw_down: 98700 -> 100000
+
+INFO:Time 59:Finished hour 1
+INFO:Time 59:Release undone tasks: dict_keys([])
+INFO:Time 59:Release undone tasks: dict_keys([])
+INFO:Time 60:mno overall hour utility: 72.52507629231812, hour fitness: 18.13126907307953
+INFO:Time 60:mvno overall hour utility: 73.41973192290061, hour fitness: 24.473243974300203
+INFO:Time 60:------------------------------------Start of Updating Parameters------------------------------------
+INFO:Time 60:-------------------------------updating MNO parameters-------------------------------
+INFO:Time 60:-----------------------Updating best population-----------------------
+INFO:Time 60:No better population found, keep origin.
+INFO:Time 60:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 18.13126907307953.
+INFO:Time 60:Finished updating best population.
+INFO:Time 60:-----------------------Generate new offsprings------------------------
+INFO:Time 60:data not enough for updating, skip updating.
+INFO:Time 60:final new offspring:
+1: [  0.01   0.14   0.13   0.01   0.24   0.46   0.01   0.32   0.01   0.13
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27]
+2: [  0.02   0.01   0.02   0.43   0.2    0.32   0.05   0.1    0.36   0.21
+   0.03   0.25   0.16   0.05   0.28   0.04   0.05   0.43 245.69   0.32]
+3: [  0.47   0.23   0.01   0.17   0.02   0.09   0.09   0.36   0.47   0.02
+   0.01   0.05   0.09   0.33   0.1    0.15   0.01   0.31 201.66   0.14]
+4: [  0.02   0.24   0.02   0.38   0.18   0.16   0.01   0.04   0.52   0.32
+   0.03   0.08   0.23   0.37   0.02   0.18   0.18   0.02 218.8    0.31]
+
+INFO:Time 60:Finished generating new offsprings.
+INFO:Time 60:Finished updating MNO parameters
+INFO:Time 60:Function update_task_deployment_parameters executed in 0.0000s
+INFO:Time 60:------------------------------updating MVNO parameters-------------------------------
+INFO:Time 60:-----------------------Updating best population-----------------------
+INFO:Time 60:No better population found, keep origin.
+INFO:Time 60:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 24.473243974300203.
+INFO:Time 60:Finished updating best population.
+INFO:Time 60:-----------------------Generate new offsprings------------------------
+INFO:Time 60:data not enough for updating, skip updating.
+INFO:Time 60:final new offspring:
+1: [  0.07   0.03   0.04   0.77   0.02   0.06   0.18   0.13   0.16   0.03
+   0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.06]
+2: [  0.1    0.51   0.06   0.17   0.14   0.03   0.04   0.09   0.17   0.02
+   0.65   0.02   0.01   0.36   0.02   0.35   0.1    0.17 382.65   0.12]
+3: [  0.03   0.01   0.32   0.06   0.01   0.56   0.26   0.01   0.46   0.03
+   0.23   0.01   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16]
+4: [  0.08   0.05   0.23   0.02   0.48   0.13   0.05   0.45   0.1    0.29
+   0.02   0.09   0.09   0.16   0.4    0.08   0.1    0.18 395.22   0.39]
+
+INFO:Time 60:Finished generating new offsprings.
+INFO:Time 60:Finished updating MVNO parameters
+INFO:Time 60:Function update_task_deployment_parameters executed in 0.0000s
+INFO:Time 60:Finished updating MNO and MVNO parameters.
+INFO:Time 60:Start of hour 2
+Get hour events:
+id,type,time
+[[16 0 61 'VoIP' '15' '13' 0.1 0.02 370 16]
+ [16 1 63 'VoIP' '15' '13' 0.1 0.02 370 16]
+ [17 0 65 'VoIP' '16' '14' 0.1 0.02 370 16]
+ [17 1 65 'VoIP' '16' '14' 0.1 0.02 370 16]
+ [18 0 65 'VoIP' '17' '5' 0.1 0.02 370 16]
+ [19 0 70 'IP_Video' '18' '15' 0.08 0.05 24 1065]
+ [18 1 70 'VoIP' '17' '5' 0.1 0.02 370 16]
+ [19 1 71 'IP_Video' '18' '15' 0.08 0.05 24 1065]
+ [20 0 80 'IP_Video' '12' '16' 0.08 0.05 24 1065]
+ [20 1 85 'IP_Video' '12' '16' 0.08 0.05 24 1065]
+ [21 0 85 'FTP' '15' '6' 0.3 0.12 25 1300]
+ [21 1 85 'FTP' '15' '6' 0.3 0.12 25 1300]
+ [22 0 85 'VoIP' '19' '17' 0.1 0.02 370 16]
+ [23 0 90 'VoIP' '16' '14' 0.1 0.02 370 16]
+ [24 0 90 'VoIP' '16' '14' 0.1 0.02 370 16]
+ [6 0 95 'IP_Video' '6' '6' 0.08 0.05 24 1065]
+ [9 0 96 'VoIP' '1' '6' 0.07 0.04 450 17]
+ [5 0 96 'FTP' '5' '5' 0.3 0.12 25 1300]
+ [23 1 100 'VoIP' '16' '14' 0.1 0.02 370 16]
+ [10 0 102 'VoIP' '9' '1' 0.1 0.02 370 16]
+ [10 1 113 'VoIP' '9' '1' 0.1 0.02 370 16]
+ [9 1 114 'VoIP' '1' '6' 0.07 0.04 450 17]
+ [22 1 115 'VoIP' '19' '17' 0.1 0.02 370 16]
+ [24 1 115 'VoIP' '16' '14' 0.1 0.02 370 16]
+ [25 0 115 'VoIP' '17' '15' 0.05 0.02 246 15]
+ [6 1 118 'IP_Video' '6' '6' 0.08 0.05 24 1065]
+ [5 1 119 'FTP' '5' '5' 0.3 0.12 25 1300]
+ [25 1 119 'VoIP' '17' '15' 0.05 0.02 246 15]
+ [26 0 119 'FTP' '18' '16' 0.15 0.1 26 790]]
+INFO:Time 60:mno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 18.13126907307953
+INFO:Time 60:mvno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 24.473243974300203
+INFO:Time 61:task16 assign to MNO
+INFO:Time 61:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 61:Deploy task16 to vm 1,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 63:release task16 from vm 1,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:Time 65:task17 assign to MNO
+INFO:Time 65:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 65:Deploy task17 to vm 1,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 65:release task17 from vm 1,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:Time 65:task18 assign to MNO
+INFO:Time 65:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 65:Deploy task18 to vm 1,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 70:task19 assign to MVNO
+INFO:Time 70:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 70:Deploy task19 to vm 5,
+task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
+task bw_up: 24, local_bw_up: 100000 -> 99976
+task bw_down: 1065, local_bw_down: 100000 -> 98935
+
+INFO:Time 70:release task18 from vm 1,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:Time 71:release task19 from vm 5,
+cr: 0.15000000000000002 -> 0.2
+local_bw_up: 99976 -> 100000
+local_bw_down: 98935 -> 100000
+
+INFO:Time 80:task20 assign to MVNO
+INFO:Time 80:Deploy task20 to vm 5,
+task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
+task bw_up: 24, local_bw_up: 100000 -> 99976
+task bw_down: 1065, local_bw_down: 100000 -> 98935
+
+INFO:Time 85:release task20 from vm 5,
+cr: 0.15000000000000002 -> 0.2
+local_bw_up: 99976 -> 100000
+local_bw_down: 98935 -> 100000
+
+INFO:Time 85:task21 assign to MNO
+INFO:Time 85:Deploy task21 to vm 3,
+task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
+task bw_up: 25, local_bw_up: 100000 -> 99975
+task bw_down: 1300, local_bw_down: 100000 -> 98700
+
+INFO:Time 85:release task21 from vm 3,
+cr: 0.08000000000000002 -> 0.2
+local_bw_up: 99975 -> 100000
+local_bw_down: 98700 -> 100000
+
+INFO:Time 85:task22 assign to MVNO
+INFO:Time 85:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 85:Deploy task22 to vm 4,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 90:task23 assign to MNO
+INFO:Time 90:Deploy task23 to vm 1,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 90:task24 assign to MNO
+INFO:Time 90:Task24 unaccepted, retry after 100 minutes.
+INFO:Time 95:task6 assign to MNO
+INFO:Time 95:Deploy task6 to vm 2,
+task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
+task bw_up: 24, local_bw_up: 100000 -> 99976
+task bw_down: 1065, local_bw_down: 100000 -> 98935
+
+INFO:Time 96:task9 assign to MNO
+INFO:Time 96:Task9 unaccepted, retry after 89 minutes.
+INFO:Time 96:task5 assign to MNO
+INFO:Time 96:Deploy task5 to vm 3,
+task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
+task bw_up: 25, local_bw_up: 100000 -> 99975
+task bw_down: 1300, local_bw_down: 100000 -> 98700
+
+INFO:Time 100:release task23 from vm 1,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:Time 102:task10 assign to MNO
+INFO:Time 102:Deploy task10 to vm 1,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 113:release task10 from vm 1,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:Time 115:release task22 from vm 4,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:Time 115:task25 assign to MNO
+INFO:Time 115:Deploy task25 to vm 1,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 246, local_bw_up: 100000 -> 99754
+task bw_down: 15, local_bw_down: 100000 -> 99985
+
+INFO:Time 118:release task6 from vm 2,
+cr: 0.15000000000000002 -> 0.2
+local_bw_up: 99976 -> 100000
+local_bw_down: 98935 -> 100000
+
+INFO:Time 119:release task5 from vm 3,
+cr: 0.08000000000000002 -> 0.2
+local_bw_up: 99975 -> 100000
+local_bw_down: 98700 -> 100000
+
+INFO:Time 119:release task25 from vm 1,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99754 -> 100000
+local_bw_down: 99985 -> 100000
+
+INFO:Time 119:task26 assign to MVNO
+INFO:Time 119:Deploy task26 to vm 6,
+task cr: 0.1, vm cr: 0.2 -> 0.1
+task bw_up: 26, local_bw_up: 100000 -> 99974
+task bw_down: 790, local_bw_down: 100000 -> 99210
+
+INFO:Time 119:Finished hour 2
+INFO:Time 119:Release undone tasks: dict_keys([26])
+INFO:Time 119:Task26 unaccepted, retry after 81 minutes.
+INFO:Time 119:release task26 from vm 6,
+cr: 0.1 -> 0.2
+local_bw_up: 99974 -> 100000
+local_bw_down: 99210 -> 100000
+
+INFO:Time 119:Release undone tasks: dict_keys([])
+INFO:Time 120:mno overall hour utility: 82.11577056273053, hour fitness: 9.12397450697006
+INFO:Time 120:mvno overall hour utility: 85.24378309057751, hour fitness: 21.310945772644377
+INFO:Time 120:------------------------------------Start of Updating Parameters------------------------------------
+INFO:Time 120:-------------------------------updating MNO parameters-------------------------------
+INFO:Time 120:-----------------------Updating best population-----------------------
+INFO:Time 120:No better population found, keep origin.
+INFO:Time 120:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 9.12397450697006.
+INFO:Time 120:Finished updating best population.
+INFO:Time 120:-----------------------Generate new offsprings------------------------
+INFO:Time 120:final new offspring:
+1: [  0.02   0.23   0.03   0.43   0.06   0.23   0.09   0.36   0.47   0.02
+   0.01   0.05   0.15   0.31   0.1    0.14   0.01   0.29 340.24   0.27]
+2: [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.33   0.01   0.14
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 245.69   0.32]
+3: [  0.02   0.01   0.02   0.43   0.2    0.32   0.05   0.1    0.36   0.21
+   0.03   0.25   0.16   0.05   0.28   0.04   0.05   0.43 245.69   0.32]
+4: [  0.24   0.12   0.01   0.28   0.13   0.21   0.05   0.1    0.36   0.21
+   0.03   0.25   0.16   0.05   0.28   0.04   0.05   0.43 161.33   0.14]
+
+INFO:Time 120:Finished generating new offsprings.
+INFO:Time 120:Finished updating MNO parameters
+INFO:Time 120:Function update_task_deployment_parameters executed in 0.0040s
+INFO:Time 120:------------------------------updating MVNO parameters-------------------------------
+INFO:Time 120:-----------------------Updating best population-----------------------
+INFO:Time 120:No better population found, keep origin.
+INFO:Time 120:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 21.310945772644377.
+INFO:Time 120:Finished updating best population.
+INFO:Time 120:-----------------------Generate new offsprings------------------------
+INFO:Time 120:final new offspring:
+1: [  0.07   0.03   0.04   0.77   0.02   0.06   0.22   0.16   0.2    0.04
+   0.26   0.12   0.47   0.19   0.01   0.19   0.05   0.09 459.18   0.14]
+2: [  0.1    0.51   0.06   0.17   0.14   0.03   0.05   0.12   0.42   0.03
+   0.36   0.02   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16]
+3: [  0.03   0.01   0.31   0.08   0.01   0.55   0.26   0.01   0.46   0.03
+   0.23   0.01   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16]
+4: [  0.03   0.01   0.32   0.06   0.01   0.56   0.26   0.01   0.46   0.03
+   0.23   0.01   0.01   0.01   0.01   0.61   0.07   0.29 280.5    0.06]
+
+INFO:Time 120:Finished generating new offsprings.
+INFO:Time 120:Finished updating MVNO parameters
+INFO:Time 120:Function update_task_deployment_parameters executed in 0.0040s
+INFO:Time 120:Finished updating MNO and MVNO parameters.
+INFO:Time 120:Finished Task Deployment.
+INFO:Time 120:Finished Round 1.
+INFO:Time 120:---------------------------------------------------------Start of Round 2---------------------------------------------------------
+INFO:Time 120:------------------------------------------Start of updating history data-------------------------------------------
+INFO:Time 120:Finished update history data.
+INFO:Time 120:----------------------------------------------Start of VM Assignment-----------------------------------------------
+INFO:Time 120:mno vm id: ['1' '2' '3'], total resource (bw_up, bw_down, cr): (128146.425327284, 149693.31554356776, 0.6000000000000001)
+INFO:Time 120:mvno vm id: ['4' '5' '6'], total resource (bw_up, bw_down, cr): (147795.96716986757, 154716.30793992264, 0.6000000000000001), cost: 72.0
+INFO:Time 120:contract: bw_high: 1000000, bw_low: 5, cr_high: 10, cr_low: 0
+INFO:Time 120:Function vm_assignment executed in 0.3475s
+INFO:Time 120:Finished vm assignment.
+INFO:Time 120:---------------------------------------------Start of Task Deployment----------------------------------------------
+INFO:Time 120:Start of hour 3
+Get hour events:
+id,type,time
+[[27 0 120 'VoIP' '19' '17' 0.07 0.04 450 17]
+ [3 0 121 'VoIP' '1' '3' 0.1 0.05 300 16]
+ [27 1 122 'VoIP' '19' '17' 0.07 0.04 450 17]
+ [28 0 122 'VoIP' '20' '18' 0.1 0.02 370 16]
+ [12 0 123 'IP_Video' '11' '10' 0.08 0.05 24 1065]
+ [15 0 124 'FTP' '14' '6' 0.3 0.12 25 1300]
+ [15 1 129 'FTP' '14' '6' 0.3 0.12 25 1300]
+ [12 1 131 'IP_Video' '11' '10' 0.08 0.05 24 1065]
+ [13 0 146 'FTP' '12' '12' 0.3 0.12 25 1300]
+ [3 1 150 'VoIP' '1' '3' 0.1 0.05 300 16]
+ [29 0 150 'VoIP' '21' '19' 0.1 0.02 370 16]
+ [29 1 155 'VoIP' '21' '19' 0.1 0.02 370 16]
+ [28 1 155 'VoIP' '20' '18' 0.1 0.02 370 16]
+ [13 1 156 'FTP' '12' '12' 0.3 0.12 25 1300]
+ [30 0 157 'IP_Video' '22' '20' 0.08 0.05 24 1065]
+ [11 0 159 'VoIP' '10' '1' 0.1 0.02 370 16]
+ [11 1 165 'VoIP' '10' '1' 0.1 0.02 370 16]]
+INFO:Time 120:mno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 9.12397450697006
+INFO:Time 120:mvno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 21.310945772644377
+INFO:Time 120:task27 assign to MVNO
+INFO:Time 120:Deploy task27 to vm 4,
+task cr: 0.04, vm cr: 0.2 -> 0.16
+task bw_up: 450, local_bw_up: 100000 -> 99550
+task bw_down: 17, local_bw_down: 100000 -> 99983
+
+INFO:Time 120:task27 assign to MVNO
+INFO:Time 120:Task27 unaccepted, retry after 80 minutes.
+INFO:Time 121:task3 assign to MNO
+INFO:Time 121:Deploy task3 to vm 1,
+task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
+task bw_up: 300, local_bw_up: 100000 -> 99700
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 122:task28 assign to MNO
+INFO:Time 122:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 122:Task28 unaccepted, retry after 77 minutes.
+INFO:Time 123:task12 assign to MNO
+INFO:Time 123:Deploy task12 to vm 2,
+task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
+task bw_up: 24, local_bw_up: 100000 -> 99976
+task bw_down: 1065, local_bw_down: 100000 -> 98935
+
+INFO:Time 124:task15 assign to MNO
+INFO:Time 124:Deploy task15 to vm 3,
+task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
+task bw_up: 25, local_bw_up: 100000 -> 99975
+task bw_down: 1300, local_bw_down: 100000 -> 98700
+
+INFO:Time 129:release task15 from vm 3,
+cr: 0.08000000000000002 -> 0.2
+local_bw_up: 99975 -> 100000
+local_bw_down: 98700 -> 100000
+
+INFO:Time 131:release task12 from vm 2,
+cr: 0.15000000000000002 -> 0.2
+local_bw_up: 99976 -> 100000
+local_bw_down: 98935 -> 100000
+
+INFO:Time 146:task13 assign to MVNO
+INFO:Time 146:Deploy task13 to vm 6,
+task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
+task bw_up: 25, local_bw_up: 100000 -> 99975
+task bw_down: 1300, local_bw_down: 100000 -> 98700
+
+INFO:Time 150:release task3 from vm 1,
+cr: 0.15000000000000002 -> 0.2
+local_bw_up: 99700 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:Time 150:task29 assign to MVNO
+INFO:Time 150:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 150:Task29 unaccepted, retry after 100 minutes.
+INFO:Time 156:release task13 from vm 6,
+cr: 0.08000000000000002 -> 0.2
+local_bw_up: 99975 -> 100000
+local_bw_down: 98700 -> 100000
+
+INFO:Time 157:task30 assign to MNO
+INFO:Time 157:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 157:Deploy task30 to vm 2,
+task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
+task bw_up: 24, local_bw_up: 100000 -> 99976
+task bw_down: 1065, local_bw_down: 100000 -> 98935
+
+INFO:Time 159:task11 assign to MNO
+INFO:Time 159:Deploy task11 to vm 1,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 165:release task11 from vm 1,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:Time 165:Finished hour 3
+INFO:Time 165:Release undone tasks: dict_keys([27])
+INFO:Time 165:Task27 unaccepted, retry after 111 minutes.
+INFO:Time 165:release task27 from vm 4,
+cr: 0.16 -> 0.2
+local_bw_up: 99550 -> 100000
+local_bw_down: 99983 -> 100000
+
+INFO:Time 165:Release undone tasks: dict_keys([30])
+INFO:Time 165:Task30 unaccepted, retry after 105 minutes.
+INFO:Time 165:release task30 from vm 2,
+cr: 0.15000000000000002 -> 0.2
+local_bw_up: 99976 -> 100000
+local_bw_down: 98935 -> 100000
+
+INFO:Time 180:mno overall hour utility: 69.14369333803937, hour fitness: 13.828738667607874
+INFO:Time 180:mvno overall hour utility: 69.81863040620576, hour fitness: 34.90931520310288
+INFO:Time 180:------------------------------------Start of Updating Parameters------------------------------------
+INFO:Time 180:-------------------------------updating MNO parameters-------------------------------
+INFO:Time 180:-----------------------Updating best population-----------------------
+INFO:Time 180:better population 2 found, update best population!
+INFO:Time 180:best population as [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.33   0.01   0.14
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 245.69   0.32], fitness: 14.859874664561195.
+INFO:Time 180:Finished updating best population.
+INFO:Time 180:-----------------------Generate new offsprings------------------------
+INFO:Time 180:final new offspring:
+1: [  0.02   0.23   0.03   0.43   0.06   0.23   0.09   0.36   0.47   0.02
+   0.01   0.05   0.21   0.06   0.35   0.12   0.01   0.25 340.24   0.32]
+2: [  0.04   0.04   0.14   0.01   0.27   0.51   0.01   0.33   0.01   0.14
+   0.02   0.5    0.78   0.05   0.02   0.07   0.02   0.06 245.69   0.32]
+3: [  0.02   0.01   0.02   0.43   0.2    0.32   0.07   0.1    0.35   0.21
+   0.02   0.25   0.16   0.05   0.28   0.04   0.05   0.43 245.69   0.32]
+4: [  0.24   0.12   0.01   0.28   0.13   0.21   0.04   0.18   0.32   0.19
+   0.03   0.23   0.11   0.24   0.07   0.04   0.05   0.48 161.33   0.14]
+
+INFO:Time 180:Finished generating new offsprings.
+INFO:Time 180:Finished updating MNO parameters
+INFO:Time 180:Function update_task_deployment_parameters executed in 0.0000s
+INFO:Time 180:------------------------------updating MVNO parameters-------------------------------
+INFO:Time 180:-----------------------Updating best population-----------------------
+INFO:Time 180:No better population found, keep origin.
+INFO:Time 180:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 34.90931520310288.
+INFO:Time 180:Finished updating best population.
+INFO:Time 180:-----------------------Generate new offsprings------------------------
+INFO:Time 180:data not enough for updating, skip updating.
+INFO:Time 180:final new offspring:
+1: [  0.07   0.03   0.04   0.77   0.02   0.06   0.22   0.16   0.2    0.04
+   0.26   0.12   0.47   0.19   0.01   0.19   0.05   0.09 459.18   0.14]
+2: [  0.1    0.51   0.06   0.17   0.14   0.03   0.05   0.12   0.42   0.03
+   0.36   0.02   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16]
+3: [  0.03   0.01   0.31   0.08   0.01   0.55   0.26   0.01   0.46   0.03
+   0.23   0.01   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16]
+4: [  0.03   0.01   0.32   0.06   0.01   0.56   0.26   0.01   0.46   0.03
+   0.23   0.01   0.01   0.01   0.01   0.61   0.07   0.29 280.5    0.06]
+
+INFO:Time 180:Finished generating new offsprings.
+INFO:Time 180:Finished updating MVNO parameters
+INFO:Time 180:Function update_task_deployment_parameters executed in 0.0158s
+INFO:Time 180:Finished updating MNO and MVNO parameters.
+INFO:Time 180:Start of hour 4
+Get hour events:
+id,type,time
+[[31 0 180 'FTP' '16' '21' 0.3 0.12 25 1300]
+ [9 0 185 'VoIP' '1' '6' 0.07 0.04 450 17]
+ [24 0 190 'VoIP' '16' '14' 0.1 0.02 370 16]
+ [28 0 199 'VoIP' '20' '18' 0.1 0.02 370 16]
+ [26 0 200 'FTP' '18' '16' 0.15 0.1 26 790]
+ [31 1 200 'FTP' '16' '21' 0.3 0.12 25 1300]
+ [32 0 200 'FTP' '23' '5' 0.3 0.12 25 1300]
+ [32 1 200 'FTP' '23' '5' 0.3 0.12 25 1300]
+ [26 1 203 'FTP' '18' '16' 0.15 0.1 26 790]
+ [9 1 203 'VoIP' '1' '6' 0.07 0.04 450 17]
+ [33 0 210 'FTP' '24' '4' 0.3 0.12 25 1300]
+ [33 1 212 'FTP' '24' '4' 0.3 0.12 25 1300]
+ [24 1 215 'VoIP' '16' '14' 0.1 0.02 370 16]
+ [34 0 215 'VoIP' '8' '8' 0.1 0.02 370 16]
+ [34 1 218 'VoIP' '8' '8' 0.1 0.02 370 16]
+ [35 0 220 'VoIP' '25' '16' 0.1 0.02 370 16]
+ [35 1 222 'VoIP' '25' '16' 0.1 0.02 370 16]
+ [36 0 230 'VoIP' '26' '2' 0.1 0.02 370 16]
+ [28 1 232 'VoIP' '20' '18' 0.1 0.02 370 16]
+ [37 0 234 'IP_Video' '27' '17' 0.08 0.05 24 1065]
+ [36 1 234 'VoIP' '26' '2' 0.1 0.02 370 16]
+ [37 1 235 'IP_Video' '27' '17' 0.08 0.05 24 1065]
+ [38 0 235 'IP_Video' '28' '18' 0.08 0.05 24 1065]
+ [39 0 238 'FTP' '29' '9' 0.3 0.12 25 1300]
+ [38 1 238 'IP_Video' '28' '18' 0.08 0.05 24 1065]
+ [39 1 239 'FTP' '29' '9' 0.3 0.12 25 1300]]
+INFO:Time 180:mno deploy with best population [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.33   0.01   0.14
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 245.69   0.32] with fitness: 14.859874664561195
+INFO:Time 180:mvno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 34.90931520310288
+INFO:Time 180:task31 assign to MNO
+INFO:Time 180:Task31 unaccepted, retry after 111 minutes.
+INFO:Time 185:task9 assign to MNO
+INFO:Time 185:Task9 unaccepted, retry after 103 minutes.
+INFO:Time 190:task24 assign to MNO
+INFO:Time 190:Task24 unaccepted, retry after 66 minutes.
+INFO:Time 199:task28 assign to MNO
+INFO:Time 199:Task28 unaccepted, retry after 111 minutes.
+INFO:Time 200:task26 assign to MVNO
+INFO:Time 200:Deploy task26 to vm 6,
+task cr: 0.1, vm cr: 0.2 -> 0.1
+task bw_up: 26, local_bw_up: 100000 -> 99974
+task bw_down: 790, local_bw_down: 100000 -> 99210
+
+INFO:Time 200:task32 assign to MVNO
+INFO:Time 200:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 200:Task32 unaccepted, retry after 116 minutes.
+INFO:Time 203:release task26 from vm 6,
+cr: 0.1 -> 0.2
+local_bw_up: 99974 -> 100000
+local_bw_down: 99210 -> 100000
+
+INFO:Time 210:task33 assign to MNO
+INFO:Time 210:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 210:Task33 unaccepted, retry after 97 minutes.
+INFO:Time 215:task34 assign to MVNO
+INFO:Time 215:Deploy task34 to vm 4,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 218:release task34 from vm 4,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:Time 220:task35 assign to MNO
+INFO:Time 220:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 220:Task35 unaccepted, retry after 62 minutes.
+INFO:Time 230:task36 assign to MNO
+INFO:Time 230:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 230:Task36 unaccepted, retry after 60 minutes.
+INFO:Time 234:task37 assign to MNO
+INFO:Time 234:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 234:Task37 unaccepted, retry after 94 minutes.
+INFO:Time 235:task38 assign to MVNO
+INFO:Time 235:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 235:Deploy task38 to vm 5,
+task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
+task bw_up: 24, local_bw_up: 100000 -> 99976
+task bw_down: 1065, local_bw_down: 100000 -> 98935
+
+INFO:Time 238:task39 assign to MNO
+INFO:Time 238:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 238:Task39 unaccepted, retry after 93 minutes.
+INFO:Time 238:release task38 from vm 5,
+cr: 0.15000000000000002 -> 0.2
+local_bw_up: 99976 -> 100000
+local_bw_down: 98935 -> 100000
+
+INFO:Time 238:Finished hour 4
+INFO:Time 238:Release undone tasks: dict_keys([])
+INFO:Time 238:Release undone tasks: dict_keys([])
+INFO:Time 240:mno overall hour utility: 0, hour fitness: 0.0
+INFO:Time 240:mvno overall hour utility: 75.86382100537884, hour fitness: 25.28794033512628
+INFO:Time 240:------------------------------------Start of Updating Parameters------------------------------------
+INFO:Time 240:-------------------------------updating MNO parameters-------------------------------
+INFO:Time 240:-----------------------Updating best population-----------------------
+INFO:Time 240:No better population found, keep origin.
+INFO:Time 240:best population as [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.33   0.01   0.14
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 245.69   0.32], fitness: 0.0.
+INFO:Time 240:Finished updating best population.
+INFO:Time 240:-----------------------Generate new offsprings------------------------
+INFO:Time 240:data not enough for updating, skip updating.
+INFO:Time 240:final new offspring:
+1: [  0.02   0.23   0.03   0.43   0.06   0.23   0.09   0.36   0.47   0.02
+   0.01   0.05   0.21   0.06   0.35   0.12   0.01   0.25 340.24   0.32]
+2: [  0.04   0.04   0.14   0.01   0.27   0.51   0.01   0.33   0.01   0.14
+   0.02   0.5    0.78   0.05   0.02   0.07   0.02   0.06 245.69   0.32]
+3: [  0.02   0.01   0.02   0.43   0.2    0.32   0.07   0.1    0.35   0.21
+   0.02   0.25   0.16   0.05   0.28   0.04   0.05   0.43 245.69   0.32]
+4: [  0.24   0.12   0.01   0.28   0.13   0.21   0.04   0.18   0.32   0.19
+   0.03   0.23   0.11   0.24   0.07   0.04   0.05   0.48 161.33   0.14]
+
+INFO:Time 240:Finished generating new offsprings.
+INFO:Time 240:Finished updating MNO parameters
+INFO:Time 240:Function update_task_deployment_parameters executed in 0.0020s
+INFO:Time 240:------------------------------updating MVNO parameters-------------------------------
+INFO:Time 240:-----------------------Updating best population-----------------------
+INFO:Time 240:No better population found, keep origin.
+INFO:Time 240:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 25.28794033512628.
+INFO:Time 240:Finished updating best population.
+INFO:Time 240:-----------------------Generate new offsprings------------------------
+INFO:Time 240:final new offspring:
+1: [  0.08   0.03   0.04   0.8    0.02   0.03   0.05   0.12   0.42   0.03
+   0.36   0.02   0.     0.49   0.14   0.14   0.02   0.2  249.65   0.16]
+2: [  0.1    0.51   0.06   0.17   0.09   0.07   0.22   0.16   0.2    0.04
+   0.26   0.12   0.47   0.19   0.01   0.19   0.05   0.09 459.18   0.14]
+3: [  0.05   0.28   0.03   0.09   0.08   0.46   0.26   0.01   0.46   0.03
+   0.23   0.01   0.01   0.01   0.01   0.61   0.07   0.29 280.5    0.06]
+4: [  0.06   0.03   0.7    0.13   0.03   0.05   0.04   0.12   0.42   0.03
+   0.36   0.02   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16]
+
+INFO:Time 240:Finished generating new offsprings.
+INFO:Time 240:Finished updating MVNO parameters
+INFO:Time 240:Function update_task_deployment_parameters executed in 0.0040s
+INFO:Time 240:Finished updating MNO and MVNO parameters.
+INFO:Time 240:Finished Task Deployment.
+INFO:Time 240:Finished Round 2.
+INFO:Time 240:---------------------------------------------------------Start of Round 3---------------------------------------------------------
+INFO:Time 240:------------------------------------------Start of updating history data-------------------------------------------
+INFO:Time 240:Finished update history data.
+INFO:Time 240:----------------------------------------------Start of VM Assignment-----------------------------------------------
+INFO:Time 240:mno vm id: ['1' '2' '3'], total resource (bw_up, bw_down, cr): (130648.41142909197, 146973.29038346373, 0.6000000000000001)
+INFO:Time 240:mvno vm id: ['4' '5' '6'], total resource (bw_up, bw_down, cr): (151315.55440260362, 153754.09331221244, 0.6000000000000001), cost: 57.60000000000002
+INFO:Time 240:contract: bw_high: 1000000, bw_low: 5, cr_high: 10, cr_low: 0
+INFO:Time 240:Function vm_assignment executed in 0.3523s
+INFO:Time 240:Finished vm assignment.
+INFO:Time 240:---------------------------------------------Start of Task Deployment----------------------------------------------
+INFO:Time 240:Start of hour 5
+Get hour events:
+id,type,time
+[[40 0 240 'VoIP' '30' '11' 0.1 0.02 370 16]
+ [41 0 240 'VoIP' '34' '6' 0.1 0.02 370 16]
+ [41 1 242 'VoIP' '34' '6' 0.1 0.02 370 16]
+ [29 0 250 'VoIP' '21' '19' 0.1 0.02 370 16]
+ [40 1 251 'VoIP' '30' '11' 0.1 0.02 370 16]
+ [42 0 252 'VoIP' '32' '7' 0.1 0.02 370 16]
+ [42 1 252 'VoIP' '32' '7' 0.1 0.02 370 16]
+ [29 1 255 'VoIP' '21' '19' 0.1 0.02 370 16]
+ [24 0 256 'VoIP' '16' '14' 0.1 0.02 370 16]
+ [30 0 262 'IP_Video' '22' '20' 0.08 0.05 24 1065]
+ [24 1 281 'VoIP' '16' '14' 0.1 0.02 370 16]
+ [35 0 282 'VoIP' '25' '16' 0.1 0.02 370 16]
+ [35 1 284 'VoIP' '25' '16' 0.1 0.02 370 16]
+ [30 1 285 'IP_Video' '22' '20' 0.08 0.05 24 1065]
+ [9 0 288 'VoIP' '1' '6' 0.07 0.04 450 17]
+ [36 0 290 'VoIP' '26' '2' 0.1 0.02 370 16]
+ [31 0 291 'FTP' '16' '21' 0.3 0.12 25 1300]
+ [36 1 294 'VoIP' '26' '2' 0.1 0.02 370 16]]
+INFO:Time 240:mno deploy with best population [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.33   0.01   0.14
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 245.69   0.32] with fitness: 0.0
+INFO:Time 240:mvno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 25.28794033512628
+INFO:Time 240:task40 assign to MNO
+INFO:Time 240:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 240:Task40 unaccepted, retry after 107 minutes.
+INFO:Time 240:task41 assign to MVNO
+INFO:Time 240:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 240:Deploy task41 to vm 4,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 242:release task41 from vm 4,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:Time 250:task29 assign to MVNO
+INFO:Time 250:Deploy task29 to vm 4,
+task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 252:task42 assign to MVNO
+INFO:Time 252:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 252:Task42 unaccepted, retry after 118 minutes.
+INFO:Time 255:release task29 from vm 4,
+cr: 0.18000000000000002 -> 0.2
+local_bw_up: 99630 -> 100000
+local_bw_down: 99984 -> 100000
+
+INFO:Time 256:task24 assign to MNO
+INFO:Time 256:Task24 unaccepted, retry after 103 minutes.
+INFO:Time 262:task30 assign to MNO
+INFO:Time 262:Task30 unaccepted, retry after 86 minutes.
+INFO:Time 282:task35 assign to MNO
+INFO:Time 282:Task35 unaccepted, retry after 90 minutes.
+INFO:Time 288:task9 assign to MNO
+INFO:Time 288:Task9 unaccepted, retry after 112 minutes.
+INFO:Time 290:task36 assign to MNO
+INFO:Time 290:Task36 unaccepted, retry after 84 minutes.
+INFO:Time 291:task31 assign to MNO
+INFO:Time 291:Task31 unaccepted, retry after 81 minutes.
+INFO:Time 291:Finished hour 5
+INFO:Time 291:Release undone tasks: dict_keys([])
+INFO:Time 291:Release undone tasks: dict_keys([])
+INFO:Time 300:mno overall hour utility: 0, hour fitness: 0.0
+INFO:Time 300:mvno overall hour utility: 56.58146418797109, hour fitness: 28.290732093985547
+INFO:Time 300:------------------------------------Start of Updating Parameters------------------------------------
+INFO:Time 300:-------------------------------updating MNO parameters-------------------------------
+INFO:Time 300:-----------------------Updating best population-----------------------
+INFO:Time 300:No better population found, keep origin.
+INFO:Time 300:best population as [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.33   0.01   0.14
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 245.69   0.32], fitness: 0.0.
+INFO:Time 300:Finished updating best population.
+INFO:Time 300:-----------------------Generate new offsprings------------------------
+INFO:Time 300:data not enough for updating, skip updating.
+INFO:Time 300:final new offspring:
+1: [  0.02   0.23   0.03   0.43   0.06   0.23   0.09   0.36   0.47   0.02
+   0.01   0.05   0.21   0.06   0.35   0.12   0.01   0.25 340.24   0.32]
+2: [  0.04   0.04   0.14   0.01   0.27   0.51   0.01   0.33   0.01   0.14
+   0.02   0.5    0.78   0.05   0.02   0.07   0.02   0.06 245.69   0.32]
+3: [  0.02   0.01   0.02   0.43   0.2    0.32   0.07   0.1    0.35   0.21
+   0.02   0.25   0.16   0.05   0.28   0.04   0.05   0.43 245.69   0.32]
+4: [  0.24   0.12   0.01   0.28   0.13   0.21   0.04   0.18   0.32   0.19
+   0.03   0.23   0.11   0.24   0.07   0.04   0.05   0.48 161.33   0.14]
+
+INFO:Time 300:Finished generating new offsprings.
+INFO:Time 300:Finished updating MNO parameters
+INFO:Time 300:Function update_task_deployment_parameters executed in 0.0020s
+INFO:Time 300:------------------------------updating MVNO parameters-------------------------------
+INFO:Time 300:-----------------------Updating best population-----------------------
+INFO:Time 300:No better population found, keep origin.
+INFO:Time 300:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 28.290732093985547.
+INFO:Time 300:Finished updating best population.
+INFO:Time 300:-----------------------Generate new offsprings------------------------
+INFO:Time 300:data not enough for updating, skip updating.
+INFO:Time 300:final new offspring:
+1: [  0.08   0.03   0.04   0.8    0.02   0.03   0.05   0.12   0.42   0.03
+   0.36   0.02   0.     0.49   0.14   0.14   0.02   0.2  249.65   0.16]
+2: [  0.1    0.51   0.06   0.17   0.09   0.07   0.22   0.16   0.2    0.04
+   0.26   0.12   0.47   0.19   0.01   0.19   0.05   0.09 459.18   0.14]
+3: [  0.05   0.28   0.03   0.09   0.08   0.46   0.26   0.01   0.46   0.03
+   0.23   0.01   0.01   0.01   0.01   0.61   0.07   0.29 280.5    0.06]
+4: [  0.06   0.03   0.7    0.13   0.03   0.05   0.04   0.12   0.42   0.03
+   0.36   0.02   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16]
+
+INFO:Time 300:Finished generating new offsprings.
+INFO:Time 300:Finished updating MVNO parameters
+INFO:Time 300:Function update_task_deployment_parameters executed in 0.0020s
+INFO:Time 300:Finished updating MNO and MVNO parameters.
+INFO:Time 300:Start of hour 6
+Get hour events:
+id,type,time
+[[33 0 307 'FTP' '24' '4' 0.3 0.12 25 1300]
+ [33 1 309 'FTP' '24' '4' 0.3 0.12 25 1300]
+ [28 0 310 'VoIP' '20' '18' 0.1 0.02 370 16]
+ [27 0 311 'VoIP' '19' '17' 0.07 0.04 450 17]
+ [27 1 313 'VoIP' '19' '17' 0.07 0.04 450 17]
+ [32 0 316 'FTP' '23' '5' 0.3 0.12 25 1300]
+ [32 1 316 'FTP' '23' '5' 0.3 0.12 25 1300]
+ [37 0 328 'IP_Video' '27' '17' 0.08 0.05 24 1065]
+ [37 1 329 'IP_Video' '27' '17' 0.08 0.05 24 1065]
+ [39 0 331 'FTP' '29' '9' 0.3 0.12 25 1300]
+ [39 1 332 'FTP' '29' '9' 0.3 0.12 25 1300]
+ [28 1 343 'VoIP' '20' '18' 0.1 0.02 370 16]
+ [40 0 347 'VoIP' '30' '11' 0.1 0.02 370 16]
+ [30 0 348 'IP_Video' '22' '20' 0.08 0.05 24 1065]
+ [40 1 358 'VoIP' '30' '11' 0.1 0.02 370 16]
+ [24 0 359 'VoIP' '16' '14' 0.1 0.02 370 16]]
+INFO:Time 300:mno deploy with best population [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.33   0.01   0.14
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 245.69   0.32] with fitness: 0.0
+INFO:Time 300:mvno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 28.290732093985547
+INFO:Time 307:task33 assign to MNO
+INFO:Time 307:Task33 unaccepted, retry after 91 minutes.
+INFO:Time 310:task28 assign to MNO
+INFO:Time 310:Task28 unaccepted, retry after 111 minutes.
+INFO:Time 311:task27 assign to MVNO
+INFO:Time 311:Deploy task27 to vm 4,
+task cr: 0.04, vm cr: 0.2 -> 0.16
+task bw_up: 450, local_bw_up: 100000 -> 99550
+task bw_down: 17, local_bw_down: 100000 -> 99983
+
+INFO:Time 313:release task27 from vm 4,
+cr: 0.16 -> 0.2
+local_bw_up: 99550 -> 100000
+local_bw_down: 99983 -> 100000
+
+INFO:Time 316:task32 assign to MVNO
+INFO:Time 316:Deploy task32 to vm 6,
+task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
+task bw_up: 25, local_bw_up: 100000 -> 99975
+task bw_down: 1300, local_bw_down: 100000 -> 98700
+
+INFO:Time 316:release task32 from vm 6,
+cr: 0.08000000000000002 -> 0.2
+local_bw_up: 99975 -> 100000
+local_bw_down: 98700 -> 100000
+
+INFO:Time 328:task37 assign to MNO
+INFO:Time 328:Task37 unaccepted, retry after 93 minutes.
+INFO:Time 331:task39 assign to MNO
+INFO:Time 331:Task39 unaccepted, retry after 103 minutes.
+INFO:Time 347:task40 assign to MNO
+INFO:Time 347:Task40 unaccepted, retry after 85 minutes.
+INFO:Time 348:task30 assign to MNO
+INFO:Time 348:Task30 unaccepted, retry after 105 minutes.
+INFO:Time 359:task24 assign to MNO
+INFO:Time 359:Task24 unaccepted, retry after 113 minutes.
+INFO:Time 359:Finished hour 6
+INFO:Time 359:Release undone tasks: dict_keys([])
+INFO:Time 359:Release undone tasks: dict_keys([])
+INFO:Time 360:mno overall hour utility: 0, hour fitness: 0.0
+INFO:Time 360:mvno overall hour utility: 70.21889082568858, hour fitness: 35.10944541284429
+INFO:Time 360:------------------------------------Start of Updating Parameters------------------------------------
+INFO:Time 360:-------------------------------updating MNO parameters-------------------------------
+INFO:Time 360:-----------------------Updating best population-----------------------
+INFO:Time 360:No better population found, keep origin.
+INFO:Time 360:best population as [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.33   0.01   0.14
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 245.69   0.32], fitness: 0.0.
+INFO:Time 360:Finished updating best population.
+INFO:Time 360:-----------------------Generate new offsprings------------------------
+INFO:Time 360:data not enough for updating, skip updating.
+INFO:Time 360:final new offspring:
+1: [  0.02   0.23   0.03   0.43   0.06   0.23   0.09   0.36   0.47   0.02
+   0.01   0.05   0.21   0.06   0.35   0.12   0.01   0.25 340.24   0.32]
+2: [  0.04   0.04   0.14   0.01   0.27   0.51   0.01   0.33   0.01   0.14
+   0.02   0.5    0.78   0.05   0.02   0.07   0.02   0.06 245.69   0.32]
+3: [  0.02   0.01   0.02   0.43   0.2    0.32   0.07   0.1    0.35   0.21
+   0.02   0.25   0.16   0.05   0.28   0.04   0.05   0.43 245.69   0.32]
+4: [  0.24   0.12   0.01   0.28   0.13   0.21   0.04   0.18   0.32   0.19
+   0.03   0.23   0.11   0.24   0.07   0.04   0.05   0.48 161.33   0.14]
+
+INFO:Time 360:Finished generating new offsprings.
+INFO:Time 360:Finished updating MNO parameters
+INFO:Time 360:Function update_task_deployment_parameters executed in 0.0012s
+INFO:Time 360:------------------------------updating MVNO parameters-------------------------------
+INFO:Time 360:-----------------------Updating best population-----------------------
+INFO:Time 360:better population 1 found, update best population!
+INFO:Time 360:better population 3 found, update best population!
+INFO:Time 360:best population as [  0.05   0.28   0.03   0.09   0.08   0.46   0.26   0.01   0.46   0.03
+   0.23   0.01   0.01   0.01   0.01   0.61   0.07   0.29 280.5    0.06], fitness: 39.9205678329266.
+INFO:Time 360:Finished updating best population.
+INFO:Time 360:-----------------------Generate new offsprings------------------------
+INFO:Time 360:final new offspring:
+1: [  0.08   0.03   0.04   0.8    0.02   0.03   0.04   0.01   0.6    0.04
+   0.3    0.01   0.01   0.01   0.01   0.6    0.03   0.36 249.65   0.16]
+2: [  0.1    0.51   0.06   0.17   0.09   0.07   0.22   0.16   0.2    0.04
+   0.26   0.12   0.47   0.19   0.01   0.19   0.05   0.09 459.18   0.14]
+3: [  0.05   0.4    0.05   0.13   0.07   0.3    0.35   0.08   0.29   0.02
+   0.25   0.02   0.     0.36   0.11   0.33   0.04   0.15 280.5    0.06]
+4: [  0.06   0.03   0.7    0.13   0.03   0.05   0.04   0.12   0.42   0.03
+   0.36   0.02   0.     0.49   0.14   0.14   0.02   0.2  249.65   0.16]
+
+INFO:Time 360:Finished generating new offsprings.
+INFO:Time 360:Finished updating MVNO parameters
+INFO:Time 360:Function update_task_deployment_parameters executed in 0.0000s
+INFO:Time 360:Finished updating MNO and MVNO parameters.
+INFO:Time 360:Finished Task Deployment.
+INFO:Time 360:Finished Round 3.
+INFO:Time 360:Finish simulating...

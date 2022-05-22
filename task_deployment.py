@@ -1,11 +1,13 @@
+from platform import release
 import numpy as np
-from utils import (softmax, toSoftmax, step_logger, get_TD_populations_log_msg)
 from queue import Queue
-from parameters import (generated_bw_max, generated_bw_min, title5,
-                        generated_delay_cloud_max, generated_delay_cloud_min, Task_type_index, Task_event_index)
-from optimizing import TaskDeploymentParametersOptimizing
 from vm import VM
+from optimizing import TaskDeploymentParametersOptimizing
 from task_handler import Task_handler
+from utils import (softmax, toSoftmax, step_logger, get_TD_populations_log_msg)
+from parameters import (generated_bw_max, generated_bw_min, title5,
+                        generated_delay_cloud_max, generated_delay_cloud_min, generated_delay_edge_max,
+                        generated_delay_edge_min, Task_type_index, Task_event_index, Global)
 import logging
 
 class UtilityFunc:
@@ -30,8 +32,11 @@ class UtilityFunc:
             return (max_price - p) / max_price * 100
 
         @staticmethod
-        def delay(d: float) -> float:
-            return (generated_delay_cloud_max - d) / (generated_delay_cloud_max - generated_delay_cloud_min) * 100
+        def delay(d: float, location: str) -> float:
+            if location == 'cloud':
+                return (generated_delay_cloud_max - d) / (generated_delay_cloud_max - generated_delay_cloud_min) * 100
+            elif location == 'edge':
+                return (generated_delay_edge_max - d) / (generated_delay_edge_max - generated_delay_edge_min) * 100
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -57,8 +62,11 @@ class UtilityFunc:
             return (max_price - p) / max_price * 100
 
         @staticmethod
-        def delay(d: float) -> float:
-            return (generated_delay_cloud_max - d) / (generated_delay_cloud_max - generated_delay_cloud_min) * 100
+        def delay(d: float, location: str) -> float:
+            if location == 'cloud':
+                return (generated_delay_cloud_max - d) / (generated_delay_cloud_max - generated_delay_cloud_min) * 100
+            elif location == 'edge':
+                return (generated_delay_edge_max - d) / (generated_delay_edge_max - generated_delay_edge_min) * 100
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -84,8 +92,11 @@ class UtilityFunc:
             return (max_price - p) / max_price * 100
 
         @staticmethod
-        def delay(d: float) -> float:
-            return (generated_delay_cloud_max - d) / (generated_delay_cloud_max - generated_delay_cloud_min) * 100
+        def delay(d: float, location: str) -> float:
+            if location == 'cloud':
+                return (generated_delay_cloud_max - d) / (generated_delay_cloud_max - generated_delay_cloud_min) * 100
+            elif location == 'edge':
+                return (generated_delay_edge_max - d) / (generated_delay_edge_max - generated_delay_edge_min) * 100
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -131,6 +142,8 @@ class TaskDeployment:
         self.hour_fitness = self.hour_utility / self.hour_task_num
         for idx in range(len(self.optimizing.fitness)):
             self.optimizing.fitness[idx] /= self.hour_task_num
+        logging.info(f'Release undone tasks: {self.running_task_id_to_vm.keys()}')
+        self.all_release()
 
     def deploy(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
         '''Start running TaskDeployment algorithm.'''
@@ -141,6 +154,7 @@ class TaskDeployment:
         cpu_request = task[Task_event_index.cpu_request.value]
 
         max_utility = float('-inf')
+        offsprings_max_utility = [float('-inf') for _ in range(len(self.optimizing.new_populations))]
         selected_vm_id = None
         for vm_id in candidate_vm_id:
             # deployment by best population
@@ -154,29 +168,30 @@ class TaskDeployment:
             bw_down = vm.from_user[user_id]['bw_down']
             delay = vm.from_user[user_id]['delay']
             cr_diff = abs(cpu_request - vm.cr)
-            if min(bw_up, bw_down) < self.optimizing.best_op_bw and vm.cr < self.optimizing.best_op_cr:
+            if min(bw_up, bw_down) < self.optimizing.best_op_bw or vm.cr < self.optimizing.best_op_cr or \
+                vm.cr < task[Task_event_index.average_cpu_usage] or vm.local_bw_up < task[Task_event_index.T_up] or \
+                vm.local_bw_down < task[Task_event_index.T_down]:
                 continue
             utilities = [
                 task_utility.bw_up(bw_up),
                 task_utility.bw_down(bw_down),
                 task_utility.cr(vm.cr),
                 task_utility.price(vm.price),
-                task_utility.delay(delay),
+                task_utility.delay(delay, vm.location),
                 task_utility.cr_diff(cr_diff)
             ]
             utility = sum([g * u for g, u in zip(softmax(self.optimizing.best_gamma[Task_type_index[task_type]]), utilities)])
-            self.hour_utility += utility
             # virtual deployment by offsprings
             for idx, population in enumerate(self.optimizing.new_populations):
                 population = toSoftmax(population)
                 _op_bw, _op_cr = population[-2], population[-1]
                 if min(bw_up, bw_down) < _op_bw and vm.cr < _op_cr:
-                    # negative utility of six utility functions
-                    self.optimizing.fitness += -600
                     continue
                 _gamma = [population[0:6], population[6:12], population[12:18]]
                 _utility = sum([g * u for g, u in zip(_gamma[Task_type_index[task_type]], utilities)])
-                self.optimizing.fitness[idx] += _utility
+
+                if _utility > offsprings_max_utility[idx]:
+                    offsprings_max_utility[idx] = _utility
             # keep the best vm
             if utility > max_utility:
                 max_utility = utility
@@ -185,23 +200,28 @@ class TaskDeployment:
         # if no feasible solution
         if selected_vm_id == None:
             self.reschedule_task(task)
+            self.hour_task_num -= 1
         else:
             self.bind_task(task, vm_list[selected_vm_id])
+
+        self.hour_utility = max(self.hour_utility, max_utility)
+        for idx, _utility in enumerate(offsprings_max_utility):
+            self.optimizing.fitness[idx] = max(0, _utility)
 
     def reschedule_task(self, task: np.array) -> None:
         task_id = task[Task_event_index.index.value]
         Task_handler.set_mask(task_id)
         events = Task_handler.get_deleted_events()
+        start_event, end_event = events
         assert(len(events) == 2)
         Task_handler.delete_events()
-        retry_offset = np.random.randint(0, 60)
-        logging.info(f'Task{task_id} unaccepted, retry after {retry_offset} minutes.')
-        start_event, end_event = events
         event_time_idx = Task_event_index.event_time.value
+        retry_offset = np.random.randint(60, 120)
+        logging.info(f'Task{task_id} unaccepted, retry after {retry_offset} minutes.')
         start_event[event_time_idx] = start_event[event_time_idx] + retry_offset
         end_event[event_time_idx] = end_event[event_time_idx] + retry_offset
-        Task_handler.insert_event(start_event)
         Task_handler.insert_event(end_event)
+        Task_handler.insert_event(start_event)
 
     def bind_task(self, task: np.array, selected_vm: VM) -> None:
         '''Consume resource of selected vm and make task as observer.'''
@@ -249,8 +269,22 @@ class TaskDeployment:
 
     def update_parameters(self) -> None:
         '''Update the parameters based on the performance of optimizing offsprings of this hour.'''
-        with step_logger('Updating best population', title5, f'Finished updating best population as {toSoftmax(self.optimizing.best_population)}.'):
+        with step_logger('Updating best population', title5, f'Finished updating best population.'):
             self.optimizing.best_fitness = self.hour_fitness
             self.optimizing.update_best_population()
-        with step_logger('Generate new offsprings', title5, get_TD_populations_log_msg('final new offspring', self.optimizing.new_populations)):
+            logging.info(f'best population as {toSoftmax(self.optimizing.best_population)}, fitness: {self.optimizing.best_fitness}.')
+        with step_logger('Generate new offsprings', title5, 'Finished generating new offsprings.'):
             self.optimizing.step()
+            logging.info(get_TD_populations_log_msg('final new offspring', self.optimizing.new_populations))
+
+    def all_release(self):
+        tasks = []
+        # get and reschedule undone tasks
+        for task_id in self.running_task_id_to_vm:
+            task_id_idx = Task_event_index.index.value
+            task = Task_handler.task_events[Task_handler.task_events[:, task_id_idx] == task_id][0]
+            tasks.append(task)
+            self.reschedule_task(task)
+        # release undone tasks
+        for task in tasks:
+            self.release(task)

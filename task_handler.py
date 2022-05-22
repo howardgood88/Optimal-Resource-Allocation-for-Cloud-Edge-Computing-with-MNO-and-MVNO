@@ -4,6 +4,7 @@ from parameters import (Task_event_index)
 class Task_handler:
     task_events = None
     mask = None
+    changed = False
 
     @classmethod
     def set_mask(cls, task_id):
@@ -12,14 +13,23 @@ class Task_handler:
 
     @classmethod
     def get_deleted_events(cls):
+        '''Get the two events under mask.'''
+        cls.changed = True
         return cls.task_events[cls.mask]
 
     @classmethod
     def delete_events(cls):
-        return np.delete(cls.task_events, cls.mask)
+        '''Delete the two events under mask.'''
+        cls.changed = True
+        cls.task_events = np.delete(cls.task_events, cls.mask, axis=0)
 
     @classmethod
     def insert_event(cls, event):
+        '''Insert the new event.'''
+        cls.changed = True
         event_time_idx = Task_event_index.event_time.value
-        insert_idx = np.where(cls.task_events[:, event_time_idx] >= event[event_time_idx])[0][0]
-        return np.insert(cls.task_events, insert_idx, event, axis=0)
+        wh = np.where(cls.task_events[:, event_time_idx] >= event[event_time_idx])[0]
+        if wh.size == 0:
+            wh = [len(cls.task_events)]
+        insert_idx = wh[0]
+        cls.task_events = np.insert(cls.task_events, insert_idx, event, axis=0)

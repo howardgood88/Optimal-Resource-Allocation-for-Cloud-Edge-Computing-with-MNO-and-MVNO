@@ -2,7 +2,7 @@ import numpy as np
 from optimizing import VMAssignmentOptimizing
 from contract import Contract
 from utils import (step_logger)
-from parameters import (rnd_seed, _theta, _lambda, Task_type_index, optimizing_times, _lambda, title4)
+from parameters import (rnd_seed, _lambda, optimizing_times, _lambda, title4)
 import logging
 
 np.random.seed(rnd_seed)

@@ -6,7 +6,7 @@ class Global:
 
 rnd_seed = 1126
 logging_level = logging.INFO
-test_data_dir = './data/case2/'
+test_data_dir = './data/case3/'
 # the length of log with filling "-"
 title1, title2, title3, title4, title5 = 130, 115, 100, 85, 70
 # round time
@@ -25,9 +25,9 @@ generated_delay_edge_min = 1
 
 # contract
 bw_low = 5
-bw_high = generated_bw_max * 100 # Kbps
+bw_high = generated_bw_max * 10 # Kbps
 cr_low = 0
-cr_high = 5
+cr_high = 10
 
 # vm assignment
 mno_rate = 0.7
@@ -48,7 +48,9 @@ _op_cr = 0.2 # GCU-second/second
 _phi = 0.7
 
 # optimizing
-optimizing_times = 10
+## the max time of searching the valid offsprings in vm assignment
+max_searching_times = 500
+optimizing_times = 100
 offspring_number = 4
 mutate_rate = 0.05
 

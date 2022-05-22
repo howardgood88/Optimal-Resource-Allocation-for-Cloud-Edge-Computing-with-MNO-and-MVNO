@@ -1,10 +1,10 @@
 import abc
+import numpy as np
 from vm_assignment import VMAssignment
 from task_deployment import TaskDeployment
-import numpy as np
-from parameters import (_mu, title4)
-from utils import (step_logger)
 from contract import Contract
+from utils import (step_logger, get_total_resource, timer)
+from parameters import (_mu, title4)
 import logging
 
 class Network_operator(abc.ABC):
@@ -20,6 +20,7 @@ class Network_operator(abc.ABC):
         '''Delegate to class TaskDeployment.'''
         self._task_deployment.release(task)
 
+    @timer
     def update_task_deployment_parameters(self) -> None:
         '''Delegate to class TaskDeployment.'''
         with step_logger(f'updating {self.name} parameters', title4, f'Finished updating {self.name} parameters'):
@@ -40,6 +41,7 @@ class MNO(Network_operator):
         self.contract = Contract()
         self._vm_assignment = VMAssignment(self.contract, self.total_vm_id, vm_list)
 
+    @timer
     def vm_assignment(self, statistic_data: np.array, vm_list: dict) -> None:
         '''Calculate average vm bw and delegate to class VMAssignment.'''
         def get_avg_vm_bw():
@@ -54,7 +56,10 @@ class MNO(Network_operator):
                 vm.avg_bw_down = bw_down_sum / len(vm.from_user)
         get_avg_vm_bw()
         self.hold_vm_id, self.mvno.hold_vm_id = self._vm_assignment.run(statistic_data)
-        logging.info(f'mno vm id: {self.hold_vm_id}, mvno vm id: {self.mvno.hold_vm_id}')
+        logging.info(f'mno vm id: {self.hold_vm_id}, total resource (bw_up, bw_down, cr): {get_total_resource(self.hold_vm_id, vm_list)}')
+        logging.info(f'mvno vm id: {self.mvno.hold_vm_id}, total resource (bw_up, bw_down, cr): {get_total_resource(self.mvno.hold_vm_id, vm_list)}, '
+                        f'cost: {self._vm_assignment.vm_highest_price - self._vm_assignment.optimizing.best_fitness}')
+        logging.info(f'contract: bw_high: {self.contract.bw_high}, bw_low: {self.contract.bw_low}, cr_high: {self.contract.cr_high}, cr_low: {self.contract.cr_low}')
         
         # the price mvno sells to its customers
         for id in self.mvno.hold_vm_id:
