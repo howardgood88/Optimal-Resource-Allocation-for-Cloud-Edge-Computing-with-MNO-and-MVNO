@@ -3,7 +3,7 @@ import numpy as np
 from network_operator import (MNO, MVNO)
 from vm import VM
 from task_handler import Task_handler
-from utils import (toSoftmax, step_logger, timer)
+from utils import (toSoftmax, step_logger)
 from parameters import (test_data_dir, small_round_minutes, big_round_minutes, big_round_times, rnd_seed, Task_type_index, Task_event_index,
                         Event_type, _phi, generated_bw_max, generated_bw_min, generated_delay_cloud_max, generated_delay_cloud_min,
                         generated_delay_edge_max, generated_delay_edge_min, logging_level, mno_rate, Global,
@@ -187,7 +187,7 @@ def task_deployment(hour_events: np.array, minutes_range: tuple) -> None:
             idx += 1
 
 # load data
-with step_logger('Start of load data', title1, 'Finished loading data.') as _:
+with step_logger('Start of load data', title1, 'Finished loading data.'):
     machine_attributes = load_machine_data(test_data_dir + 'machine_attributes.json')
     history_data = load_task_data(test_data_dir + 'history_data.json')
     task_events = load_task_data(test_data_dir + 'task_events.json')

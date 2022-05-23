@@ -53,8 +53,10 @@ class VMAssignmentOptimizing(GeneticOptimizing):
             cnt = 0
             while not flag:
                 if cnt > max_searching_times:
-                    logging.warning('Cannot find valid vm assignment.')
-                    exit()
+                    logging.warning('Cannot find valid vm assignment, regenerate initial populations.')
+                    self.new_populations = np.array([self.choose_vm(self.candidate_vm_id, statistic_data) for _ in range(offspring_number)], dtype=bool)
+                    self.min_population_len = min(len(population) for population in self.new_populations)
+                    return self.new_populations
                 cnt += 1
                 # print overall message only if all offsprings fit the conditions
                 self.valid_evolution_message = ''
