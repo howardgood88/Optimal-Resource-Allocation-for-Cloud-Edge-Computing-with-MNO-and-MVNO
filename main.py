@@ -3,7 +3,7 @@ import numpy as np
 from network_operator import (MNO, MVNO)
 from vm import VM
 from task_handler import Task_handler
-from utils import (toSoftmax, step_logger)
+from utils import (toSoftmax, step_logger, timer)
 from parameters import (test_data_dir, small_round_minutes, big_round_minutes, big_round_times, rnd_seed, Task_type_index, Task_event_index,
                         Event_type, _phi, generated_bw_max, generated_bw_min, generated_delay_cloud_max, generated_delay_cloud_min,
                         generated_delay_edge_max, generated_delay_edge_min, logging_level, mno_rate, Global,
@@ -47,7 +47,7 @@ def createVM(machine_attributes: dict) -> dict:
 
 def get_hourly_statistic_data(hour_events: np.array) -> np.array:
     '''
-    Calculate hourly average_cpu_usage, bw_up, bw_down of hour tasks.
+    Sum up average_cpu_usage, bw_up, bw_down of hour tasks as hourly statistic data.
     For N = number of events in the hour.
     
     Parameters
@@ -68,7 +68,7 @@ def get_hourly_statistic_data(hour_events: np.array) -> np.array:
     for task_type, task_idx in Task_type_index.__members__.items():
         # [average_cpu, bw_up, bw_down]
         data = hour_events[(hour_events[:, task_type_idx] == task_type)][:, average_cpu_usage_idx:T_down_idx + 1]
-        data = np.zeros(3) if data.size == 0 else np.mean(data, axis=0)
+        data = np.zeros(3) if data.size == 0 else np.sum(data, axis=0)
         hourly_statistic_data[task_idx.value] = data
     return np.array(hourly_statistic_data, dtype=list)
 
@@ -187,7 +187,7 @@ def task_deployment(hour_events: np.array, minutes_range: tuple) -> None:
             idx += 1
 
 # load data
-with step_logger('Start of load data', title1, 'Finished loading data.'):
+with step_logger('Start of load data', title1, 'Finished loading data.') as _:
     machine_attributes = load_machine_data(test_data_dir + 'machine_attributes.json')
     history_data = load_task_data(test_data_dir + 'history_data.json')
     task_events = load_task_data(test_data_dir + 'task_events.json')
@@ -242,8 +242,8 @@ while Global.system_time // big_round_minutes < big_round_times:
 
                 # prepare for next round
                 Global.system_time = temp_time + small_round_minutes
-                logging.info(f'mno overall hour utility: {mno._task_deployment.hour_utility}, hour fitness: {mno._task_deployment.hour_fitness}')
-                logging.info(f'mvno overall hour utility: {mvno._task_deployment.hour_utility}, hour fitness: {mvno._task_deployment.hour_fitness}')
+                logging.info(f'mno overall hour utility: {mno._task_deployment.hour_utility}, # of task: {mno._task_deployment.hour_task_num}, hour fitness: {mno._task_deployment.hour_fitness}')
+                logging.info(f'mvno overall hour utility: {mvno._task_deployment.hour_utility}, # of task: {mvno._task_deployment.hour_task_num}, hour fitness: {mvno._task_deployment.hour_fitness}')
 
                 with step_logger(f'Start of Updating Parameters', title3, 'Finished updating MNO and MVNO parameters.'):
                     mno.update_task_deployment_parameters()

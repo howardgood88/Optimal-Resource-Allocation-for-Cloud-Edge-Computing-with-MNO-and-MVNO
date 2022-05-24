@@ -54,9 +54,7 @@ class VMAssignmentOptimizing(GeneticOptimizing):
             while not flag:
                 if cnt > max_searching_times:
                     logging.warning('Cannot find valid vm assignment, regenerate initial populations.')
-                    self.new_populations = np.array([self.choose_vm(self.candidate_vm_id, statistic_data) for _ in range(offspring_number)], dtype=bool)
-                    self.min_population_len = min(len(population) for population in self.new_populations)
-                    return self.new_populations
+                    raise ValueError('Improper parameters setting cause no legal vm assignment.')
                 cnt += 1
                 # print overall message only if all offsprings fit the conditions
                 self.valid_evolution_message = ''
@@ -68,6 +66,7 @@ class VMAssignmentOptimizing(GeneticOptimizing):
                     if not self.check_condition(offspring, statistic_data):
                         flag = False
             logging.debug(self.valid_evolution_message)
+            self.new_populations = offsprings
             return offsprings
 
     def choose_vm(self, candidate_vm_id: np.array, statistic_data: np.array) -> np.array:
@@ -192,12 +191,12 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
         self.best_op_cr = _op_cr
 
         # Save the populations without softmax
-        self.new_populations = np.array([self.get_parameters() for _ in range(offspring_number)])
+        self.new_populations = np.array([self.initialize_population() for _ in range(offspring_number)])
         self.fitness = [0 for _ in range(offspring_number)]
         self.best_population = np.concatenate((self.best_gamma.flatten(), [self.best_op_bw, self.best_op_cr]))
         self.best_fitness = float('-inf')
 
-    def get_parameters(self):
+    def initialize_population(self):
         new_gamma = np.random.uniform(0, 5, self.best_gamma.size)
         new_op_bw = np.random.uniform(200, 400, 1)
         new_op_cr = np.random.uniform(0, 0.4, 1)

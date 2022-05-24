@@ -7,12 +7,2800 @@ INFO:Time 0:New user/users detected, finished updating vm_list.from_user.
 INFO:Time 0:Finished initialization.
 INFO:Time 0:---------------------------------------------------------Start of Round 1---------------------------------------------------------
 INFO:Time 0:------------------------------------------Start of updating history data-------------------------------------------
+DEBUG:Time 0:add hour data
+[[0.026000000000000002 273.2 12.8]
+ [0.04 15.0 563.0]
+ [0.06000000000000001 17.2 618.0]] into statistic data, statistic data becomes:
+[[0.0182 191.23999999999998 8.959999999999999]
+ [0.027999999999999997 10.5 394.09999999999997]
+ [0.042 12.04 432.59999999999997]]
 INFO:Time 0:Finished update history data.
 INFO:Time 0:----------------------------------------------Start of VM Assignment-----------------------------------------------
-INFO:Time 0:mno vm id: ['1' '3' '5'], total resource (bw_up, bw_down, cr): (122276.84829644655, 139390.48626749613, 0.6000000000000001)
-INFO:Time 0:mvno vm id: ['2' '4' '6'], total resource (bw_up, bw_down, cr): (155357.65001598425, 141644.6911136321, 0.6000000000000001), cost: 120.0
+DEBUG:Time 0:-------------------------------------Evolution 1-------------------------------------
+DEBUG:Time 0:best population [['1' '2' '3' '4' '5' '6']] with cost inf, with fitness: -inf
+DEBUG:Time 0:population 1 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:better population found, update best population to ['2' '4' '6']!
+DEBUG:Time 0:population 2 ['1' '3' '5'] with cost: 168.0, fitness: 382.0
+DEBUG:Time 0:population 3 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '5'] with cost: 216.0, fitness: 334.0
+DEBUG:Time 0:Finished Evolution 1
+DEBUG:Time 0:-------------------------------------Evolution 2-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True False  True]
+ [ True False  True False  True False]
+ [False  True  True  True  True False]
+ [ True  True  True False  True False]]
+selected points: (4, 4)
+order after shuffle: [2 3 1 0], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [ True False  True False  True False]
+ [False  True  True  True  True False]
+ [ True  True  True False False False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [ True False  True False  True False]
+ [False  True  True  True  True False]
+ [ True  True  True False False False]]
+
+DEBUG:Time 0:best population ['2' '4' '6'] with cost 162.0, with fitness: 388.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['1' '3' '5'] with cost: 168.0, fitness: 382.0
+DEBUG:Time 0:population 3 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 4 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:Finished Evolution 2
+DEBUG:Time 0:-------------------------------------Evolution 3-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [ True False  True False  True False]
+ [False  True  True  True  True False]
+ [ True  True  True False False False]]
+selected points: (0, 4)
+order after shuffle: [0 2 1 3], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False  True  True  True  True False]
+ [ True False  True False  True False]
+ [ True  True  True False False False]]
+offspring 1 mutate at [1] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False  True  True  True  True False]
+ [ True False  True False  True False]
+ [ True  True  True False False False]]
+
+DEBUG:Time 0:best population ['2' '4' '6'] with cost 162.0, with fitness: 388.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:better population found, update best population to ['4' '5' '6']!
+DEBUG:Time 0:population 2 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 3 ['1' '3' '5'] with cost: 168.0, fitness: 382.0
+DEBUG:Time 0:population 4 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:Finished Evolution 3
+DEBUG:Time 0:-------------------------------------Evolution 4-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False  True  True  True  True False]
+ [ True False  True False  True False]
+ [ True  True  True False False False]]
+selected points: (0, 5)
+order after shuffle: [1 0 2 3], new offsprings after crossover:
+[[False  True  True  True  True False]
+ [False False False  True  True  True]
+ [ True False  True False  True False]
+ [ True  True  True False False False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True  True  True  True False]
+ [False False False  True  True  True]
+ [ True False  True False  True False]
+ [ True  True  True False False False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['1' '3' '5'] with cost: 168.0, fitness: 382.0
+DEBUG:Time 0:population 4 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:Finished Evolution 4
+DEBUG:Time 0:-------------------------------------Evolution 5-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True  True  True  True False]
+ [False False False  True  True  True]
+ [ True False  True False  True False]
+ [ True  True  True False False False]]
+selected points: (5, 5)
+order after shuffle: [2 3 1 0], new offsprings after crossover:
+[[False  True  True  True  True False]
+ [False False False  True  True False]
+ [ True False  True False  True  True]
+ [ True  True  True False False False]]
+offspring 1 mutate at [0] bit
+offspring 2 mutate at [2] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [4] bit
+new offsprings:
+[[ True  True  True  True  True False]
+ [False False  True  True  True False]
+ [ True False  True False  True  True]
+ [ True  True  True False  True False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3' '4' '5'] with cost: 246.0, fitness: 304.0
+DEBUG:Time 0:population 2 ['3' '4' '5'] with cost: 138.0, fitness: 412.0
+DEBUG:Time 0:population 3 ['1' '3' '5' '6'] with cost: 252.0, fitness: 298.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '5'] with cost: 216.0, fitness: 334.0
+DEBUG:Time 0:Finished Evolution 5
+DEBUG:Time 0:-------------------------------------Evolution 6-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True  True  True False]
+ [False False  True  True  True False]
+ [ True False  True False  True  True]
+ [ True  True  True False  True False]]
+selected points: (3, 5)
+order after shuffle: [0 1 2 3], new offsprings after crossover:
+[[ True  True  True  True  True False]
+ [False False  True  True  True False]
+ [ True False  True False  True  True]
+ [ True  True  True False  True False]]
+offspring 1 mutate at [0] bit
+offspring 2 mutate at [1] bit
+offspring 3 mutate at [2] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True  True  True  True False]
+ [False  True  True  True  True False]
+ [ True False False False  True  True]
+ [ True  True  True False  True False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 2 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 3 ['1' '5' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '5'] with cost: 216.0, fitness: 334.0
+DEBUG:Time 0:Finished Evolution 6
+DEBUG:Time 0:-------------------------------------Evolution 7-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True  True  True  True False]
+ [False  True  True  True  True False]
+ [ True False False False  True  True]
+ [ True  True  True False  True False]]
+selected points: (0, 1)
+order after shuffle: [2 1 0 3], new offsprings after crossover:
+[[ True False  True  True  True False]
+ [False  True  True  True  True False]
+ [False  True False False  True  True]
+ [ True  True  True False  True False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [2 3] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True False  True  True  True False]
+ [False  True  True  True  True False]
+ [False  True  True  True  True  True]
+ [ True  True  True False  True False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '3' '4' '5'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 2 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 3 ['2' '3' '4' '5' '6'] with cost: 270.0, fitness: 280.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '5'] with cost: 216.0, fitness: 334.0
+DEBUG:Time 0:Finished Evolution 7
+DEBUG:Time 0:-------------------------------------Evolution 8-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True False  True  True  True False]
+ [False  True  True  True  True False]
+ [False  True  True  True  True  True]
+ [ True  True  True False  True False]]
+selected points: (1, 2)
+order after shuffle: [2 0 3 1], new offsprings after crossover:
+[[ True  True  True  True  True False]
+ [False False  True  True  True False]
+ [False  True  True  True  True  True]
+ [ True  True  True False  True False]]
+offspring 1 mutate at [4] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True  True  True False False]
+ [False False  True  True  True False]
+ [False  True  True  True  True  True]
+ [ True  True  True False  True False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3' '4'] with cost: 228.0, fitness: 322.0
+DEBUG:Time 0:population 2 ['3' '4' '5'] with cost: 138.0, fitness: 412.0
+DEBUG:Time 0:population 3 ['2' '3' '4' '5' '6'] with cost: 270.0, fitness: 280.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '5'] with cost: 216.0, fitness: 334.0
+DEBUG:Time 0:Finished Evolution 8
+DEBUG:Time 0:-------------------------------------Evolution 9-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True  True False False]
+ [False False  True  True  True False]
+ [False  True  True  True  True  True]
+ [ True  True  True False  True False]]
+selected points: (0, 4)
+order after shuffle: [0 3 2 1], new offsprings after crossover:
+[[ True  True  True  True False False]
+ [ True  True  True False  True False]
+ [False  True  True  True  True  True]
+ [False False  True  True  True False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [5] bit
+new offsprings:
+[[ True  True  True  True False False]
+ [ True  True  True False  True False]
+ [False  True  True  True  True  True]
+ [False False  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3' '4'] with cost: 228.0, fitness: 322.0
+DEBUG:Time 0:population 2 ['1' '2' '3' '5'] with cost: 216.0, fitness: 334.0
+DEBUG:Time 0:population 3 ['2' '3' '4' '5' '6'] with cost: 270.0, fitness: 280.0
+DEBUG:Time 0:population 4 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:Finished Evolution 9
+DEBUG:Time 0:------------------------------------Evolution 10-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True  True False False]
+ [ True  True  True False  True False]
+ [ True  True  True False  True False]
+ [False False  True  True  True  True]]
+selected points: (0, 3)
+order after shuffle: [2 3 0 1], new offsprings after crossover:
+[[ True  True  True False False False]
+ [False False  True  True  True False]
+ [ True  True  True  True  True False]
+ [ True  True  True False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [0] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True  True False False False]
+ [False False  True  True  True False]
+ [False  True  True  True  True False]
+ [ True  True  True False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 2 ['3' '4' '5'] with cost: 138.0, fitness: 412.0
+DEBUG:Time 0:population 3 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '5' '6'] with cost: 300.0, fitness: 250.0
+DEBUG:Time 0:Finished Evolution 10
+DEBUG:Time 0:------------------------------------Evolution 11-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True False False False]
+ [False False  True  True  True False]
+ [False  True  True  True  True False]
+ [ True  True  True False  True  True]]
+selected points: (0, 0)
+order after shuffle: [0 2 1 3], new offsprings after crossover:
+[[ True  True  True False False False]
+ [False False  True  True  True False]
+ [False  True  True  True  True False]
+ [ True  True  True False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True  True False False False]
+ [False False  True  True  True False]
+ [False  True  True  True  True False]
+ [ True  True  True False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 2 ['3' '4' '5'] with cost: 138.0, fitness: 412.0
+DEBUG:Time 0:population 3 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '5' '6'] with cost: 300.0, fitness: 250.0
+DEBUG:Time 0:Finished Evolution 11
+DEBUG:Time 0:------------------------------------Evolution 12-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True False False False]
+ [False False  True  True  True False]
+ [False  True  True  True  True False]
+ [ True  True  True False  True  True]]
+selected points: (0, 4)
+order after shuffle: [2 0 3 1], new offsprings after crossover:
+[[False  True  True  True  True False]
+ [ True  True  True False False False]
+ [ True  True  True False  True False]
+ [False False  True  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [4] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [0] bit
+new offsprings:
+[[False  True  True  True  True False]
+ [ True  True  True False  True False]
+ [ True  True  True False  True False]
+ [ True False  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 2 ['1' '2' '3' '5'] with cost: 216.0, fitness: 334.0
+DEBUG:Time 0:population 3 ['1' '2' '3' '5'] with cost: 216.0, fitness: 334.0
+DEBUG:Time 0:population 4 ['1' '3' '4' '5' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:Finished Evolution 12
+DEBUG:Time 0:------------------------------------Evolution 13-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True  True  True  True False]
+ [ True  True  True False  True False]
+ [ True  True  True False  True False]
+ [ True False  True  True  True  True]]
+selected points: (0, 2)
+order after shuffle: [1 3 0 2], new offsprings after crossover:
+[[ True  True  True  True  True False]
+ [ True False  True False  True False]
+ [False  True  True False  True False]
+ [ True  True  True  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [5] bit
+offspring 3 mutate at [3] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True  True  True  True False]
+ [ True False  True False  True  True]
+ [False  True  True  True  True False]
+ [ True  True  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3' '4' '5'] with cost: 246.0, fitness: 304.0
+DEBUG:Time 0:population 2 ['1' '3' '5' '6'] with cost: 252.0, fitness: 298.0
+DEBUG:Time 0:population 3 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '4' '5' '6'] with cost: 330.0, fitness: 220.0
+DEBUG:Time 0:Finished Evolution 13
+DEBUG:Time 0:------------------------------------Evolution 14-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True  True  True False]
+ [ True False  True False  True  True]
+ [False  True  True  True  True False]
+ [ True  True  True  True  True  True]]
+selected points: (0, 2)
+order after shuffle: [2 1 0 3], new offsprings after crossover:
+[[False  True  True  True  True False]
+ [ True False  True False  True  True]
+ [ True  True  True  True  True False]
+ [ True  True  True  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True  True  True  True False]
+ [ True False  True False  True  True]
+ [ True  True  True  True  True False]
+ [ True  True  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 2 ['1' '3' '5' '6'] with cost: 252.0, fitness: 298.0
+DEBUG:Time 0:population 3 ['1' '2' '3' '4' '5'] with cost: 246.0, fitness: 304.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '4' '5' '6'] with cost: 330.0, fitness: 220.0
+DEBUG:Time 0:Finished Evolution 14
+DEBUG:Time 0:------------------------------------Evolution 15-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True  True  True  True False]
+ [ True False  True False  True  True]
+ [ True  True  True  True  True False]
+ [ True  True  True  True  True  True]]
+selected points: (1, 3)
+order after shuffle: [0 3 2 1], new offsprings after crossover:
+[[False  True  True  True  True False]
+ [ True  True  True  True  True  True]
+ [ True  True  True  True  True False]
+ [ True False  True False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True  True  True  True False]
+ [ True  True  True  True  True  True]
+ [ True  True  True  True  True False]
+ [ True False  True False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 2 ['1' '2' '3' '4' '5' '6'] with cost: 330.0, fitness: 220.0
+DEBUG:Time 0:population 3 ['1' '2' '3' '4' '5'] with cost: 246.0, fitness: 304.0
+DEBUG:Time 0:population 4 ['1' '3' '5' '6'] with cost: 252.0, fitness: 298.0
+DEBUG:Time 0:Finished Evolution 15
+DEBUG:Time 0:------------------------------------Evolution 16-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True  True  True  True False]
+ [ True  True  True  True  True  True]
+ [ True  True  True  True  True False]
+ [ True False  True False  True  True]]
+selected points: (2, 4)
+order after shuffle: [1 2 3 0], new offsprings after crossover:
+[[False  True  True  True  True False]
+ [ True  True  True  True  True  True]
+ [ True  True  True False  True False]
+ [ True False  True  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [1] bit
+offspring 3 mutate at [4] bit
+offspring 4 mutate at [5] bit
+new offsprings:
+[[False  True  True  True  True False]
+ [ True False  True  True  True  True]
+ [ True  True  True False False False]
+ [ True False  True  True  True False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '3' '4' '5'] with cost: 186.0, fitness: 364.0
+DEBUG:Time 0:population 2 ['1' '3' '4' '5' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:population 3 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 4 ['1' '3' '4' '5'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:Finished Evolution 16
+DEBUG:Time 0:------------------------------------Evolution 17-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True  True  True  True False]
+ [ True False  True  True  True  True]
+ [ True  True  True False False False]
+ [ True False  True  True  True False]]
+selected points: (1, 2)
+order after shuffle: [3 1 2 0], new offsprings after crossover:
+[[False False  True  True  True False]
+ [ True False  True  True  True  True]
+ [ True  True  True False False False]
+ [ True  True  True  True  True False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [3] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False  True  True  True False]
+ [ True False  True  True  True  True]
+ [ True  True  True  True False False]
+ [ True  True  True  True  True False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['3' '4' '5'] with cost: 138.0, fitness: 412.0
+DEBUG:Time 0:population 2 ['1' '3' '4' '5' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:population 3 ['1' '2' '3' '4'] with cost: 228.0, fitness: 322.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '4' '5'] with cost: 246.0, fitness: 304.0
+DEBUG:Time 0:Finished Evolution 17
+DEBUG:Time 0:------------------------------------Evolution 18-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False  True  True  True False]
+ [ True False  True  True  True  True]
+ [ True  True  True  True False False]
+ [ True  True  True  True  True False]]
+selected points: (5, 5)
+order after shuffle: [2 1 3 0], new offsprings after crossover:
+[[False False  True  True  True False]
+ [ True False  True  True  True  True]
+ [ True  True  True  True False False]
+ [ True  True  True  True  True False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [0] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False  True  True  True False]
+ [False False  True  True  True  True]
+ [ True  True  True  True False False]
+ [ True  True  True  True  True False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['3' '4' '5'] with cost: 138.0, fitness: 412.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['1' '2' '3' '4'] with cost: 228.0, fitness: 322.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '4' '5'] with cost: 246.0, fitness: 304.0
+DEBUG:Time 0:Finished Evolution 18
+DEBUG:Time 0:------------------------------------Evolution 19-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False  True  True  True False]
+ [False False  True  True  True False]
+ [False False  True  True  True  True]
+ [ True  True  True  True False False]]
+selected points: (0, 1)
+order after shuffle: [0 2 1 3], new offsprings after crossover:
+[[False False  True  True  True False]
+ [False False  True  True  True False]
+ [False False  True  True  True  True]
+ [ True  True  True  True False False]]
+offspring 1 mutate at [5] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [3] bit
+new offsprings:
+[[False False  True  True  True  True]
+ [False False  True  True  True False]
+ [False False  True  True  True  True]
+ [ True  True  True False False False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 2 ['3' '4' '5'] with cost: 138.0, fitness: 412.0
+DEBUG:Time 0:population 3 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 4 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:Finished Evolution 19
+DEBUG:Time 0:------------------------------------Evolution 20-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False  True  True  True  True]
+ [False False  True  True  True False]
+ [False False  True  True  True  True]
+ [ True  True  True False False False]]
+selected points: (1, 5)
+order after shuffle: [1 0 2 3], new offsprings after crossover:
+[[False False  True  True  True False]
+ [False False  True  True  True  True]
+ [False False  True  True  True  True]
+ [ True  True  True False False False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False  True  True  True False]
+ [False False  True  True  True  True]
+ [False False  True  True  True  True]
+ [ True  True  True False False False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['3' '4' '5'] with cost: 138.0, fitness: 412.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 4 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:Finished Evolution 20
+DEBUG:Time 0:------------------------------------Evolution 21-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False  True  True  True False]
+ [False False  True  True  True  True]
+ [False False  True  True  True  True]
+ [ True  True  True False False False]]
+selected points: (0, 5)
+order after shuffle: [3 1 2 0], new offsprings after crossover:
+[[ True  True  True False False False]
+ [False False  True  True  True  True]
+ [False False  True  True  True  True]
+ [False False  True  True  True False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True  True False False False]
+ [False False  True  True  True  True]
+ [False False  True  True  True  True]
+ [False False  True  True  True False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 4 ['3' '4' '5'] with cost: 138.0, fitness: 412.0
+DEBUG:Time 0:Finished Evolution 21
+DEBUG:Time 0:------------------------------------Evolution 22-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True False False False]
+ [False False  True  True  True  True]
+ [False False  True  True  True  True]
+ [False False  True  True  True False]]
+selected points: (0, 4)
+order after shuffle: [0 1 3 2], new offsprings after crossover:
+[[ True  True  True False False False]
+ [False False  True  True  True  True]
+ [False False  True  True  True  True]
+ [False False  True  True  True False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True  True False False False]
+ [False False  True  True  True  True]
+ [False False  True  True  True  True]
+ [False False  True  True  True False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 4 ['3' '4' '5'] with cost: 138.0, fitness: 412.0
+DEBUG:Time 0:Finished Evolution 22
+DEBUG:Time 0:------------------------------------Evolution 23-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True False False False]
+ [False False  True  True  True  True]
+ [False False  True  True  True  True]
+ [False False  True  True  True False]]
+selected points: (0, 3)
+order after shuffle: [0 1 3 2], new offsprings after crossover:
+[[ True  True  True False False False]
+ [False False  True  True  True  True]
+ [False False  True  True  True  True]
+ [False False  True  True  True False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [2] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True  True False False False]
+ [False False  True  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['3' '4' '5'] with cost: 138.0, fitness: 412.0
+DEBUG:Time 0:Finished Evolution 23
+DEBUG:Time 0:------------------------------------Evolution 24-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True False False False]
+ [False False  True  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True False]]
+selected points: (5, 5)
+order after shuffle: [0 1 2 3], new offsprings after crossover:
+[[ True  True  True False False False]
+ [False False  True  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True  True False False False]
+ [False False  True  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['3' '4' '5'] with cost: 138.0, fitness: 412.0
+DEBUG:Time 0:Finished Evolution 24
+DEBUG:Time 0:------------------------------------Evolution 25-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True False]]
+selected points: (1, 2)
+order after shuffle: [0 2 1 3], new offsprings after crossover:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [0 3] bit
+new offsprings:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False  True False  True False]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '3' '5'] with cost: 168.0, fitness: 382.0
+DEBUG:Time 0:Finished Evolution 25
+DEBUG:Time 0:------------------------------------Evolution 26-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False  True False  True False]]
+selected points: (1, 1)
+order after shuffle: [0 3 2 1], new offsprings after crossover:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False  True False  True False]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [5] bit
+new offsprings:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False  True False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '3' '5' '6'] with cost: 252.0, fitness: 298.0
+DEBUG:Time 0:Finished Evolution 26
+DEBUG:Time 0:------------------------------------Evolution 27-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False  True False  True  True]]
+selected points: (0, 2)
+order after shuffle: [0 1 2 3], new offsprings after crossover:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False  True False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False  True False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '3' '5' '6'] with cost: 252.0, fitness: 298.0
+DEBUG:Time 0:Finished Evolution 27
+DEBUG:Time 0:------------------------------------Evolution 28-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False  True False  True  True]]
+selected points: (4, 4)
+order after shuffle: [0 2 3 1], new offsprings after crossover:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False  True False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [1] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [ True False  True False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 4 ['1' '3' '5' '6'] with cost: 252.0, fitness: 298.0
+DEBUG:Time 0:Finished Evolution 28
+DEBUG:Time 0:------------------------------------Evolution 29-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True False False False]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [ True False  True False  True  True]]
+selected points: (1, 1)
+order after shuffle: [0 2 1 3], new offsprings after crossover:
+[[ True  True  True False False False]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [ True False  True False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True  True False False False]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [ True False  True False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '3' '5' '6'] with cost: 252.0, fitness: 298.0
+DEBUG:Time 0:Finished Evolution 29
+DEBUG:Time 0:------------------------------------Evolution 30-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True  True False False False]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [ True False  True False  True  True]]
+selected points: (0, 5)
+order after shuffle: [2 3 0 1], new offsprings after crossover:
+[[False False False  True  True  True]
+ [ True False  True False  True  True]
+ [ True  True  True False False False]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [1] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [ True  True  True False  True  True]
+ [ True  True  True False False False]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['1' '2' '3' '5' '6'] with cost: 300.0, fitness: 250.0
+DEBUG:Time 0:population 3 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 30
+DEBUG:Time 0:------------------------------------Evolution 31-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [ True  True  True False  True  True]
+ [ True  True  True False False False]
+ [False  True False  True  True  True]]
+selected points: (3, 5)
+order after shuffle: [0 2 3 1], new offsprings after crossover:
+[[False False False  True  True  True]
+ [ True  True  True False False False]
+ [ True  True  True  True  True  True]
+ [False  True False False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [1 2] bit
+offspring 4 mutate at [0] bit
+new offsprings:
+[[False False False  True  True  True]
+ [ True  True  True False False False]
+ [ True False False  True  True  True]
+ [ True  True False False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 3 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 4 ['1' '2' '5' '6'] with cost: 210.0, fitness: 340.0
+DEBUG:Time 0:Finished Evolution 31
+DEBUG:Time 0:------------------------------------Evolution 32-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True  True  True False False False]
+ [ True False False  True  True  True]]
+selected points: (3, 3)
+order after shuffle: [3 0 2 1], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True  True  True False False False]
+ [ True False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [5] bit
+offspring 4 mutate at [0] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True  True  True False False  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['1' '2' '3' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 32
+DEBUG:Time 0:------------------------------------Evolution 33-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True  True  True False False  True]
+ [False False False  True  True  True]]
+selected points: (2, 2)
+order after shuffle: [3 2 0 1], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False  True  True  True  True]
+ [ True  True False False False  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [4] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False  True  True  True  True]
+ [ True  True False False  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['1' '2' '5' '6'] with cost: 210.0, fitness: 340.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 33
+DEBUG:Time 0:------------------------------------Evolution 34-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False  True  True  True  True]
+ [ True  True False False  True  True]
+ [False False False  True  True  True]]
+selected points: (4, 4)
+order after shuffle: [3 0 1 2], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False  True  True  True  True]
+ [ True  True False False  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [1] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False  True  True  True  True]
+ [ True  True False False  True  True]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['1' '2' '5' '6'] with cost: 210.0, fitness: 340.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 34
+DEBUG:Time 0:------------------------------------Evolution 35-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False  True  True  True  True]
+ [ True  True False False  True  True]
+ [False  True False  True  True  True]]
+selected points: (4, 4)
+order after shuffle: [2 3 1 0], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False  True  True  True  True]
+ [ True  True False False  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [2] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True  True False False  True  True]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['1' '2' '5' '6'] with cost: 210.0, fitness: 340.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 35
+DEBUG:Time 0:------------------------------------Evolution 36-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True  True False False  True  True]
+ [False  True False  True  True  True]]
+selected points: (1, 2)
+order after shuffle: [3 2 1 0], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [ True False False False  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [0] bit
+offspring 2 mutate at [2] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True False  True  True  True]
+ [False  True  True  True  True  True]
+ [ True False False False  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:population 2 ['2' '3' '4' '5' '6'] with cost: 270.0, fitness: 280.0
+DEBUG:Time 0:population 3 ['1' '5' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 36
+DEBUG:Time 0:------------------------------------Evolution 37-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True False  True  True  True]
+ [ True False False False  True  True]
+ [ True False False False  True  True]
+ [False False False  True  True  True]]
+selected points: (0, 3)
+order after shuffle: [2 0 3 1], new offsprings after crossover:
+[[ True False False False  True  True]
+ [ True  True False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True False False False  True  True]
+ [ True  True False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '5' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 2 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '5' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:Finished Evolution 37
+DEBUG:Time 0:------------------------------------Evolution 38-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True False False False  True  True]
+ [ True  True False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+selected points: (0, 4)
+order after shuffle: [3 1 0 2], new offsprings after crossover:
+[[ True False False False  True  True]
+ [ True  True False  True  True  True]
+ [ True False False False  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [2] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True False  True False  True  True]
+ [ True  True False  True  True  True]
+ [ True False False False  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '3' '5' '6'] with cost: 252.0, fitness: 298.0
+DEBUG:Time 0:population 2 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:population 3 ['1' '5' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 38
+DEBUG:Time 0:------------------------------------Evolution 39-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True False  True False  True  True]
+ [ True  True False  True  True  True]
+ [ True False False False  True  True]
+ [False False False  True  True  True]]
+selected points: (1, 5)
+order after shuffle: [1 0 2 3], new offsprings after crossover:
+[[ True  True False  True  True  True]
+ [ True False  True False  True  True]
+ [ True False False False  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [1] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True False  True  True  True]
+ [ True False  True False  True  True]
+ [ True  True False False  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:population 2 ['1' '3' '5' '6'] with cost: 252.0, fitness: 298.0
+DEBUG:Time 0:population 3 ['1' '2' '5' '6'] with cost: 210.0, fitness: 340.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 39
+DEBUG:Time 0:------------------------------------Evolution 40-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True False  True  True  True]
+ [ True  True False False  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (4, 5)
+order after shuffle: [0 3 1 2], new offsprings after crossover:
+[[ True  True False  True  True  True]
+ [ True  True False False  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [0] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True False  True  True  True]
+ [ True  True False False  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:population 2 ['1' '2' '5' '6'] with cost: 210.0, fitness: 340.0
+DEBUG:Time 0:population 3 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 40
+DEBUG:Time 0:------------------------------------Evolution 41-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True False  True  True  True]
+ [ True  True False False  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (1, 3)
+order after shuffle: [2 1 0 3], new offsprings after crossover:
+[[ True False False  True  True  True]
+ [ True  True False False  True  True]
+ [ True  True False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True False False  True  True  True]
+ [ True  True False False  True  True]
+ [ True  True False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 2 ['1' '2' '5' '6'] with cost: 210.0, fitness: 340.0
+DEBUG:Time 0:population 3 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 41
+DEBUG:Time 0:------------------------------------Evolution 42-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True False False  True  True  True]
+ [ True  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (1, 4)
+order after shuffle: [2 3 0 1], new offsprings after crossover:
+[[ True False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [2] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [1] bit
+new offsprings:
+[[ True False False  True  True  True]
+ [ True False  True  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 2 ['1' '3' '4' '5' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 42
+DEBUG:Time 0:------------------------------------Evolution 43-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (1, 4)
+order after shuffle: [2 0 1 3], new offsprings after crossover:
+[[ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [1] bit
+new offsprings:
+[[ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 43
+DEBUG:Time 0:------------------------------------Evolution 44-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+selected points: (2, 5)
+order after shuffle: [3 0 2 1], new offsprings after crossover:
+[[ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [2] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True False False  True  True  True]
+ [False False  True  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 44
+DEBUG:Time 0:------------------------------------Evolution 45-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True False False  True  True  True]
+ [False False  True  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+selected points: (2, 5)
+order after shuffle: [3 0 1 2], new offsprings after crossover:
+[[ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [3] bit
+offspring 2 mutate at [2] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True False False False  True  True]
+ [False False  True  True  True  True]
+ [False False  True  True  True  True]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '5' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 45
+DEBUG:Time 0:------------------------------------Evolution 46-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True False False False  True  True]
+ [False False  True  True  True  True]
+ [False False  True  True  True  True]
+ [False  True False  True  True  True]]
+selected points: (2, 2)
+order after shuffle: [0 3 2 1], new offsprings after crossover:
+[[ True False False False  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]
+ [False  True  True  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True False False False  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]
+ [False  True  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '5' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 4 ['2' '3' '4' '5' '6'] with cost: 270.0, fitness: 280.0
+DEBUG:Time 0:Finished Evolution 46
+DEBUG:Time 0:------------------------------------Evolution 47-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True False False False  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]]
+selected points: (0, 5)
+order after shuffle: [1 3 2 0], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False  True  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False  True  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '5' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:Finished Evolution 47
+DEBUG:Time 0:------------------------------------Evolution 48-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False  True  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+selected points: (0, 3)
+order after shuffle: [0 2 1 3], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]
+ [ True False False False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]
+ [ True False False False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 4 ['1' '5' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:Finished Evolution 48
+DEBUG:Time 0:------------------------------------Evolution 49-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]
+ [ True False False False  True  True]]
+selected points: (1, 1)
+order after shuffle: [0 2 1 3], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]
+ [ True False False False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [2] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '5' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:Finished Evolution 49
+DEBUG:Time 0:------------------------------------Evolution 50-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+selected points: (2, 2)
+order after shuffle: [0 2 3 1], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [3] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:Finished Evolution 50
+DEBUG:Time 0:------------------------------------Evolution 51-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+selected points: (0, 5)
+order after shuffle: [0 2 1 3], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:Finished Evolution 51
+DEBUG:Time 0:------------------------------------Evolution 52-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+selected points: (2, 3)
+order after shuffle: [3 2 1 0], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [1] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [0] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 52
+DEBUG:Time 0:------------------------------------Evolution 53-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (2, 4)
+order after shuffle: [2 1 0 3], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 53
+DEBUG:Time 0:------------------------------------Evolution 54-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (3, 3)
+order after shuffle: [3 0 1 2], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 54
+DEBUG:Time 0:------------------------------------Evolution 55-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (0, 3)
+order after shuffle: [1 0 2 3], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 55
+DEBUG:Time 0:------------------------------------Evolution 56-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (0, 3)
+order after shuffle: [3 1 2 0], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [4] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True False  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:Finished Evolution 56
+DEBUG:Time 0:------------------------------------Evolution 57-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True False  True]]
+selected points: (0, 3)
+order after shuffle: [0 3 2 1], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True False  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [4] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 57
+DEBUG:Time 0:------------------------------------Evolution 58-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (1, 5)
+order after shuffle: [2 3 1 0], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 58
+DEBUG:Time 0:------------------------------------Evolution 59-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (0, 1)
+order after shuffle: [3 1 2 0], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [0] bit
+offspring 4 mutate at [0] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True  True False  True  True  True]
+ [ True False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:population 4 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:Finished Evolution 59
+DEBUG:Time 0:------------------------------------Evolution 60-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True  True False  True  True  True]
+ [ True False False  True  True  True]]
+selected points: (2, 5)
+order after shuffle: [1 0 3 2], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True  True False  True  True  True]
+ [ True False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [1] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]
+ [ True False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 4 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:Finished Evolution 60
+DEBUG:Time 0:------------------------------------Evolution 61-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]
+ [ True False False  True  True  True]]
+selected points: (4, 5)
+order after shuffle: [3 2 1 0], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]
+ [ True False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]
+ [ True False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 4 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:Finished Evolution 61
+DEBUG:Time 0:------------------------------------Evolution 62-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+selected points: (3, 5)
+order after shuffle: [3 0 1 2], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [1] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:Finished Evolution 62
+DEBUG:Time 0:------------------------------------Evolution 63-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True  True False  True  True  True]]
+selected points: (1, 1)
+order after shuffle: [2 3 1 0], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [0] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 63
+DEBUG:Time 0:------------------------------------Evolution 64-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (2, 5)
+order after shuffle: [0 1 2 3], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 64
+DEBUG:Time 0:------------------------------------Evolution 65-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (2, 5)
+order after shuffle: [3 0 1 2], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 65
+DEBUG:Time 0:------------------------------------Evolution 66-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (1, 5)
+order after shuffle: [3 0 1 2], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [1] bit
+offspring 2 mutate at [2] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [False False  True  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 66
+DEBUG:Time 0:------------------------------------Evolution 67-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [False False  True  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (2, 5)
+order after shuffle: [2 3 0 1], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False  True  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [0] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [ True False  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 4 ['1' '3' '4' '5' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:Finished Evolution 67
+DEBUG:Time 0:------------------------------------Evolution 68-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [ True False  True  True  True  True]]
+selected points: (3, 3)
+order after shuffle: [1 0 2 3], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [ True False  True  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [ True False  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 4 ['1' '3' '4' '5' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:Finished Evolution 68
+DEBUG:Time 0:------------------------------------Evolution 69-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [ True False  True  True  True  True]]
+selected points: (1, 4)
+order after shuffle: [2 0 3 1], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False False  True  True  True  True]
+ [ True False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [0] bit
+offspring 4 mutate at [1] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [ True False  True  True  True  True]
+ [ True  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['1' '3' '4' '5' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:population 4 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:Finished Evolution 69
+DEBUG:Time 0:------------------------------------Evolution 70-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [ True  True False  True  True  True]]
+selected points: (0, 3)
+order after shuffle: [2 0 3 1], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [ True  True False  True  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [ True  True False  True  True  True]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 70
+DEBUG:Time 0:------------------------------------Evolution 71-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [ True  True False  True  True  True]
+ [False  True False  True  True  True]]
+selected points: (2, 4)
+order after shuffle: [1 3 2 0], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [ True  True False  True  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [ True  True False  True  True  True]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 71
+DEBUG:Time 0:------------------------------------Evolution 72-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [ True  True False  True  True  True]
+ [False  True False  True  True  True]]
+selected points: (1, 2)
+order after shuffle: [0 2 1 3], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [ True  True False  True  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [ True  True False  True  True  True]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 72
+DEBUG:Time 0:------------------------------------Evolution 73-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]]
+selected points: (3, 3)
+order after shuffle: [3 2 1 0], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [2] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True  True  True  True  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '3' '4' '5' '6'] with cost: 270.0, fitness: 280.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 73
+DEBUG:Time 0:------------------------------------Evolution 74-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True  True  True  True  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]]
+selected points: (1, 4)
+order after shuffle: [1 2 0 3], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True  True  True  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [4] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True False  True]
+ [False  True False  True  True  True]
+ [False  True  True  True  True  True]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['2' '3' '4' '5' '6'] with cost: 270.0, fitness: 280.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 74
+DEBUG:Time 0:------------------------------------Evolution 75-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True False  True]
+ [False  True False  True  True  True]
+ [False  True  True  True  True  True]
+ [False  True False  True  True  True]]
+selected points: (2, 2)
+order after shuffle: [0 3 1 2], new offsprings after crossover:
+[[False  True False  True False  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True  True  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True False  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 4 ['2' '3' '4' '5' '6'] with cost: 270.0, fitness: 280.0
+DEBUG:Time 0:Finished Evolution 75
+DEBUG:Time 0:------------------------------------Evolution 76-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True False  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True  True  True  True  True]]
+selected points: (3, 3)
+order after shuffle: [2 0 1 3], new offsprings after crossover:
+[[False  True False  True False  True]
+ [False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True  True  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [0] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True False  True]
+ [False  True False  True  True  True]
+ [ True  True False  True  True  True]
+ [False  True  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:population 4 ['2' '3' '4' '5' '6'] with cost: 270.0, fitness: 280.0
+DEBUG:Time 0:Finished Evolution 76
+DEBUG:Time 0:------------------------------------Evolution 77-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True False  True]
+ [False  True False  True  True  True]
+ [ True  True False  True  True  True]
+ [False  True  True  True  True  True]]
+selected points: (3, 5)
+order after shuffle: [3 2 0 1], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False  True False  True  True  True]
+ [ True  True False  True False  True]
+ [False  True  True  True  True  True]]
+offspring 1 mutate at [1] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [2 3] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [ True  True  True False False  True]
+ [False  True  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['1' '2' '3' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:population 4 ['2' '3' '4' '5' '6'] with cost: 270.0, fitness: 280.0
+DEBUG:Time 0:Finished Evolution 77
+DEBUG:Time 0:------------------------------------Evolution 78-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False  True  True  True  True  True]]
+selected points: (0, 1)
+order after shuffle: [3 0 2 1], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False  True  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 4 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:Finished Evolution 78
+DEBUG:Time 0:------------------------------------Evolution 79-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+selected points: (4, 4)
+order after shuffle: [2 0 3 1], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 79
+DEBUG:Time 0:------------------------------------Evolution 80-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+selected points: (1, 2)
+order after shuffle: [1 3 2 0], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [1] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [2] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False  True  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['2' '3' '4' '5' '6'] with cost: 270.0, fitness: 280.0
+DEBUG:Time 0:Finished Evolution 80
+DEBUG:Time 0:------------------------------------Evolution 81-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (3, 4)
+order after shuffle: [0 3 2 1], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [1] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [2] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:Finished Evolution 81
+DEBUG:Time 0:------------------------------------Evolution 82-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]]
+selected points: (1, 4)
+order after shuffle: [2 0 3 1], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]
+ [False  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [4] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]
+ [False  True False  True False  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 4 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:Finished Evolution 82
+DEBUG:Time 0:------------------------------------Evolution 83-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]
+ [False  True False  True False  True]]
+selected points: (0, 5)
+order after shuffle: [3 1 2 0], new offsprings after crossover:
+[[False  True False  True False  True]
+ [False False False  True  True  True]
+ [False False  True  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [0] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True False  True]
+ [False False False  True  True  True]
+ [ True False  True  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['1' '3' '4' '5' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 83
+DEBUG:Time 0:------------------------------------Evolution 84-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True False  True]
+ [False False False  True  True  True]
+ [ True False  True  True  True  True]
+ [False False False  True  True  True]]
+selected points: (3, 5)
+order after shuffle: [0 2 1 3], new offsprings after crossover:
+[[False  True False  True False  True]
+ [False False False  True  True  True]
+ [ True False  True  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True False  True]
+ [False False False  True  True  True]
+ [ True False  True  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['1' '3' '4' '5' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 84
+DEBUG:Time 0:------------------------------------Evolution 85-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True False  True]
+ [False False False  True  True  True]
+ [ True False  True  True  True  True]
+ [False False False  True  True  True]]
+selected points: (2, 3)
+order after shuffle: [2 1 3 0], new offsprings after crossover:
+[[False  True  True  True False  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True  True  True False  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '3' '4' '6'] with cost: 252.0, fitness: 298.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 85
+DEBUG:Time 0:------------------------------------Evolution 86-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (2, 5)
+order after shuffle: [2 0 1 3], new offsprings after crossover:
+[[False False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 86
+DEBUG:Time 0:------------------------------------Evolution 87-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (1, 1)
+order after shuffle: [1 3 2 0], new offsprings after crossover:
+[[False False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 87
+DEBUG:Time 0:------------------------------------Evolution 88-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (0, 3)
+order after shuffle: [2 3 0 1], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:Finished Evolution 88
+DEBUG:Time 0:------------------------------------Evolution 89-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+selected points: (2, 4)
+order after shuffle: [0 3 2 1], new offsprings after crossover:
+[[False False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+offspring 1 mutate at [0] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [3] bit
+new offsprings:
+[[ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 2 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '5' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:Finished Evolution 89
+DEBUG:Time 0:------------------------------------Evolution 90-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True False False  True  True  True]
+ [False False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+selected points: (0, 4)
+order after shuffle: [2 0 1 3], new offsprings after crossover:
+[[False False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 2 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '5' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:Finished Evolution 90
+DEBUG:Time 0:------------------------------------Evolution 91-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False False  True  True  True]
+ [ True False False  True  True  True]
+ [False False False  True  True  True]
+ [ True False False False  True  True]]
+selected points: (1, 4)
+order after shuffle: [1 3 0 2], new offsprings after crossover:
+[[False False False  True  True  True]
+ [ True False False False  True  True]
+ [False False False  True  True  True]
+ [ True False False  True  True  True]]
+offspring 1 mutate at [1 4] bit
+offspring 2 mutate at [1] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [2] bit
+new offsprings:
+[[False  True False  True False  True]
+ [ True  True False False  True  True]
+ [False False False  True  True  True]
+ [ True False  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 2 ['1' '2' '5' '6'] with cost: 210.0, fitness: 340.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '3' '4' '5' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:Finished Evolution 91
+DEBUG:Time 0:------------------------------------Evolution 92-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True False  True]
+ [False  True False  True False  True]
+ [ True  True False False  True  True]
+ [False False False  True  True  True]]
+selected points: (2, 3)
+order after shuffle: [3 2 0 1], new offsprings after crossover:
+[[False  True False  True False  True]
+ [False  True False False False  True]
+ [ True  True False  True  True  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [0] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True False  True]
+ [ True  True False False False  True]
+ [ True  True False  True  True  True]
+ [False False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 2 ['1' '2' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 3 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:population 4 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:Finished Evolution 92
+DEBUG:Time 0:------------------------------------Evolution 93-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True False  True]
+ [ True  True False False False  True]
+ [ True  True False  True  True  True]
+ [False False False  True  True  True]]
+selected points: (0, 3)
+order after shuffle: [1 0 3 2], new offsprings after crossover:
+[[ True  True False False False  True]
+ [False  True False  True False  True]
+ [False False False  True  True  True]
+ [ True  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True False False False  True]
+ [False  True False  True False  True]
+ [False False False  True  True  True]
+ [ True  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 2 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['1' '2' '4' '5' '6'] with cost: 240.0, fitness: 310.0
+DEBUG:Time 0:Finished Evolution 93
+DEBUG:Time 0:------------------------------------Evolution 94-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True False False False  True]
+ [False  True False  True False  True]
+ [False False False  True  True  True]
+ [ True  True False  True  True  True]]
+selected points: (2, 2)
+order after shuffle: [3 0 2 1], new offsprings after crossover:
+[[ True  True False False False  True]
+ [False  True False  True False  True]
+ [False False False  True  True  True]
+ [ True  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [0] bit
+new offsprings:
+[[ True  True False False False  True]
+ [False  True False  True False  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 2 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:Finished Evolution 94
+DEBUG:Time 0:------------------------------------Evolution 95-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True False False False  True]
+ [False  True False  True False  True]
+ [False False False  True  True  True]
+ [False  True False  True  True  True]]
+selected points: (4, 5)
+order after shuffle: [0 2 3 1], new offsprings after crossover:
+[[ True  True False False False  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True False  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[ True  True False False False  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True False  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['1' '2' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 2 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 3 ['4' '5' '6'] with cost: 132.0, fitness: 418.0
+DEBUG:Time 0:population 4 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:Finished Evolution 95
+DEBUG:Time 0:------------------------------------Evolution 96-------------------------------------
+DEBUG:Time 0:selected parents:
+[[ True  True False False False  True]
+ [False  True False  True  True  True]
+ [False False False  True  True  True]
+ [False  True False  True False  True]]
+selected points: (0, 4)
+order after shuffle: [1 3 0 2], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False  True False  True False  True]
+ [ True  True False False False  True]
+ [False False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [0] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [False  True False  True False  True]
+ [ True  True False False False  True]
+ [ True False False  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 3 ['1' '2' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:population 4 ['1' '4' '5' '6'] with cost: 192.0, fitness: 358.0
+DEBUG:Time 0:Finished Evolution 96
+DEBUG:Time 0:------------------------------------Evolution 97-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [False  True False  True False  True]
+ [ True  True False False False  True]
+ [ True False False  True  True  True]]
+selected points: (5, 5)
+order after shuffle: [3 1 2 0], new offsprings after crossover:
+[[False  True False  True  True  True]
+ [False  True False  True False  True]
+ [ True  True False False False  True]
+ [ True False False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [2] bit
+offspring 4 mutate at [2] bit
+new offsprings:
+[[False  True False  True  True  True]
+ [False  True False  True False  True]
+ [ True  True  True False False  True]
+ [ True False  True  True  True  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '5' '6'] with cost: 180.0, fitness: 370.0
+DEBUG:Time 0:population 2 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 3 ['1' '2' '3' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:population 4 ['1' '3' '4' '5' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:Finished Evolution 97
+DEBUG:Time 0:------------------------------------Evolution 98-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False  True False  True  True  True]
+ [False  True False  True False  True]
+ [ True  True  True False False  True]
+ [ True False  True  True  True  True]]
+selected points: (1, 3)
+order after shuffle: [3 0 2 1], new offsprings after crossover:
+[[False False  True  True  True  True]
+ [False  True False  True False  True]
+ [ True  True  True False False  True]
+ [ True  True False  True  True  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [5] bit
+offspring 4 mutate at [2 4] bit
+new offsprings:
+[[False False  True  True  True  True]
+ [False  True False  True False  True]
+ [ True  True  True False False False]
+ [ True  True  True  True False  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 2 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 3 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '4' '6'] with cost: 312.0, fitness: 238.0
+DEBUG:Time 0:Finished Evolution 98
+DEBUG:Time 0:------------------------------------Evolution 99-------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False  True  True  True  True]
+ [False  True False  True False  True]
+ [ True  True  True False False False]
+ [ True  True  True  True False  True]]
+selected points: (3, 4)
+order after shuffle: [0 3 1 2], new offsprings after crossover:
+[[False False  True  True  True  True]
+ [False  True False  True False  True]
+ [ True  True  True  True False False]
+ [ True  True  True False False  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False False  True  True  True  True]
+ [False  True False  True False  True]
+ [ True  True  True  True False False]
+ [ True  True  True False False  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 2 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 3 ['1' '2' '3' '4'] with cost: 228.0, fitness: 322.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '6'] with cost: 282.0, fitness: 268.0
+DEBUG:Time 0:Finished Evolution 99
+DEBUG:Time 0:------------------------------------Evolution 100------------------------------------
+DEBUG:Time 0:selected parents:
+[[False False  True  True  True  True]
+ [False  True False  True False  True]
+ [ True  True  True  True False False]
+ [ True  True  True False False  True]]
+selected points: (0, 4)
+order after shuffle: [1 0 3 2], new offsprings after crossover:
+[[False  True False  True False  True]
+ [False False  True  True  True  True]
+ [ True  True  True False False False]
+ [ True  True  True  True False  True]]
+offspring 1 mutate at [] bit
+offspring 2 mutate at [] bit
+offspring 3 mutate at [] bit
+offspring 4 mutate at [] bit
+new offsprings:
+[[False  True False  True False  True]
+ [False False  True  True  True  True]
+ [ True  True  True False False False]
+ [ True  True  True  True False  True]]
+
+DEBUG:Time 0:best population ['4' '5' '6'] with cost 132.0, with fitness: 418.0
+DEBUG:Time 0:population 1 ['2' '4' '6'] with cost: 162.0, fitness: 388.0
+DEBUG:Time 0:population 2 ['3' '4' '5' '6'] with cost: 222.0, fitness: 328.0
+DEBUG:Time 0:population 3 ['1' '2' '3'] with cost: 198.0, fitness: 352.0
+DEBUG:Time 0:population 4 ['1' '2' '3' '4' '6'] with cost: 312.0, fitness: 238.0
+DEBUG:Time 0:Finished Evolution 100
+INFO:Time 0:mno vm id: ['1' '2' '3'], total resource (bw_up, bw_down, cr): (146446.33305915206, 159247.79441001694, 2.0999999999999996)
+INFO:Time 0:mvno vm id: ['4' '5' '6'], total resource (bw_up, bw_down, cr): (131188.16525327874, 121787.38297111126, 1.6), cost: 132.0
 INFO:Time 0:contract: bw_high: 1000000, bw_low: 5, cr_high: 10, cr_low: 0
-INFO:Time 0:Function vm_assignment executed in 0.0400s
+INFO:Time 0:Function vm_assignment executed in 246.0915s
 INFO:Time 0:Finished vm assignment.
 INFO:Time 0:---------------------------------------------Start of Task Deployment----------------------------------------------
 INFO:Time 0:Start of hour 1
@@ -20,10 +2808,10 @@ Get hour events:
 id,type,time
 [[0 0 10 'VoIP' '1' '1' 0.1 0.02 370 16]
  [1 0 15 'IP_Video' '2' '2' 0.1 0.06 20 900]
- [2 0 15 'FTP' '3' '3' 0.2 0.08 35 1000]
+ [2 0 15 'FTP' '3' '3' 0.2 0.05 35 1000]
  [3 0 21 'VoIP' '1' '3' 0.1 0.05 300 16]
  [4 0 26 'IP_Video' '4' '4' 0.15 0.09 31 850]
- [5 0 27 'FTP' '5' '5' 0.3 0.12 25 1300]
+ [5 0 27 'FTP' '5' '5' 0.3 0.05 25 1300]
  [6 0 30 'IP_Video' '6' '6' 0.08 0.05 24 1065]
  [7 0 32 'VoIP' '7' '2' 0.05 0.02 246 15]
  [8 0 33 'FTP' '8' '4' 0.15 0.1 26 790]
@@ -31,165 +2819,297 @@ id,type,time
  [10 0 41 'VoIP' '9' '1' 0.1 0.02 370 16]
  [11 0 45 'VoIP' '10' '1' 0.1 0.02 370 16]
  [12 0 45 'IP_Video' '11' '10' 0.08 0.05 24 1065]
- [13 0 45 'FTP' '12' '12' 0.3 0.12 25 1300]
+ [13 0 45 'FTP' '12' '12' 0.3 0.05 25 1300]
  [0 1 45 'VoIP' '1' '1' 0.1 0.02 370 16]
  [1 1 48 'IP_Video' '2' '2' 0.1 0.06 20 900]
- [2 1 49 'FTP' '3' '3' 0.2 0.08 35 1000]
+ [2 1 49 'FTP' '3' '3' 0.2 0.05 35 1000]
  [8 1 49 'FTP' '8' '4' 0.15 0.1 26 790]
  [4 1 50 'IP_Video' '4' '4' 0.15 0.09 31 850]
  [7 1 50 'VoIP' '7' '2' 0.05 0.02 246 15]
- [5 1 50 'FTP' '5' '5' 0.3 0.12 25 1300]
+ [5 1 50 'FTP' '5' '5' 0.3 0.05 25 1300]
  [3 1 50 'VoIP' '1' '3' 0.1 0.05 300 16]
  [11 1 51 'VoIP' '10' '1' 0.1 0.02 370 16]
  [10 1 52 'VoIP' '9' '1' 0.1 0.02 370 16]
  [6 1 53 'IP_Video' '6' '6' 0.08 0.05 24 1065]
  [9 1 53 'VoIP' '1' '6' 0.07 0.04 450 17]
  [12 1 53 'IP_Video' '11' '10' 0.08 0.05 24 1065]
- [13 1 55 'FTP' '12' '12' 0.3 0.12 25 1300]
- [14 0 55 'FTP' '13' '9' 0.3 0.12 25 1300]
- [15 0 55 'FTP' '14' '6' 0.3 0.12 25 1300]
- [14 1 59 'FTP' '13' '9' 0.3 0.12 25 1300]]
+ [13 1 55 'FTP' '12' '12' 0.3 0.05 25 1300]
+ [14 0 55 'FTP' '13' '9' 0.15 0.05 25 1300]
+ [15 0 55 'FTP' '14' '6' 0.15 0.05 25 1300]
+ [14 1 59 'FTP' '13' '9' 0.15 0.05 25 1300]]
 INFO:Time 0:mno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
    0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: -inf
 INFO:Time 0:mvno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
    0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: -inf
-INFO:Time 10:task0 assign to MNO
-INFO:Time 10:Deploy task0 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
+INFO:Time 10:task0 assign to MVNO
+INFO:Time 10:Deploy task0 to vm 4,
+task cr: 0.02, vm cr: 0.5 -> 0.48
 task bw_up: 370, local_bw_up: 100000 -> 99630
 task bw_down: 16, local_bw_down: 100000 -> 99984
 
-INFO:Time 15:task1 assign to MVNO
+INFO:Time 15:task1 assign to MNO
 INFO:Time 15:Deploy task1 to vm 2,
-task cr: 0.06, vm cr: 0.2 -> 0.14
+task cr: 0.06, vm cr: 0.6 -> 0.54
 task bw_up: 20, local_bw_up: 100000 -> 99980
 task bw_down: 900, local_bw_down: 100000 -> 99100
 
 INFO:Time 15:task2 assign to MVNO
 INFO:Time 15:Deploy task2 to vm 6,
-task cr: 0.08, vm cr: 0.2 -> 0.12000000000000001
+task cr: 0.05, vm cr: 0.8 -> 0.75
 task bw_up: 35, local_bw_up: 100000 -> 99965
 task bw_down: 1000, local_bw_down: 100000 -> 99000
 
-INFO:Time 21:task3 assign to MNO
-INFO:Time 21:Task3 unaccepted, retry after 66 minutes.
+INFO:Time 21:task3 assign to MVNO
+INFO:Time 21:Deploy task3 to vm 4,
+task cr: 0.05, vm cr: 0.48 -> 0.43
+task bw_up: 300, local_bw_up: 99630 -> 99330
+task bw_down: 16, local_bw_down: 99984 -> 99968
+
 INFO:Time 26:task4 assign to MNO
-INFO:Time 26:Deploy task4 to vm 5,
-task cr: 0.09, vm cr: 0.2 -> 0.11000000000000001
-task bw_up: 31, local_bw_up: 100000 -> 99969
-task bw_down: 850, local_bw_down: 100000 -> 99150
+INFO:Time 26:Deploy task4 to vm 2,
+task cr: 0.09, vm cr: 0.54 -> 0.45000000000000007
+task bw_up: 31, local_bw_up: 99980 -> 99949
+task bw_down: 850, local_bw_down: 99100 -> 98250
 
 INFO:Time 27:task5 assign to MNO
 INFO:Time 27:Deploy task5 to vm 3,
-task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
+task cr: 0.05, vm cr: 0.8 -> 0.75
 task bw_up: 25, local_bw_up: 100000 -> 99975
 task bw_down: 1300, local_bw_down: 100000 -> 98700
 
-INFO:Time 30:task6 assign to MVNO
-INFO:Time 30:Task6 unaccepted, retry after 113 minutes.
+INFO:Time 30:task6 assign to MNO
+INFO:Time 30:Deploy task6 to vm 2,
+task cr: 0.05, vm cr: 0.45000000000000007 -> 0.4000000000000001
+task bw_up: 24, local_bw_up: 99949 -> 99925
+task bw_down: 1065, local_bw_down: 98250 -> 97185
+
 INFO:Time 32:task7 assign to MVNO
 INFO:Time 32:Deploy task7 to vm 4,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 246, local_bw_up: 100000 -> 99754
-task bw_down: 15, local_bw_down: 100000 -> 99985
+task cr: 0.02, vm cr: 0.43 -> 0.41
+task bw_up: 246, local_bw_up: 99330 -> 99084
+task bw_down: 15, local_bw_down: 99968 -> 99953
 
 INFO:Time 33:task8 assign to MNO
-INFO:Time 33:Task8 unaccepted, retry after 118 minutes.
-INFO:Time 35:task9 assign to MNO
-INFO:Time 35:Task9 unaccepted, retry after 118 minutes.
-INFO:Time 41:task10 assign to MNO
+INFO:Time 33:Deploy task8 to vm 3,
+task cr: 0.1, vm cr: 0.75 -> 0.65
+task bw_up: 26, local_bw_up: 99975 -> 99949
+task bw_down: 790, local_bw_down: 98700 -> 97910
+
+INFO:Time 35:task9 assign to MVNO
+INFO:Time 35:Deploy task9 to vm 4,
+task cr: 0.04, vm cr: 0.41 -> 0.37
+task bw_up: 450, local_bw_up: 99084 -> 98634
+task bw_down: 17, local_bw_down: 99953 -> 99936
+
+INFO:Time 41:task10 assign to MVNO
 INFO:Time 41:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 41:Task10 unaccepted, retry after 63 minutes.
+INFO:Time 41:Deploy task10 to vm 4,
+task cr: 0.02, vm cr: 0.37 -> 0.35
+task bw_up: 370, local_bw_up: 98634 -> 98264
+task bw_down: 16, local_bw_down: 99936 -> 99920
+
 INFO:Time 45:task11 assign to MNO
 INFO:Time 45:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 45:Task11 unaccepted, retry after 97 minutes.
-INFO:Time 45:task12 assign to MVNO
+INFO:Time 45:Deploy task11 to vm 1,
+task cr: 0.02, vm cr: 0.7 -> 0.6799999999999999
+task bw_up: 370, local_bw_up: 100000 -> 99630
+task bw_down: 16, local_bw_down: 100000 -> 99984
+
+INFO:Time 45:task12 assign to MNO
 INFO:Time 45:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 45:Task12 unaccepted, retry after 77 minutes.
+INFO:Time 45:Deploy task12 to vm 2,
+task cr: 0.05, vm cr: 0.4000000000000001 -> 0.3500000000000001
+task bw_up: 24, local_bw_up: 99925 -> 99901
+task bw_down: 1065, local_bw_down: 97185 -> 96120
+
 INFO:Time 45:task13 assign to MVNO
 INFO:Time 45:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 45:Task13 unaccepted, retry after 77 minutes.
-INFO:Time 45:release task0 from vm 1,
-cr: 0.18000000000000002 -> 0.2
+INFO:Time 45:Deploy task13 to vm 6,
+task cr: 0.05, vm cr: 0.75 -> 0.7
+task bw_up: 25, local_bw_up: 99965 -> 99940
+task bw_down: 1300, local_bw_down: 99000 -> 97700
+
+INFO:Time 45:release task0 from vm 4,
+cr: 0.35 -> 0.37
+local_bw_up: 98264 -> 98634
+local_bw_down: 99920 -> 99936
+
+INFO:Time 48:release task1 from vm 2,
+cr: 0.3500000000000001 -> 0.4100000000000001
+local_bw_up: 99901 -> 99921
+local_bw_down: 96120 -> 97020
+
+INFO:Time 49:release task2 from vm 6,
+cr: 0.7 -> 0.75
+local_bw_up: 99940 -> 99975
+local_bw_down: 97700 -> 98700
+
+INFO:Time 49:release task8 from vm 3,
+cr: 0.65 -> 0.75
+local_bw_up: 99949 -> 99975
+local_bw_down: 97910 -> 98700
+
+INFO:Time 50:release task4 from vm 2,
+cr: 0.4100000000000001 -> 0.5000000000000001
+local_bw_up: 99921 -> 99952
+local_bw_down: 97020 -> 97870
+
+INFO:Time 50:release task7 from vm 4,
+cr: 0.37 -> 0.39
+local_bw_up: 98634 -> 98880
+local_bw_down: 99936 -> 99951
+
+INFO:Time 50:release task5 from vm 3,
+cr: 0.75 -> 0.8
+local_bw_up: 99975 -> 100000
+local_bw_down: 98700 -> 100000
+
+INFO:Time 50:release task3 from vm 4,
+cr: 0.39 -> 0.44
+local_bw_up: 98880 -> 99180
+local_bw_down: 99951 -> 99967
+
+INFO:Time 51:release task11 from vm 1,
+cr: 0.6799999999999999 -> 0.7
 local_bw_up: 99630 -> 100000
 local_bw_down: 99984 -> 100000
 
-INFO:Time 48:release task1 from vm 2,
-cr: 0.14 -> 0.2
-local_bw_up: 99980 -> 100000
-local_bw_down: 99100 -> 100000
+INFO:Time 52:release task10 from vm 4,
+cr: 0.44 -> 0.46
+local_bw_up: 99180 -> 99550
+local_bw_down: 99967 -> 99983
 
-INFO:Time 49:release task2 from vm 6,
-cr: 0.12000000000000001 -> 0.2
-local_bw_up: 99965 -> 100000
-local_bw_down: 99000 -> 100000
+INFO:Time 53:release task6 from vm 2,
+cr: 0.5000000000000001 -> 0.5500000000000002
+local_bw_up: 99952 -> 99976
+local_bw_down: 97870 -> 98935
 
-INFO:Time 50:release task4 from vm 5,
-cr: 0.11000000000000001 -> 0.2
-local_bw_up: 99969 -> 100000
-local_bw_down: 99150 -> 100000
+INFO:Time 53:release task9 from vm 4,
+cr: 0.46 -> 0.5
+local_bw_up: 99550 -> 100000
+local_bw_down: 99983 -> 100000
 
-INFO:Time 50:release task7 from vm 4,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99754 -> 100000
-local_bw_down: 99985 -> 100000
+INFO:Time 53:release task12 from vm 2,
+cr: 0.5500000000000002 -> 0.6000000000000002
+local_bw_up: 99976 -> 100000
+local_bw_down: 98935 -> 100000
 
-INFO:Time 50:release task5 from vm 3,
-cr: 0.08000000000000002 -> 0.2
+INFO:Time 55:release task13 from vm 6,
+cr: 0.75 -> 0.8
 local_bw_up: 99975 -> 100000
 local_bw_down: 98700 -> 100000
 
-INFO:Time 55:task14 assign to MNO
+INFO:Time 55:task14 assign to MVNO
 INFO:Time 55:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 55:Deploy task14 to vm 3,
-task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
+INFO:Time 55:Deploy task14 to vm 6,
+task cr: 0.05, vm cr: 0.8 -> 0.75
 task bw_up: 25, local_bw_up: 100000 -> 99975
 task bw_down: 1300, local_bw_down: 100000 -> 98700
 
-INFO:Time 55:task15 assign to MNO
+INFO:Time 55:task15 assign to MVNO
 INFO:Time 55:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 55:Task15 unaccepted, retry after 68 minutes.
-INFO:Time 59:release task14 from vm 3,
-cr: 0.08000000000000002 -> 0.2
+INFO:Time 55:Deploy task15 to vm 6,
+task cr: 0.05, vm cr: 0.75 -> 0.7
+task bw_up: 25, local_bw_up: 99975 -> 99950
+task bw_down: 1300, local_bw_down: 98700 -> 97400
+
+INFO:Time 59:release task14 from vm 6,
+cr: 0.7 -> 0.75
+local_bw_up: 99950 -> 99975
+local_bw_down: 97400 -> 98700
+
+INFO:Time 59:Finished hour 1
+INFO:Time 59:Release undone tasks: dict_keys([15])
+INFO:Time 59:Task15 unaccepted, retry after 77 minutes.
+INFO:Time 59:release task15 from vm 6,
+cr: 0.75 -> 0.8
 local_bw_up: 99975 -> 100000
 local_bw_down: 98700 -> 100000
 
-INFO:Time 59:Finished hour 1
 INFO:Time 59:Release undone tasks: dict_keys([])
-INFO:Time 59:Release undone tasks: dict_keys([])
-INFO:Time 60:mno overall hour utility: 60.29567092168565, hour fitness: 15.073917730421412
-INFO:Time 60:mvno overall hour utility: 75.7425729748081, hour fitness: 25.247524324936034
+INFO:Time 60:mno overall hour utility: 76.80288636278402, # of task: 7, hour fitness: 10.971840908969146
+INFO:Time 60:mvno overall hour utility: 78.55561208916518, # of task: 9, hour fitness: 8.728401343240575
 INFO:Time 60:------------------------------------Start of Updating Parameters------------------------------------
 INFO:Time 60:-------------------------------updating MNO parameters-------------------------------
 INFO:Time 60:-----------------------Updating best population-----------------------
-INFO:Time 60:No better population found, keep origin.
-INFO:Time 60:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 15.073917730421412.
+DEBUG:Time 60:population 1 [  0.01   0.14   0.13   0.01   0.24   0.46   0.01   0.32   0.01   0.13
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27] with fitness: 12.68201942674324
+INFO:Time 60:better population 1 found, update best population!
+DEBUG:Time 60:population 2 [  0.02   0.01   0.02   0.43   0.2    0.32   0.05   0.1    0.36   0.21
+   0.03   0.25   0.16   0.05   0.28   0.04   0.05   0.43 245.69   0.32] with fitness: 8.995949907961656
+DEBUG:Time 60:population 3 [  0.47   0.23   0.01   0.17   0.02   0.09   0.09   0.36   0.47   0.02
+   0.01   0.05   0.09   0.33   0.1    0.15   0.01   0.31 201.66   0.14] with fitness: 9.051468508227156
+DEBUG:Time 60:population 4 [  0.02   0.24   0.02   0.38   0.18   0.16   0.01   0.04   0.52   0.32
+   0.03   0.08   0.23   0.37   0.02   0.18   0.18   0.02 218.8    0.31] with fitness: 7.077141859542933
+INFO:Time 60:best population as [  0.01   0.14   0.13   0.01   0.24   0.46   0.01   0.32   0.01   0.13
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27], fitness: 12.68201942674324.
 INFO:Time 60:Finished updating best population.
 INFO:Time 60:-----------------------Generate new offsprings------------------------
-INFO:Time 60:data not enough for updating, skip updating.
-INFO:Time 60:final new offspring:
+DEBUG:Time 60:selected parents:
 1: [  0.01   0.14   0.13   0.01   0.24   0.46   0.01   0.32   0.01   0.13
    0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27]
-2: [  0.02   0.01   0.02   0.43   0.2    0.32   0.05   0.1    0.36   0.21
+2: [  0.01   0.14   0.13   0.01   0.24   0.46   0.01   0.32   0.01   0.13
+   0.02   0.5    0.8    0.05   0.02   0.07   0.02   0.04 340.24   0.27]
+3: [  0.02   0.01   0.02   0.43   0.2    0.32   0.05   0.1    0.36   0.21
    0.03   0.25   0.16   0.05   0.28   0.04   0.05   0.43 245.69   0.32]
-3: [  0.47   0.23   0.01   0.17   0.02   0.09   0.09   0.36   0.47   0.02
+4: [  0.47   0.23   0.01   0.17   0.02   0.09   0.09   0.36   0.47   0.02
    0.01   0.05   0.09   0.33   0.1    0.15   0.01   0.31 201.66   0.14]
-4: [  0.02   0.24   0.02   0.38   0.18   0.16   0.01   0.04   0.52   0.32
-   0.03   0.08   0.23   0.37   0.02   0.18   0.18   0.02 218.8    0.31]
+
+DEBUG:Time 60:selected points: (2, 13)
+DEBUG:Time 60:order after shuffle: [2 3 1 0]
+DEBUG:Time 60:new offsprings after crossover:
+1: [  0.01   0.07   0.02   0.41   0.19   0.3    0.05   0.1    0.36   0.21
+   0.03   0.25   0.53   0.15   0.05   0.14   0.05   0.08 340.24   0.27]
+2: [  0.02   0.23   0.03   0.43   0.06   0.23   0.09   0.36   0.47   0.02
+   0.01   0.05   0.16   0.57   0.04   0.12   0.04   0.07 340.24   0.27]
+3: [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.32   0.01   0.13
+   0.02   0.5    0.38   0.02   0.21   0.03   0.03   0.32 245.69   0.32]
+4: [  0.38   0.19   0.07   0.     0.13   0.24   0.01   0.32   0.01   0.13
+   0.02   0.5    0.56   0.03   0.07   0.11   0.01   0.22 201.66   0.14]
+
+DEBUG:Time 60:offspring 1 mutate at [0] bit, multiply by 1.2
+DEBUG:Time 60:offspring 2 mutate at [] bit, multiply by
+DEBUG:Time 60:offspring 3 mutate at [ 0 10] bit, multiply by 0.8 1.2
+DEBUG:Time 60:offspring 4 mutate at [] bit, multiply by
+DEBUG:Time 60:new offsprings after mutation:
+1: [  0.01   0.07   0.02   0.41   0.19   0.3    0.05   0.1    0.36   0.21
+   0.03   0.25   0.53   0.15   0.05   0.14   0.05   0.08 340.24   0.27]
+2: [  0.02   0.23   0.03   0.43   0.06   0.23   0.09   0.36   0.47   0.02
+   0.01   0.05   0.16   0.57   0.04   0.12   0.04   0.07 340.24   0.27]
+3: [  0.03   0.03   0.14   0.01   0.27   0.52   0.01   0.32   0.01   0.13
+   0.03   0.49   0.38   0.02   0.21   0.03   0.03   0.32 245.69   0.32]
+4: [  0.38   0.19   0.07   0.     0.13   0.24   0.01   0.32   0.01   0.13
+   0.02   0.5    0.56   0.03   0.07   0.11   0.01   0.22 201.66   0.14]
+
+INFO:Time 60:final new offspring:
+1: [  0.01   0.07   0.02   0.41   0.19   0.3    0.05   0.1    0.36   0.21
+   0.03   0.25   0.53   0.15   0.05   0.14   0.05   0.08 340.24   0.27]
+2: [  0.02   0.23   0.03   0.43   0.06   0.23   0.09   0.36   0.47   0.02
+   0.01   0.05   0.16   0.57   0.04   0.12   0.04   0.07 340.24   0.27]
+3: [  0.03   0.03   0.14   0.01   0.27   0.52   0.01   0.32   0.01   0.13
+   0.03   0.49   0.38   0.02   0.21   0.03   0.03   0.32 245.69   0.32]
+4: [  0.38   0.19   0.07   0.     0.13   0.24   0.01   0.32   0.01   0.13
+   0.02   0.5    0.56   0.03   0.07   0.11   0.01   0.22 201.66   0.14]
 
 INFO:Time 60:Finished generating new offsprings.
 INFO:Time 60:Finished updating MNO parameters
-INFO:Time 60:Function update_task_deployment_parameters executed in 0.0030s
+INFO:Time 60:Function update_task_deployment_parameters executed in 0.0166s
 INFO:Time 60:------------------------------updating MVNO parameters-------------------------------
 INFO:Time 60:-----------------------Updating best population-----------------------
+DEBUG:Time 60:population 1 [  0.07   0.03   0.04   0.77   0.02   0.06   0.18   0.13   0.16   0.03
+   0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.06] with fitness: 3.7915550294926197
+DEBUG:Time 60:population 2 [  0.1    0.51   0.06   0.17   0.14   0.03   0.04   0.09   0.17   0.02
+   0.65   0.02   0.01   0.36   0.02   0.35   0.1    0.17 382.65   0.12] with fitness: 6.1831266651559265
+DEBUG:Time 60:population 3 [  0.03   0.01   0.32   0.06   0.01   0.56   0.26   0.01   0.46   0.03
+   0.23   0.01   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16] with fitness: 7.754976094775589
+DEBUG:Time 60:population 4 [  0.08   0.05   0.23   0.02   0.48   0.13   0.05   0.45   0.1    0.29
+   0.02   0.09   0.09   0.16   0.4    0.08   0.1    0.18 395.22   0.39] with fitness: 7.230718117455098
 INFO:Time 60:No better population found, keep origin.
 INFO:Time 60:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 25.247524324936034.
+   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 8.728401343240575.
 INFO:Time 60:Finished updating best population.
 INFO:Time 60:-----------------------Generate new offsprings------------------------
-INFO:Time 60:data not enough for updating, skip updating.
-INFO:Time 60:final new offspring:
+DEBUG:Time 60:selected parents:
 1: [  0.07   0.03   0.04   0.77   0.02   0.06   0.18   0.13   0.16   0.03
    0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.06]
 2: [  0.1    0.51   0.06   0.17   0.14   0.03   0.04   0.09   0.17   0.02
@@ -199,914 +3119,43 @@ INFO:Time 60:final new offspring:
 4: [  0.08   0.05   0.23   0.02   0.48   0.13   0.05   0.45   0.1    0.29
    0.02   0.09   0.09   0.16   0.4    0.08   0.1    0.18 395.22   0.39]
 
+DEBUG:Time 60:selected points: (0, 9)
+DEBUG:Time 60:order after shuffle: [1 2 3 0]
+DEBUG:Time 60:new offsprings after crossover:
+1: [  0.1    0.51   0.06   0.17   0.14   0.03   0.06   0.13   0.24   0.03
+   0.44   0.1    0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.06]
+2: [  0.03   0.01   0.32   0.06   0.01   0.56   0.22   0.01   0.38   0.02
+   0.36   0.01   0.01   0.36   0.02   0.35   0.1    0.17 382.65   0.12]
+3: [  0.08   0.05   0.23   0.02   0.48   0.13   0.04   0.31   0.07   0.21
+   0.36   0.02   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16]
+4: [  0.07   0.03   0.04   0.77   0.02   0.06   0.3    0.22   0.27   0.05
+   0.02   0.14   0.09   0.16   0.4    0.08   0.1    0.18 395.22   0.39]
+
+DEBUG:Time 60:offspring 1 mutate at [2] bit, multiply by 1.2
+DEBUG:Time 60:offspring 2 mutate at [] bit, multiply by
+DEBUG:Time 60:offspring 3 mutate at [] bit, multiply by
+DEBUG:Time 60:offspring 4 mutate at [] bit, multiply by
+DEBUG:Time 60:new offsprings after mutation:
+1: [  0.1    0.5    0.07   0.16   0.13   0.03   0.06   0.13   0.24   0.03
+   0.44   0.1    0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.06]
+2: [  0.03   0.01   0.32   0.06   0.01   0.56   0.22   0.01   0.38   0.02
+   0.36   0.01   0.01   0.36   0.02   0.35   0.1    0.17 382.65   0.12]
+3: [  0.08   0.05   0.23   0.02   0.48   0.13   0.04   0.31   0.07   0.21
+   0.36   0.02   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16]
+4: [  0.07   0.03   0.04   0.77   0.02   0.06   0.3    0.22   0.27   0.05
+   0.02   0.14   0.09   0.16   0.4    0.08   0.1    0.18 395.22   0.39]
+
+INFO:Time 60:final new offspring:
+1: [  0.1    0.5    0.07   0.16   0.13   0.03   0.06   0.13   0.24   0.03
+   0.44   0.1    0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.06]
+2: [  0.03   0.01   0.32   0.06   0.01   0.56   0.22   0.01   0.38   0.02
+   0.36   0.01   0.01   0.36   0.02   0.35   0.1    0.17 382.65   0.12]
+3: [  0.08   0.05   0.23   0.02   0.48   0.13   0.04   0.31   0.07   0.21
+   0.36   0.02   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16]
+4: [  0.07   0.03   0.04   0.77   0.02   0.06   0.3    0.22   0.27   0.05
+   0.02   0.14   0.09   0.16   0.4    0.08   0.1    0.18 395.22   0.39]
+
 INFO:Time 60:Finished generating new offsprings.
 INFO:Time 60:Finished updating MVNO parameters
-INFO:Time 60:Function update_task_deployment_parameters executed in 0.0020s
+INFO:Time 60:Function update_task_deployment_parameters executed in 0.0140s
 INFO:Time 60:Finished updating MNO and MVNO parameters.
-INFO:Time 60:Start of hour 2
-Get hour events:
-id,type,time
-[[16 0 61 'VoIP' '15' '13' 0.1 0.02 370 16]
- [16 1 63 'VoIP' '15' '13' 0.1 0.02 370 16]
- [17 0 65 'VoIP' '16' '14' 0.1 0.02 370 16]
- [17 1 65 'VoIP' '16' '14' 0.1 0.02 370 16]
- [18 0 65 'VoIP' '17' '5' 0.1 0.02 370 16]
- [19 0 70 'IP_Video' '18' '15' 0.08 0.05 24 1065]
- [18 1 70 'VoIP' '17' '5' 0.1 0.02 370 16]
- [19 1 71 'IP_Video' '18' '15' 0.08 0.05 24 1065]
- [20 0 80 'IP_Video' '12' '16' 0.08 0.05 24 1065]
- [20 1 85 'IP_Video' '12' '16' 0.08 0.05 24 1065]
- [21 0 85 'FTP' '15' '6' 0.3 0.12 25 1300]
- [21 1 85 'FTP' '15' '6' 0.3 0.12 25 1300]
- [22 0 85 'VoIP' '19' '17' 0.1 0.02 370 16]
- [3 0 87 'VoIP' '1' '3' 0.1 0.05 300 16]
- [23 0 90 'VoIP' '16' '14' 0.1 0.02 370 16]
- [24 0 90 'VoIP' '16' '14' 0.1 0.02 370 16]
- [23 1 100 'VoIP' '16' '14' 0.1 0.02 370 16]
- [10 0 104 'VoIP' '9' '1' 0.1 0.02 370 16]
- [10 1 115 'VoIP' '9' '1' 0.1 0.02 370 16]
- [22 1 115 'VoIP' '19' '17' 0.1 0.02 370 16]
- [24 1 115 'VoIP' '16' '14' 0.1 0.02 370 16]
- [25 0 115 'VoIP' '17' '15' 0.05 0.02 246 15]
- [3 1 116 'VoIP' '1' '3' 0.1 0.05 300 16]
- [25 1 119 'VoIP' '17' '15' 0.05 0.02 246 15]
- [26 0 119 'FTP' '18' '16' 0.15 0.1 26 790]]
-INFO:Time 60:mno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 15.073917730421412
-INFO:Time 60:mvno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 25.247524324936034
-INFO:Time 61:task16 assign to MNO
-INFO:Time 61:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 61:Deploy task16 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 63:release task16 from vm 1,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 65:task17 assign to MNO
-INFO:Time 65:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 65:Deploy task17 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 65:release task17 from vm 1,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 65:task18 assign to MNO
-INFO:Time 65:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 65:Deploy task18 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 70:task19 assign to MNO
-INFO:Time 70:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 70:Deploy task19 to vm 5,
-task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
-task bw_up: 24, local_bw_up: 100000 -> 99976
-task bw_down: 1065, local_bw_down: 100000 -> 98935
-
-INFO:Time 70:release task18 from vm 1,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 71:release task19 from vm 5,
-cr: 0.15000000000000002 -> 0.2
-local_bw_up: 99976 -> 100000
-local_bw_down: 98935 -> 100000
-
-INFO:Time 80:task20 assign to MVNO
-INFO:Time 80:Deploy task20 to vm 2,
-task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
-task bw_up: 24, local_bw_up: 100000 -> 99976
-task bw_down: 1065, local_bw_down: 100000 -> 98935
-
-INFO:Time 85:release task20 from vm 2,
-cr: 0.15000000000000002 -> 0.2
-local_bw_up: 99976 -> 100000
-local_bw_down: 98935 -> 100000
-
-INFO:Time 85:task21 assign to MNO
-INFO:Time 85:Deploy task21 to vm 3,
-task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
-task bw_up: 25, local_bw_up: 100000 -> 99975
-task bw_down: 1300, local_bw_down: 100000 -> 98700
-
-INFO:Time 85:release task21 from vm 3,
-cr: 0.08000000000000002 -> 0.2
-local_bw_up: 99975 -> 100000
-local_bw_down: 98700 -> 100000
-
-INFO:Time 85:task22 assign to MVNO
-INFO:Time 85:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 85:Deploy task22 to vm 4,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 87:task3 assign to MNO
-INFO:Time 87:Deploy task3 to vm 1,
-task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
-task bw_up: 300, local_bw_up: 100000 -> 99700
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 90:task23 assign to MNO
-INFO:Time 90:Task23 unaccepted, retry after 72 minutes.
-INFO:Time 90:task24 assign to MNO
-INFO:Time 90:Task24 unaccepted, retry after 61 minutes.
-INFO:Time 104:task10 assign to MNO
-INFO:Time 104:Task10 unaccepted, retry after 114 minutes.
-INFO:Time 115:release task22 from vm 4,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 115:task25 assign to MNO
-INFO:Time 115:Task25 unaccepted, retry after 81 minutes.
-INFO:Time 116:release task3 from vm 1,
-cr: 0.15000000000000002 -> 0.2
-local_bw_up: 99700 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 119:task26 assign to MNO
-INFO:Time 119:Deploy task26 to vm 3,
-task cr: 0.1, vm cr: 0.2 -> 0.1
-task bw_up: 26, local_bw_up: 100000 -> 99974
-task bw_down: 790, local_bw_down: 100000 -> 99210
-
-INFO:Time 119:Finished hour 2
-INFO:Time 119:Release undone tasks: dict_keys([])
-INFO:Time 119:Release undone tasks: dict_keys([26])
-INFO:Time 119:Task26 unaccepted, retry after 64 minutes.
-INFO:Time 119:release task26 from vm 3,
-cr: 0.1 -> 0.2
-local_bw_up: 99974 -> 100000
-local_bw_down: 99210 -> 100000
-
-INFO:Time 120:mno overall hour utility: 76.52734876335587, hour fitness: 10.932478394765125
-INFO:Time 120:mvno overall hour utility: 68.20840121814037, hour fitness: 34.10420060907018
-INFO:Time 120:------------------------------------Start of Updating Parameters------------------------------------
-INFO:Time 120:-------------------------------updating MNO parameters-------------------------------
-INFO:Time 120:-----------------------Updating best population-----------------------
-INFO:Time 120:No better population found, keep origin.
-INFO:Time 120:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 10.932478394765125.
-INFO:Time 120:Finished updating best population.
-INFO:Time 120:-----------------------Generate new offsprings------------------------
-INFO:Time 120:final new offspring:
-1: [  0.02   0.23   0.03   0.43   0.06   0.23   0.09   0.36   0.47   0.02
-   0.01   0.05   0.12   0.45   0.14   0.21   0.02   0.05 340.24   0.27]
-2: [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.32   0.01   0.13
-   0.03   0.49   0.49   0.03   0.01   0.04   0.01   0.41 245.69   0.32]
-3: [  0.02   0.02   0.02   0.53   0.25   0.16   0.04   0.08   0.28   0.38
-   0.02   0.2    0.16   0.05   0.28   0.04   0.05   0.43 245.69   0.32]
-4: [  0.21   0.1    0.01   0.24   0.26   0.18   0.03   0.07   0.58   0.14
-   0.02   0.16   0.21   0.06   0.37   0.05   0.06   0.26 201.66   0.14]
-
-INFO:Time 120:Finished generating new offsprings.
-INFO:Time 120:Finished updating MNO parameters
-INFO:Time 120:Function update_task_deployment_parameters executed in 0.0530s
-INFO:Time 120:------------------------------updating MVNO parameters-------------------------------
-INFO:Time 120:-----------------------Updating best population-----------------------
-INFO:Time 120:No better population found, keep origin.
-INFO:Time 120:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 34.10420060907018.
-INFO:Time 120:Finished updating best population.
-INFO:Time 120:-----------------------Generate new offsprings------------------------
-INFO:Time 120:final new offspring:
-1: [  0.07   0.03   0.04   0.77   0.02   0.06   0.16   0.07   0.49   0.03
-   0.24   0.01   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.06]
-2: [  0.06   0.03   0.04   0.79   0.02   0.06   0.18   0.13   0.16   0.03
-   0.42   0.09   0.44   0.01   0.01   0.34   0.04   0.16 280.5    0.06]
-3: [  0.03   0.01   0.32   0.06   0.01   0.56   0.14   0.01   0.54   0.03
-   0.27   0.01   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16]
-4: [  0.03   0.01   0.32   0.06   0.01   0.56   0.63   0.01   0.05   0.02
-   0.24   0.05   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16]
-
-INFO:Time 120:Finished generating new offsprings.
-INFO:Time 120:Finished updating MVNO parameters
-INFO:Time 120:Function update_task_deployment_parameters executed in 0.0090s
-INFO:Time 120:Finished updating MNO and MVNO parameters.
-INFO:Time 120:Finished Task Deployment.
-INFO:Time 120:Finished Round 1.
-INFO:Time 120:---------------------------------------------------------Start of Round 2---------------------------------------------------------
-INFO:Time 120:------------------------------------------Start of updating history data-------------------------------------------
-INFO:Time 120:Finished update history data.
-INFO:Time 120:----------------------------------------------Start of VM Assignment-----------------------------------------------
-INFO:Time 120:mno vm id: ['1' '3' '5'], total resource (bw_up, bw_down, cr): (144127.6137838519, 154428.99672890536, 0.6000000000000001)
-INFO:Time 120:mvno vm id: ['2' '4' '6'], total resource (bw_up, bw_down, cr): (148577.74262474943, 136794.09765271138, 0.6000000000000001), cost: 96.0
-INFO:Time 120:contract: bw_high: 1000000, bw_low: 5, cr_high: 10, cr_low: 0
-INFO:Time 120:Function vm_assignment executed in 0.1050s
-INFO:Time 120:Finished vm assignment.
-INFO:Time 120:---------------------------------------------Start of Task Deployment----------------------------------------------
-INFO:Time 120:Start of hour 3
-Get hour events:
-id,type,time
-[[27 0 120 'VoIP' '19' '17' 0.07 0.04 450 17]
- [13 0 122 'FTP' '12' '12' 0.3 0.12 25 1300]
- [12 0 122 'IP_Video' '11' '10' 0.08 0.05 24 1065]
- [27 1 122 'VoIP' '19' '17' 0.07 0.04 450 17]
- [28 0 122 'VoIP' '20' '18' 0.1 0.02 370 16]
- [15 0 123 'FTP' '14' '6' 0.3 0.12 25 1300]
- [15 1 128 'FTP' '14' '6' 0.3 0.12 25 1300]
- [12 1 130 'IP_Video' '11' '10' 0.08 0.05 24 1065]
- [13 1 132 'FTP' '12' '12' 0.3 0.12 25 1300]
- [11 0 142 'VoIP' '10' '1' 0.1 0.02 370 16]
- [6 0 143 'IP_Video' '6' '6' 0.08 0.05 24 1065]
- [11 1 148 'VoIP' '10' '1' 0.1 0.02 370 16]
- [29 0 150 'VoIP' '21' '19' 0.1 0.02 370 16]
- [24 0 151 'VoIP' '16' '14' 0.1 0.02 370 16]
- [8 0 151 'FTP' '8' '4' 0.15 0.1 26 790]
- [9 0 153 'VoIP' '1' '6' 0.07 0.04 450 17]
- [29 1 155 'VoIP' '21' '19' 0.1 0.02 370 16]
- [28 1 155 'VoIP' '20' '18' 0.1 0.02 370 16]
- [30 0 157 'IP_Video' '22' '20' 0.08 0.05 24 1065]
- [23 0 162 'VoIP' '16' '14' 0.1 0.02 370 16]
- [6 1 166 'IP_Video' '6' '6' 0.08 0.05 24 1065]
- [8 1 167 'FTP' '8' '4' 0.15 0.1 26 790]
- [9 1 171 'VoIP' '1' '6' 0.07 0.04 450 17]
- [23 1 172 'VoIP' '16' '14' 0.1 0.02 370 16]
- [24 1 176 'VoIP' '16' '14' 0.1 0.02 370 16]]
-INFO:Time 120:mno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 10.932478394765125
-INFO:Time 120:mvno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 34.10420060907018
-INFO:Time 120:task27 assign to MVNO
-INFO:Time 120:Deploy task27 to vm 4,
-task cr: 0.04, vm cr: 0.2 -> 0.16
-task bw_up: 450, local_bw_up: 100000 -> 99550
-task bw_down: 17, local_bw_down: 100000 -> 99983
-
-INFO:Time 120:task27 assign to MVNO
-INFO:Time 120:Task27 unaccepted, retry after 114 minutes.
-INFO:Time 122:task13 assign to MVNO
-INFO:Time 122:Task13 unaccepted, retry after 66 minutes.
-INFO:Time 122:task12 assign to MVNO
-INFO:Time 122:Deploy task12 to vm 2,
-task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
-task bw_up: 24, local_bw_up: 100000 -> 99976
-task bw_down: 1065, local_bw_down: 100000 -> 98935
-
-INFO:Time 122:task28 assign to MNO
-INFO:Time 122:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 122:Deploy task28 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 123:task15 assign to MNO
-INFO:Time 123:Deploy task15 to vm 3,
-task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
-task bw_up: 25, local_bw_up: 100000 -> 99975
-task bw_down: 1300, local_bw_down: 100000 -> 98700
-
-INFO:Time 128:release task15 from vm 3,
-cr: 0.08000000000000002 -> 0.2
-local_bw_up: 99975 -> 100000
-local_bw_down: 98700 -> 100000
-
-INFO:Time 130:release task12 from vm 2,
-cr: 0.15000000000000002 -> 0.2
-local_bw_up: 99976 -> 100000
-local_bw_down: 98935 -> 100000
-
-INFO:Time 142:task11 assign to MNO
-INFO:Time 142:Task11 unaccepted, retry after 74 minutes.
-INFO:Time 143:task6 assign to MVNO
-INFO:Time 143:Deploy task6 to vm 2,
-task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
-task bw_up: 24, local_bw_up: 100000 -> 99976
-task bw_down: 1065, local_bw_down: 100000 -> 98935
-
-INFO:Time 150:task29 assign to MNO
-INFO:Time 150:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 150:Task29 unaccepted, retry after 98 minutes.
-INFO:Time 151:task24 assign to MNO
-INFO:Time 151:Task24 unaccepted, retry after 94 minutes.
-INFO:Time 151:task8 assign to MNO
-INFO:Time 151:Deploy task8 to vm 3,
-task cr: 0.1, vm cr: 0.2 -> 0.1
-task bw_up: 26, local_bw_up: 100000 -> 99974
-task bw_down: 790, local_bw_down: 100000 -> 99210
-
-INFO:Time 153:task9 assign to MNO
-INFO:Time 153:Task9 unaccepted, retry after 78 minutes.
-INFO:Time 155:release task28 from vm 1,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 157:task30 assign to MNO
-INFO:Time 157:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 157:Deploy task30 to vm 5,
-task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
-task bw_up: 24, local_bw_up: 100000 -> 99976
-task bw_down: 1065, local_bw_down: 100000 -> 98935
-
-INFO:Time 162:task23 assign to MNO
-INFO:Time 162:Deploy task23 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 166:release task6 from vm 2,
-cr: 0.15000000000000002 -> 0.2
-local_bw_up: 99976 -> 100000
-local_bw_down: 98935 -> 100000
-
-INFO:Time 167:release task8 from vm 3,
-cr: 0.1 -> 0.2
-local_bw_up: 99974 -> 100000
-local_bw_down: 99210 -> 100000
-
-INFO:Time 172:release task23 from vm 1,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 172:Finished hour 3
-INFO:Time 172:Release undone tasks: dict_keys([27])
-INFO:Time 172:Task27 unaccepted, retry after 75 minutes.
-INFO:Time 172:release task27 from vm 4,
-cr: 0.16 -> 0.2
-local_bw_up: 99550 -> 100000
-local_bw_down: 99983 -> 100000
-
-INFO:Time 172:Release undone tasks: dict_keys([30])
-INFO:Time 172:Task30 unaccepted, retry after 69 minutes.
-INFO:Time 172:release task30 from vm 5,
-cr: 0.15000000000000002 -> 0.2
-local_bw_up: 99976 -> 100000
-local_bw_down: 98935 -> 100000
-
-INFO:Time 180:mno overall hour utility: 88.37329232442586, hour fitness: 17.674658464885173
-INFO:Time 180:mvno overall hour utility: 76.17190627220594, hour fitness: 25.39063542406865
-INFO:Time 180:------------------------------------Start of Updating Parameters------------------------------------
-INFO:Time 180:-------------------------------updating MNO parameters-------------------------------
-INFO:Time 180:-----------------------Updating best population-----------------------
-INFO:Time 180:No better population found, keep origin.
-INFO:Time 180:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 17.674658464885173.
-INFO:Time 180:Finished updating best population.
-INFO:Time 180:-----------------------Generate new offsprings------------------------
-INFO:Time 180:final new offspring:
-1: [  0.06   0.04   0.2    0.01   0.38   0.31   0.01   0.32   0.01   0.13
-   0.03   0.49   0.49   0.03   0.01   0.04   0.01   0.41 245.69   0.32]
-2: [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.22   0.25   0.33
-   0.02   0.17   0.16   0.05   0.28   0.04   0.05   0.43 294.83   0.32]
-3: [  0.02   0.02   0.02   0.53   0.25   0.16   0.03   0.07   0.58   0.14
-   0.02   0.16   0.21   0.06   0.37   0.05   0.06   0.26 201.66   0.32]
-4: [  0.21   0.1    0.01   0.24   0.26   0.18   0.06   0.13   0.01   0.16
-   0.04   0.6    0.49   0.03   0.01   0.04   0.01   0.41 245.69   0.14]
-
-INFO:Time 180:Finished generating new offsprings.
-INFO:Time 180:Finished updating MNO parameters
-INFO:Time 180:Function update_task_deployment_parameters executed in 0.0080s
-INFO:Time 180:------------------------------updating MVNO parameters-------------------------------
-INFO:Time 180:-----------------------Updating best population-----------------------
-INFO:Time 180:better population 4 found, update best population!
-INFO:Time 180:best population as [  0.03   0.01   0.32   0.06   0.01   0.56   0.63   0.01   0.05   0.02
-   0.24   0.05   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16], fitness: 26.90971374411851.
-INFO:Time 180:Finished updating best population.
-INFO:Time 180:-----------------------Generate new offsprings------------------------
-INFO:Time 180:final new offspring:
-1: [  0.07   0.03   0.04   0.77   0.02   0.06   0.16   0.07   0.49   0.03
-   0.24   0.01   0.     0.32   0.24   0.24   0.06   0.14 280.5    0.06]
-2: [  0.06   0.03   0.04   0.79   0.02   0.06   0.18   0.13   0.16   0.03
-   0.42   0.09   0.01   0.33   0.25   0.24   0.03   0.14 280.5    0.06]
-3: [  0.03   0.01   0.32   0.06   0.01   0.56   0.14   0.01   0.54   0.03
-   0.27   0.01   0.36   0.01   0.01   0.27   0.03   0.33 249.65   0.16]
-4: [  0.03   0.01   0.31   0.08   0.01   0.55   0.61   0.01   0.05   0.02
-   0.23   0.08   0.25   0.     0.     0.49   0.02   0.23 249.65   0.16]
-
-INFO:Time 180:Finished generating new offsprings.
-INFO:Time 180:Finished updating MVNO parameters
-INFO:Time 180:Function update_task_deployment_parameters executed in 0.0060s
-INFO:Time 180:Finished updating MNO and MVNO parameters.
-INFO:Time 180:Start of hour 4
-Get hour events:
-id,type,time
-[[31 0 180 'FTP' '16' '21' 0.3 0.12 25 1300]
- [26 0 183 'FTP' '18' '16' 0.15 0.1 26 790]
- [26 1 186 'FTP' '18' '16' 0.15 0.1 26 790]
- [13 0 188 'FTP' '12' '12' 0.3 0.12 25 1300]
- [25 0 196 'VoIP' '17' '15' 0.05 0.02 246 15]
- [13 1 198 'FTP' '12' '12' 0.3 0.12 25 1300]
- [25 1 200 'VoIP' '17' '15' 0.05 0.02 246 15]
- [31 1 200 'FTP' '16' '21' 0.3 0.12 25 1300]
- [32 0 200 'FTP' '23' '5' 0.3 0.12 25 1300]
- [32 1 200 'FTP' '23' '5' 0.3 0.12 25 1300]
- [33 0 210 'FTP' '24' '4' 0.3 0.12 25 1300]
- [33 1 212 'FTP' '24' '4' 0.3 0.12 25 1300]
- [34 0 215 'VoIP' '8' '8' 0.1 0.02 370 16]
- [11 0 216 'VoIP' '10' '1' 0.1 0.02 370 16]
- [10 0 218 'VoIP' '9' '1' 0.1 0.02 370 16]
- [34 1 218 'VoIP' '8' '8' 0.1 0.02 370 16]
- [35 0 220 'VoIP' '25' '16' 0.1 0.02 370 16]
- [11 1 222 'VoIP' '10' '1' 0.1 0.02 370 16]
- [35 1 222 'VoIP' '25' '16' 0.1 0.02 370 16]
- [30 0 226 'IP_Video' '22' '20' 0.08 0.05 24 1065]
- [10 1 229 'VoIP' '9' '1' 0.1 0.02 370 16]
- [36 0 230 'VoIP' '26' '2' 0.1 0.02 370 16]
- [9 0 231 'VoIP' '1' '6' 0.07 0.04 450 17]
- [37 0 234 'IP_Video' '27' '17' 0.08 0.05 24 1065]
- [36 1 234 'VoIP' '26' '2' 0.1 0.02 370 16]
- [37 1 235 'IP_Video' '27' '17' 0.08 0.05 24 1065]
- [38 0 235 'IP_Video' '28' '18' 0.08 0.05 24 1065]
- [39 0 238 'FTP' '29' '9' 0.3 0.12 25 1300]
- [38 1 238 'IP_Video' '28' '18' 0.08 0.05 24 1065]
- [39 1 239 'FTP' '29' '9' 0.3 0.12 25 1300]]
-INFO:Time 180:mno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 17.674658464885173
-INFO:Time 180:mvno deploy with best population [  0.03   0.01   0.32   0.06   0.01   0.56   0.63   0.01   0.05   0.02
-   0.24   0.05   0.     0.27   0.21   0.2    0.02   0.29 249.65   0.16] with fitness: 26.90971374411851
-INFO:Time 180:task31 assign to MNO
-INFO:Time 180:Deploy task31 to vm 3,
-task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
-task bw_up: 25, local_bw_up: 100000 -> 99975
-task bw_down: 1300, local_bw_down: 100000 -> 98700
-
-INFO:Time 180:task31 assign to MNO
-INFO:Time 180:Task31 unaccepted, retry after 116 minutes.
-INFO:Time 183:task26 assign to MNO
-INFO:Time 183:Task26 unaccepted, retry after 94 minutes.
-INFO:Time 188:task13 assign to MVNO
-INFO:Time 188:Task13 unaccepted, retry after 68 minutes.
-INFO:Time 196:task25 assign to MNO
-INFO:Time 196:Deploy task25 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 246, local_bw_up: 100000 -> 99754
-task bw_down: 15, local_bw_down: 100000 -> 99985
-
-INFO:Time 200:release task25 from vm 1,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99754 -> 100000
-local_bw_down: 99985 -> 100000
-
-INFO:Time 200:task32 assign to MVNO
-INFO:Time 200:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 200:Deploy task32 to vm 6,
-task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
-task bw_up: 25, local_bw_up: 100000 -> 99975
-task bw_down: 1300, local_bw_down: 100000 -> 98700
-
-INFO:Time 200:release task32 from vm 6,
-cr: 0.08000000000000002 -> 0.2
-local_bw_up: 99975 -> 100000
-local_bw_down: 98700 -> 100000
-
-INFO:Time 210:task33 assign to MNO
-INFO:Time 210:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 210:Task33 unaccepted, retry after 68 minutes.
-INFO:Time 215:task34 assign to MNO
-INFO:Time 215:Deploy task34 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 216:task11 assign to MNO
-INFO:Time 216:Task11 unaccepted, retry after 95 minutes.
-INFO:Time 218:task10 assign to MNO
-INFO:Time 218:Task10 unaccepted, retry after 103 minutes.
-INFO:Time 218:release task34 from vm 1,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 220:task35 assign to MNO
-INFO:Time 220:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 220:Deploy task35 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 222:release task35 from vm 1,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 226:task30 assign to MNO
-INFO:Time 226:Deploy task30 to vm 5,
-task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
-task bw_up: 24, local_bw_up: 100000 -> 99976
-task bw_down: 1065, local_bw_down: 100000 -> 98935
-
-INFO:Time 230:task36 assign to MNO
-INFO:Time 230:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 230:Deploy task36 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 231:task9 assign to MNO
-INFO:Time 231:Task9 unaccepted, retry after 70 minutes.
-INFO:Time 234:task37 assign to MNO
-INFO:Time 234:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 234:Task37 unaccepted, retry after 101 minutes.
-INFO:Time 234:release task36 from vm 1,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 235:task38 assign to MNO
-INFO:Time 235:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 235:Task38 unaccepted, retry after 92 minutes.
-INFO:Time 238:task39 assign to MNO
-INFO:Time 238:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 238:Task39 unaccepted, retry after 86 minutes.
-INFO:Time 238:Finished hour 4
-INFO:Time 238:Release undone tasks: dict_keys([])
-INFO:Time 238:Release undone tasks: dict_keys([31, 30])
-INFO:Time 238:Task31 unaccepted, retry after 74 minutes.
-INFO:Time 238:Task30 unaccepted, retry after 117 minutes.
-INFO:Time 238:release task31 from vm 3,
-cr: 0.08000000000000002 -> 0.2
-local_bw_up: 99975 -> 100000
-local_bw_down: 98700 -> 100000
-
-INFO:Time 238:release task30 from vm 5,
-cr: 0.15000000000000002 -> 0.2
-local_bw_up: 99976 -> 100000
-local_bw_down: 98935 -> 100000
-
-INFO:Time 240:mno overall hour utility: 82.35731250888239, hour fitness: 13.726218751480397
-INFO:Time 240:mvno overall hour utility: 74.77223542298324, hour fitness: 74.77223542298324
-INFO:Time 240:------------------------------------Start of Updating Parameters------------------------------------
-INFO:Time 240:-------------------------------updating MNO parameters-------------------------------
-INFO:Time 240:-----------------------Updating best population-----------------------
-INFO:Time 240:No better population found, keep origin.
-INFO:Time 240:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 13.726218751480397.
-INFO:Time 240:Finished updating best population.
-INFO:Time 240:-----------------------Generate new offsprings------------------------
-INFO:Time 240:data not enough for updating, skip updating.
-INFO:Time 240:final new offspring:
-1: [  0.06   0.04   0.2    0.01   0.38   0.31   0.01   0.32   0.01   0.13
-   0.03   0.49   0.49   0.03   0.01   0.04   0.01   0.41 245.69   0.32]
-2: [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.22   0.25   0.33
-   0.02   0.17   0.16   0.05   0.28   0.04   0.05   0.43 294.83   0.32]
-3: [  0.02   0.02   0.02   0.53   0.25   0.16   0.03   0.07   0.58   0.14
-   0.02   0.16   0.21   0.06   0.37   0.05   0.06   0.26 201.66   0.32]
-4: [  0.21   0.1    0.01   0.24   0.26   0.18   0.06   0.13   0.01   0.16
-   0.04   0.6    0.49   0.03   0.01   0.04   0.01   0.41 245.69   0.14]
-
-INFO:Time 240:Finished generating new offsprings.
-INFO:Time 240:Finished updating MNO parameters
-INFO:Time 240:Function update_task_deployment_parameters executed in 0.0030s
-INFO:Time 240:------------------------------updating MVNO parameters-------------------------------
-INFO:Time 240:-----------------------Updating best population-----------------------
-INFO:Time 240:better population 3 found, update best population!
-INFO:Time 240:best population as [  0.03   0.01   0.32   0.06   0.01   0.56   0.14   0.01   0.54   0.03
-   0.27   0.01   0.36   0.01   0.01   0.27   0.03   0.33 249.65   0.16], fitness: 85.79805619973737.
-INFO:Time 240:Finished updating best population.
-INFO:Time 240:-----------------------Generate new offsprings------------------------
-INFO:Time 240:final new offspring:
-1: [  0.06   0.03   0.04   0.79   0.02   0.06   0.18   0.13   0.16   0.03
-   0.42   0.09   0.01   0.33   0.25   0.24   0.03   0.14 280.5    0.06]
-2: [  0.03   0.01   0.31   0.08   0.01   0.55   0.64   0.01   0.05   0.02
-   0.26   0.01   0.36   0.01   0.01   0.27   0.03   0.33 249.65   0.16]
-3: [  0.03   0.01   0.32   0.06   0.01   0.56   0.14   0.01   0.54   0.03
-   0.27   0.01   0.36   0.01   0.     0.28   0.03   0.33 249.65   0.16]
-4: [  0.03   0.01   0.32   0.06   0.01   0.56   0.13   0.01   0.51   0.03
-   0.24   0.08   0.11   0.     0.     0.58   0.02   0.27 249.65   0.16]
-
-INFO:Time 240:Finished generating new offsprings.
-INFO:Time 240:Finished updating MVNO parameters
-INFO:Time 240:Function update_task_deployment_parameters executed in 0.0050s
-INFO:Time 240:Finished updating MNO and MVNO parameters.
-INFO:Time 240:Finished Task Deployment.
-INFO:Time 240:Finished Round 2.
-INFO:Time 240:---------------------------------------------------------Start of Round 3---------------------------------------------------------
-INFO:Time 240:------------------------------------------Start of updating history data-------------------------------------------
-INFO:Time 240:Finished update history data.
-INFO:Time 240:----------------------------------------------Start of VM Assignment-----------------------------------------------
-INFO:Time 240:mno vm id: ['1' '3' '5'], total resource (bw_up, bw_down, cr): (145801.37110123853, 150385.45314845192, 0.6000000000000001)
-INFO:Time 240:mvno vm id: ['2' '4' '6'], total resource (bw_up, bw_down, cr): (148400.9964593087, 137836.81350684143, 0.6000000000000001), cost: 76.80000000000001
-INFO:Time 240:contract: bw_high: 1000000, bw_low: 5, cr_high: 10, cr_low: 0
-INFO:Time 240:Function vm_assignment executed in 0.0600s
-INFO:Time 240:Finished vm assignment.
-INFO:Time 240:---------------------------------------------Start of Task Deployment----------------------------------------------
-INFO:Time 240:Start of hour 5
-Get hour events:
-id,type,time
-[[40 0 240 'VoIP' '30' '11' 0.1 0.02 370 16]
- [41 0 240 'VoIP' '34' '6' 0.1 0.02 370 16]
- [41 1 242 'VoIP' '34' '6' 0.1 0.02 370 16]
- [24 0 245 'VoIP' '16' '14' 0.1 0.02 370 16]
- [29 0 248 'VoIP' '21' '19' 0.1 0.02 370 16]
- [40 1 251 'VoIP' '30' '11' 0.1 0.02 370 16]
- [42 0 252 'VoIP' '32' '7' 0.1 0.02 370 16]
- [42 1 252 'VoIP' '32' '7' 0.1 0.02 370 16]
- [29 1 253 'VoIP' '21' '19' 0.1 0.02 370 16]
- [13 0 256 'FTP' '12' '12' 0.3 0.12 25 1300]
- [13 1 266 'FTP' '12' '12' 0.3 0.12 25 1300]
- [24 1 270 'VoIP' '16' '14' 0.1 0.02 370 16]
- [26 0 277 'FTP' '18' '16' 0.15 0.1 26 790]
- [33 0 278 'FTP' '24' '4' 0.3 0.12 25 1300]
- [33 1 280 'FTP' '24' '4' 0.3 0.12 25 1300]
- [26 1 280 'FTP' '18' '16' 0.15 0.1 26 790]]
-INFO:Time 240:mno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 13.726218751480397
-INFO:Time 240:mvno deploy with best population [  0.03   0.01   0.32   0.06   0.01   0.56   0.14   0.01   0.54   0.03
-   0.27   0.01   0.36   0.01   0.01   0.27   0.03   0.33 249.65   0.16] with fitness: 85.79805619973737
-INFO:Time 240:task40 assign to MVNO
-INFO:Time 240:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 240:Deploy task40 to vm 4,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 240:task40 assign to MVNO
-INFO:Time 240:Deploy task40 to vm 4,
-task cr: 0.02, vm cr: 0.18000000000000002 -> 0.16000000000000003
-task bw_up: 370, local_bw_up: 99630 -> 99260
-task bw_down: 16, local_bw_down: 99984 -> 99968
-
-INFO:Time 240:task41 assign to MVNO
-INFO:Time 240:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 240:Task41 unaccepted, retry after 109 minutes.
-INFO:Time 245:task24 assign to MNO
-INFO:Time 245:Deploy task24 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 248:task29 assign to MNO
-INFO:Time 248:Task29 unaccepted, retry after 86 minutes.
-INFO:Time 251:release task40 from vm 4,
-cr: 0.16000000000000003 -> 0.18000000000000002
-local_bw_up: 99260 -> 99630
-local_bw_down: 99968 -> 99984
-
-INFO:Time 252:task42 assign to MVNO
-INFO:Time 252:New user/users detected, finished updating vm_list.from_user.
-INFO:Time 252:Deploy task42 to vm 4,
-task cr: 0.02, vm cr: 0.18000000000000002 -> 0.16000000000000003
-task bw_up: 370, local_bw_up: 99630 -> 99260
-task bw_down: 16, local_bw_down: 99984 -> 99968
-
-INFO:Time 252:release task42 from vm 4,
-cr: 0.16000000000000003 -> 0.18000000000000002
-local_bw_up: 99260 -> 99630
-local_bw_down: 99968 -> 99984
-
-INFO:Time 256:task13 assign to MVNO
-INFO:Time 256:Task13 unaccepted, retry after 65 minutes.
-INFO:Time 270:release task24 from vm 1,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 277:task26 assign to MNO
-INFO:Time 277:Deploy task26 to vm 3,
-task cr: 0.1, vm cr: 0.2 -> 0.1
-task bw_up: 26, local_bw_up: 100000 -> 99974
-task bw_down: 790, local_bw_down: 100000 -> 99210
-
-INFO:Time 278:task33 assign to MNO
-INFO:Time 278:Task33 unaccepted, retry after 101 minutes.
-INFO:Time 280:release task26 from vm 3,
-cr: 0.1 -> 0.2
-local_bw_up: 99974 -> 100000
-local_bw_down: 99210 -> 100000
-
-INFO:Time 280:Finished hour 5
-INFO:Time 280:Release undone tasks: dict_keys([])
-INFO:Time 280:Release undone tasks: dict_keys([])
-INFO:Time 300:mno overall hour utility: 64.11606621057756, hour fitness: 32.05803310528878
-INFO:Time 300:mvno overall hour utility: 70.47584569035187, hour fitness: 23.491948563450624
-INFO:Time 300:------------------------------------Start of Updating Parameters------------------------------------
-INFO:Time 300:-------------------------------updating MNO parameters-------------------------------
-INFO:Time 300:-----------------------Updating best population-----------------------
-INFO:Time 300:No better population found, keep origin.
-INFO:Time 300:best population as [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ], fitness: 32.05803310528878.
-INFO:Time 300:Finished updating best population.
-INFO:Time 300:-----------------------Generate new offsprings------------------------
-INFO:Time 300:data not enough for updating, skip updating.
-INFO:Time 300:final new offspring:
-1: [  0.06   0.04   0.2    0.01   0.38   0.31   0.01   0.32   0.01   0.13
-   0.03   0.49   0.49   0.03   0.01   0.04   0.01   0.41 245.69   0.32]
-2: [  0.04   0.03   0.14   0.01   0.27   0.51   0.01   0.22   0.25   0.33
-   0.02   0.17   0.16   0.05   0.28   0.04   0.05   0.43 294.83   0.32]
-3: [  0.02   0.02   0.02   0.53   0.25   0.16   0.03   0.07   0.58   0.14
-   0.02   0.16   0.21   0.06   0.37   0.05   0.06   0.26 201.66   0.32]
-4: [  0.21   0.1    0.01   0.24   0.26   0.18   0.06   0.13   0.01   0.16
-   0.04   0.6    0.49   0.03   0.01   0.04   0.01   0.41 245.69   0.14]
-
-INFO:Time 300:Finished generating new offsprings.
-INFO:Time 300:Finished updating MNO parameters
-INFO:Time 300:Function update_task_deployment_parameters executed in 0.0030s
-INFO:Time 300:------------------------------updating MVNO parameters-------------------------------
-INFO:Time 300:-----------------------Updating best population-----------------------
-INFO:Time 300:No better population found, keep origin.
-INFO:Time 300:best population as [  0.03   0.01   0.32   0.06   0.01   0.56   0.14   0.01   0.54   0.03
-   0.27   0.01   0.36   0.01   0.01   0.27   0.03   0.33 249.65   0.16], fitness: 23.491948563450624.
-INFO:Time 300:Finished updating best population.
-INFO:Time 300:-----------------------Generate new offsprings------------------------
-INFO:Time 300:data not enough for updating, skip updating.
-INFO:Time 300:final new offspring:
-1: [  0.06   0.03   0.04   0.79   0.02   0.06   0.18   0.13   0.16   0.03
-   0.42   0.09   0.01   0.33   0.25   0.24   0.03   0.14 280.5    0.06]
-2: [  0.03   0.01   0.31   0.08   0.01   0.55   0.64   0.01   0.05   0.02
-   0.26   0.01   0.36   0.01   0.01   0.27   0.03   0.33 249.65   0.16]
-3: [  0.03   0.01   0.32   0.06   0.01   0.56   0.14   0.01   0.54   0.03
-   0.27   0.01   0.36   0.01   0.     0.28   0.03   0.33 249.65   0.16]
-4: [  0.03   0.01   0.32   0.06   0.01   0.56   0.13   0.01   0.51   0.03
-   0.24   0.08   0.11   0.     0.     0.58   0.02   0.27 249.65   0.16]
-
-INFO:Time 300:Finished generating new offsprings.
-INFO:Time 300:Finished updating MVNO parameters
-INFO:Time 300:Function update_task_deployment_parameters executed in 0.0040s
-INFO:Time 300:Finished updating MNO and MVNO parameters.
-INFO:Time 300:Start of hour 6
-Get hour events:
-id,type,time
-[[9 0 301 'VoIP' '1' '6' 0.07 0.04 450 17]
- [27 0 309 'VoIP' '19' '17' 0.07 0.04 450 17]
- [11 0 311 'VoIP' '10' '1' 0.1 0.02 370 16]
- [27 1 311 'VoIP' '19' '17' 0.07 0.04 450 17]
- [11 1 317 'VoIP' '10' '1' 0.1 0.02 370 16]
- [9 1 319 'VoIP' '1' '6' 0.07 0.04 450 17]
- [13 0 321 'FTP' '12' '12' 0.3 0.12 25 1300]
- [10 0 321 'VoIP' '9' '1' 0.1 0.02 370 16]
- [39 0 324 'FTP' '29' '9' 0.3 0.12 25 1300]
- [39 1 325 'FTP' '29' '9' 0.3 0.12 25 1300]
- [38 0 327 'IP_Video' '28' '18' 0.08 0.05 24 1065]
- [38 1 330 'IP_Video' '28' '18' 0.08 0.05 24 1065]
- [13 1 331 'FTP' '12' '12' 0.3 0.12 25 1300]
- [10 1 332 'VoIP' '9' '1' 0.1 0.02 370 16]
- [29 0 334 'VoIP' '21' '19' 0.1 0.02 370 16]
- [37 0 335 'IP_Video' '27' '17' 0.08 0.05 24 1065]
- [37 1 336 'IP_Video' '27' '17' 0.08 0.05 24 1065]
- [29 1 339 'VoIP' '21' '19' 0.1 0.02 370 16]
- [30 0 343 'IP_Video' '22' '20' 0.08 0.05 24 1065]
- [41 0 349 'VoIP' '34' '6' 0.1 0.02 370 16]
- [41 1 351 'VoIP' '34' '6' 0.1 0.02 370 16]]
-INFO:Time 300:mno deploy with best population [  0.09   0.01   0.01   0.09   0.69   0.09   0.02   0.26   0.1    0.26
-   0.1    0.26   0.3    0.02   0.04   0.3    0.04   0.3  300.     0.2 ] with fitness: 32.05803310528878
-INFO:Time 300:mvno deploy with best population [  0.03   0.01   0.32   0.06   0.01   0.56   0.14   0.01   0.54   0.03
-   0.27   0.01   0.36   0.01   0.01   0.27   0.03   0.33 249.65   0.16] with fitness: 23.491948563450624
-INFO:Time 301:task9 assign to MNO
-INFO:Time 301:Deploy task9 to vm 1,
-task cr: 0.04, vm cr: 0.2 -> 0.16
-task bw_up: 450, local_bw_up: 100000 -> 99550
-task bw_down: 17, local_bw_down: 100000 -> 99983
-
-INFO:Time 309:task27 assign to MVNO
-INFO:Time 309:Deploy task27 to vm 4,
-task cr: 0.04, vm cr: 0.18000000000000002 -> 0.14
-task bw_up: 450, local_bw_up: 99630 -> 99180
-task bw_down: 17, local_bw_down: 99984 -> 99967
-
-INFO:Time 311:task11 assign to MNO
-INFO:Time 311:Task11 unaccepted, retry after 89 minutes.
-INFO:Time 311:release task27 from vm 4,
-cr: 0.14 -> 0.18000000000000002
-local_bw_up: 99180 -> 99630
-local_bw_down: 99967 -> 99984
-
-INFO:Time 319:release task9 from vm 1,
-cr: 0.16 -> 0.2
-local_bw_up: 99550 -> 100000
-local_bw_down: 99983 -> 100000
-
-INFO:Time 321:task13 assign to MVNO
-INFO:Time 321:Task13 unaccepted, retry after 97 minutes.
-INFO:Time 321:task10 assign to MNO
-INFO:Time 321:Deploy task10 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 324:task39 assign to MNO
-INFO:Time 324:Deploy task39 to vm 3,
-task cr: 0.12, vm cr: 0.2 -> 0.08000000000000002
-task bw_up: 25, local_bw_up: 100000 -> 99975
-task bw_down: 1300, local_bw_down: 100000 -> 98700
-
-INFO:Time 325:release task39 from vm 3,
-cr: 0.08000000000000002 -> 0.2
-local_bw_up: 99975 -> 100000
-local_bw_down: 98700 -> 100000
-
-INFO:Time 327:task38 assign to MNO
-INFO:Time 327:Deploy task38 to vm 5,
-task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
-task bw_up: 24, local_bw_up: 100000 -> 99976
-task bw_down: 1065, local_bw_down: 100000 -> 98935
-
-INFO:Time 330:release task38 from vm 5,
-cr: 0.15000000000000002 -> 0.2
-local_bw_up: 99976 -> 100000
-local_bw_down: 98935 -> 100000
-
-INFO:Time 332:release task10 from vm 1,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 334:task29 assign to MNO
-INFO:Time 334:Deploy task29 to vm 1,
-task cr: 0.02, vm cr: 0.2 -> 0.18000000000000002
-task bw_up: 370, local_bw_up: 100000 -> 99630
-task bw_down: 16, local_bw_down: 100000 -> 99984
-
-INFO:Time 335:task37 assign to MNO
-INFO:Time 335:Deploy task37 to vm 5,
-task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
-task bw_up: 24, local_bw_up: 100000 -> 99976
-task bw_down: 1065, local_bw_down: 100000 -> 98935
-
-INFO:Time 336:release task37 from vm 5,
-cr: 0.15000000000000002 -> 0.2
-local_bw_up: 99976 -> 100000
-local_bw_down: 98935 -> 100000
-
-INFO:Time 339:release task29 from vm 1,
-cr: 0.18000000000000002 -> 0.2
-local_bw_up: 99630 -> 100000
-local_bw_down: 99984 -> 100000
-
-INFO:Time 343:task30 assign to MNO
-INFO:Time 343:Deploy task30 to vm 5,
-task cr: 0.05, vm cr: 0.2 -> 0.15000000000000002
-task bw_up: 24, local_bw_up: 100000 -> 99976
-task bw_down: 1065, local_bw_down: 100000 -> 98935
-
-INFO:Time 349:task41 assign to MVNO
-INFO:Time 349:Deploy task41 to vm 4,
-task cr: 0.02, vm cr: 0.18000000000000002 -> 0.16000000000000003
-task bw_up: 370, local_bw_up: 99630 -> 99260
-task bw_down: 16, local_bw_down: 99984 -> 99968
-
-INFO:Time 351:release task41 from vm 4,
-cr: 0.16000000000000003 -> 0.18000000000000002
-local_bw_up: 99260 -> 99630
-local_bw_down: 99968 -> 99984
-
-INFO:Time 351:Finished hour 6
-INFO:Time 351:Release undone tasks: dict_keys([])
-INFO:Time 351:Release undone tasks: dict_keys([30])
-INFO:Time 351:Task30 unaccepted, retry after 105 minutes.
-INFO:Time 351:release task30 from vm 5,
-cr: 0.15000000000000002 -> 0.2
-local_bw_up: 99976 -> 100000
-local_bw_down: 98935 -> 100000
-
-INFO:Time 360:mno overall hour utility: 70.6039631199781, hour fitness: 10.086280445711157
-INFO:Time 360:mvno overall hour utility: 69.84456000814953, hour fitness: 34.922280004074764
-INFO:Time 360:------------------------------------Start of Updating Parameters------------------------------------
-INFO:Time 360:-------------------------------updating MNO parameters-------------------------------
-INFO:Time 360:-----------------------Updating best population-----------------------
-INFO:Time 360:better population 1 found, update best population!
-INFO:Time 360:better population 4 found, update best population!
-INFO:Time 360:best population as [  0.21   0.1    0.01   0.24   0.26   0.18   0.06   0.13   0.01   0.16
-   0.04   0.6    0.49   0.03   0.01   0.04   0.01   0.41 245.69   0.14], fitness: 11.925674699007619.
-INFO:Time 360:Finished updating best population.
-INFO:Time 360:-----------------------Generate new offsprings------------------------
-INFO:Time 360:final new offspring:
-1: [  0.03   0.03   0.12   0.01   0.22   0.59   0.09   0.12   0.01   0.16
-   0.04   0.58   0.49   0.03   0.01   0.04   0.01   0.41 245.69   0.32]
-2: [  0.06   0.04   0.2    0.01   0.38   0.31   0.01   0.32   0.01   0.13
-   0.03   0.49   0.72   0.02   0.01   0.02   0.01   0.23 245.69   0.32]
-3: [  0.04   0.04   0.14   0.01   0.27   0.51   0.01   0.22   0.25   0.33
-   0.02   0.17   0.16   0.05   0.28   0.04   0.05   0.43 294.83   0.32]
-4: [  0.24   0.12   0.01   0.28   0.3    0.06   0.01   0.32   0.01   0.13
-   0.03   0.49   0.47   0.03   0.01   0.07   0.01   0.4  245.69   0.14]
-
-INFO:Time 360:Finished generating new offsprings.
-INFO:Time 360:Finished updating MNO parameters
-INFO:Time 360:Function update_task_deployment_parameters executed in 0.0090s
-INFO:Time 360:------------------------------updating MVNO parameters-------------------------------
-INFO:Time 360:-----------------------Updating best population-----------------------
-INFO:Time 360:better population 1 found, update best population!
-INFO:Time 360:best population as [  0.06   0.03   0.04   0.79   0.02   0.06   0.18   0.13   0.16   0.03
-   0.42   0.09   0.01   0.33   0.25   0.24   0.03   0.14 280.5    0.06], fitness: 38.64736262647287.
-INFO:Time 360:Finished updating best population.
-INFO:Time 360:-----------------------Generate new offsprings------------------------
-INFO:Time 360:final new offspring:
-1: [  0.03   0.02   0.03   0.49   0.01   0.42   0.57   0.07   0.08   0.01
-   0.22   0.05   0.01   0.33   0.25   0.24   0.03   0.14 224.4    0.06]
-2: [  0.06   0.03   0.03   0.79   0.02   0.06   0.18   0.13   0.16   0.03
-   0.42   0.09   0.     0.32   0.24   0.24   0.06   0.14 280.5    0.06]
-3: [  0.05   0.03   0.63   0.17   0.03   0.1    0.22   0.02   0.12   0.04
-   0.57   0.02   0.44   0.01   0.01   0.34   0.05   0.15 249.65   0.16]
-4: [  0.03   0.01   0.32   0.06   0.01   0.56   0.14   0.01   0.54   0.03
-   0.27   0.01   0.36   0.01   0.     0.28   0.03   0.33 249.65   0.16]
-
-INFO:Time 360:Finished generating new offsprings.
-INFO:Time 360:Finished updating MVNO parameters
-INFO:Time 360:Function update_task_deployment_parameters executed in 0.0100s
-INFO:Time 360:Finished updating MNO and MVNO parameters.
-INFO:Time 360:Finished Task Deployment.
-INFO:Time 360:Finished Round 3.
-INFO:Time 360:Finish simulating...

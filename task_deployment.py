@@ -168,6 +168,7 @@ class TaskDeployment:
             bw_down = vm.from_user[user_id]['bw_down']
             delay = vm.from_user[user_id]['delay']
             cr_diff = abs(cpu_request - vm.cr)
+            # checking the operating value and vm remaining resource
             if min(bw_up, bw_down) < self.optimizing.best_op_bw or vm.cr < self.optimizing.best_op_cr or \
                 vm.cr < task[Task_event_index.average_cpu_usage] or vm.local_bw_up < task[Task_event_index.T_up] or \
                 vm.local_bw_down < task[Task_event_index.T_down]:

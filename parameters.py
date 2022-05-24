@@ -5,7 +5,7 @@ class Global:
     system_time = 0
 
 rnd_seed = 1126
-logging_level = logging.INFO
+logging_level = logging.DEBUG
 test_data_dir = './data/case3/'
 # the length of log with filling "-"
 title1, title2, title3, title4, title5 = 130, 115, 100, 85, 70
