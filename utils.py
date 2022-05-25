@@ -65,4 +65,5 @@ def timer(func):
         t1 = time()
         result = func(*args, **kwargs)
         logging.info(f'Function {func.__name__} executed in {time() - t1:.4f}s')
+        return result
     return decorate

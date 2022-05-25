@@ -17,7 +17,7 @@ big_round_times = 3
 
 # user to vm generating data
 generated_bw_max = 100000 # Kbps
-generated_bw_min = 0 # Kbps
+generated_bw_min = 50000 # Kbps
 generated_delay_cloud_max = 50
 generated_delay_cloud_min = 49
 generated_delay_edge_max = 2
@@ -49,8 +49,8 @@ _phi = 0.7
 
 # optimizing
 ## the max time of searching the valid offsprings in vm assignment
-max_searching_times = 500
-optimizing_times = 100
+max_searching_times = 50
+optimizing_times = 10
 offspring_number = 4
 mutate_rate = 0.05
 

@@ -37,7 +37,7 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         self.new_populations = None
         self.fitness = [0 for i in range(offspring_number)]
         self.best_population = None
-        self.best_fitness = float('-inf')
+        self.best_fitness = 0
         self.min_population_len = None
         self.valid_evolution_message = None
 
