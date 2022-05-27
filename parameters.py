@@ -16,18 +16,23 @@ big_round_minutes = small_round_minutes * 2
 big_round_times = 3
 
 # user to vm generating data
-generated_bw_max = 100000 # Kbps
-generated_bw_min = 50000 # Kbps
-generated_delay_cloud_max = 50
-generated_delay_cloud_min = 49
-generated_delay_edge_max = 2
-generated_delay_edge_min = 1
+beta_a = 2
+beta_b = 1.5
+beta_t = 100
+beta_d = 0
+PT5_cloud_a = 2 # must
+PT5_cloud_b = 0.557
+PT5_cloud_d = 45
+PT5_edge_a = 2
+PT5_edge_b = 2
+PT5_edge_d = 2
 
 # contract
+expected_vm_num = 10
 bw_low = 5
-bw_high = generated_bw_max * 10 # Kbps
+bw_high = 100000 * expected_vm_num # Kbps
 cr_low = 0
-cr_high = 10
+cr_high = 1 * expected_vm_num
 
 # vm assignment
 mno_rate = 0.7
@@ -44,8 +49,17 @@ _gamma = [
 _op_bw = 300 # Kbps
 _op_cr = 0.2 # GCU-second/second
 
+# utility function
+max_score = 100
+voip_bw_up_bmin = 370
+voip_bw_down_bmin = 16.5
+ipVideo_bw_up_bmin = 20
+ipVideo_bw_down_bmin = 950
+ftp_bw_up_bmin = 35
+ftp_bw_down_bmin = 1100
+
 # update history data
-_phi = 0.7
+phi = 0.7
 
 # optimizing
 ## the max time of searching the valid offsprings in vm assignment

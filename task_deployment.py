@@ -4,10 +4,8 @@ from queue import Queue
 from vm import VM
 from optimizing import TaskDeploymentParametersOptimizing
 from task_handler import Task_handler
-from utils import (softmax, toSoftmax, step_logger, get_TD_populations_log_msg)
-from parameters import (generated_bw_max, generated_bw_min, title5,
-                        generated_delay_cloud_max, generated_delay_cloud_min, generated_delay_edge_max,
-                        generated_delay_edge_min, Task_type_index, Task_event_index, Global)
+from utils import (softmax, toSoftmax, step_logger, get_TD_populations_log_msg, sgn)
+from parameters import *
 import logging
 
 class UtilityFunc:
@@ -16,92 +14,89 @@ class UtilityFunc:
     class VoIP:
         @staticmethod
         def bw_up(bw: float) -> float:
-            return bw / (generated_bw_max - generated_bw_min) * 100
+            return max_score * (sgn(bw - voip_bw_up_bmin) + 1) / 2
 
         @staticmethod
         def bw_down(bw: float) -> float:
-            return bw / (generated_bw_max - generated_bw_min) * 100
+            return max_score * (sgn(bw - voip_bw_down_bmin) + 1) / 2
 
         @staticmethod
         def cr(cr: float) -> float:
-            return cr * 100
+            return max_score * cr
 
         @staticmethod
         def price(p: float) -> float:
             max_price = 150
-            return (max_price - p) / max_price * 100
+            return max_score * (max_price - p) / max_price
 
         @staticmethod
         def delay(d: float, location: str) -> float:
             if location == 'cloud':
-                return (generated_delay_cloud_max - d) / (generated_delay_cloud_max - generated_delay_cloud_min) * 100
+                return max_score * 1.5 ** -(d - PT5_cloud_d)
             elif location == 'edge':
-                return (generated_delay_edge_max - d) / (generated_delay_edge_max - generated_delay_edge_min) * 100
+                return max_score * 1.5 ** -(d - PT5_edge_d)
 
         @staticmethod
         def cr_diff(diff: float) -> float:
-            _range = generated_bw_max - generated_bw_min
-            return (_range - diff) / (_range) * 100
+            return max_score * (1 - diff)
 
     class IPVideo:
         @staticmethod
         def bw_up(bw: float) -> float:
-            return bw / (generated_bw_max - generated_bw_min) * 100
+            return max_score * (sgn(bw - ipVideo_bw_up_bmin) + 1) / 2
 
         @staticmethod
         def bw_down(bw: float) -> float:
-            return bw / (generated_bw_max - generated_bw_min) * 100
+            return max_score * (sgn(bw - ipVideo_bw_down_bmin) + 1) / 2
 
         @staticmethod
         def cr(cr: float) -> float:
-            return cr * 100
+            return max_score * cr
 
         @staticmethod
         def price(p: float) -> float:
             max_price = 150
-            return (max_price - p) / max_price * 100
+            return max_score * (max_price - p) / max_price
 
         @staticmethod
         def delay(d: float, location: str) -> float:
             if location == 'cloud':
-                return (generated_delay_cloud_max - d) / (generated_delay_cloud_max - generated_delay_cloud_min) * 100
+                return max_score * 1.5 ** -(d - PT5_cloud_d)
             elif location == 'edge':
-                return (generated_delay_edge_max - d) / (generated_delay_edge_max - generated_delay_edge_min) * 100
+                return max_score * 1.5 ** -(d - PT5_edge_d)
 
         @staticmethod
         def cr_diff(diff: float) -> float:
-            _range = generated_bw_max - generated_bw_min
-            return (_range - diff) / (_range) * 100
+            return max_score * (1 - diff)
 
     class FTP:
         @staticmethod
         def bw_up(bw: float) -> float:
-            return bw / (generated_bw_max - generated_bw_min) * 100
+            return max_score * (sgn(bw - ftp_bw_up_bmin) + 1) / 2
 
         @staticmethod
         def bw_down(bw: float) -> float:
-            return bw / (generated_bw_max - generated_bw_min) * 100
+            return max_score * (sgn(bw - ftp_bw_down_bmin) + 1) / 2
 
         @staticmethod
         def cr(cr: float) -> float:
-            return cr * 100
+            return cr * max_score
 
         @staticmethod
         def price(p: float) -> float:
             max_price = 150
-            return (max_price - p) / max_price * 100
+            return (max_price - p) / max_price * max_score
 
         @staticmethod
         def delay(d: float, location: str) -> float:
             if location == 'cloud':
-                return (generated_delay_cloud_max - d) / (generated_delay_cloud_max - generated_delay_cloud_min) * 100
+                return max_score * 1.5 ** -(d - PT5_cloud_d)
             elif location == 'edge':
-                return (generated_delay_edge_max - d) / (generated_delay_edge_max - generated_delay_edge_min) * 100
+                return max_score * 1.5 ** -(d - PT5_edge_d)
 
         @staticmethod
         def cr_diff(diff: float) -> float:
-            _range = generated_bw_max - generated_bw_min
-            return (_range - diff) / (_range) * 100
+            return max_score * (1 - diff)
 
     @classmethod
     def get_task_utility_func(cls, task_type: str):
