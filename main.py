@@ -3,11 +3,9 @@ import numpy as np
 from network_operator import (MNO, MVNO)
 from vm import VM
 from task_handler import Task_handler
-from utils import (toSoftmax, step_logger, timer)
-from parameters import (test_data_dir, small_round_minutes, big_round_minutes, big_round_times, rnd_seed, Task_type_index, Task_event_index,
-                        Event_type, _phi, generated_bw_max, generated_bw_min, generated_delay_cloud_max, generated_delay_cloud_min,
-                        generated_delay_edge_max, generated_delay_edge_min, logging_level, mno_rate, Global,
-                        title1, title2, title3)
+from utils import (toSoftmax, step_logger, beta, PT5)
+from parameters import *
+
 # initial setting for logging
 import logging
 logging.basicConfig(format=f'%(levelname)s:Time %(system_time)s:%(message)s', filename=test_data_dir + 'log.txt'
@@ -116,15 +114,15 @@ def generate_user_to_vm_data(location: str) -> dict:
     '''Random generate the runtime data from user to vm when new user arrive.'''
     if location == 'cloud':
         return {
-                    'bw_up':np.random.uniform(generated_bw_min, generated_bw_max),
-                    'bw_down':np.random.uniform(generated_bw_min, generated_bw_max),
-                    'delay':np.random.uniform(generated_delay_cloud_min, generated_delay_cloud_max)
+                    'bw_up':beta(beta_a, beta_b, beta_t, beta_d),
+                    'bw_down':beta(beta_a, beta_b, beta_t, beta_d),
+                    'delay':PT5(PT5_cloud_a, PT5_cloud_b, PT5_cloud_d)
                 }
     elif location == 'edge':
         return {
-                    'bw_up':np.random.uniform(generated_bw_min, generated_bw_max),
-                    'bw_down':np.random.uniform(generated_bw_min, generated_bw_max),
-                    'delay':np.random.uniform(generated_delay_edge_min, generated_delay_edge_max)
+                    'bw_up':beta(beta_a, beta_b, beta_t, beta_d),
+                    'bw_down':beta(beta_a, beta_b, beta_t, beta_d),
+                    'delay':PT5(PT5_edge_a, PT5_edge_b, PT5_edge_d)
                 }
     else:
         raise ValueError(f'invalid value {location} of location')
@@ -146,7 +144,7 @@ def update_history_data(hourly_history_data: np.array, hour_task_record: np.arra
         hourly_history_data = np.vstack([hourly_history_data, hour_task_record])
     _message = f'add hour data\n{np.mean(hour_task_record, axis=0)} into statistic data, '
     # update statistic data with the influence of _phi
-    statistic_data = statistic_data * (1 -_phi) + np.mean(hour_task_record, axis=0) * _phi
+    statistic_data = statistic_data * (1 - phi) + np.mean(hour_task_record, axis=0) * phi
     logging.debug(_message + f'statistic data becomes:\n{statistic_data}')
     return hourly_history_data, statistic_data
 
@@ -187,7 +185,7 @@ def task_deployment(hour_events: np.array, minutes_range: tuple) -> None:
             idx += 1
 
 # load data
-with step_logger('Start of load data', title1, 'Finished loading data.') as _:
+with step_logger('Start of load data', title1, 'Finished loading data.'):
     machine_attributes = load_machine_data(test_data_dir + 'machine_attributes.json')
     history_data = load_task_data(test_data_dir + 'history_data.json')
     task_events = load_task_data(test_data_dir + 'task_events.json')

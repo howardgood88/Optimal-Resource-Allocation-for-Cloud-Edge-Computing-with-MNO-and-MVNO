@@ -1,6 +1,11 @@
 import numpy as np
 from time import time
+import scipy.integrate as integrate
+import math
 import logging
+from parameters import rnd_seed
+
+np.random.seed(rnd_seed)
 
 def printReturn(func):
     def decorate(*args, **kwargs):
@@ -67,3 +72,35 @@ def timer(func):
         logging.info(f'Function {func.__name__} executed in {time() - t1:.4f}s')
         return result
     return decorate
+
+def beta(a, b, t, d):
+    '''Beta Distribution Generator.'''
+    def distribution(x):
+        return ((x - d) / t) ** (a - 1) * (1 - (x - d) / t) ** (b - 1) / integrate.quad(lambda x: x ** (a - 1) * (1 - x) ** (b - 1), 0, 1)[0]
+
+    mode = (a - 1) / (a + b - 2)
+    max_val = distribution(mode * t + d)
+    while True:
+        x = np.random.uniform(d, d + t)
+        y = np.random.uniform(0, max_val)
+        if y <= distribution(x):
+            return x * 1000 # to Mbps
+
+def PT5(a, b, d, max_x = 20):
+    '''Pearson Type 5 Distribution Generator.'''
+    def distribution(x):
+        return (x - d) ** -(a - 1) * math.exp(-b / (x - d)) * b ** a / math.factorial(a - 1)
+
+    mode = b / (a + 1) + d
+    max_val = distribution(mode + d)
+    while True:
+        x = np.random.uniform(d, max_x + d)
+        y = np.random.uniform(0, max_val)
+        if y <= distribution(x):
+            return x
+
+def sgn(x):
+    if x >= 0:
+        return 1
+    else:
+        return -1
