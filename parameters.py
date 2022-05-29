@@ -53,10 +53,12 @@ _op_cr = 0.2 # GCU-second/second
 max_score = 100
 voip_bw_up_bmin = 370
 voip_bw_down_bmin = 16.5
-ipVideo_bw_up_bmin = 20
-ipVideo_bw_down_bmin = 950
-ftp_bw_up_bmin = 35
-ftp_bw_down_bmin = 1100
+ipVideo_bw_up_bmax = 20
+ipVideo_bw_down_bmax = 950
+ftp_bw_up_bmin = 5
+ftp_bw_up_bmax = 35
+ftp_bw_down_bmin = 100
+ftp_bw_down_bmax = 1100
 
 # update history data
 phi = 0.7

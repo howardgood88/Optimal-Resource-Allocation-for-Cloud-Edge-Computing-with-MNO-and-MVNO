@@ -281,7 +281,7 @@ DEBUG:Time 0:Finished Evolution 10
 INFO:Time 0:mno vm id: ['1' '2' '6'], total resource (bw_up, bw_down, cr): (188064.1220209101, 161111.6132134624, 2.0999999999999996)
 INFO:Time 0:mvno vm id: ['3' '4' '5'], total resource (bw_up, bw_down, cr): (166253.29321873438, 155952.0626766069, 1.6), cost: 138.0
 INFO:Time 0:contract: bw_high: 1000000, bw_low: 5, cr_high: 10, cr_low: 0
-INFO:Time 0:Function vm_assignment executed in 0.0350s
+INFO:Time 0:Function vm_assignment executed in 0.0170s
 INFO:Time 0:Finished vm assignment.
 INFO:Time 0:---------------------------------------------Start of Task Deployment----------------------------------------------
 INFO:Time 0:Start of hour 1
@@ -327,60 +327,70 @@ INFO:Time 10:Deploy task0 to vm 1,
 task cr: 0.02, vm cr: 0.7 -> 0.6799999999999999
 task bw_up: 370, local_bw_up: 100000 -> 99630
 task bw_down: 16, local_bw_down: 100000 -> 99984
+INFO:Time 10:utility: 19.110422507957942
 
 INFO:Time 15:task1 assign to MNO
 INFO:Time 15:Deploy task1 to vm 2,
 task cr: 0.06, vm cr: 0.6 -> 0.54
 task bw_up: 20, local_bw_up: 100000 -> 99980
 task bw_down: 900, local_bw_down: 100000 -> 99100
+INFO:Time 15:utility: 87.85502112046935
 
 INFO:Time 15:task2 assign to MVNO
 INFO:Time 15:Deploy task2 to vm 3,
 task cr: 0.05, vm cr: 0.8 -> 0.75
 task bw_up: 35, local_bw_up: 100000 -> 99965
 task bw_down: 1000, local_bw_down: 100000 -> 99000
+INFO:Time 15:utility: 168.83641534804406
 
 INFO:Time 21:task3 assign to MNO
 INFO:Time 21:Deploy task3 to vm 1,
 task cr: 0.05, vm cr: 0.6799999999999999 -> 0.6299999999999999
 task bw_up: 300, local_bw_up: 99630 -> 99330
 task bw_down: 16, local_bw_down: 99984 -> 99968
+INFO:Time 21:utility: 19.27265269338468
 
 INFO:Time 26:task4 assign to MNO
 INFO:Time 26:Deploy task4 to vm 2,
 task cr: 0.09, vm cr: 0.54 -> 0.45000000000000007
 task bw_up: 31, local_bw_up: 99980 -> 99949
 task bw_down: 850, local_bw_down: 99100 -> 98250
+INFO:Time 26:utility: 78.99489094375745
 
 INFO:Time 27:task5 assign to MVNO
 INFO:Time 27:Deploy task5 to vm 3,
 task cr: 0.05, vm cr: 0.75 -> 0.7
 task bw_up: 25, local_bw_up: 99965 -> 99940
 task bw_down: 1300, local_bw_down: 99000 -> 97700
+INFO:Time 27:utility: 178.7670312448557
 
 INFO:Time 30:task6 assign to MNO
 INFO:Time 30:Deploy task6 to vm 2,
 task cr: 0.05, vm cr: 0.45000000000000007 -> 0.4000000000000001
 task bw_up: 24, local_bw_up: 99949 -> 99925
 task bw_down: 1065, local_bw_down: 98250 -> 97185
+INFO:Time 30:utility: 92.19822670267472
 
 INFO:Time 32:task7 assign to MNO
 INFO:Time 32:Deploy task7 to vm 1,
 task cr: 0.02, vm cr: 0.6299999999999999 -> 0.6099999999999999
 task bw_up: 246, local_bw_up: 99330 -> 99084
 task bw_down: 15, local_bw_down: 99968 -> 99953
+INFO:Time 32:utility: 18.54378654471552
 
 INFO:Time 33:task8 assign to MVNO
 INFO:Time 33:Deploy task8 to vm 3,
 task cr: 0.1, vm cr: 0.7 -> 0.6
 task bw_up: 26, local_bw_up: 99940 -> 99914
 task bw_down: 790, local_bw_down: 97700 -> 96910
+INFO:Time 33:utility: 180.28109358737748
 
 INFO:Time 35:task9 assign to MNO
 INFO:Time 35:Deploy task9 to vm 1,
 task cr: 0.04, vm cr: 0.6099999999999999 -> 0.5699999999999998
 task bw_up: 450, local_bw_up: 99084 -> 98634
 task bw_down: 17, local_bw_down: 99953 -> 99936
+INFO:Time 35:utility: 19.559025234929397
 
 INFO:Time 41:task10 assign to MNO
 INFO:Time 41:New user/users detected, finished updating vm_list.from_user.
@@ -388,6 +398,7 @@ INFO:Time 41:Deploy task10 to vm 1,
 task cr: 0.02, vm cr: 0.5699999999999998 -> 0.5499999999999998
 task bw_up: 370, local_bw_up: 98634 -> 98264
 task bw_down: 16, local_bw_down: 99936 -> 99920
+INFO:Time 41:utility: 19.56459715062381
 
 INFO:Time 45:task11 assign to MNO
 INFO:Time 45:New user/users detected, finished updating vm_list.from_user.
@@ -395,6 +406,7 @@ INFO:Time 45:Deploy task11 to vm 1,
 task cr: 0.02, vm cr: 0.5499999999999998 -> 0.5299999999999998
 task bw_up: 370, local_bw_up: 98264 -> 97894
 task bw_down: 16, local_bw_down: 99920 -> 99904
+INFO:Time 45:utility: 19.671932432286923
 
 INFO:Time 45:task12 assign to MNO
 INFO:Time 45:New user/users detected, finished updating vm_list.from_user.
@@ -402,6 +414,7 @@ INFO:Time 45:Deploy task12 to vm 2,
 task cr: 0.05, vm cr: 0.4000000000000001 -> 0.3500000000000001
 task bw_up: 24, local_bw_up: 99925 -> 99901
 task bw_down: 1065, local_bw_down: 97185 -> 96120
+INFO:Time 45:utility: 82.4530071405668
 
 INFO:Time 45:task13 assign to MVNO
 INFO:Time 45:New user/users detected, finished updating vm_list.from_user.
@@ -409,6 +422,7 @@ INFO:Time 45:Deploy task13 to vm 3,
 task cr: 0.05, vm cr: 0.6 -> 0.5499999999999999
 task bw_up: 25, local_bw_up: 99914 -> 99889
 task bw_down: 1300, local_bw_down: 96910 -> 95610
+INFO:Time 45:utility: 187.391665995673
 
 INFO:Time 45:release task0 from vm 1,
 cr: 0.5299999999999998 -> 0.5499999999999998
@@ -486,6 +500,7 @@ INFO:Time 55:Deploy task14 to vm 3,
 task cr: 0.05, vm cr: 0.8 -> 0.75
 task bw_up: 25, local_bw_up: 100000 -> 99975
 task bw_down: 1300, local_bw_down: 100000 -> 98700
+INFO:Time 55:utility: 169.38135489705525
 
 INFO:Time 55:task15 assign to MVNO
 INFO:Time 55:New user/users detected, finished updating vm_list.from_user.
@@ -493,6 +508,7 @@ INFO:Time 55:Deploy task15 to vm 3,
 task cr: 0.05, vm cr: 0.75 -> 0.7
 task bw_up: 25, local_bw_up: 99975 -> 99950
 task bw_down: 1300, local_bw_down: 98700 -> 97400
+INFO:Time 55:utility: 173.59236670317907
 
 INFO:Time 59:release task14 from vm 3,
 cr: 0.7 -> 0.75
@@ -508,22 +524,23 @@ local_bw_up: 99975 -> 100000
 local_bw_down: 98700 -> 100000
 
 INFO:Time 59:Release undone tasks: dict_keys([])
-INFO:Time 60:mno overall hour utility: 69.89135347656388, # of task: 10, hour fitness: 6.989135347656388
-INFO:Time 60:mvno overall hour utility: 62.576348442605436, # of task: 6, hour fitness: 10.429391407100907
+INFO:Time 60:mno overall hour utility: 457.22356247136656, # of task: 10, hour fitness: 45.72235624713666
+INFO:Time 60:mvno overall hour utility: 1058.2499277761847, # of task: 6, hour fitness: 176.37498796269745
 INFO:Time 60:------------------------------------Start of Updating Parameters------------------------------------
 INFO:Time 60:-------------------------------updating MNO parameters-------------------------------
 INFO:Time 60:-----------------------Updating best population-----------------------
 DEBUG:Time 60:population 1 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29] with fitness: 8.702386902895249
+   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29] with fitness: 92.9527401652327
 INFO:Time 60:better population 1 found, update best population!
 DEBUG:Time 60:population 2 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.23   0.01   0.64
-   0.08   0.02   0.22   0.18   0.02   0.12   0.46   0.01 219.12   0.38] with fitness: 5.655514716797738
+   0.08   0.02   0.22   0.18   0.02   0.12   0.46   0.01 219.12   0.38] with fitness: 71.03812538118333
 DEBUG:Time 60:population 3 [  0.03   0.01   0.04   0.66   0.01   0.26   0.31   0.05   0.01   0.4
-   0.04   0.19   0.02   0.02   0.06   0.07   0.81   0.01 258.38   0.23] with fitness: 6.791004414946109
+   0.04   0.19   0.02   0.02   0.06   0.07   0.81   0.01 258.38   0.23] with fitness: 84.65459495405199
 DEBUG:Time 60:population 4 [  0.05   0.49   0.13   0.12   0.06   0.16   0.24   0.31   0.34   0.01
-   0.02   0.08   0.26   0.06   0.63   0.01   0.02   0.01 384.7    0.32] with fitness: 7.4775584198111815
-INFO:Time 60:best population as [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29], fitness: 8.702386902895249.
+   0.02   0.08   0.26   0.06   0.63   0.01   0.02   0.01 384.7    0.32] with fitness: 107.90472720910375
+INFO:Time 60:better population 4 found, update best population!
+INFO:Time 60:best population as [  0.05   0.49   0.13   0.12   0.06   0.16   0.24   0.31   0.34   0.01
+   0.02   0.08   0.26   0.06   0.63   0.01   0.02   0.01 384.7    0.32], fitness: 107.90472720910375.
 INFO:Time 60:Finished updating best population.
 INFO:Time 60:-----------------------Generate new offsprings------------------------
 DEBUG:Time 60:selected parents:
@@ -578,23 +595,23 @@ INFO:Time 60:Function update_task_deployment_parameters executed in 0.0080s
 INFO:Time 60:------------------------------updating MVNO parameters-------------------------------
 INFO:Time 60:-----------------------Updating best population-----------------------
 DEBUG:Time 60:population 1 [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
-   0.47   0.01   0.08   0.08   0.2    0.44   0.2    0.01 258.06   0.26] with fitness: 6.594588471701065
+   0.47   0.01   0.08   0.08   0.2    0.44   0.2    0.01 258.06   0.26] with fitness: 84.38029830447785
 DEBUG:Time 60:population 2 [  0.26   0.07   0.12   0.43   0.1    0.02   0.03   0.52   0.38   0.02
-   0.01   0.04   0.07   0.09   0.02   0.51   0.22   0.1  331.65   0.38] with fitness: 5.1743810839274795
+   0.01   0.04   0.07   0.09   0.02   0.51   0.22   0.1  331.65   0.38] with fitness: 77.06170512438528
 DEBUG:Time 60:population 3 [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 12.327029814457022
+   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 276.04743155549244
 INFO:Time 60:better population 3 found, update best population!
 DEBUG:Time 60:population 4 [  0.71   0.02   0.02   0.18   0.04   0.04   0.15   0.09   0.02   0.59
-   0.15   0.01   0.08   0.1    0.12   0.36   0.27   0.06 303.43   0.3 ] with fitness: 6.209507338919553
+   0.15   0.01   0.08   0.1    0.12   0.36   0.27   0.06 303.43   0.3 ] with fitness: 91.2255987855735
 INFO:Time 60:best population as [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19], fitness: 12.327029814457022.
+   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19], fitness: 276.04743155549244.
 INFO:Time 60:Finished updating best population.
 INFO:Time 60:-----------------------Generate new offsprings------------------------
 DEBUG:Time 60:selected parents:
 1: [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
    0.47   0.01   0.08   0.08   0.2    0.44   0.2    0.01 258.06   0.26]
-2: [  0.26   0.07   0.12   0.43   0.1    0.02   0.03   0.52   0.38   0.02
-   0.01   0.04   0.07   0.09   0.02   0.51   0.22   0.1  331.65   0.38]
+2: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
+   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 3: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
    0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 4: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
@@ -605,8 +622,8 @@ DEBUG:Time 60:order after shuffle: [3 1 0 2]
 DEBUG:Time 60:new offsprings after crossover:
 1: [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
    0.47   0.01   0.13   0.13   0.23   0.14   0.35   0.02 258.06   0.26]
-2: [  0.26   0.07   0.12   0.43   0.1    0.02   0.03   0.52   0.38   0.02
-   0.01   0.04   0.07   0.09   0.02   0.51   0.22   0.1  331.65   0.38]
+2: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
+   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 3: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
    0.02   0.41   0.34   0.02   0.15   0.32   0.02   0.15 257.42   0.19]
 4: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
@@ -619,8 +636,8 @@ DEBUG:Time 60:offspring 4 mutate at [3] bit, multiply by 0.8
 DEBUG:Time 60:new offsprings after mutation:
 1: [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
    0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.26]
-2: [  0.26   0.07   0.12   0.43   0.1    0.02   0.03   0.51   0.38   0.03
-   0.01   0.04   0.07   0.09   0.02   0.51   0.22   0.1  331.65   0.46]
+2: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.06
+   0.02   0.4    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.22]
 3: [  0.03   0.64   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
    0.02   0.41   0.34   0.02   0.15   0.32   0.02   0.15 257.42   0.19]
 4: [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
@@ -629,8 +646,8 @@ DEBUG:Time 60:new offsprings after mutation:
 INFO:Time 60:final new offspring:
 1: [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
    0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.26]
-2: [  0.26   0.07   0.12   0.43   0.1    0.02   0.03   0.51   0.38   0.03
-   0.01   0.04   0.07   0.09   0.02   0.51   0.22   0.1  331.65   0.46]
+2: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.06
+   0.02   0.4    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.22]
 3: [  0.03   0.64   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
    0.02   0.41   0.34   0.02   0.15   0.32   0.02   0.15 257.42   0.19]
 4: [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
@@ -638,7 +655,7 @@ INFO:Time 60:final new offspring:
 
 INFO:Time 60:Finished generating new offsprings.
 INFO:Time 60:Finished updating MVNO parameters
-INFO:Time 60:Function update_task_deployment_parameters executed in 0.0090s
+INFO:Time 60:Function update_task_deployment_parameters executed in 0.0080s
 INFO:Time 60:Finished updating MNO and MVNO parameters.
 INFO:Time 60:Start of hour 2
 Get hour events:
@@ -664,22 +681,24 @@ id,type,time
  [25 0 115 'VoIP' '17' '15' 0.05 0.02 246 15]
  [25 1 119 'VoIP' '17' '15' 0.05 0.02 246 15]
  [26 0 119 'FTP' '18' '16' 0.15 0.05 26 790]]
-INFO:Time 60:mno deploy with best population [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29] with fitness: 8.702386902895249
+INFO:Time 60:mno deploy with best population [  0.05   0.49   0.13   0.12   0.06   0.16   0.24   0.31   0.34   0.01
+   0.02   0.08   0.26   0.06   0.63   0.01   0.02   0.01 384.7    0.32] with fitness: 107.90472720910375
 INFO:Time 60:mvno deploy with best population [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 12.327029814457022
+   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 276.04743155549244
 INFO:Time 61:task16 assign to MNO
 INFO:Time 61:New user/users detected, finished updating vm_list.from_user.
 INFO:Time 61:Deploy task16 to vm 1,
 task cr: 0.02, vm cr: 0.7 -> 0.6799999999999999
 task bw_up: 370, local_bw_up: 100000 -> 99630
 task bw_down: 16, local_bw_down: 100000 -> 99984
+INFO:Time 61:utility: 76.88886782315144
 
 INFO:Time 61:task16 assign to MNO
 INFO:Time 61:Deploy task16 to vm 1,
 task cr: 0.02, vm cr: 0.6799999999999999 -> 0.6599999999999999
 task bw_up: 370, local_bw_up: 99630 -> 99260
 task bw_down: 16, local_bw_down: 99984 -> 99968
+INFO:Time 61:utility: 76.95042965357227
 
 INFO:Time 63:release task16 from vm 1,
 cr: 0.6599999999999999 -> 0.6799999999999999
@@ -692,6 +711,7 @@ INFO:Time 65:Deploy task17 to vm 1,
 task cr: 0.02, vm cr: 0.6799999999999999 -> 0.6599999999999999
 task bw_up: 370, local_bw_up: 99630 -> 99260
 task bw_down: 16, local_bw_down: 99984 -> 99968
+INFO:Time 65:utility: 73.15084679479331
 
 INFO:Time 65:release task17 from vm 1,
 cr: 0.6599999999999999 -> 0.6799999999999999
@@ -704,6 +724,7 @@ INFO:Time 65:Deploy task18 to vm 1,
 task cr: 0.02, vm cr: 0.6799999999999999 -> 0.6599999999999999
 task bw_up: 370, local_bw_up: 99630 -> 99260
 task bw_down: 16, local_bw_down: 99984 -> 99968
+INFO:Time 65:utility: 73.34809360752894
 
 INFO:Time 70:task19 assign to MNO
 INFO:Time 70:New user/users detected, finished updating vm_list.from_user.
@@ -711,6 +732,7 @@ INFO:Time 70:Deploy task19 to vm 2,
 task cr: 0.05, vm cr: 0.6000000000000002 -> 0.5500000000000002
 task bw_up: 24, local_bw_up: 100000 -> 99976
 task bw_down: 1065, local_bw_down: 100000 -> 98935
+INFO:Time 70:utility: 160.440511015443
 
 INFO:Time 70:release task18 from vm 1,
 cr: 0.6599999999999999 -> 0.6799999999999999
@@ -727,6 +749,7 @@ INFO:Time 80:Deploy task20 to vm 5,
 task cr: 0.05, vm cr: 0.3 -> 0.25
 task bw_up: 24, local_bw_up: 100000 -> 99976
 task bw_down: 1065, local_bw_down: 100000 -> 98935
+INFO:Time 80:utility: 108.93795774446411
 
 INFO:Time 85:release task20 from vm 5,
 cr: 0.25 -> 0.3
@@ -738,6 +761,7 @@ INFO:Time 85:Deploy task21 to vm 6,
 task cr: 0.05, vm cr: 0.8 -> 0.75
 task bw_up: 25, local_bw_up: 100000 -> 99975
 task bw_down: 1300, local_bw_down: 100000 -> 98700
+INFO:Time 85:utility: 186.68979173304965
 
 INFO:Time 85:release task21 from vm 6,
 cr: 0.75 -> 0.8
@@ -750,18 +774,21 @@ INFO:Time 85:Deploy task22 to vm 4,
 task cr: 0.02, vm cr: 0.5 -> 0.48
 task bw_up: 370, local_bw_up: 100000 -> 99630
 task bw_down: 16, local_bw_down: 100000 -> 99984
+INFO:Time 85:utility: 85.119630203513
 
 INFO:Time 90:task23 assign to MNO
 INFO:Time 90:Deploy task23 to vm 1,
 task cr: 0.02, vm cr: 0.6799999999999999 -> 0.6599999999999999
 task bw_up: 370, local_bw_up: 99630 -> 99260
 task bw_down: 16, local_bw_down: 99984 -> 99968
+INFO:Time 90:utility: 73.15084679479331
 
 INFO:Time 90:task24 assign to MNO
 INFO:Time 90:Deploy task24 to vm 1,
 task cr: 0.02, vm cr: 0.6599999999999999 -> 0.6399999999999999
 task bw_up: 370, local_bw_up: 99260 -> 98890
 task bw_down: 16, local_bw_down: 99968 -> 99952
+INFO:Time 90:utility: 73.21240862521412
 
 INFO:Time 100:release task23 from vm 1,
 cr: 0.6399999999999999 -> 0.6599999999999999
@@ -783,6 +810,7 @@ INFO:Time 115:Deploy task25 to vm 1,
 task cr: 0.02, vm cr: 0.6799999999999999 -> 0.6599999999999999
 task bw_up: 246, local_bw_up: 99630 -> 99384
 task bw_down: 15, local_bw_down: 99984 -> 99969
+INFO:Time 115:utility: 72.53971777861933
 
 INFO:Time 119:release task25 from vm 1,
 cr: 0.6599999999999999 -> 0.6799999999999999
@@ -794,6 +822,7 @@ INFO:Time 119:Deploy task26 to vm 6,
 task cr: 0.05, vm cr: 0.8 -> 0.75
 task bw_up: 26, local_bw_up: 100000 -> 99974
 task bw_down: 790, local_bw_down: 100000 -> 99210
+INFO:Time 119:utility: 189.9964801087539
 
 INFO:Time 119:Finished hour 2
 INFO:Time 119:Release undone tasks: dict_keys([])
@@ -804,22 +833,22 @@ cr: 0.75 -> 0.8
 local_bw_up: 99974 -> 100000
 local_bw_down: 99210 -> 100000
 
-INFO:Time 120:mno overall hour utility: 87.52506286473168, # of task: 10, hour fitness: 8.752506286473167
-INFO:Time 120:mvno overall hour utility: 85.119630203513, # of task: 2, hour fitness: 42.5598151017565
+INFO:Time 120:mno overall hour utility: 1056.3679939349192, # of task: 10, hour fitness: 105.63679939349193
+INFO:Time 120:mvno overall hour utility: 194.0575879479771, # of task: 2, hour fitness: 97.02879397398856
 INFO:Time 120:------------------------------------Start of Updating Parameters------------------------------------
 INFO:Time 120:-------------------------------updating MNO parameters-------------------------------
 INFO:Time 120:-----------------------Updating best population-----------------------
 DEBUG:Time 120:population 1 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29] with fitness: 4.537621939307708
+   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29] with fitness: 78.54836326598954
 DEBUG:Time 120:population 2 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.24   0.01   0.67
-   0.05   0.02   0.23   0.19   0.02   0.07   0.48   0.01 219.12   0.38] with fitness: 6.1418101486727155
+   0.05   0.02   0.23   0.19   0.02   0.07   0.48   0.01 219.12   0.38] with fitness: 87.76767188267245
 DEBUG:Time 120:population 3 [  0.03   0.01   0.04   0.66   0.01   0.26   0.12   0.21   0.58   0.01
-   0.01   0.07   0.02   0.02   0.06   0.07   0.81   0.01 258.38   0.23] with fitness: 3.890912012189715
+   0.01   0.07   0.02   0.02   0.06   0.07   0.81   0.01 258.38   0.23] with fitness: 49.12539402247964
 DEBUG:Time 120:population 4 [  0.05   0.49   0.13   0.12   0.06   0.16   0.41   0.04   0.01   0.37
-   0.03   0.13   0.13   0.03   0.82   0.     0.01   0.   384.7    0.32] with fitness: 8.214262576690398
+   0.03   0.13   0.13   0.03   0.82   0.     0.01   0.   384.7    0.32] with fitness: 96.801332170713
 INFO:Time 120:No better population found, keep origin.
-INFO:Time 120:best population as [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29], fitness: 8.752506286473167.
+INFO:Time 120:best population as [  0.05   0.49   0.13   0.12   0.06   0.16   0.24   0.31   0.34   0.01
+   0.02   0.08   0.26   0.06   0.63   0.01   0.02   0.01 384.7    0.32], fitness: 105.63679939349193.
 INFO:Time 120:Finished updating best population.
 INFO:Time 120:-----------------------Generate new offsprings------------------------
 DEBUG:Time 120:selected parents:
@@ -827,8 +856,8 @@ DEBUG:Time 120:selected parents:
    0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29]
 2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.24   0.01   0.67
    0.05   0.02   0.23   0.19   0.02   0.07   0.48   0.01 219.12   0.38]
-3: [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.24   0.01   0.67
-   0.05   0.02   0.23   0.19   0.02   0.07   0.48   0.01 219.12   0.38]
+3: [  0.03   0.01   0.04   0.66   0.01   0.26   0.12   0.21   0.58   0.01
+   0.01   0.07   0.02   0.02   0.06   0.07   0.81   0.01 258.38   0.23]
 4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.41   0.04   0.01   0.37
    0.03   0.13   0.13   0.03   0.82   0.     0.01   0.   384.7    0.32]
 
@@ -838,9 +867,9 @@ DEBUG:Time 120:new offsprings after crossover:
 1: [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
    0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29]
 2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.24   0.01   0.67
-   0.05   0.02   0.23   0.19   0.02   0.07   0.48   0.01 219.12   0.38]
-3: [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.24   0.01   0.67
-   0.05   0.02   0.09   0.08   0.81   0.     0.01   0.   219.12   0.38]
+   0.05   0.02   0.17   0.15   0.05   0.05   0.58   0.01 219.12   0.38]
+3: [  0.03   0.01   0.04   0.66   0.01   0.26   0.12   0.21   0.58   0.01
+   0.01   0.07   0.01   0.01   0.95   0.01   0.01   0.01 258.38   0.23]
 4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.41   0.04   0.01   0.37
    0.03   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32]
 
@@ -852,9 +881,9 @@ DEBUG:Time 120:new offsprings after mutation:
 1: [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.77   0.06   0.02
    0.07   0.08   0.09   0.14   0.01   0.1    0.62   0.04 211.89   0.29]
 2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.24   0.01   0.67
-   0.05   0.02   0.23   0.19   0.02   0.07   0.48   0.01 219.12   0.38]
-3: [  0.01   0.39   0.01   0.01   0.01   0.57   0.01   0.12   0.     0.84
-   0.02   0.01   0.09   0.08   0.81   0.     0.01   0.   219.12   0.38]
+   0.05   0.02   0.17   0.15   0.05   0.05   0.58   0.01 219.12   0.38]
+3: [  0.03   0.01   0.04   0.66   0.01   0.26   0.19   0.34   0.32   0.02
+   0.02   0.12   0.01   0.01   0.95   0.01   0.01   0.01 258.38   0.23]
 4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.4    0.04   0.01   0.36
    0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32]
 
@@ -862,37 +891,37 @@ INFO:Time 120:final new offspring:
 1: [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.77   0.06   0.02
    0.07   0.08   0.09   0.14   0.01   0.1    0.62   0.04 211.89   0.29]
 2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.24   0.01   0.67
-   0.05   0.02   0.23   0.19   0.02   0.07   0.48   0.01 219.12   0.38]
-3: [  0.01   0.39   0.01   0.01   0.01   0.57   0.01   0.12   0.     0.84
-   0.02   0.01   0.09   0.08   0.81   0.     0.01   0.   219.12   0.38]
+   0.05   0.02   0.17   0.15   0.05   0.05   0.58   0.01 219.12   0.38]
+3: [  0.03   0.01   0.04   0.66   0.01   0.26   0.19   0.34   0.32   0.02
+   0.02   0.12   0.01   0.01   0.95   0.01   0.01   0.01 258.38   0.23]
 4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.4    0.04   0.01   0.36
    0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32]
 
 INFO:Time 120:Finished generating new offsprings.
 INFO:Time 120:Finished updating MNO parameters
-INFO:Time 120:Function update_task_deployment_parameters executed in 0.0080s
+INFO:Time 120:Function update_task_deployment_parameters executed in 0.0090s
 INFO:Time 120:------------------------------updating MVNO parameters-------------------------------
 INFO:Time 120:-----------------------Updating best population-----------------------
 DEBUG:Time 120:population 1 [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
-   0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.26] with fitness: 31.305590359170054
-DEBUG:Time 120:population 2 [  0.26   0.07   0.12   0.43   0.1    0.02   0.03   0.51   0.38   0.03
-   0.01   0.04   0.07   0.09   0.02   0.51   0.22   0.1  331.65   0.46] with fitness: 37.296731937785175
+   0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.26] with fitness: 126.4987964232744
+INFO:Time 120:better population 1 found, update best population!
+DEBUG:Time 120:population 2 [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.06
+   0.02   0.4    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.22] with fitness: 96.8334568104222
 DEBUG:Time 120:population 3 [  0.03   0.64   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.34   0.02   0.15   0.32   0.02   0.15 257.42   0.19] with fitness: 42.38978037914174
+   0.02   0.41   0.34   0.02   0.15   0.32   0.02   0.15 257.42   0.19] with fitness: 96.8587592513738
 DEBUG:Time 120:population 4 [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 42.700761760847286
-INFO:Time 120:better population 4 found, update best population!
-INFO:Time 120:best population as [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19], fitness: 42.700761760847286.
+   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 97.16974063307934
+INFO:Time 120:best population as [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
+   0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.26], fitness: 126.4987964232744.
 INFO:Time 120:Finished updating best population.
 INFO:Time 120:-----------------------Generate new offsprings------------------------
 DEBUG:Time 120:selected parents:
 1: [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
    0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.26]
-2: [  0.26   0.07   0.12   0.43   0.1    0.02   0.03   0.51   0.38   0.03
-   0.01   0.04   0.07   0.09   0.02   0.51   0.22   0.1  331.65   0.46]
-3: [  0.03   0.64   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.34   0.02   0.15   0.32   0.02   0.15 257.42   0.19]
+2: [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
+   0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.26]
+3: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.41   0.1    0.06
+   0.02   0.4    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.22]
 4: [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
    0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
@@ -901,10 +930,10 @@ DEBUG:Time 120:order after shuffle: [2 0 1 3]
 DEBUG:Time 120:new offsprings after crossover:
 1: [  0.23   0.     0.14   0.03   0.2    0.4    0.68   0.03   0.06   0.02
    0.01   0.2    0.53   0.04   0.15   0.05   0.22   0.01 258.06   0.26]
-2: [  0.26   0.07   0.12   0.43   0.1    0.02   0.02   0.35   0.26   0.02
-   0.34   0.01   0.05   0.05   0.02   0.54   0.24   0.1  331.65   0.46]
-3: [  0.03   0.64   0.23   0.06   0.02   0.02   0.02   0.59   0.15   0.07
-   0.03   0.15   0.1    0.12   0.18   0.39   0.03   0.18 257.42   0.19]
+2: [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
+   0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.26]
+3: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.2    0.05   0.03
+   0.69   0.02   0.13   0.13   0.22   0.13   0.05   0.34 257.42   0.22]
 4: [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
    0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
@@ -915,26 +944,26 @@ DEBUG:Time 120:offspring 4 mutate at [] bit, multiply by
 DEBUG:Time 120:new offsprings after mutation:
 1: [  0.23   0.     0.14   0.03   0.2    0.4    0.68   0.03   0.06   0.02
    0.01   0.2    0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-2: [  0.26   0.07   0.12   0.43   0.1    0.02   0.02   0.35   0.26   0.02
-   0.34   0.01   0.05   0.05   0.02   0.54   0.24   0.1  331.65   0.55]
-3: [  0.03   0.64   0.23   0.06   0.02   0.02   0.02   0.59   0.15   0.07
-   0.03   0.15   0.06   0.08   0.12   0.6    0.02   0.12 257.42   0.19]
+2: [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
+   0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.31]
+3: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.2    0.05   0.03
+   0.69   0.02   0.12   0.12   0.2    0.2    0.04   0.32 257.42   0.22]
 4: [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
    0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
 INFO:Time 120:final new offspring:
 1: [  0.23   0.     0.14   0.03   0.2    0.4    0.68   0.03   0.06   0.02
    0.01   0.2    0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-2: [  0.26   0.07   0.12   0.43   0.1    0.02   0.02   0.35   0.26   0.02
-   0.34   0.01   0.05   0.05   0.02   0.54   0.24   0.1  331.65   0.55]
-3: [  0.03   0.64   0.23   0.06   0.02   0.02   0.02   0.59   0.15   0.07
-   0.03   0.15   0.06   0.08   0.12   0.6    0.02   0.12 257.42   0.19]
+2: [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
+   0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.31]
+3: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.2    0.05   0.03
+   0.69   0.02   0.12   0.12   0.2    0.2    0.04   0.32 257.42   0.22]
 4: [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
    0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
 INFO:Time 120:Finished generating new offsprings.
 INFO:Time 120:Finished updating MVNO parameters
-INFO:Time 120:Function update_task_deployment_parameters executed in 0.0150s
+INFO:Time 120:Function update_task_deployment_parameters executed in 0.0070s
 INFO:Time 120:Finished updating MNO and MVNO parameters.
 INFO:Time 120:Finished Task Deployment.
 INFO:Time 120:Finished Round 1.
@@ -1233,7 +1262,7 @@ DEBUG:Time 120:Finished Evolution 10
 INFO:Time 120:mno vm id: ['1' '2' '6'], total resource (bw_up, bw_down, cr): (177788.62882797394, 168430.69481300405, 2.08)
 INFO:Time 120:mvno vm id: ['3' '4' '5'], total resource (bw_up, bw_down, cr): (178183.75086612787, 162785.49688686116, 1.6), cost: 110.39999999999998
 INFO:Time 120:contract: bw_high: 1000000, bw_low: 5, cr_high: 10, cr_low: 0
-INFO:Time 120:Function vm_assignment executed in 0.0400s
+INFO:Time 120:Function vm_assignment executed in 0.0249s
 INFO:Time 120:Finished vm assignment.
 INFO:Time 120:---------------------------------------------Start of Task Deployment----------------------------------------------
 INFO:Time 120:Start of hour 3
@@ -1248,21 +1277,23 @@ id,type,time
  [29 1 155 'VoIP' '21' '19' 0.1 0.02 370 16]
  [28 1 155 'VoIP' '20' '18' 0.1 0.02 370 16]
  [30 0 157 'IP_Video' '22' '20' 0.08 0.05 24 1065]]
-INFO:Time 120:mno deploy with best population [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29] with fitness: 8.752506286473167
-INFO:Time 120:mvno deploy with best population [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 42.700761760847286
+INFO:Time 120:mno deploy with best population [  0.05   0.49   0.13   0.12   0.06   0.16   0.24   0.31   0.34   0.01
+   0.02   0.08   0.26   0.06   0.63   0.01   0.02   0.01 384.7    0.32] with fitness: 105.63679939349193
+INFO:Time 120:mvno deploy with best population [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
+   0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.26] with fitness: 126.4987964232744
 INFO:Time 120:task27 assign to MVNO
 INFO:Time 120:Deploy task27 to vm 4,
 task cr: 0.04, vm cr: 0.5 -> 0.46
 task bw_up: 450, local_bw_up: 100000 -> 99550
 task bw_down: 17, local_bw_down: 100000 -> 99983
+INFO:Time 120:utility: 61.54646706288888
 
 INFO:Time 120:task27 assign to MVNO
 INFO:Time 120:Deploy task27 to vm 4,
 task cr: 0.04, vm cr: 0.46 -> 0.42000000000000004
 task bw_up: 450, local_bw_up: 99550 -> 99100
 task bw_down: 17, local_bw_down: 99983 -> 99966
+INFO:Time 120:utility: 62.58701010879139
 
 INFO:Time 122:release task27 from vm 4,
 cr: 0.42000000000000004 -> 0.46
@@ -1275,12 +1306,14 @@ INFO:Time 122:Deploy task28 to vm 4,
 task cr: 0.02, vm cr: 0.46 -> 0.44
 task bw_up: 370, local_bw_up: 99550 -> 99180
 task bw_down: 16, local_bw_down: 99983 -> 99967
+INFO:Time 122:utility: 63.22092131801696
 
 INFO:Time 140:task15 assign to MVNO
 INFO:Time 140:Deploy task15 to vm 3,
 task cr: 0.05, vm cr: 0.8 -> 0.75
 task bw_up: 25, local_bw_up: 100000 -> 99975
 task bw_down: 1300, local_bw_down: 100000 -> 98700
+INFO:Time 140:utility: 132.0332391702896
 
 INFO:Time 145:release task15 from vm 3,
 cr: 0.75 -> 0.8
@@ -1293,6 +1326,7 @@ INFO:Time 150:Deploy task29 to vm 1,
 task cr: 0.02, vm cr: 0.6799999999999999 -> 0.6599999999999999
 task bw_up: 370, local_bw_up: 99630 -> 99260
 task bw_down: 16, local_bw_down: 99984 -> 99968
+INFO:Time 150:utility: 75.94217175287906
 
 INFO:Time 155:release task29 from vm 1,
 cr: 0.6599999999999999 -> 0.6799999999999999
@@ -1310,6 +1344,7 @@ INFO:Time 157:Deploy task30 to vm 2,
 task cr: 0.05, vm cr: 0.6000000000000002 -> 0.5500000000000002
 task bw_up: 24, local_bw_up: 100000 -> 99976
 task bw_down: 1065, local_bw_down: 100000 -> 98935
+INFO:Time 157:utility: 153.72800356801332
 
 INFO:Time 157:Finished hour 3
 INFO:Time 157:Release undone tasks: dict_keys([])
@@ -1320,31 +1355,31 @@ cr: 0.5500000000000002 -> 0.6000000000000002
 local_bw_up: 99976 -> 100000
 local_bw_down: 98935 -> 100000
 
-INFO:Time 180:mno overall hour utility: 86.79260514889526, # of task: 2, hour fitness: 43.39630257444763
-INFO:Time 180:mvno overall hour utility: 85.52150282298388, # of task: 4, hour fitness: 21.38037570574597
+INFO:Time 180:mno overall hour utility: 229.67017532089238, # of task: 2, hour fitness: 114.83508766044619
+INFO:Time 180:mvno overall hour utility: 319.3876376599868, # of task: 4, hour fitness: 79.8469094149967
 INFO:Time 180:------------------------------------Start of Updating Parameters------------------------------------
 INFO:Time 180:-------------------------------updating MNO parameters-------------------------------
 INFO:Time 180:-----------------------Updating best population-----------------------
 DEBUG:Time 180:population 1 [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.77   0.06   0.02
-   0.07   0.08   0.09   0.14   0.01   0.1    0.62   0.04 211.89   0.29] with fitness: 42.87350328624677
+   0.07   0.08   0.09   0.14   0.01   0.1    0.62   0.04 211.89   0.29] with fitness: 95.45568718461264
 DEBUG:Time 180:population 2 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.24   0.01   0.67
-   0.05   0.02   0.23   0.19   0.02   0.07   0.48   0.01 219.12   0.38] with fitness: 29.018659194994076
-DEBUG:Time 180:population 3 [  0.01   0.39   0.01   0.01   0.01   0.57   0.01   0.12   0.     0.84
-   0.02   0.01   0.09   0.08   0.81   0.     0.01   0.   219.12   0.38] with fitness: 26.069280455857825
+   0.05   0.02   0.17   0.15   0.05   0.05   0.58   0.01 219.12   0.38] with fitness: 70.00415737595577
+DEBUG:Time 180:population 3 [  0.03   0.01   0.04   0.66   0.01   0.26   0.19   0.34   0.32   0.02
+   0.02   0.12   0.01   0.01   0.95   0.01   0.01   0.01 258.38   0.23] with fitness: 90.20755727028703
 DEBUG:Time 180:population 4 [  0.05   0.49   0.13   0.12   0.06   0.16   0.4    0.04   0.01   0.36
-   0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32] with fitness: 34.166314243043246
-INFO:Time 180:No better population found, keep origin.
-INFO:Time 180:best population as [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29], fitness: 43.39630257444763.
+   0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32] with fitness: 120.5704900160299
+INFO:Time 180:better population 4 found, update best population!
+INFO:Time 180:best population as [  0.05   0.49   0.13   0.12   0.06   0.16   0.4    0.04   0.01   0.36
+   0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32], fitness: 120.5704900160299.
 INFO:Time 180:Finished updating best population.
 INFO:Time 180:-----------------------Generate new offsprings------------------------
 DEBUG:Time 180:selected parents:
 1: [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.77   0.06   0.02
    0.07   0.08   0.09   0.14   0.01   0.1    0.62   0.04 211.89   0.29]
 2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.24   0.01   0.67
-   0.05   0.02   0.23   0.19   0.02   0.07   0.48   0.01 219.12   0.38]
-3: [  0.01   0.39   0.01   0.01   0.01   0.57   0.01   0.12   0.     0.84
-   0.02   0.01   0.09   0.08   0.81   0.     0.01   0.   219.12   0.38]
+   0.05   0.02   0.17   0.15   0.05   0.05   0.58   0.01 219.12   0.38]
+3: [  0.03   0.01   0.04   0.66   0.01   0.26   0.19   0.34   0.32   0.02
+   0.02   0.12   0.01   0.01   0.95   0.01   0.01   0.01 258.38   0.23]
 4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.4    0.04   0.01   0.36
    0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32]
 
@@ -1352,11 +1387,11 @@ DEBUG:Time 180:selected points: (3, 15)
 DEBUG:Time 180:order after shuffle: [1 2 0 3]
 DEBUG:Time 180:new offsprings after crossover:
 1: [  0.07   0.3    0.01   0.01   0.01   0.6    0.02   0.24   0.01   0.67
-   0.05   0.02   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29]
-2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.01   0.12   0.     0.84
-   0.02   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38]
-3: [  0.01   0.36   0.01   0.02   0.01   0.59   0.01   0.77   0.06   0.02
-   0.07   0.08   0.25   0.4    0.02   0.29   0.04   0.01 219.12   0.38]
+   0.05   0.02   0.13   0.11   0.03   0.04   0.65   0.04 211.89   0.29]
+2: [  0.     0.26   0.01   0.51   0.01   0.21   0.19   0.34   0.32   0.02
+   0.02   0.12   0.01   0.01   0.71   0.     0.27   0.   219.12   0.38]
+3: [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23]
 4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.4    0.04   0.01   0.36
    0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32]
 
@@ -1366,49 +1401,50 @@ DEBUG:Time 180:offspring 3 mutate at [] bit, multiply by
 DEBUG:Time 180:offspring 4 mutate at [] bit, multiply by
 DEBUG:Time 180:new offsprings after mutation:
 1: [  0.07   0.3    0.01   0.01   0.01   0.6    0.02   0.24   0.01   0.67
-   0.05   0.02   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29]
-2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.01   0.12   0.     0.84
-   0.02   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38]
-3: [  0.01   0.36   0.01   0.02   0.01   0.59   0.01   0.77   0.06   0.02
-   0.07   0.08   0.25   0.4    0.02   0.29   0.04   0.01 219.12   0.38]
+   0.05   0.02   0.13   0.11   0.03   0.04   0.65   0.04 211.89   0.29]
+2: [  0.     0.26   0.01   0.51   0.01   0.21   0.19   0.34   0.32   0.02
+   0.02   0.12   0.01   0.01   0.71   0.     0.27   0.   219.12   0.38]
+3: [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23]
 4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.4    0.04   0.01   0.36
    0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32]
 
 INFO:Time 180:final new offspring:
 1: [  0.07   0.3    0.01   0.01   0.01   0.6    0.02   0.24   0.01   0.67
-   0.05   0.02   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29]
-2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.01   0.12   0.     0.84
-   0.02   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38]
-3: [  0.01   0.36   0.01   0.02   0.01   0.59   0.01   0.77   0.06   0.02
-   0.07   0.08   0.25   0.4    0.02   0.29   0.04   0.01 219.12   0.38]
+   0.05   0.02   0.13   0.11   0.03   0.04   0.65   0.04 211.89   0.29]
+2: [  0.     0.26   0.01   0.51   0.01   0.21   0.19   0.34   0.32   0.02
+   0.02   0.12   0.01   0.01   0.71   0.     0.27   0.   219.12   0.38]
+3: [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23]
 4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.4    0.04   0.01   0.36
    0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32]
 
 INFO:Time 180:Finished generating new offsprings.
 INFO:Time 180:Finished updating MNO parameters
-INFO:Time 180:Function update_task_deployment_parameters executed in 0.0070s
+INFO:Time 180:Function update_task_deployment_parameters executed in 0.0050s
 INFO:Time 180:------------------------------updating MVNO parameters-------------------------------
 INFO:Time 180:-----------------------Updating best population-----------------------
 DEBUG:Time 180:population 1 [  0.23   0.     0.14   0.03   0.2    0.4    0.68   0.03   0.06   0.02
-   0.01   0.2    0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26] with fitness: 19.916405581402373
-DEBUG:Time 180:population 2 [  0.26   0.07   0.12   0.43   0.1    0.02   0.02   0.35   0.26   0.02
-   0.34   0.01   0.05   0.05   0.02   0.54   0.24   0.1  331.65   0.55] with fitness: 8.700256415656133
-DEBUG:Time 180:population 3 [  0.03   0.64   0.23   0.06   0.02   0.02   0.02   0.59   0.15   0.07
-   0.03   0.15   0.06   0.08   0.12   0.6    0.02   0.12 257.42   0.19] with fitness: 12.426472596539872
+   0.01   0.2    0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26] with fitness: 126.67597295981173
+INFO:Time 180:better population 1 found, update best population!
+DEBUG:Time 180:population 2 [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
+   0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.31] with fitness: 79.8469094149967
+DEBUG:Time 180:population 3 [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.2    0.05   0.03
+   0.69   0.02   0.12   0.12   0.2    0.2    0.04   0.32 257.42   0.22] with fitness: 94.7620691275086
 DEBUG:Time 180:population 4 [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 18.72207372654289
-INFO:Time 180:No better population found, keep origin.
+   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 132.48527419282948
+INFO:Time 180:better population 4 found, update best population!
 INFO:Time 180:best population as [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19], fitness: 21.38037570574597.
+   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19], fitness: 132.48527419282948.
 INFO:Time 180:Finished updating best population.
 INFO:Time 180:-----------------------Generate new offsprings------------------------
 DEBUG:Time 180:selected parents:
 1: [  0.23   0.     0.14   0.03   0.2    0.4    0.68   0.03   0.06   0.02
    0.01   0.2    0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-2: [  0.23   0.     0.14   0.03   0.2    0.4    0.68   0.03   0.06   0.02
-   0.01   0.2    0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.03   0.64   0.23   0.06   0.02   0.02   0.02   0.59   0.15   0.07
-   0.03   0.15   0.06   0.08   0.12   0.6    0.02   0.12 257.42   0.19]
+2: [  0.23   0.     0.14   0.03   0.2    0.4    0.45   0.02   0.04   0.01
+   0.47   0.01   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.31]
+3: [  0.06   0.62   0.23   0.06   0.02   0.02   0.01   0.2    0.05   0.03
+   0.69   0.02   0.12   0.12   0.2    0.2    0.04   0.32 257.42   0.22]
 4: [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
    0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
@@ -1417,12 +1453,12 @@ DEBUG:Time 180:order after shuffle: [3 2 0 1]
 DEBUG:Time 180:new offsprings after crossover:
 1: [  0.55   0.01   0.33   0.05   0.03   0.03   0.01   0.41   0.1    0.05
    0.02   0.41   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.02   0.34   0.12   0.02   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.06   0.08   0.12   0.6    0.02   0.12 257.42   0.19]
-4: [  0.03   0.33   0.12   0.02   0.16   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
+2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.01   0.2    0.05   0.03
+   0.69   0.02   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.31]
+3: [  0.03   0.33   0.12   0.02   0.16   0.33   0.68   0.03   0.06   0.02
+   0.01   0.2    0.12   0.12   0.2    0.2    0.04   0.32 257.42   0.22]
+4: [  0.03   0.33   0.12   0.02   0.16   0.33   0.45   0.02   0.04   0.01
+   0.47   0.01   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
 DEBUG:Time 180:offspring 1 mutate at [7] bit, multiply by 1.2
 DEBUG:Time 180:offspring 2 mutate at [] bit, multiply by
@@ -1431,26 +1467,26 @@ DEBUG:Time 180:offspring 4 mutate at [3] bit, multiply by 0.8
 DEBUG:Time 180:new offsprings after mutation:
 1: [  0.55   0.01   0.33   0.05   0.03   0.03   0.01   0.6    0.07   0.03
    0.01   0.28   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.02   0.34   0.12   0.02   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.06   0.08   0.12   0.6    0.02   0.12 257.42   0.19]
-4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
+2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.01   0.2    0.05   0.03
+   0.69   0.02   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.31]
+3: [  0.03   0.33   0.12   0.02   0.16   0.33   0.68   0.03   0.06   0.02
+   0.01   0.2    0.12   0.12   0.2    0.2    0.06   0.31 257.42   0.22]
+4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.45   0.02   0.04   0.01
+   0.47   0.01   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
 INFO:Time 180:final new offspring:
 1: [  0.55   0.01   0.33   0.05   0.03   0.03   0.01   0.6    0.07   0.03
    0.01   0.28   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.02   0.34   0.12   0.02   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.06   0.08   0.12   0.6    0.02   0.12 257.42   0.19]
-4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
+2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.01   0.2    0.05   0.03
+   0.69   0.02   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.31]
+3: [  0.03   0.33   0.12   0.02   0.16   0.33   0.68   0.03   0.06   0.02
+   0.01   0.2    0.12   0.12   0.2    0.2    0.06   0.31 257.42   0.22]
+4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.45   0.02   0.04   0.01
+   0.47   0.01   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
 INFO:Time 180:Finished generating new offsprings.
 INFO:Time 180:Finished updating MVNO parameters
-INFO:Time 180:Function update_task_deployment_parameters executed in 0.0070s
+INFO:Time 180:Function update_task_deployment_parameters executed in 0.0060s
 INFO:Time 180:Finished updating MNO and MVNO parameters.
 INFO:Time 180:Start of hour 4
 Get hour events:
@@ -1475,21 +1511,23 @@ id,type,time
  [39 0 238 'FTP' '29' '9' 0.15 0.12 25 1300]
  [38 1 238 'IP_Video' '28' '18' 0.08 0.05 24 1065]
  [39 1 239 'FTP' '29' '9' 0.15 0.12 25 1300]]
-INFO:Time 180:mno deploy with best population [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29] with fitness: 43.39630257444763
+INFO:Time 180:mno deploy with best population [  0.05   0.49   0.13   0.12   0.06   0.16   0.4    0.04   0.01   0.36
+   0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32] with fitness: 120.5704900160299
 INFO:Time 180:mvno deploy with best population [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 21.38037570574597
+   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 132.48527419282948
 INFO:Time 180:task31 assign to MNO
 INFO:Time 180:Deploy task31 to vm 6,
 task cr: 0.12, vm cr: 0.8 -> 0.68
 task bw_up: 25, local_bw_up: 100000 -> 99975
 task bw_down: 1300, local_bw_down: 100000 -> 98700
+INFO:Time 180:utility: 199.47091971584285
 
 INFO:Time 180:task31 assign to MNO
 INFO:Time 180:Deploy task31 to vm 6,
 task cr: 0.12, vm cr: 0.68 -> 0.56
 task bw_up: 25, local_bw_up: 99975 -> 99950
 task bw_down: 1300, local_bw_down: 98700 -> 97400
+INFO:Time 180:utility: 199.30555665502064
 
 INFO:Time 200:release task31 from vm 6,
 cr: 0.56 -> 0.68
@@ -1502,6 +1540,7 @@ INFO:Time 200:Deploy task32 to vm 6,
 task cr: 0.12, vm cr: 0.68 -> 0.56
 task bw_up: 25, local_bw_up: 99975 -> 99950
 task bw_down: 1300, local_bw_down: 98700 -> 97400
+INFO:Time 200:utility: 184.9435619163698
 
 INFO:Time 200:release task32 from vm 6,
 cr: 0.56 -> 0.68
@@ -1513,6 +1552,7 @@ INFO:Time 208:Deploy task26 to vm 6,
 task cr: 0.05, vm cr: 0.68 -> 0.63
 task bw_up: 26, local_bw_up: 99975 -> 99949
 task bw_down: 790, local_bw_down: 98700 -> 97910
+INFO:Time 208:utility: 187.67013498194706
 
 INFO:Time 210:task33 assign to MVNO
 INFO:Time 210:New user/users detected, finished updating vm_list.from_user.
@@ -1520,6 +1560,7 @@ INFO:Time 210:Deploy task33 to vm 3,
 task cr: 0.12, vm cr: 0.8 -> 0.68
 task bw_up: 25, local_bw_up: 100000 -> 99975
 task bw_down: 1300, local_bw_down: 100000 -> 98700
+INFO:Time 210:utility: 277.75642774333073
 
 INFO:Time 211:release task26 from vm 6,
 cr: 0.63 -> 0.68
@@ -1536,6 +1577,7 @@ INFO:Time 215:Deploy task34 to vm 4,
 task cr: 0.02, vm cr: 0.46 -> 0.44
 task bw_up: 370, local_bw_up: 99550 -> 99180
 task bw_down: 16, local_bw_down: 99983 -> 99967
+INFO:Time 215:utility: 84.40154924724526
 
 INFO:Time 218:release task34 from vm 4,
 cr: 0.44 -> 0.46
@@ -1548,6 +1590,7 @@ INFO:Time 220:Deploy task35 to vm 4,
 task cr: 0.02, vm cr: 0.46 -> 0.44
 task bw_up: 370, local_bw_up: 99550 -> 99180
 task bw_down: 16, local_bw_down: 99983 -> 99967
+INFO:Time 220:utility: 84.8239657646901
 
 INFO:Time 222:release task35 from vm 4,
 cr: 0.44 -> 0.46
@@ -1560,6 +1603,7 @@ INFO:Time 230:Deploy task36 to vm 1,
 task cr: 0.02, vm cr: 0.6799999999999999 -> 0.6599999999999999
 task bw_up: 370, local_bw_up: 99630 -> 99260
 task bw_down: 16, local_bw_down: 99984 -> 99968
+INFO:Time 230:utility: 73.5109507380311
 
 INFO:Time 234:task37 assign to MVNO
 INFO:Time 234:New user/users detected, finished updating vm_list.from_user.
@@ -1567,6 +1611,7 @@ INFO:Time 234:Deploy task37 to vm 5,
 task cr: 0.05, vm cr: 0.3 -> 0.25
 task bw_up: 24, local_bw_up: 100000 -> 99976
 task bw_down: 1065, local_bw_down: 100000 -> 98935
+INFO:Time 234:utility: 103.69930340005823
 
 INFO:Time 234:release task36 from vm 1,
 cr: 0.6599999999999999 -> 0.6799999999999999
@@ -1584,6 +1629,7 @@ INFO:Time 235:Deploy task38 to vm 2,
 task cr: 0.05, vm cr: 0.6000000000000002 -> 0.5500000000000002
 task bw_up: 24, local_bw_up: 100000 -> 99976
 task bw_down: 1065, local_bw_down: 100000 -> 98935
+INFO:Time 235:utility: 171.65321565582403
 
 INFO:Time 238:task39 assign to MVNO
 INFO:Time 238:New user/users detected, finished updating vm_list.from_user.
@@ -1591,6 +1637,7 @@ INFO:Time 238:Deploy task39 to vm 3,
 task cr: 0.12, vm cr: 0.8 -> 0.68
 task bw_up: 25, local_bw_up: 100000 -> 99975
 task bw_down: 1300, local_bw_down: 100000 -> 98700
+INFO:Time 238:utility: 275.6983720142178
 
 INFO:Time 238:release task38 from vm 2,
 cr: 0.5500000000000002 -> 0.6000000000000002
@@ -1605,109 +1652,109 @@ local_bw_down: 98700 -> 100000
 INFO:Time 239:Finished hour 4
 INFO:Time 239:Release undone tasks: dict_keys([])
 INFO:Time 239:Release undone tasks: dict_keys([])
-INFO:Time 240:mno overall hour utility: 87.35326413840721, # of task: 6, hour fitness: 14.558877356401203
-INFO:Time 240:mvno overall hour utility: 84.8239657646901, # of task: 5, hour fitness: 16.96479315293802
+INFO:Time 240:mno overall hour utility: 1016.5543396630355, # of task: 6, hour fitness: 169.42572327717258
+INFO:Time 240:mvno overall hour utility: 826.379618169542, # of task: 5, hour fitness: 165.2759236339084
 INFO:Time 240:------------------------------------Start of Updating Parameters------------------------------------
 INFO:Time 240:-------------------------------updating MNO parameters-------------------------------
 INFO:Time 240:-----------------------Updating best population-----------------------
 DEBUG:Time 240:population 1 [  0.07   0.3    0.01   0.01   0.01   0.6    0.02   0.24   0.01   0.67
-   0.05   0.02   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29] with fitness: 9.736755309654313
-DEBUG:Time 240:population 2 [  0.01   0.39   0.01   0.01   0.01   0.57   0.01   0.12   0.     0.84
-   0.02   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38] with fitness: 8.72052375258629
-DEBUG:Time 240:population 3 [  0.01   0.36   0.01   0.02   0.01   0.59   0.01   0.77   0.06   0.02
-   0.07   0.08   0.25   0.4    0.02   0.29   0.04   0.01 219.12   0.38] with fitness: 14.382092301612433
+   0.05   0.02   0.13   0.11   0.03   0.04   0.65   0.04 211.89   0.29] with fitness: 99.54535887690872
+DEBUG:Time 240:population 2 [  0.     0.26   0.01   0.51   0.01   0.21   0.19   0.34   0.32   0.02
+   0.02   0.12   0.01   0.01   0.71   0.     0.27   0.   219.12   0.38] with fitness: 75.22860317323777
+DEBUG:Time 240:population 3 [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23] with fitness: 184.693242855362
+INFO:Time 240:better population 3 found, update best population!
 DEBUG:Time 240:population 4 [  0.05   0.49   0.13   0.12   0.06   0.16   0.4    0.04   0.01   0.36
-   0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32] with fitness: 11.451227573006966
-INFO:Time 240:No better population found, keep origin.
-INFO:Time 240:best population as [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29], fitness: 14.558877356401203.
+   0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32] with fitness: 169.42572327717258
+INFO:Time 240:best population as [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23], fitness: 184.693242855362.
 INFO:Time 240:Finished updating best population.
 INFO:Time 240:-----------------------Generate new offsprings------------------------
 DEBUG:Time 240:selected parents:
 1: [  0.07   0.3    0.01   0.01   0.01   0.6    0.02   0.24   0.01   0.67
-   0.05   0.02   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29]
-2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.01   0.12   0.     0.84
-   0.02   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38]
-3: [  0.01   0.36   0.01   0.02   0.01   0.59   0.01   0.77   0.06   0.02
-   0.07   0.08   0.25   0.4    0.02   0.29   0.04   0.01 219.12   0.38]
+   0.05   0.02   0.13   0.11   0.03   0.04   0.65   0.04 211.89   0.29]
+2: [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23]
+3: [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23]
 4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.4    0.04   0.01   0.36
    0.05   0.13   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32]
 
-DEBUG:Time 240:selected points: (2, 9)
-DEBUG:Time 240:order after shuffle: [1 3 0 2]
+DEBUG:Time 240:selected points: (9, 12)
+DEBUG:Time 240:order after shuffle: [3 2 0 1]
 DEBUG:Time 240:new offsprings after crossover:
-1: [  0.07   0.3    0.01   0.01   0.01   0.59   0.01   0.12   0.     0.84
-   0.02   0.01   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29]
-2: [  0.01   0.82   0.05   0.04   0.02   0.06   0.45   0.05   0.01   0.41
-   0.06   0.02   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38]
-3: [  0.01   0.39   0.01   0.01   0.01   0.57   0.01   0.22   0.01   0.62
-   0.07   0.07   0.25   0.4    0.02   0.29   0.04   0.01 219.12   0.38]
-4: [  0.01   0.11   0.02   0.03   0.02   0.82   0.01   0.75   0.05   0.02
-   0.05   0.12   0.32   0.08   0.03   0.07   0.5    0.01 384.7    0.32]
+1: [  0.07   0.3    0.01   0.01   0.01   0.6    0.02   0.3    0.01   0.44
+   0.06   0.16   0.17   0.1    0.03   0.04   0.62   0.04 211.89   0.29]
+2: [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23]
+3: [  0.04   0.01   0.06   0.03   0.02   0.84   0.     0.49   0.04   0.42
+   0.03   0.01   0.32   0.36   0.02   0.26   0.03   0.02 258.38   0.23]
+4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.64   0.06   0.02   0.03
+   0.12   0.13   0.2    0.09   0.03   0.08   0.59   0.01 384.7    0.32]
 
 DEBUG:Time 240:offspring 1 mutate at [] bit, multiply by
-DEBUG:Time 240:offspring 2 mutate at [9] bit, multiply by 1.2
-DEBUG:Time 240:offspring 3 mutate at [ 3  6 15] bit, multiply by 0.8 1.2 0.8
-DEBUG:Time 240:offspring 4 mutate at [11 13] bit, multiply by 0.8 0.8
+DEBUG:Time 240:offspring 2 mutate at [] bit, multiply by
+DEBUG:Time 240:offspring 3 mutate at [6 9] bit, multiply by 1.2 0.8
+DEBUG:Time 240:offspring 4 mutate at [7] bit, multiply by 1.2
 DEBUG:Time 240:new offsprings after mutation:
-1: [  0.07   0.3    0.01   0.01   0.01   0.59   0.01   0.12   0.     0.84
-   0.02   0.01   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29]
-2: [  0.01   0.82   0.05   0.04   0.02   0.06   0.3    0.03   0.01   0.61
-   0.04   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38]
-3: [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.22   0.01   0.62
-   0.07   0.07   0.29   0.46   0.02   0.17   0.04   0.01 219.12   0.38]
-4: [  0.01   0.11   0.02   0.03   0.02   0.82   0.01   0.8    0.06   0.02
-   0.05   0.07   0.33   0.05   0.03   0.07   0.52   0.01 384.7    0.32]
+1: [  0.07   0.3    0.01   0.01   0.01   0.6    0.02   0.3    0.01   0.44
+   0.06   0.16   0.17   0.1    0.03   0.04   0.62   0.04 211.89   0.29]
+2: [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23]
+3: [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.67   0.05   0.22
+   0.04   0.02   0.32   0.36   0.02   0.26   0.03   0.02 258.38   0.23]
+4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.62   0.09   0.02   0.03
+   0.12   0.12   0.2    0.09   0.03   0.08   0.59   0.01 384.7    0.32]
 
 INFO:Time 240:final new offspring:
-1: [  0.07   0.3    0.01   0.01   0.01   0.59   0.01   0.12   0.     0.84
-   0.02   0.01   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29]
-2: [  0.01   0.82   0.05   0.04   0.02   0.06   0.3    0.03   0.01   0.61
-   0.04   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38]
-3: [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.22   0.01   0.62
-   0.07   0.07   0.29   0.46   0.02   0.17   0.04   0.01 219.12   0.38]
-4: [  0.01   0.11   0.02   0.03   0.02   0.82   0.01   0.8    0.06   0.02
-   0.05   0.07   0.33   0.05   0.03   0.07   0.52   0.01 384.7    0.32]
+1: [  0.07   0.3    0.01   0.01   0.01   0.6    0.02   0.3    0.01   0.44
+   0.06   0.16   0.17   0.1    0.03   0.04   0.62   0.04 211.89   0.29]
+2: [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23]
+3: [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.67   0.05   0.22
+   0.04   0.02   0.32   0.36   0.02   0.26   0.03   0.02 258.38   0.23]
+4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.62   0.09   0.02   0.03
+   0.12   0.12   0.2    0.09   0.03   0.08   0.59   0.01 384.7    0.32]
 
 INFO:Time 240:Finished generating new offsprings.
 INFO:Time 240:Finished updating MNO parameters
-INFO:Time 240:Function update_task_deployment_parameters executed in 0.0070s
+INFO:Time 240:Function update_task_deployment_parameters executed in 0.0080s
 INFO:Time 240:------------------------------updating MVNO parameters-------------------------------
 INFO:Time 240:-----------------------Updating best population-----------------------
 DEBUG:Time 240:population 1 [  0.55   0.01   0.33   0.05   0.03   0.03   0.01   0.6    0.07   0.03
-   0.01   0.28   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26] with fitness: 16.02465304474441
-DEBUG:Time 240:population 2 [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26] with fitness: 16.02465304474441
-DEBUG:Time 240:population 3 [  0.02   0.34   0.12   0.02   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.06   0.08   0.12   0.6    0.02   0.12 257.42   0.19] with fitness: 9.898501107889507
-DEBUG:Time 240:population 4 [  0.03   0.34   0.12   0.01   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 15.000139794280756
-INFO:Time 240:No better population found, keep origin.
-INFO:Time 240:best population as [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19], fitness: 16.96479315293802.
+   0.01   0.28   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26] with fitness: 183.01335873244642
+INFO:Time 240:better population 1 found, update best population!
+DEBUG:Time 240:population 2 [  0.53   0.01   0.32   0.09   0.03   0.03   0.01   0.2    0.05   0.03
+   0.69   0.02   0.14   0.14   0.25   0.09   0.37   0.02 258.06   0.31] with fitness: 92.1578906792665
+DEBUG:Time 240:population 3 [  0.03   0.33   0.12   0.02   0.16   0.33   0.68   0.03   0.06   0.02
+   0.01   0.2    0.12   0.12   0.2    0.2    0.06   0.31 257.42   0.22] with fitness: 130.11569730503672
+DEBUG:Time 240:population 4 [  0.03   0.34   0.12   0.01   0.17   0.33   0.45   0.02   0.04   0.01
+   0.47   0.01   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 173.67406180183428
+INFO:Time 240:best population as [  0.55   0.01   0.33   0.05   0.03   0.03   0.01   0.6    0.07   0.03
+   0.01   0.28   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26], fitness: 183.01335873244642.
 INFO:Time 240:Finished updating best population.
 INFO:Time 240:-----------------------Generate new offsprings------------------------
 DEBUG:Time 240:selected parents:
 1: [  0.55   0.01   0.33   0.05   0.03   0.03   0.01   0.6    0.07   0.03
    0.01   0.28   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
+2: [  0.55   0.01   0.33   0.05   0.03   0.03   0.01   0.6    0.07   0.03
+   0.01   0.28   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
+3: [  0.03   0.33   0.12   0.02   0.16   0.33   0.68   0.03   0.06   0.02
+   0.01   0.2    0.12   0.12   0.2    0.2    0.06   0.31 257.42   0.22]
+4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.45   0.02   0.04   0.01
+   0.47   0.01   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
 DEBUG:Time 240:selected points: (1, 14)
 DEBUG:Time 240:order after shuffle: [0 2 1 3]
 DEBUG:Time 240:new offsprings after crossover:
 1: [  0.55   0.01   0.33   0.05   0.03   0.03   0.01   0.6    0.07   0.03
    0.01   0.28   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
+2: [  0.16   0.29   0.1    0.02   0.14   0.28   0.68   0.03   0.06   0.02
+   0.01   0.2    0.17   0.17   0.3    0.11   0.22   0.02 258.06   0.26]
+3: [  0.16   0.01   0.62   0.1    0.05   0.06   0.01   0.6    0.07   0.03
+   0.01   0.28   0.47   0.03   0.13   0.13   0.04   0.2  257.42   0.22]
+4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.45   0.02   0.04   0.01
+   0.47   0.01   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
 DEBUG:Time 240:offspring 1 mutate at [ 0 13] bit, multiply by 0.8 1.2
 DEBUG:Time 240:offspring 2 mutate at [] bit, multiply by
@@ -1716,22 +1763,22 @@ DEBUG:Time 240:offspring 4 mutate at [] bit, multiply by
 DEBUG:Time 240:new offsprings after mutation:
 1: [  0.33   0.01   0.49   0.08   0.04   0.05   0.01   0.6    0.07   0.03
    0.01   0.28   0.59   0.05   0.16   0.06   0.12   0.01 258.06   0.26]
-2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
+2: [  0.16   0.29   0.1    0.02   0.14   0.28   0.68   0.03   0.06   0.02
+   0.01   0.2    0.17   0.17   0.3    0.11   0.22   0.02 258.06   0.26]
+3: [  0.16   0.01   0.62   0.1    0.05   0.06   0.01   0.6    0.07   0.03
+   0.01   0.28   0.47   0.03   0.13   0.13   0.04   0.2  257.42   0.22]
+4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.45   0.02   0.04   0.01
+   0.47   0.01   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
 INFO:Time 240:final new offspring:
 1: [  0.33   0.01   0.49   0.08   0.04   0.05   0.01   0.6    0.07   0.03
    0.01   0.28   0.59   0.05   0.16   0.06   0.12   0.01 258.06   0.26]
-2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
+2: [  0.16   0.29   0.1    0.02   0.14   0.28   0.68   0.03   0.06   0.02
+   0.01   0.2    0.17   0.17   0.3    0.11   0.22   0.02 258.06   0.26]
+3: [  0.16   0.01   0.62   0.1    0.05   0.06   0.01   0.6    0.07   0.03
+   0.01   0.28   0.47   0.03   0.13   0.13   0.04   0.2  257.42   0.22]
+4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.45   0.02   0.04   0.01
+   0.47   0.01   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
 INFO:Time 240:Finished generating new offsprings.
 INFO:Time 240:Finished updating MVNO parameters
@@ -2034,7 +2081,7 @@ DEBUG:Time 240:Finished Evolution 10
 INFO:Time 240:mno vm id: ['1' '2' '6'], total resource (bw_up, bw_down, cr): (174691.25122638536, 167769.98723233282, 1.9600000000000004)
 INFO:Time 240:mvno vm id: ['3' '4' '5'], total resource (bw_up, bw_down, cr): (173633.71744057536, 160363.45656355016, 1.56), cost: 88.32
 INFO:Time 240:contract: bw_high: 1000000, bw_low: 5, cr_high: 10, cr_low: 0
-INFO:Time 240:Function vm_assignment executed in 0.0590s
+INFO:Time 240:Function vm_assignment executed in 0.0369s
 INFO:Time 240:Finished vm assignment.
 INFO:Time 240:---------------------------------------------Start of Task Deployment----------------------------------------------
 INFO:Time 240:Start of hour 5
@@ -2048,16 +2095,17 @@ id,type,time
  [42 1 252 'VoIP' '32' '7' 0.1 0.02 370 16]
  [30 0 265 'IP_Video' '22' '20' 0.08 0.05 24 1065]
  [30 1 288 'IP_Video' '22' '20' 0.08 0.05 24 1065]]
-INFO:Time 240:mno deploy with best population [  0.07   0.28   0.01   0.02   0.01   0.61   0.01   0.79   0.06   0.02
-   0.07   0.05   0.11   0.18   0.01   0.32   0.33   0.05 211.89   0.29] with fitness: 14.558877356401203
-INFO:Time 240:mvno deploy with best population [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 16.96479315293802
+INFO:Time 240:mno deploy with best population [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23] with fitness: 184.693242855362
+INFO:Time 240:mvno deploy with best population [  0.55   0.01   0.33   0.05   0.03   0.03   0.01   0.6    0.07   0.03
+   0.01   0.28   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26] with fitness: 183.01335873244642
 INFO:Time 240:task40 assign to MNO
 INFO:Time 240:New user/users detected, finished updating vm_list.from_user.
 INFO:Time 240:Deploy task40 to vm 1,
 task cr: 0.02, vm cr: 0.6799999999999999 -> 0.6599999999999999
 task bw_up: 370, local_bw_up: 99630 -> 99260
 task bw_down: 16, local_bw_down: 99984 -> 99968
+INFO:Time 240:utility: 45.47571406603933
 
 INFO:Time 240:task41 assign to MNO
 INFO:Time 240:New user/users detected, finished updating vm_list.from_user.
@@ -2065,6 +2113,7 @@ INFO:Time 240:Deploy task41 to vm 1,
 task cr: 0.02, vm cr: 0.6599999999999999 -> 0.6399999999999999
 task bw_up: 370, local_bw_up: 99260 -> 98890
 task bw_down: 16, local_bw_down: 99968 -> 99952
+INFO:Time 240:utility: 47.09635246479787
 
 INFO:Time 242:release task41 from vm 1,
 cr: 0.6399999999999999 -> 0.6599999999999999
@@ -2082,6 +2131,7 @@ INFO:Time 252:Deploy task42 to vm 4,
 task cr: 0.02, vm cr: 0.46 -> 0.44
 task bw_up: 370, local_bw_up: 99550 -> 99180
 task bw_down: 16, local_bw_down: 99983 -> 99967
+INFO:Time 252:utility: 77.26332785284941
 
 INFO:Time 252:release task42 from vm 4,
 cr: 0.44 -> 0.46
@@ -2093,6 +2143,7 @@ INFO:Time 265:Deploy task30 to vm 2,
 task cr: 0.05, vm cr: 0.6000000000000002 -> 0.5500000000000002
 task bw_up: 24, local_bw_up: 100000 -> 99976
 task bw_down: 1065, local_bw_down: 100000 -> 98935
+INFO:Time 265:utility: 128.56251928324235
 
 INFO:Time 288:release task30 from vm 2,
 cr: 0.5500000000000002 -> 0.6000000000000002
@@ -2102,137 +2153,137 @@ local_bw_down: 98935 -> 100000
 INFO:Time 288:Finished hour 5
 INFO:Time 288:Release undone tasks: dict_keys([])
 INFO:Time 288:Release undone tasks: dict_keys([])
-INFO:Time 300:mno overall hour utility: 86.79260514889526, # of task: 3, hour fitness: 28.930868382965087
-INFO:Time 300:mvno overall hour utility: 84.38877967834749, # of task: 1, hour fitness: 84.38877967834749
+INFO:Time 300:mno overall hour utility: 221.13458581407954, # of task: 3, hour fitness: 73.71152860469319
+INFO:Time 300:mvno overall hour utility: 77.26332785284941, # of task: 1, hour fitness: 77.26332785284941
 INFO:Time 300:------------------------------------Start of Updating Parameters------------------------------------
 INFO:Time 300:-------------------------------updating MNO parameters-------------------------------
 INFO:Time 300:-----------------------Updating best population-----------------------
-DEBUG:Time 300:population 1 [  0.07   0.3    0.01   0.01   0.01   0.59   0.01   0.12   0.     0.84
-   0.02   0.01   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29] with fitness: 17.379520303905217
-DEBUG:Time 300:population 2 [  0.01   0.82   0.05   0.04   0.02   0.06   0.3    0.03   0.01   0.61
-   0.04   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38] with fitness: 20.80329787804043
-DEBUG:Time 300:population 3 [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.22   0.01   0.62
-   0.07   0.07   0.29   0.46   0.02   0.17   0.04   0.01 219.12   0.38] with fitness: 18.820729749394896
-DEBUG:Time 300:population 4 [  0.01   0.11   0.02   0.03   0.02   0.82   0.01   0.8    0.06   0.02
-   0.05   0.07   0.33   0.05   0.03   0.07   0.52   0.01 384.7    0.32] with fitness: 29.39901439936783
+DEBUG:Time 300:population 1 [  0.07   0.3    0.01   0.01   0.01   0.6    0.02   0.3    0.01   0.44
+   0.06   0.16   0.17   0.1    0.03   0.04   0.62   0.04 211.89   0.29] with fitness: 70.26412870895417
+DEBUG:Time 300:population 2 [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23] with fitness: 73.71152860469319
+DEBUG:Time 300:population 3 [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.67   0.05   0.22
+   0.04   0.02   0.32   0.36   0.02   0.26   0.03   0.02 258.38   0.23] with fitness: 70.28369945581873
+DEBUG:Time 300:population 4 [  0.05   0.49   0.13   0.12   0.06   0.16   0.62   0.09   0.02   0.03
+   0.12   0.12   0.2    0.09   0.03   0.08   0.59   0.01 384.7    0.32] with fitness: 126.13413509276147
 INFO:Time 300:better population 4 found, update best population!
-INFO:Time 300:best population as [  0.01   0.11   0.02   0.03   0.02   0.82   0.01   0.8    0.06   0.02
-   0.05   0.07   0.33   0.05   0.03   0.07   0.52   0.01 384.7    0.32], fitness: 29.39901439936783.
+INFO:Time 300:best population as [  0.05   0.49   0.13   0.12   0.06   0.16   0.62   0.09   0.02   0.03
+   0.12   0.12   0.2    0.09   0.03   0.08   0.59   0.01 384.7    0.32], fitness: 126.13413509276147.
 INFO:Time 300:Finished updating best population.
 INFO:Time 300:-----------------------Generate new offsprings------------------------
 DEBUG:Time 300:selected parents:
-1: [  0.07   0.3    0.01   0.01   0.01   0.59   0.01   0.12   0.     0.84
-   0.02   0.01   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29]
-2: [  0.01   0.82   0.05   0.04   0.02   0.06   0.3    0.03   0.01   0.61
-   0.04   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38]
-3: [  0.01   0.39   0.01   0.01   0.01   0.57   0.02   0.22   0.01   0.62
-   0.07   0.07   0.29   0.46   0.02   0.17   0.04   0.01 219.12   0.38]
-4: [  0.01   0.11   0.02   0.03   0.02   0.82   0.01   0.8    0.06   0.02
-   0.05   0.07   0.33   0.05   0.03   0.07   0.52   0.01 384.7    0.32]
+1: [  0.07   0.3    0.01   0.01   0.01   0.6    0.02   0.3    0.01   0.44
+   0.06   0.16   0.17   0.1    0.03   0.04   0.62   0.04 211.89   0.29]
+2: [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.77   0.06   0.02
+   0.07   0.08   0.25   0.39   0.02   0.29   0.04   0.02 258.38   0.23]
+3: [  0.04   0.01   0.06   0.03   0.02   0.84   0.01   0.67   0.05   0.22
+   0.04   0.02   0.32   0.36   0.02   0.26   0.03   0.02 258.38   0.23]
+4: [  0.05   0.49   0.13   0.12   0.06   0.16   0.62   0.09   0.02   0.03
+   0.12   0.12   0.2    0.09   0.03   0.08   0.59   0.01 384.7    0.32]
 
-DEBUG:Time 300:selected points: (1, 5)
-DEBUG:Time 300:order after shuffle: [1 2 0 3]
+DEBUG:Time 300:selected points: (1, 13)
+DEBUG:Time 300:order after shuffle: [2 3 0 1]
 DEBUG:Time 300:new offsprings after crossover:
-1: [  0.13   0.73   0.04   0.04   0.02   0.05   0.01   0.12   0.     0.84
-   0.02   0.01   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29]
-2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.3    0.03   0.01   0.61
-   0.04   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38]
-3: [  0.01   0.33   0.02   0.01   0.01   0.64   0.02   0.22   0.01   0.62
-   0.07   0.07   0.29   0.46   0.02   0.17   0.04   0.01 219.12   0.38]
-4: [  0.01   0.11   0.02   0.03   0.02   0.82   0.01   0.8    0.06   0.02
-   0.05   0.07   0.33   0.05   0.03   0.07   0.52   0.01 384.7    0.32]
+1: [  0.09   0.01   0.06   0.03   0.02   0.8    0.01   0.67   0.05   0.22
+   0.04   0.02   0.12   0.14   0.03   0.04   0.63   0.04 211.89   0.29]
+2: [  0.16   0.43   0.12   0.1    0.05   0.14   0.62   0.09   0.02   0.03
+   0.12   0.12   0.34   0.16   0.03   0.4    0.05   0.03 258.38   0.23]
+3: [  0.03   0.32   0.01   0.01   0.01   0.62   0.02   0.3    0.01   0.44
+   0.06   0.16   0.42   0.26   0.02   0.25   0.03   0.02 258.38   0.23]
+4: [  0.01   0.01   0.06   0.03   0.02   0.87   0.01   0.77   0.06   0.02
+   0.07   0.08   0.16   0.26   0.02   0.07   0.48   0.01 384.7    0.32]
 
-DEBUG:Time 300:offspring 1 mutate at [] bit, multiply by
-DEBUG:Time 300:offspring 2 mutate at [3] bit, multiply by 1.2
-DEBUG:Time 300:offspring 3 mutate at [] bit, multiply by
-DEBUG:Time 300:offspring 4 mutate at [16] bit, multiply by 1.2
+DEBUG:Time 300:offspring 1 mutate at [16] bit, multiply by 1.2
+DEBUG:Time 300:offspring 2 mutate at [ 9 10] bit, multiply by 1.2 0.8
+DEBUG:Time 300:offspring 3 mutate at [8] bit, multiply by 1.2
+DEBUG:Time 300:offspring 4 mutate at [ 6  9 11] bit, multiply by 0.8 0.8 1.2
 DEBUG:Time 300:new offsprings after mutation:
-1: [  0.13   0.73   0.04   0.04   0.02   0.05   0.01   0.12   0.     0.84
-   0.02   0.01   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29]
-2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.3    0.03   0.01   0.61
-   0.04   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38]
-3: [  0.01   0.33   0.02   0.01   0.01   0.64   0.02   0.22   0.01   0.62
-   0.07   0.07   0.29   0.46   0.02   0.17   0.04   0.01 219.12   0.38]
-4: [  0.01   0.11   0.02   0.03   0.02   0.82   0.01   0.8    0.06   0.02
-   0.05   0.07   0.19   0.03   0.02   0.04   0.72   0.01 384.7    0.32]
+1: [  0.09   0.01   0.06   0.03   0.02   0.8    0.01   0.67   0.05   0.22
+   0.04   0.02   0.06   0.06   0.01   0.02   0.83   0.02 211.89   0.29]
+2: [  0.16   0.43   0.12   0.1    0.05   0.14   0.65   0.1    0.02   0.03
+   0.07   0.13   0.34   0.16   0.03   0.4    0.05   0.03 258.38   0.23]
+3: [  0.03   0.32   0.01   0.01   0.01   0.62   0.02   0.3    0.01   0.44
+   0.06   0.16   0.42   0.26   0.02   0.25   0.03   0.02 258.38   0.23]
+4: [  0.01   0.01   0.06   0.03   0.02   0.87   0.01   0.74   0.05   0.01
+   0.07   0.12   0.16   0.26   0.02   0.07   0.48   0.01 384.7    0.32]
 
 INFO:Time 300:final new offspring:
-1: [  0.13   0.73   0.04   0.04   0.02   0.05   0.01   0.12   0.     0.84
-   0.02   0.01   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29]
-2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.3    0.03   0.01   0.61
-   0.04   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38]
-3: [  0.01   0.33   0.02   0.01   0.01   0.64   0.02   0.22   0.01   0.62
-   0.07   0.07   0.29   0.46   0.02   0.17   0.04   0.01 219.12   0.38]
-4: [  0.01   0.11   0.02   0.03   0.02   0.82   0.01   0.8    0.06   0.02
-   0.05   0.07   0.19   0.03   0.02   0.04   0.72   0.01 384.7    0.32]
+1: [  0.09   0.01   0.06   0.03   0.02   0.8    0.01   0.67   0.05   0.22
+   0.04   0.02   0.06   0.06   0.01   0.02   0.83   0.02 211.89   0.29]
+2: [  0.16   0.43   0.12   0.1    0.05   0.14   0.65   0.1    0.02   0.03
+   0.07   0.13   0.34   0.16   0.03   0.4    0.05   0.03 258.38   0.23]
+3: [  0.03   0.32   0.01   0.01   0.01   0.62   0.02   0.3    0.01   0.44
+   0.06   0.16   0.42   0.26   0.02   0.25   0.03   0.02 258.38   0.23]
+4: [  0.01   0.01   0.06   0.03   0.02   0.87   0.01   0.74   0.05   0.01
+   0.07   0.12   0.16   0.26   0.02   0.07   0.48   0.01 384.7    0.32]
 
 INFO:Time 300:Finished generating new offsprings.
 INFO:Time 300:Finished updating MNO parameters
-INFO:Time 300:Function update_task_deployment_parameters executed in 0.0090s
+INFO:Time 300:Function update_task_deployment_parameters executed in 0.0080s
 INFO:Time 300:------------------------------updating MVNO parameters-------------------------------
 INFO:Time 300:-----------------------Updating best population-----------------------
 DEBUG:Time 300:population 1 [  0.33   0.01   0.49   0.08   0.04   0.05   0.01   0.6    0.07   0.03
    0.01   0.28   0.59   0.05   0.16   0.06   0.12   0.01 258.06   0.26] with fitness: 66.58561444452691
-DEBUG:Time 300:population 2 [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26] with fitness: 77.46027002933421
-DEBUG:Time 300:population 3 [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26] with fitness: 77.46027002933421
-DEBUG:Time 300:population 4 [  0.03   0.34   0.12   0.01   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 65.0995832929689
+DEBUG:Time 300:population 2 [  0.16   0.29   0.1    0.02   0.14   0.28   0.68   0.03   0.06   0.02
+   0.01   0.2    0.17   0.17   0.3    0.11   0.22   0.02 258.06   0.26] with fitness: 70.03442225558632
+DEBUG:Time 300:population 3 [  0.16   0.01   0.62   0.1    0.05   0.06   0.01   0.6    0.07   0.03
+   0.01   0.28   0.47   0.03   0.13   0.13   0.04   0.2  257.42   0.22] with fitness: 57.91201384926323
+DEBUG:Time 300:population 4 [  0.03   0.34   0.12   0.01   0.17   0.33   0.45   0.02   0.04   0.01
+   0.47   0.01   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19] with fitness: 65.0995832929689
 INFO:Time 300:No better population found, keep origin.
-INFO:Time 300:best population as [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19], fitness: 84.38877967834749.
+INFO:Time 300:best population as [  0.55   0.01   0.33   0.05   0.03   0.03   0.01   0.6    0.07   0.03
+   0.01   0.28   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26], fitness: 77.26332785284941.
 INFO:Time 300:Finished updating best population.
 INFO:Time 300:-----------------------Generate new offsprings------------------------
 DEBUG:Time 300:selected parents:
 1: [  0.33   0.01   0.49   0.08   0.04   0.05   0.01   0.6    0.07   0.03
    0.01   0.28   0.59   0.05   0.16   0.06   0.12   0.01 258.06   0.26]
-2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
+2: [  0.16   0.29   0.1    0.02   0.14   0.28   0.68   0.03   0.06   0.02
+   0.01   0.2    0.17   0.17   0.3    0.11   0.22   0.02 258.06   0.26]
+3: [  0.16   0.29   0.1    0.02   0.14   0.28   0.68   0.03   0.06   0.02
+   0.01   0.2    0.17   0.17   0.3    0.11   0.22   0.02 258.06   0.26]
+4: [  0.03   0.34   0.12   0.01   0.17   0.33   0.45   0.02   0.04   0.01
+   0.47   0.01   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
 
-DEBUG:Time 300:selected points: (2, 19)
+DEBUG:Time 300:selected points: (1, 13)
 DEBUG:Time 300:order after shuffle: [3 2 1 0]
 DEBUG:Time 300:new offsprings after crossover:
-1: [  0.11   0.     0.17   0.02   0.23   0.47   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19]
-2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-4: [  0.06   0.64   0.22   0.04   0.02   0.02   0.01   0.6    0.07   0.03
-   0.01   0.28   0.59   0.05   0.16   0.06   0.12   0.01 258.06   0.26]
+1: [  0.08   0.32   0.12   0.01   0.16   0.32   0.45   0.02   0.04   0.01
+   0.47   0.01   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
+2: [  0.16   0.29   0.1    0.02   0.14   0.28   0.68   0.03   0.06   0.02
+   0.01   0.2    0.17   0.17   0.3    0.11   0.22   0.02 258.06   0.26]
+3: [  0.16   0.29   0.1    0.02   0.14   0.28   0.68   0.03   0.06   0.02
+   0.01   0.2    0.17   0.17   0.3    0.11   0.22   0.02 258.06   0.26]
+4: [  0.16   0.01   0.62   0.1    0.05   0.06   0.01   0.6    0.07   0.03
+   0.01   0.28   0.49   0.05   0.14   0.08   0.03   0.21 257.42   0.19]
 
-DEBUG:Time 300:offspring 1 mutate at [ 0 19] bit, multiply by 0.8 0.8
-DEBUG:Time 300:offspring 2 mutate at [] bit, multiply by
+DEBUG:Time 300:offspring 1 mutate at [] bit, multiply by
+DEBUG:Time 300:offspring 2 mutate at [ 4 13] bit, multiply by 1.2 0.8
 DEBUG:Time 300:offspring 3 mutate at [] bit, multiply by
-DEBUG:Time 300:offspring 4 mutate at [3] bit, multiply by 1.2
+DEBUG:Time 300:offspring 4 mutate at [17] bit, multiply by 0.8
 DEBUG:Time 300:new offsprings after mutation:
-1: [  0.06   0.     0.18   0.02   0.24   0.49   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.15]
-2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-4: [  0.06   0.63   0.22   0.05   0.02   0.02   0.01   0.6    0.07   0.03
-   0.01   0.28   0.59   0.05   0.16   0.06   0.12   0.01 258.06   0.26]
+1: [  0.08   0.32   0.12   0.01   0.16   0.32   0.45   0.02   0.04   0.01
+   0.47   0.01   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
+2: [  0.14   0.24   0.09   0.02   0.28   0.24   0.68   0.03   0.06   0.02
+   0.01   0.2    0.18   0.11   0.32   0.12   0.24   0.02 258.06   0.26]
+3: [  0.16   0.29   0.1    0.02   0.14   0.28   0.68   0.03   0.06   0.02
+   0.01   0.2    0.17   0.17   0.3    0.11   0.22   0.02 258.06   0.26]
+4: [  0.16   0.01   0.62   0.1    0.05   0.06   0.01   0.6    0.07   0.03
+   0.01   0.28   0.55   0.05   0.15   0.09   0.03   0.12 257.42   0.19]
 
 INFO:Time 300:final new offspring:
-1: [  0.06   0.     0.18   0.02   0.24   0.49   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.15]
-2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-4: [  0.06   0.63   0.22   0.05   0.02   0.02   0.01   0.6    0.07   0.03
-   0.01   0.28   0.59   0.05   0.16   0.06   0.12   0.01 258.06   0.26]
+1: [  0.08   0.32   0.12   0.01   0.16   0.32   0.45   0.02   0.04   0.01
+   0.47   0.01   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
+2: [  0.14   0.24   0.09   0.02   0.28   0.24   0.68   0.03   0.06   0.02
+   0.01   0.2    0.18   0.11   0.32   0.12   0.24   0.02 258.06   0.26]
+3: [  0.16   0.29   0.1    0.02   0.14   0.28   0.68   0.03   0.06   0.02
+   0.01   0.2    0.17   0.17   0.3    0.11   0.22   0.02 258.06   0.26]
+4: [  0.16   0.01   0.62   0.1    0.05   0.06   0.01   0.6    0.07   0.03
+   0.01   0.28   0.55   0.05   0.15   0.09   0.03   0.12 257.42   0.19]
 
 INFO:Time 300:Finished generating new offsprings.
 INFO:Time 300:Finished updating MVNO parameters
-INFO:Time 300:Function update_task_deployment_parameters executed in 0.0090s
+INFO:Time 300:Function update_task_deployment_parameters executed in 0.0040s
 INFO:Time 300:Finished updating MNO and MVNO parameters.
 INFO:Time 300:--------------------------Start of hour 6
 Get hour events:
@@ -2246,62 +2297,62 @@ INFO:Time 360:mvno overall hour utility: 0, # of task: 1, hour fitness: 0.0
 INFO:Time 360:------------------------------------Start of Updating Parameters------------------------------------
 INFO:Time 360:-------------------------------updating MNO parameters-------------------------------
 INFO:Time 360:-----------------------Updating best population-----------------------
-DEBUG:Time 360:population 1 [  0.13   0.73   0.04   0.04   0.02   0.05   0.01   0.12   0.     0.84
-   0.02   0.01   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29] with fitness: 0.0
-DEBUG:Time 360:population 2 [  0.01   0.39   0.01   0.01   0.01   0.57   0.3    0.03   0.01   0.61
-   0.04   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38] with fitness: 0.0
-DEBUG:Time 360:population 3 [  0.01   0.33   0.02   0.01   0.01   0.64   0.02   0.22   0.01   0.62
-   0.07   0.07   0.29   0.46   0.02   0.17   0.04   0.01 219.12   0.38] with fitness: 0.0
-DEBUG:Time 360:population 4 [  0.01   0.11   0.02   0.03   0.02   0.82   0.01   0.8    0.06   0.02
-   0.05   0.07   0.19   0.03   0.02   0.04   0.72   0.01 384.7    0.32] with fitness: 0.0
+DEBUG:Time 360:population 1 [  0.09   0.01   0.06   0.03   0.02   0.8    0.01   0.67   0.05   0.22
+   0.04   0.02   0.06   0.06   0.01   0.02   0.83   0.02 211.89   0.29] with fitness: 0.0
+DEBUG:Time 360:population 2 [  0.16   0.43   0.12   0.1    0.05   0.14   0.65   0.1    0.02   0.03
+   0.07   0.13   0.34   0.16   0.03   0.4    0.05   0.03 258.38   0.23] with fitness: 0.0
+DEBUG:Time 360:population 3 [  0.03   0.32   0.01   0.01   0.01   0.62   0.02   0.3    0.01   0.44
+   0.06   0.16   0.42   0.26   0.02   0.25   0.03   0.02 258.38   0.23] with fitness: 0.0
+DEBUG:Time 360:population 4 [  0.01   0.01   0.06   0.03   0.02   0.87   0.01   0.74   0.05   0.01
+   0.07   0.12   0.16   0.26   0.02   0.07   0.48   0.01 384.7    0.32] with fitness: 0.0
 INFO:Time 360:No better population found, keep origin.
-INFO:Time 360:best population as [  0.01   0.11   0.02   0.03   0.02   0.82   0.01   0.8    0.06   0.02
-   0.05   0.07   0.33   0.05   0.03   0.07   0.52   0.01 384.7    0.32], fitness: 0.0.
+INFO:Time 360:best population as [  0.05   0.49   0.13   0.12   0.06   0.16   0.62   0.09   0.02   0.03
+   0.12   0.12   0.2    0.09   0.03   0.08   0.59   0.01 384.7    0.32], fitness: 0.0.
 INFO:Time 360:Finished updating best population.
 INFO:Time 360:-----------------------Generate new offsprings------------------------
 INFO:Time 360:data not enough for updating, skip updating.
 INFO:Time 360:final new offspring:
-1: [  0.13   0.73   0.04   0.04   0.02   0.05   0.01   0.12   0.     0.84
-   0.02   0.01   0.13   0.11   0.01   0.04   0.66   0.04 211.89   0.29]
-2: [  0.01   0.39   0.01   0.01   0.01   0.57   0.3    0.03   0.01   0.61
-   0.04   0.01   0.08   0.07   0.68   0.     0.17   0.   219.12   0.38]
-3: [  0.01   0.33   0.02   0.01   0.01   0.64   0.02   0.22   0.01   0.62
-   0.07   0.07   0.29   0.46   0.02   0.17   0.04   0.01 219.12   0.38]
-4: [  0.01   0.11   0.02   0.03   0.02   0.82   0.01   0.8    0.06   0.02
-   0.05   0.07   0.19   0.03   0.02   0.04   0.72   0.01 384.7    0.32]
+1: [  0.09   0.01   0.06   0.03   0.02   0.8    0.01   0.67   0.05   0.22
+   0.04   0.02   0.06   0.06   0.01   0.02   0.83   0.02 211.89   0.29]
+2: [  0.16   0.43   0.12   0.1    0.05   0.14   0.65   0.1    0.02   0.03
+   0.07   0.13   0.34   0.16   0.03   0.4    0.05   0.03 258.38   0.23]
+3: [  0.03   0.32   0.01   0.01   0.01   0.62   0.02   0.3    0.01   0.44
+   0.06   0.16   0.42   0.26   0.02   0.25   0.03   0.02 258.38   0.23]
+4: [  0.01   0.01   0.06   0.03   0.02   0.87   0.01   0.74   0.05   0.01
+   0.07   0.12   0.16   0.26   0.02   0.07   0.48   0.01 384.7    0.32]
 
 INFO:Time 360:Finished generating new offsprings.
 INFO:Time 360:Finished updating MNO parameters
-INFO:Time 360:Function update_task_deployment_parameters executed in 0.0030s
+INFO:Time 360:Function update_task_deployment_parameters executed in 0.0020s
 INFO:Time 360:------------------------------updating MVNO parameters-------------------------------
 INFO:Time 360:-----------------------Updating best population-----------------------
-DEBUG:Time 360:population 1 [  0.06   0.     0.18   0.02   0.24   0.49   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.15] with fitness: 0.0
-DEBUG:Time 360:population 2 [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26] with fitness: 0.0
-DEBUG:Time 360:population 3 [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26] with fitness: 0.0
-DEBUG:Time 360:population 4 [  0.06   0.63   0.22   0.05   0.02   0.02   0.01   0.6    0.07   0.03
-   0.01   0.28   0.59   0.05   0.16   0.06   0.12   0.01 258.06   0.26] with fitness: 0.0
+DEBUG:Time 360:population 1 [  0.08   0.32   0.12   0.01   0.16   0.32   0.45   0.02   0.04   0.01
+   0.47   0.01   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26] with fitness: 0.0
+DEBUG:Time 360:population 2 [  0.14   0.24   0.09   0.02   0.28   0.24   0.68   0.03   0.06   0.02
+   0.01   0.2    0.18   0.11   0.32   0.12   0.24   0.02 258.06   0.26] with fitness: 0.0
+DEBUG:Time 360:population 3 [  0.16   0.29   0.1    0.02   0.14   0.28   0.68   0.03   0.06   0.02
+   0.01   0.2    0.17   0.17   0.3    0.11   0.22   0.02 258.06   0.26] with fitness: 0.0
+DEBUG:Time 360:population 4 [  0.16   0.01   0.62   0.1    0.05   0.06   0.01   0.6    0.07   0.03
+   0.01   0.28   0.55   0.05   0.15   0.09   0.03   0.12 257.42   0.19] with fitness: 0.0
 INFO:Time 360:No better population found, keep origin.
-INFO:Time 360:best population as [  0.06   0.64   0.23   0.04   0.02   0.02   0.01   0.41   0.1    0.05
-   0.02   0.41   0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.19], fitness: 0.0.
+INFO:Time 360:best population as [  0.55   0.01   0.33   0.05   0.03   0.03   0.01   0.6    0.07   0.03
+   0.01   0.28   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26], fitness: 0.0.
 INFO:Time 360:Finished updating best population.
 INFO:Time 360:-----------------------Generate new offsprings------------------------
 INFO:Time 360:data not enough for updating, skip updating.
 INFO:Time 360:final new offspring:
-1: [  0.06   0.     0.18   0.02   0.24   0.49   0.68   0.03   0.06   0.02
-   0.01   0.2    0.5    0.03   0.14   0.08   0.03   0.22 257.42   0.15]
-2: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-3: [  0.53   0.01   0.32   0.09   0.03   0.03   0.02   0.59   0.15   0.07
-   0.03   0.15   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
-4: [  0.06   0.63   0.22   0.05   0.02   0.02   0.01   0.6    0.07   0.03
-   0.01   0.28   0.59   0.05   0.16   0.06   0.12   0.01 258.06   0.26]
+1: [  0.08   0.32   0.12   0.01   0.16   0.32   0.45   0.02   0.04   0.01
+   0.47   0.01   0.6    0.04   0.17   0.06   0.12   0.01 258.06   0.26]
+2: [  0.14   0.24   0.09   0.02   0.28   0.24   0.68   0.03   0.06   0.02
+   0.01   0.2    0.18   0.11   0.32   0.12   0.24   0.02 258.06   0.26]
+3: [  0.16   0.29   0.1    0.02   0.14   0.28   0.68   0.03   0.06   0.02
+   0.01   0.2    0.17   0.17   0.3    0.11   0.22   0.02 258.06   0.26]
+4: [  0.16   0.01   0.62   0.1    0.05   0.06   0.01   0.6    0.07   0.03
+   0.01   0.28   0.55   0.05   0.15   0.09   0.03   0.12 257.42   0.19]
 
 INFO:Time 360:Finished generating new offsprings.
 INFO:Time 360:Finished updating MVNO parameters
-INFO:Time 360:Function update_task_deployment_parameters executed in 0.0040s
+INFO:Time 360:Function update_task_deployment_parameters executed in 0.0020s
 INFO:Time 360:Finished updating MNO and MVNO parameters.
 INFO:Time 360:Finished Task Deployment.
 INFO:Time 360:Finished Round 3.

@@ -4,6 +4,7 @@ from queue import Queue
 from vm import VM
 from optimizing import TaskDeploymentParametersOptimizing
 from task_handler import Task_handler
+import math
 from utils import (softmax, toSoftmax, step_logger, get_TD_populations_log_msg, sgn)
 from parameters import *
 import logging
@@ -43,11 +44,11 @@ class UtilityFunc:
     class IPVideo:
         @staticmethod
         def bw_up(bw: float) -> float:
-            return max_score * (sgn(bw - ipVideo_bw_up_bmin) + 1) / 2
+            return max_score * math.log10(bw + 1) / math.log10(ipVideo_bw_up_bmax + 1)
 
         @staticmethod
         def bw_down(bw: float) -> float:
-            return max_score * (sgn(bw - ipVideo_bw_down_bmin) + 1) / 2
+            return max_score * math.log10(bw + 1) / math.log10(ipVideo_bw_down_bmax + 1)
 
         @staticmethod
         def cr(cr: float) -> float:
@@ -72,11 +73,11 @@ class UtilityFunc:
     class FTP:
         @staticmethod
         def bw_up(bw: float) -> float:
-            return max_score * (sgn(bw - ftp_bw_up_bmin) + 1) / 2
+            return max_score * math.log10(bw / ftp_bw_up_bmin) / math.log10(ftp_bw_up_bmax / ftp_bw_up_bmin) * (sgn(bw - ftp_bw_up_bmin) + 1) / 2
 
         @staticmethod
         def bw_down(bw: float) -> float:
-            return max_score * (sgn(bw - ftp_bw_down_bmin) + 1) / 2
+            return max_score * math.log10(bw / ftp_bw_down_bmin) / math.log10(ftp_bw_down_bmax / ftp_bw_down_bmin) * (sgn(bw - ftp_bw_down_bmin) + 1) / 2
 
         @staticmethod
         def cr(cr: float) -> float:
@@ -134,8 +135,10 @@ class TaskDeployment:
         if self.hour_task_num == 0:
             self.hour_task_num = 1
         # average the utility
+        assert(self.hour_utility >= 0)
         self.hour_fitness = self.hour_utility / self.hour_task_num
         for idx in range(len(self.optimizing.fitness)):
+            assert(self.optimizing.fitness[idx] >= 0)
             self.optimizing.fitness[idx] /= self.hour_task_num
         logging.info(f'Release undone tasks: {self.running_task_id_to_vm.keys()}')
         self.all_release()
@@ -193,16 +196,17 @@ class TaskDeployment:
                 max_utility = utility
                 selected_vm_id = vm_id
 
-        # if no feasible solution
         if selected_vm_id == None:
+            # if no feasible solution
             self.reschedule_task(task)
             self.hour_task_num -= 1
         else:
             self.bind_task(task, vm_list[selected_vm_id])
-
-        self.hour_utility = max(self.hour_utility, max_utility)
+        logging.info(f'utility: {max_utility}\n')
+    
+        self.hour_utility += max_utility
         for idx, _utility in enumerate(offsprings_max_utility):
-            self.optimizing.fitness[idx] = max(0, _utility)
+            self.optimizing.fitness[idx] += _utility
 
     def reschedule_task(self, task: np.array) -> None:
         task_id = task[Task_event_index.index.value]
@@ -237,7 +241,7 @@ class TaskDeployment:
         task_T_down = task[Task_event_index.T_down]
         _message += f'task bw_down: {task_T_down}, local_bw_down: {selected_vm.local_bw_down} -> '
         selected_vm.local_bw_down -= task[Task_event_index.T_down.value]
-        _message += f'{selected_vm.local_bw_down}\n'
+        _message += f'{selected_vm.local_bw_down}'
         logging.info(_message)
 
         self.running_task_id_to_vm[task_id] = selected_vm
