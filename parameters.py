@@ -51,7 +51,7 @@ _op_cr = 0.2 # GCU-second/second
 
 # utility function
 max_score = 100
-voip_bw_up_bmin = 370
+voip_bw_up_bmin = 370 # Kbps
 voip_bw_down_bmin = 16.5
 ipVideo_bw_up_bmax = 20
 ipVideo_bw_down_bmax = 950

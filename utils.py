@@ -84,7 +84,7 @@ def beta(a, b, t, d):
         x = np.random.uniform(d, d + t)
         y = np.random.uniform(0, max_val)
         if y <= distribution(x):
-            return x * 1000 # to Mbps
+            return x * 1000 # to Kbps
 
 def PT5(a, b, d, max_x = 20):
     '''Pearson Type 5 Distribution Generator.'''
@@ -92,12 +92,12 @@ def PT5(a, b, d, max_x = 20):
         return (x - d) ** -(a - 1) * math.exp(-b / (x - d)) * b ** a / math.factorial(a - 1)
 
     mode = b / (a + 1) + d
-    max_val = distribution(mode + d)
+    max_val = distribution(mode)
     while True:
         x = np.random.uniform(d, max_x + d)
         y = np.random.uniform(0, max_val)
         if y <= distribution(x):
-            return x
+            return x # ms
 
 def sgn(x):
     if x >= 0:
