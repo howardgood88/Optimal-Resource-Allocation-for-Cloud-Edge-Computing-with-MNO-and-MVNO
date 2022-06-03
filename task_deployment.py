@@ -135,10 +135,10 @@ class TaskDeployment:
         if self.hour_task_num == 0:
             self.hour_task_num = 1
         # average the utility
-        assert(self.hour_utility >= 0)
+        self.hour_utility = max(self.hour_utility, 0)
         self.hour_fitness = self.hour_utility / self.hour_task_num
         for idx in range(len(self.optimizing.fitness)):
-            assert(self.optimizing.fitness[idx] >= 0)
+            self.optimizing.fitness[idx] = max(self.optimizing.fitness[idx], 0)
             self.optimizing.fitness[idx] /= self.hour_task_num
         logging.info(f'Release undone tasks: {self.running_task_id_to_vm.keys()}')
         self.all_release()
@@ -202,9 +202,9 @@ class TaskDeployment:
             self.hour_task_num -= 1
         else:
             self.bind_task(task, vm_list[selected_vm_id])
-        logging.info(f'utility: {max_utility}\n')
+        logging.info(f'task utility: {max_utility}\n')
     
-        self.hour_utility += max_utility
+        self.hour_utility += max(max_utility, -600)
         for idx, _utility in enumerate(offsprings_max_utility):
             self.optimizing.fitness[idx] += _utility
 

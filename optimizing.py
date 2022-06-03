@@ -71,9 +71,13 @@ class VMAssignmentOptimizing(GeneticOptimizing):
 
     def choose_vm(self, candidate_vm_id: np.array, statistic_data: np.array) -> np.array:
         '''Random choose a set of vm that fit the condition.'''
+        try_count = 0
         selected_vm = np.zeros(candidate_vm_id.shape, dtype=bool)
         while not self.check_condition(selected_vm, statistic_data):
             selected_vm = np.random.choice([True, False], candidate_vm_id.shape, p=[0.3, 0.7])
+            try_count += 1
+            if try_count == 1000:
+                raise ValueError('vm assignment can\'t find solution.')
         return selected_vm
     
     def selection(self) -> np.array:

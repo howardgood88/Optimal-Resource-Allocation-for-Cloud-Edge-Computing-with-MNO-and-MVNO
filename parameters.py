@@ -5,12 +5,12 @@ class Global:
     system_time = 0
 
 rnd_seed = 1126
-logging_level = logging.DEBUG
-test_data_dir = './data/case3/'
+logging_level = logging.INFO
+test_data_dir = './data/case4/'
 # the length of log with filling "-"
 title1, title2, title3, title4, title5 = 130, 115, 100, 85, 70
 # round time
-small_round_minutes = 60
+small_round_minutes = 60 * 60 # s
 # 60 * 24 * 7
 big_round_minutes = small_round_minutes * 2
 big_round_times = 3
@@ -94,8 +94,7 @@ class Task_event_index(IntEnum):
     event_time = 2
     task_type = 3
     user_id = 4
-    machine_id = 5
-    cpu_request = 6
-    average_cpu_usage = 7
-    T_up = 8
-    T_down = 9
+    cpu_request = 5
+    average_cpu_usage = 6
+    T_up = 7
+    T_down = 8
