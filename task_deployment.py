@@ -135,12 +135,11 @@ class TaskDeployment:
         if self.hour_task_num == 0:
             self.hour_task_num = 1
         # average the utility
-        assert(self.hour_utility >= 0)
+        self.hour_utility = max(self.hour_utility, 0)
         self.hour_fitness = self.hour_utility / self.hour_task_num
         for idx in range(len(self.optimizing.fitness)):
-            assert(self.optimizing.fitness[idx] >= 0)
+            self.optimizing.fitness[idx] = max(self.optimizing.fitness[idx], 0)
             self.optimizing.fitness[idx] /= self.hour_task_num
-        logging.info(f'Release undone tasks: {self.running_task_id_to_vm.keys()}')
         self.all_release()
 
     def deploy(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
@@ -202,13 +201,14 @@ class TaskDeployment:
             self.hour_task_num -= 1
         else:
             self.bind_task(task, vm_list[selected_vm_id])
-        logging.info(f'utility: {max_utility}\n')
+        logging.info(f'task utility: {max_utility}\n')
     
-        self.hour_utility += max_utility
+        self.hour_utility += max(max_utility, -600)
         for idx, _utility in enumerate(offsprings_max_utility):
             self.optimizing.fitness[idx] += _utility
 
     def reschedule_task(self, task: np.array) -> None:
+        '''Reschedule event in task_events.'''
         task_id = task[Task_event_index.index.value]
         Task_handler.set_mask(task_id)
         events = Task_handler.get_deleted_events()
@@ -218,8 +218,9 @@ class TaskDeployment:
         event_time_idx = Task_event_index.event_time.value
         retry_offset = np.random.randint(60, 120)
         logging.info(f'Task{task_id} unaccepted, retry after {retry_offset} minutes.')
-        start_event[event_time_idx] = start_event[event_time_idx] + retry_offset
-        end_event[event_time_idx] = end_event[event_time_idx] + retry_offset
+        interval = end_event[event_time_idx] - start_event[event_time_idx]
+        start_event[event_time_idx] = Global.system_time + retry_offset
+        end_event[event_time_idx] = Global.system_time + interval + retry_offset
         Task_handler.insert_event(end_event)
         Task_handler.insert_event(start_event)
 
@@ -278,6 +279,7 @@ class TaskDeployment:
             logging.info(get_TD_populations_log_msg('final new offspring', self.optimizing.new_populations))
 
     def all_release(self):
+        logging.info(f'Release undone tasks: {self.running_task_id_to_vm.keys()}')
         tasks = []
         # get and reschedule undone tasks
         for task_id in self.running_task_id_to_vm:
