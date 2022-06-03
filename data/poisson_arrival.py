@@ -46,12 +46,11 @@ def machine_generator():
 def task_events_generator(filename, last_t):
     def event_gen(_type, max_cpu, bw_up_attr, bw_down_attr):
         cpu_req = np.random.random() * max_cpu
-        return [event_id, 0, t, _type, str(np.random.randint(0, machine_num)),
-                str(np.random.randint(0, user_num)), cpu_req, cpu_req * np.random.random(),
+        return [event_id, 0, t, _type, str(np.random.randint(0, user_num)), cpu_req, cpu_req * np.random.random(),
                 beta(*bw_up_attr), beta(*bw_down_attr)]
     # spe: seconds per event
     voip_spe = 30
-    ipVideo_spe = 20
+    ipVideo_spe = 30
     ftp_spe = 100
 
     t = 0
@@ -62,7 +61,7 @@ def task_events_generator(filename, last_t):
     with open(filename, 'a') as f:
         f.write('[\n')
         periods = (voip_spe, ipVideo_spe, ftp_spe)
-        attrs = (("VoIP", 0.3, (17, 13, 300, 200), (4, 4, 3, 15)), ("IP_Video", 0.7, (2, 4, 45, 5), (4, 4, 500, 700)),
+        attrs = (("VoIP", 0.3, (17, 13, 300, 200), (4, 4, 3, 15)), ("IP_Video", 0.4, (2, 4, 45, 5), (4, 4, 500, 700)),
                 ("FTP", 0.7, (5, 3, 40, 10), (4, 5, 700, 900)))
         while t < last_t:
             # outcome events
@@ -77,13 +76,11 @@ def task_events_generator(filename, last_t):
             for period, attr in zip(periods, attrs):
                 for _ in range(np.random.poisson(1 / period)):
                     event = event_gen(*attr)
-                    interval = np.random.randint(1, 1000)
-                    interval = interval if interval <= 300 else 300 # maximum interval in google dataset is 5min
+                    interval = min(np.random.randint(1, 1000), 300) # maximum interval in google dataset is 5min
                     end_t = t + interval
                     if end_t not in event_in:
                         event_in[end_t] = []
-                    else:
-                        event_in[end_t].append(event)
+                    event_in[end_t].append(event)
                     f.write(json.dumps(event) + ',\n')
                     event_id += 1
             t += 1

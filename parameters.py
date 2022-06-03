@@ -28,14 +28,14 @@ PT5_edge_b = 2
 PT5_edge_d = 2
 
 # contract
-expected_vm_num = 10
+expected_vm_num = 300
 bw_low = 5
 bw_high = 100000 * expected_vm_num # Kbps
 cr_low = 0
 cr_high = 1 * expected_vm_num
 
 # vm assignment
-mno_rate = 0.7
+mno_rate = 0.6
 _theta = 0.3
 _lambda = 0.6
 _mu = 0.8

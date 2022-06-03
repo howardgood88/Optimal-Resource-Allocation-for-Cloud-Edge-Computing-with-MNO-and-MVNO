@@ -4,7 +4,7 @@ import math
 from contract import Contract
 from utils import (toSoftmax, get_TD_populations_log_msg)
 from parameters import (offspring_number, Task_type_index, _theta, _lambda, mutate_rate, rnd_seed,
-                        _gamma, _op_bw, _op_cr, max_searching_times)
+                        _gamma, _op_bw, _op_cr, max_searching_times, mno_rate)
 import logging
 
 np.random.seed(rnd_seed)
@@ -74,7 +74,7 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         try_count = 0
         selected_vm = np.zeros(candidate_vm_id.shape, dtype=bool)
         while not self.check_condition(selected_vm, statistic_data):
-            selected_vm = np.random.choice([True, False], candidate_vm_id.shape, p=[0.3, 0.7])
+            selected_vm = np.random.choice([True, False], candidate_vm_id.shape, p=[1 - mno_rate, mno_rate])
             try_count += 1
             if try_count == 1000:
                 raise ValueError('vm assignment can\'t find solution.')
