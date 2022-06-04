@@ -140,12 +140,13 @@ def update_history_data(hourly_history_data: np.array, hour_task_record: np.arra
     if hourly_history_data is None:
         # the first time call this function (cannot use vstack when hourly_history_data is empty)
         hourly_history_data = hour_task_record
+        statistic_data = np.mean(hour_task_record, axis=0)
     else:
         hourly_history_data = np.vstack([hourly_history_data, hour_task_record])
-    _message = f'add hour data\n{np.mean(hour_task_record, axis=0)} into statistic data, '
+    _message = f'add hour data\n{np.mean(hour_task_record, axis=0)}\ninto statistic data\n{statistic_data}, '
     # update statistic data with the influence of _phi
     statistic_data = statistic_data * (1 - phi) + np.mean(hour_task_record, axis=0) * phi
-    logging.debug(_message + f'statistic data becomes:\n{statistic_data}')
+    logging.info(_message + f'statistic data becomes:\n{statistic_data}')
     return hourly_history_data, statistic_data
 
 def task_deployment(hour_events: np.array, minutes_range: tuple) -> None:

@@ -6,14 +6,14 @@ class Global:
 
 rnd_seed = 1126
 logging_level = logging.INFO
-test_data_dir = './data/case4/'
+test_data_dir = './data/case5/'
 # the length of log with filling "-"
 title1, title2, title3, title4, title5 = 130, 115, 100, 85, 70
 # round time
 small_round_minutes = 60 * 60 # s
 # 60 * 24 * 7
-big_round_minutes = small_round_minutes * 2
-big_round_times = 3
+big_round_minutes = small_round_minutes * 6
+big_round_times = 4
 
 # user to vm generating data
 beta_a = 2
@@ -28,11 +28,12 @@ PT5_edge_b = 2
 PT5_edge_d = 2
 
 # contract
-expected_vm_num = 300
-bw_low = 5
-bw_high = 100000 * expected_vm_num # Kbps
-cr_low = 0
-cr_high = 1 * expected_vm_num
+expected_max_vm_num = 120
+expected_min_vm_num = 5
+bw_low = 100000 * expected_min_vm_num
+bw_high = 100000 * expected_max_vm_num # Kbps
+cr_low = 1 * expected_min_vm_num
+cr_high = 1 * expected_max_vm_num
 
 # vm assignment
 mno_rate = 0.6
@@ -67,7 +68,7 @@ phi = 0.7
 ## the max time of searching the valid offsprings in vm assignment
 max_searching_times = 50
 optimizing_times = 10
-offspring_number = 4
+offspring_number = 10
 mutate_rate = 0.05
 
 @unique

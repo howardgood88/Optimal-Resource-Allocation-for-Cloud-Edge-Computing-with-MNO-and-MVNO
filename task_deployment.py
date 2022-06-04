@@ -27,7 +27,7 @@ class UtilityFunc:
 
         @staticmethod
         def price(p: float) -> float:
-            max_price = 150
+            max_price = 250
             return max_score * (max_price - p) / max_price
 
         @staticmethod
@@ -44,10 +44,12 @@ class UtilityFunc:
     class IPVideo:
         @staticmethod
         def bw_up(bw: float) -> float:
+            bw = min(bw, ipVideo_bw_up_bmax)
             return max_score * math.log10(bw + 1) / math.log10(ipVideo_bw_up_bmax + 1)
 
         @staticmethod
         def bw_down(bw: float) -> float:
+            bw = min(bw, ipVideo_bw_down_bmax)
             return max_score * math.log10(bw + 1) / math.log10(ipVideo_bw_down_bmax + 1)
 
         @staticmethod
@@ -56,7 +58,7 @@ class UtilityFunc:
 
         @staticmethod
         def price(p: float) -> float:
-            max_price = 150
+            max_price = 250
             return max_score * (max_price - p) / max_price
 
         @staticmethod
@@ -73,10 +75,12 @@ class UtilityFunc:
     class FTP:
         @staticmethod
         def bw_up(bw: float) -> float:
+            bw = min(bw, ftp_bw_up_bmax)
             return max_score * math.log10(bw / ftp_bw_up_bmin) / math.log10(ftp_bw_up_bmax / ftp_bw_up_bmin) * (sgn(bw - ftp_bw_up_bmin) + 1) / 2
 
         @staticmethod
         def bw_down(bw: float) -> float:
+            bw = min(bw, ftp_bw_down_bmax)
             return max_score * math.log10(bw / ftp_bw_down_bmin) / math.log10(ftp_bw_down_bmax / ftp_bw_down_bmin) * (sgn(bw - ftp_bw_down_bmin) + 1) / 2
 
         @staticmethod
@@ -85,7 +89,7 @@ class UtilityFunc:
 
         @staticmethod
         def price(p: float) -> float:
-            max_price = 150
+            max_price = 250
             return (max_price - p) / max_price * max_score
 
         @staticmethod

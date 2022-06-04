@@ -23,10 +23,14 @@ user_num = 100
 total_time = 30000
 history_time = 5000
 dir = 'data/case4/'
+# spe: seconds per event arrive
+voip_spe = 1 / 30
+ipVideo_spe = 1 / 30
+ftp_spe = 1 / 100
 
-def machine_generator():
+def machine_generator(filename):
     id = 1
-    with open(dir + 'machine_attributes.json', 'w') as f:
+    with open(filename, 'w') as f:
         f.write('{\n')
         for id in range(machine_num):
             _type = np.random.choice(['VoIP', 'IP_Video', 'FTP'])
@@ -48,11 +52,6 @@ def task_events_generator(filename, last_t):
         cpu_req = np.random.random() * max_cpu
         return [event_id, 0, t, _type, str(np.random.randint(0, user_num)), cpu_req, cpu_req * np.random.random(),
                 beta(*bw_up_attr), beta(*bw_down_attr)]
-    # spe: seconds per event
-    voip_spe = 30
-    ipVideo_spe = 30
-    ftp_spe = 100
-
     t = 0
     event_id = 0
     event_in = {}
@@ -60,7 +59,7 @@ def task_events_generator(filename, last_t):
         os.remove(filename)
     with open(filename, 'a') as f:
         f.write('[\n')
-        periods = (voip_spe, ipVideo_spe, ftp_spe)
+        freqs = (voip_spe, ipVideo_spe, ftp_spe)
         attrs = (("VoIP", 0.3, (17, 13, 300, 200), (4, 4, 3, 15)), ("IP_Video", 0.4, (2, 4, 45, 5), (4, 4, 500, 700)),
                 ("FTP", 0.7, (5, 3, 40, 10), (4, 5, 700, 900)))
         while t < last_t:
@@ -73,8 +72,8 @@ def task_events_generator(filename, last_t):
                     event_id += 1
                 del event_in[t]
             # income events
-            for period, attr in zip(periods, attrs):
-                for _ in range(np.random.poisson(1 / period)):
+            for freq, attr in zip(freqs, attrs):
+                for _ in range(np.random.poisson(freq)):
                     event = event_gen(*attr)
                     interval = min(np.random.randint(1, 1000), 300) # maximum interval in google dataset is 5min
                     end_t = t + interval
@@ -84,12 +83,18 @@ def task_events_generator(filename, last_t):
                     f.write(json.dumps(event) + ',\n')
                     event_id += 1
             t += 1
+        for t, events in sorted(event_in.items(), key=lambda x: x[1]):
+            for event in events:
+                event[1] = 1
+                event[2] = t
+                f.write(json.dumps(event) + ',\n')
+                event_id += 1
         # delete the ',' of the last line
         f.seek(f.tell() - 3, 0)
         f.truncate()
         f.write('\n]')
 
-machine_generator()
+machine_generator(dir + 'machine_attributes.json')
 # runtime task
 task_events_generator(dir + 'task_events.json', total_time)
 # history data
