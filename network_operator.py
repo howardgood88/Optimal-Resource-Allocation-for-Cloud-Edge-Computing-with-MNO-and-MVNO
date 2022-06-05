@@ -10,7 +10,7 @@ import logging
 class Network_operator(abc.ABC):
     def __init__(self):
         self.hold_vm_id = None
-        self._task_deployment = TaskDeployment()
+        self._task_deployment = TaskDeployment(self.name)
 
     def deploy_task(self, task: np.array, vm_list: dict) -> None:
         '''Delegate to class TaskDeployment.'''
@@ -28,13 +28,13 @@ class Network_operator(abc.ABC):
 
 class MVNO(Network_operator):
     def __init__(self):
-        super().__init__()
         self.name = 'MVNO'
+        super().__init__()
 
 class MNO(Network_operator):
     def __init__(self, mvno: MVNO, vm_id_list: list, vm_list: dict):
-        super().__init__()
         self.name = 'MNO'
+        super().__init__()
         self.mvno = mvno
         # the id of all vm own by MNO, transform to list because vm_id_list never changes.
         self.total_vm_id = np.array(vm_id_list, dtype=list)

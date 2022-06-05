@@ -3,7 +3,8 @@ from time import time
 import scipy.integrate as integrate
 import math
 import logging
-from parameters import rnd_seed
+from parameters import (rnd_seed, Task_type_index)
+import matplotlib.pyplot as plt
 
 np.random.seed(rnd_seed)
 
@@ -57,13 +58,14 @@ class step_logger:
         self.logger(self.out_msg)
 
 def get_total_resource(vm_id_list: np.array, vm_list: dict):
-    bw_up_sum, bw_down_sum, cr_sum = 0, 0, 0
+    _sum = [[0, 0, 0] for _ in range(3)]
     for vm_id in vm_id_list:
         vm = vm_list[vm_id]
-        bw_up_sum += vm.avg_bw_up
-        bw_down_sum += vm.avg_bw_down
-        cr_sum += vm.cr
-    return bw_up_sum, bw_down_sum, cr_sum
+        task_type_idx = Task_type_index[vm.task_type].value
+        _sum[task_type_idx][0] += vm.cr
+        _sum[task_type_idx][1] += vm.avg_bw_up
+        _sum[task_type_idx][2] += vm.avg_bw_down
+    return _sum
 
 def timer(func):
     def decorate(*args, **kwargs):
@@ -106,12 +108,176 @@ def sgn(x):
         return -1
 
 class Metrics:
-    def __init__(self):
-        # roundly
-        self.statistic_data = [] # 3x3
-        self.mno_vm_resource = [] # (bw_up, bw_down, cr)
-        self.mvno_vm_resource = [] # (bw_up, bw_down, cr)
-        self.mvno_vm_cost = [] # int
-        # hourly
-        self.task_resource = [] # # (T_up, T_down, cr)
-        self.task_fitness = []
+    '''For plotting the result.'''
+    # roundly
+    statistic_data = [] # 3x3
+    mno_vm_resource = [] # 3x3
+    mvno_vm_resource = [] # 3x3
+    mvno_vm_cost = [] # float
+    # hourly
+    mno_task_fitness = [] # (VoIP, IP Video, FTP)
+    mno_task_resource = [] # 3x3
+    mvno_task_fitness = [] # (VoIP, IP Video, FTP)
+    mvno_task_resource = [] # 3x3
+    # parameters
+    offset = 0.3
+    gap = 0.05
+    width = 0.2
+    figsize = (16, 12)
+
+    ################# Common-used Functions #################
+
+    @classmethod
+    def plot_3dim_bar(cls, data):
+        ax1 = plt.gca()
+        ax2 = ax1.twinx()
+        x = np.arange(1, len(data) + 1)
+        labels = [str(i) for i in x]
+        # VoIP
+        ax1.bar(x - cls.offset - cls.gap, data[:, 0, 0], width=cls.width/1.5, color='tab:pink', label='VoIP cr(GCUs-s)')
+        ax2.bar(x - cls.offset + cls.gap, data[:, 0, 1], width=cls.width/1.5, label='VoIP bw up(kbps)')
+        ax2.bar(x - cls.offset + cls.gap, data[:, 0, 2], width=cls.width/1.5, bottom=data[:, 0, 1], label='VoIP bw down(kbps)')
+        # IP Video
+        ax1.bar(x - cls.gap, data[:, 1, 0], width=cls.width/1.5, color='tab:gray', label='IP Video cr(GCUs-s)')
+        ax2.bar(x + cls.gap, data[:, 1, 1], width=cls.width/1.5, label='IP Video bw up(kbps)')
+        ax2.bar(x + cls.gap, data[:, 1, 2], width=cls.width/1.5, bottom=data[:, 1, 1], label='IP Video bw down(kbps)')
+        # FTP
+        ax1.bar(x + cls.offset - cls.gap, data[:, 2, 0], width=cls.width/1.5, color='tab:olive', label='FTP cr(GCUs-s)')
+        ax2.bar(x + cls.offset + cls.gap, data[:, 2, 1], width=cls.width/1.5, label='FTP bw up(kbps)')
+        ax2.bar(x + cls.offset + cls.gap, data[:, 2, 2], width=cls.width/1.5, bottom=data[:, 2, 1], label='FTP bw down(kbps)')
+
+        ax1.set_xticks(x)
+        ax1.set_xticklabels(labels)
+        ax2.set_xticks(x)
+        ax2.set_xticklabels(labels)
+        ax1.legend(loc='upper right')
+        ax2.legend(loc='upper left')
+
+    @classmethod
+    def plot_2dim_bar(cls, data):
+        x = np.arange(1, len(data) + 1)
+        labels = [str(i) for i in x]
+        plt.bar(x - cls.offset, data[:, 0], width=cls.width, label='VoIP')
+        plt.bar(x, data[:, 1], width=cls.width, label='IP Video')
+        plt.bar(x + cls.offset, data[:, 2], width=cls.width, label='FTP')
+
+        ax = plt.gca()
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels)
+        ax.legend()
+
+    @classmethod
+    def plot_1dim_bar(cls, data):
+        x = np.arange(1, len(data) + 1)
+        labels = [str(i) for i in x]
+        plt.bar(x, data, width=cls.width * 2)
+
+        ax = plt.gca()
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels)
+        ax.legend()
+
+    ################# Plotting each type of data #################
+
+    @classmethod
+    def plot_statistic_data(cls):
+        plt.figure(figsize=cls.figsize)
+        plt.title('Statistical data in each round')
+        plt.xlabel('round')
+        plt.ylabel('statistic data')
+
+        cls.plot_3dim_bar(cls.statistic_data)
+        plt.savefig('figs/statistic_data')
+
+    @classmethod
+    def plot_mno(cls):
+        def plot_vm_resource():
+            plt.subplot(311)
+            plt.title('VM resource in each round')
+            plt.xlabel('round')
+            plt.ylabel('VM resource')
+            
+            cls.plot_3dim_bar(cls.mno_vm_resource)
+
+        def plot_task_fitness():
+            plt.subplot(312)
+            plt.title('Task fitness in hour')
+            plt.xlabel('hour')
+            plt.ylabel('total fitness in an hour')
+
+            cls.plot_2dim_bar(cls.mno_task_fitness)
+
+        def plot_task_resource():
+            plt.subplot(313)
+            plt.title('Task consuming resource in hour')
+            plt.xlabel('hour')
+            plt.ylabel('total task consuming resource in an hour')
+
+            cls.plot_3dim_bar(cls.mno_task_resource)
+
+        plt.figure(figsize=cls.figsize)
+        plt.title('MNO')
+        plot_vm_resource()
+        plot_task_fitness()
+        plot_task_resource()
+        plt.savefig('figs/mno')
+
+    @classmethod
+    def plot_mvno(cls):
+        def plot_vm_resource():
+            plt.subplot(311)
+            plt.title('VM resource in each round')
+            plt.xlabel('round')
+            plt.ylabel('VM resource')
+            
+            cls.plot_3dim_bar(cls.mvno_vm_resource)
+
+        def plot_task_fitness():
+            plt.subplot(312)
+            plt.title('Task fitness in hour')
+            plt.xlabel('hour')
+            plt.ylabel('total fitness in an hour')
+
+            cls.plot_2dim_bar(cls.mvno_task_fitness)
+
+        def plot_task_resource():
+            plt.subplot(313)
+            plt.title('Task consuming resource in hour')
+            plt.xlabel('hour')
+            plt.ylabel('total task consuming resource in an hour')
+
+            cls.plot_3dim_bar(cls.mvno_task_resource)
+
+        plt.figure(figsize=cls.figsize)
+        plt.title('MVNO')
+        plot_vm_resource()
+        plot_task_fitness()
+        plot_task_resource()
+        plt.savefig('figs/mvno')
+
+    @classmethod
+    def plot_mvno_vm_cost(cls):
+        plt.figure(figsize=cls.figsize)
+        plt.title('MVNO VM total cost in each round')
+        plt.xlabel('round')
+        plt.ylabel('VM total cost(dollar)')
+
+        cls.plot_1dim_bar(cls.mvno_vm_cost)
+        plt.savefig('figs/mvno_vm_cost')
+    
+    @classmethod
+    def plot(cls):
+        cls.statistic_data = np.array(cls.statistic_data)
+        cls.mno_vm_resource = np.array(cls.mno_vm_resource)
+        cls.mvno_vm_resource = np.array(cls.mvno_vm_resource)
+        cls.mvno_vm_cost = np.array(cls.mvno_vm_cost)
+        cls.mno_task_fitness = np.array(cls.mno_task_fitness)
+        cls.mno_task_resource = np.array(cls.mno_task_resource)
+        cls.mvno_task_fitness = np.array(cls.mvno_task_fitness)
+        cls.mvno_task_resource = np.array(cls.mvno_task_resource)
+
+        cls.plot_statistic_data()
+        cls.plot_mno()
+        cls.plot_mvno()
+        cls.plot_mvno_vm_cost()
+        plt.show()

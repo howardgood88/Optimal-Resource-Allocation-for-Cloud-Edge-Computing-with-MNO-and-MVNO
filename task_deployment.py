@@ -116,48 +116,63 @@ class UtilityFunc:
 
 class TaskDeployment:
     '''Task Deployment!!!'''
-    def __init__(self):
+    def __init__(self, operator):
+        self.operator = operator
         self.optimizing = TaskDeploymentParametersOptimizing()
         # each element with two inner element: start event and end event of a task
         self.unaccepted_task_queue = Queue()
         # the sum of utility in an hour
-        self.hour_utility = 0
+        self.hour_utility = [0, 0, 0] # VoIP, IP Video, FTP
         # the number of valid task in an hour
-        self.hour_task_num = 0
+        self.hour_task_num = [0, 0, 0] # VoIP, IP Video, FTP
         # the sum of task resource
-        self.hour_task_resource = [0, 0, 0] # (T_up, T_down, cr)
+        self.hour_task_resource = [[0, 0, 0] for _ in range(3)] # 3x3
         # the average of hour_utility
-        self.hour_fitness = 0
+        self.hour_fitness = [0, 0, 0] # VoIP, IP Video, FTP
         # keep the mapping of task id to vm it runs
         self.running_task_id_to_vm = {}
 
     def __enter__(self):
         '''Initialization.'''
-        self.hour_utility = 0
-        self.hour_task_num = 0
+        assert(self.unaccepted_task_queue.empty())
+        self.hour_utility = [0, 0, 0]
+        self.hour_task_num = [0, 0, 0]
+        self.hour_task_resource = [[0, 0, 0] for _ in range(3)]
+        self.hour_fitness = [0, 0, 0]
+        assert(len(self.running_task_id_to_vm) == 0)
 
     def __exit__(self, type, value, traceback):
         '''Get the statistic fitness of optimizing populations at the end of an hour.'''
-        if self.hour_task_num == 0:
-            self.hour_task_num = 1
-        # average the utility
-        self.hour_utility = max(self.hour_utility, 0)
-        self.hour_fitness = self.hour_utility / self.hour_task_num
+        hour_task_num = []
+        for i in range(len(self.hour_task_num)):
+            if self.hour_task_num[i] == 0:
+                self.hour_task_num[i] = 1
+            # average the utility
+            self.hour_utility[i] = max(self.hour_utility[i], 0)
+            self.hour_fitness[i] = self.hour_utility[i] / self.hour_task_num[i]
+            hour_task_num.append([val / self.hour_task_num[i] for val in self.hour_task_resource[i]])
+
+        if self.operator == 'MNO':
+            Metrics.mno_task_fitness.append(self.hour_fitness)
+            Metrics.mno_task_resource.append(hour_task_num)
+        else:
+            Metrics.mvno_task_fitness.append(self.hour_fitness)
+            Metrics.mvno_task_resource.append(hour_task_num)
+
         for idx in range(len(self.optimizing.fitness)):
             self.optimizing.fitness[idx] = max(self.optimizing.fitness[idx], 0)
-            self.optimizing.fitness[idx] /= self.hour_task_num
+            self.optimizing.fitness[idx] /= sum(self.hour_task_num)
         self.all_release()
-        Metrics.task_fitness.append(self.hour_fitness)
-        Metrics.task_resource.append([i / self.hour_task_num for i in self.hour_task_resource])
 
     def deploy(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
         '''Start running TaskDeployment algorithm.'''
-        self.hour_task_num += 1
         # get index in task_events.json
         task_type = task[Task_event_index.task_type.value]
         user_id = task[Task_event_index.user_id.value]
         cpu_request = task[Task_event_index.cpu_request.value]
-
+        task_type_idx = Task_type_index[task_type].value
+        
+        self.hour_task_num[task_type_idx] += 1
         max_utility = float('-inf')
         offsprings_max_utility = [float('-inf') for _ in range(len(self.optimizing.new_populations))]
         selected_vm_id = None
@@ -206,12 +221,12 @@ class TaskDeployment:
         if selected_vm_id == None:
             # if no feasible solution
             self.reschedule_task(task)
-            self.hour_task_num -= 1
+            self.hour_task_num[task_type_idx] -= 1
         else:
             self.bind_task(task, vm_list[selected_vm_id])
         logging.info(f'task utility: {max_utility}\n')
     
-        self.hour_utility += max(max_utility, -600)
+        self.hour_utility[task_type_idx] += max(max_utility, -100)
         for idx, _utility in enumerate(offsprings_max_utility):
             self.optimizing.fitness[idx] += _utility
 
@@ -252,7 +267,9 @@ class TaskDeployment:
         selected_vm.local_bw_down -= task_T_down
         _message += f'{selected_vm.local_bw_down}'
         logging.info(_message)
-        self.hour_task_resource = [sum(i) for i in zip(self.hour_task_resource, (task_T_up, task_T_down, task_cr))]
+        task_type = task[Task_event_index.task_type.value]
+        task_type_idx = Task_type_index[task_type].value
+        self.hour_task_resource[task_type_idx] = [sum(i) for i in zip(self.hour_task_resource[task_type_idx], (task_cr, task_T_up, task_T_down))]
        
         self.running_task_id_to_vm[task_id] = selected_vm
 
@@ -280,7 +297,7 @@ class TaskDeployment:
     def update_parameters(self) -> None:
         '''Update the parameters based on the performance of optimizing offsprings of this hour.'''
         with step_logger('Updating best population', title5, f'Finished updating best population.'):
-            self.optimizing.best_fitness = self.hour_fitness
+            self.optimizing.best_fitness = sum(self.hour_fitness)
             self.optimizing.update_best_population()
             logging.info(f'best population as {toSoftmax(self.optimizing.best_population)}, fitness: {self.optimizing.best_fitness}.')
         with step_logger('Generate new offsprings', title5, 'Finished generating new offsprings.'):

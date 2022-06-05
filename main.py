@@ -254,4 +254,5 @@ while Global.system_time // big_round_minutes < big_round_times:
         hour_task_record = np.array(hour_task_record, dtype=list)
         start_time = Global.system_time
         assert(Global.system_time % big_round_minutes == 0)
-logging.info(f'Finish simulating...')
+logging.info('Finish simulating, showing result...')
+Metrics.plot()
