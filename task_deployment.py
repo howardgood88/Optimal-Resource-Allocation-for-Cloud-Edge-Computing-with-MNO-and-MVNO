@@ -5,7 +5,7 @@ from vm import VM
 from optimizing import TaskDeploymentParametersOptimizing
 from task_handler import Task_handler
 import math
-from utils import (softmax, toSoftmax, step_logger, get_TD_populations_log_msg, sgn)
+from utils import (softmax, toSoftmax, step_logger, get_TD_populations_log_msg, sgn, Metrics)
 from parameters import *
 import logging
 
@@ -124,6 +124,8 @@ class TaskDeployment:
         self.hour_utility = 0
         # the number of valid task in an hour
         self.hour_task_num = 0
+        # the sum of task resource
+        self.hour_task_resource = [0, 0, 0] # (T_up, T_down, cr)
         # the average of hour_utility
         self.hour_fitness = 0
         # keep the mapping of task id to vm it runs
@@ -145,6 +147,8 @@ class TaskDeployment:
             self.optimizing.fitness[idx] = max(self.optimizing.fitness[idx], 0)
             self.optimizing.fitness[idx] /= self.hour_task_num
         self.all_release()
+        Metrics.task_fitness.append(self.hour_fitness)
+        Metrics.task_resource.append([i / self.hour_task_num for i in self.hour_task_resource])
 
     def deploy(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
         '''Start running TaskDeployment algorithm.'''
@@ -233,22 +237,23 @@ class TaskDeployment:
         task_id = task[Task_event_index.index.value]
         _message = f'Deploy task{task_id} to vm {selected_vm.id},\n'
 
-        task_cr = task[Task_event_index.average_cpu_usage]
+        task_cr = task[Task_event_index.average_cpu_usage.value]
         _message += f'task cr: {task_cr}, vm cr: {selected_vm.cr} -> '
-        selected_vm.cr -= task[Task_event_index.average_cpu_usage.value]
+        selected_vm.cr -= task_cr
         _message += f'{selected_vm.cr}\n'
 
-        task_T_up = task[Task_event_index.T_up]
+        task_T_up = task[Task_event_index.T_up.value]
         _message += f'task bw_up: {task_T_up}, local_bw_up: {selected_vm.local_bw_up} -> '
-        selected_vm.local_bw_up -= task[Task_event_index.T_up.value]
+        selected_vm.local_bw_up -= task_T_up
         _message += f'{selected_vm.local_bw_up}\n'
 
-        task_T_down = task[Task_event_index.T_down]
+        task_T_down = task[Task_event_index.T_down.value]
         _message += f'task bw_down: {task_T_down}, local_bw_down: {selected_vm.local_bw_down} -> '
-        selected_vm.local_bw_down -= task[Task_event_index.T_down.value]
+        selected_vm.local_bw_down -= task_T_down
         _message += f'{selected_vm.local_bw_down}'
         logging.info(_message)
-
+        self.hour_task_resource = [sum(i) for i in zip(self.hour_task_resource, (task_T_up, task_T_down, task_cr))]
+       
         self.running_task_id_to_vm[task_id] = selected_vm
 
     def release(self, task: np.array) -> None:

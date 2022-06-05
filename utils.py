@@ -104,3 +104,14 @@ def sgn(x):
         return 1
     else:
         return -1
+
+class Metrics:
+    def __init__(self):
+        # roundly
+        self.statistic_data = [] # 3x3
+        self.mno_vm_resource = [] # (bw_up, bw_down, cr)
+        self.mvno_vm_resource = [] # (bw_up, bw_down, cr)
+        self.mvno_vm_cost = [] # int
+        # hourly
+        self.task_resource = [] # # (T_up, T_down, cr)
+        self.task_fitness = []
