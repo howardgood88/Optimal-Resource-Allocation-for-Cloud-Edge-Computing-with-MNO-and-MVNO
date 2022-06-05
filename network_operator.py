@@ -3,14 +3,14 @@ import numpy as np
 from vm_assignment import VMAssignment
 from task_deployment import TaskDeployment
 from contract import Contract
-from utils import (step_logger, get_total_resource, timer)
+from utils import (step_logger, get_total_resource, timer, Metrics)
 from parameters import (_mu, title4)
 import logging
 
 class Network_operator(abc.ABC):
     def __init__(self):
         self.hold_vm_id = None
-        self._task_deployment = TaskDeployment()
+        self._task_deployment = TaskDeployment(self.name)
 
     def deploy_task(self, task: np.array, vm_list: dict) -> None:
         '''Delegate to class TaskDeployment.'''
@@ -28,13 +28,13 @@ class Network_operator(abc.ABC):
 
 class MVNO(Network_operator):
     def __init__(self):
-        super().__init__()
         self.name = 'MVNO'
+        super().__init__()
 
 class MNO(Network_operator):
     def __init__(self, mvno: MVNO, vm_id_list: list, vm_list: dict):
-        super().__init__()
         self.name = 'MNO'
+        super().__init__()
         self.mvno = mvno
         # the id of all vm own by MNO, transform to list because vm_id_list never changes.
         self.total_vm_id = np.array(vm_id_list, dtype=list)
@@ -56,9 +56,18 @@ class MNO(Network_operator):
                 vm.avg_bw_down = bw_down_sum / len(vm.from_user)
         get_avg_vm_bw()
         self.hold_vm_id, self.mvno.hold_vm_id = self._vm_assignment.run(statistic_data)
-        logging.info(f'mno vm id: {self.hold_vm_id},\ntotal resource (bw_up, bw_down, cr): {get_total_resource(self.hold_vm_id, vm_list)}')
-        logging.info(f'mvno vm id: {self.mvno.hold_vm_id},\ntotal resource (bw_up, bw_down, cr): {get_total_resource(self.mvno.hold_vm_id, vm_list)}, '
-                        f'cost: {self._vm_assignment.vm_highest_price - self._vm_assignment.optimizing.best_fitness}')
+        # MNO
+        mno_resource = get_total_resource(self.hold_vm_id, vm_list)
+        logging.info(f'mno vm id: {self.hold_vm_id},\ntotal resource (bw_up, bw_down, cr): {mno_resource}')
+        Metrics.mno_vm_resource.append(mno_resource)
+        # MVNO
+        mvno_resource = get_total_resource(self.mvno.hold_vm_id, vm_list)
+        mvno_cost = self._vm_assignment.vm_highest_price - self._vm_assignment.optimizing.best_fitness
+        logging.info(f'mvno vm id: {self.mvno.hold_vm_id},\ntotal resource (bw_up, bw_down, cr): {mvno_resource}, '
+                        f'cost: {mvno_cost}')
+        Metrics.mvno_vm_resource.append(mvno_resource)
+        Metrics.mvno_vm_cost.append(mvno_cost)
+
         logging.info(f'contract: bw_high: {self.contract.bw_high}, bw_low: {self.contract.bw_low}, cr_high: {self.contract.cr_high}, cr_low: {self.contract.cr_low}')
         
         # the price mvno sells to its customers

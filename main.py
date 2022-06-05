@@ -3,7 +3,7 @@ import numpy as np
 from network_operator import (MNO, MVNO)
 from vm import VM
 from task_handler import Task_handler
-from utils import (toSoftmax, step_logger, beta, PT5)
+from utils import (toSoftmax, step_logger, beta, PT5, Metrics)
 from parameters import *
 
 # initial setting for logging
@@ -250,7 +250,9 @@ while Global.system_time // big_round_minutes < big_round_times:
 
                 hourly_statistic_data = get_hourly_statistic_data(hour_events)
                 hour_task_record.append(hourly_statistic_data)
+                Metrics.statistic_data.append(hourly_statistic_data)
         hour_task_record = np.array(hour_task_record, dtype=list)
         start_time = Global.system_time
         assert(Global.system_time % big_round_minutes == 0)
-logging.info(f'Finish simulating...')
+logging.info('Finish simulating, showing result...')
+Metrics.plot()
