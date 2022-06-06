@@ -21,12 +21,12 @@ beta_a = 2
 beta_b = 1.5
 beta_t = 100
 beta_d = 0
-PT5_cloud_a = 2 # must
+PT5_cloud_a = 2
 PT5_cloud_b = 0.557
-PT5_cloud_d = 45
+PT5_cloud_d = 49.443
 PT5_edge_a = 2
 PT5_edge_b = 0.557
-PT5_edge_d = 2
+PT5_edge_d = 1.443
 
 # contract
 expected_max_vm_num = 120

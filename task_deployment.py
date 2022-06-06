@@ -9,6 +9,8 @@ from utils import (softmax, toSoftmax, step_logger, get_TD_populations_log_msg, 
 from parameters import *
 import logging
 
+np.random.seed(rnd_seed)
+
 class UtilityFunc:
     '''Mapping from resource to utility from 0 to 100.'''
     '''TODO'''
@@ -131,9 +133,12 @@ class TaskDeployment:
         self.hour_fitness = [0, 0, 0] # VoIP, IP Video, FTP
         # keep the mapping of task id to vm it runs
         self.running_task_id_to_vm = {}
+        # keep the starting time of an hour
+        self.starting_systime = None
 
     def __enter__(self):
         '''Initialization.'''
+        self.starting_systime = Global.system_time
         assert(self.unaccepted_task_queue.empty())
         self.hour_utility = [0, 0, 0]
         self.population_hour_utility = [[0, 0, 0] for _ in range(offspring_number)]
@@ -241,18 +246,19 @@ class TaskDeployment:
         assert(len(events) == 2)
         Task_handler.delete_events()
         event_time_idx = Task_event_index.event_time.value
-        retry_offset = np.random.randint(60, 120)
-        logging.info(f'Task{task_id} unaccepted, retry after {retry_offset} minutes.')
+        next_round_start_systime = self.starting_systime + small_round_minutes
+        retry_offset = np.random.randint(0, 60)
+        logging.info(f'Task {task_id} unaccepted, retry after {retry_offset} minutes.')
         interval = end_event[event_time_idx] - start_event[event_time_idx]
-        start_event[event_time_idx] = Global.system_time + retry_offset
-        end_event[event_time_idx] = Global.system_time + interval + retry_offset
+        start_event[event_time_idx] = next_round_start_systime + retry_offset
+        end_event[event_time_idx] = next_round_start_systime + interval + retry_offset
         Task_handler.insert_event(end_event)
         Task_handler.insert_event(start_event)
 
     def bind_task(self, task: np.array, selected_vm: VM) -> None:
         '''Consume resource of selected vm and make task as observer.'''
         task_id = task[Task_event_index.index.value]
-        _message = f'Deploy task{task_id} to vm {selected_vm.id},\n'
+        _message = f'Deploy task {task_id} to vm {selected_vm.id},\n'
 
         task_cr = task[Task_event_index.average_cpu_usage.value]
         _message += f'task cr: {task_cr}, vm cr: {selected_vm.cr} -> '
@@ -280,7 +286,7 @@ class TaskDeployment:
         task_id = task[Task_event_index.index.value]
         vm = self.running_task_id_to_vm[task_id]
 
-        _message = f'release task{task_id} from vm {vm.id},\n'
+        _message = f'release task {task_id} from vm {vm.id},\n'
         _message += f'cr: {vm.cr} -> '
         vm.cr += task[Task_event_index.average_cpu_usage.value]
         _message += f'{vm.cr}\n'

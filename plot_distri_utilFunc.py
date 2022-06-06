@@ -6,6 +6,8 @@ from task_deployment import UtilityFunc
 from data.parameters import *
 import os
 
+np.random.seed(rnd_seed)
+
 dir = './figs/distributions/'
 if not os.path.exists(dir):
     os.makedirs(dir)
@@ -27,47 +29,47 @@ def beta_test():
     plt.ylabel('times')
     plot_beta(beta_a, beta_b, beta_t, beta_d, 10000)
     plt.savefig(f'{dir}user_to_vm_bw')
-    # voip uplink throughput
+    # VoIP uplink throughput
     plt.figure(figsize=figsize)
-    plt.title('Task uplink bandwidth generation (beta distribution)')
+    plt.title('VoIP uplink bandwidth generation (beta distribution)')
     plt.xlabel('bandwidth(Kbps)')
     plt.ylabel('times')
-    plot_beta(*voip_bw_up_attr, 10000)
+    plot_beta(*voip_bw_up_attr, 30000)
     plt.savefig(f'{dir}voip_bw_up')
-    # voip downlink throughput
+    # VoIP downlink throughput
     plt.figure(figsize=figsize)
-    plt.title('Task downlink bandwidth generation (beta distribution)')
+    plt.title('VoIP downlink bandwidth generation (beta distribution)')
     plt.xlabel('bandwidth(Kbps)')
     plt.ylabel('times')
-    plot_beta(*voip_bw_down_attr, 10000)
+    plot_beta(*voip_bw_down_attr, 30000)
     plt.savefig(f'{dir}voip_bw_down')
     # IP VIdeo uplink throughput
     plt.figure(figsize=figsize)
     plt.title('IP VIdeo uplink bandwidth generation (beta distribution)')
     plt.xlabel('bandwidth(Kbps)')
     plt.ylabel('times')
-    plot_beta(*ipVideo_bw_up_attr, 10000)
+    plot_beta(*ipVideo_bw_up_attr, 45000)
     plt.savefig(f'{dir}ipVideo_bw_up')
     # IP VIdeo downlink throughput
     plt.figure(figsize=figsize)
     plt.title('IP VIdeo downlink bandwidth generation (beta distribution)')
     plt.xlabel('bandwidth(Kbps)')
     plt.ylabel('times')
-    plot_beta(*ipVideo_bw_down_attr, 10000)
+    plot_beta(*ipVideo_bw_down_attr, 50000)
     plt.savefig(f'{dir}ipVideo_bw_down')
     # FTP uplink throughput
     plt.figure(figsize=figsize)
     plt.title('FTP uplink bandwidth generation (beta distribution)')
     plt.xlabel('bandwidth(Kbps)')
     plt.ylabel('times')
-    plot_beta(*ftp_bw_up_attr, 10000)
+    plot_beta(*ftp_bw_up_attr, 40000)
     plt.savefig(f'{dir}ftp_bw_up')
     # FTP downlink throughput
     plt.figure(figsize=figsize)
     plt.title('FTP downlink bandwidth generation (beta distribution)')
     plt.xlabel('bandwidth(Kbps)')
     plt.ylabel('times')
-    plot_beta(*ftp_bw_down_attr, 10000)
+    plot_beta(*ftp_bw_down_attr, 70000)
     plt.savefig(f'{dir}ftp_bw_down')
 
 def plot_PT5(a, b, d, _slice):
@@ -122,7 +124,7 @@ def utility_func_delay_test(max_x, _slice, func, location):
     for val in x:
         y.append(func(val, location))
     plt.plot(x, y)
-    plt.savefig(f'{dir}{func.__qualname__}_utility_func.png')
+    plt.savefig(f'{dir}{func.__qualname__}_{location}_utility_func.png')
     
 beta_test()
 PT5_test()

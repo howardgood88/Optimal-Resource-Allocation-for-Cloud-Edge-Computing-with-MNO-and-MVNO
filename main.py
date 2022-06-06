@@ -242,6 +242,7 @@ while Global.system_time // big_round_minutes < big_round_times:
                     if not hour_events.size == 0:
                         task_deployment(hour_events, minutes_range)
                 task_events = Task_handler.task_events
+                Task_handler.changed = False
 
                 # prepare for next round
                 Global.system_time = temp_time + small_round_minutes
