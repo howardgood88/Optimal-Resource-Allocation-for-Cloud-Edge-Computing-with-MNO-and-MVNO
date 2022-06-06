@@ -1,20 +1,14 @@
 import poisson_arrival
 import os
 import json
+from parameters import *
 import numpy as np
 
 # the traffic ratio over peek traffic of 24 hours in a day
 hour_traffic_ratio = [0.51, 0.42, 0.33, 0.31, 0.23, 0.23, 0.24, 0.22, 0.24, 0.33, 0.35, 0.52, 0.56, 0.56, 0.64, 0.8, 0.91, 0.97, 0.98, 0.95, 0.92, 0.965, 0.87, 0.8]
 
-machine_num = 300
 user_num = 100
-total_time = 30000
-history_time = 5000
-dir = 'data/case5/'
-# spe: seconds per event arrive
-voip_spe = 1 / 30
-ipVideo_spe = 1 / 30
-ftp_spe = 1 / 100
+dir = 'data/case2/'
 
 def task_events_generator(filename):
     def event_gen(_type, max_cpu, bw_up_attr, bw_down_attr):
@@ -30,8 +24,8 @@ def task_events_generator(filename):
         f.write('[\n')
         for hour_ratio in hour_traffic_ratio:
             freqs = (voip_spe * hour_ratio, ipVideo_spe * hour_ratio, ftp_spe * hour_ratio)
-            attrs = (("VoIP", 0.3, (17, 13, 300, 200), (4, 4, 3, 15)), ("IP_Video", 0.4, (2, 4, 45, 5), (4, 4, 500, 700)),
-                    ("FTP", 0.7, (5, 3, 40, 10), (4, 5, 700, 900)))
+            attrs = (("VoIP", 0.3, voip_bw_up_attr, voip_bw_down_attr), ("IP_Video", 0.4, ipVideo_bw_up_attr, ipVideo_bw_down_attr),
+                    ("FTP", 0.7, ftp_bw_up_attr, ftp_bw_down_attr))
             while 1:
                 # outcome events
                 if t in event_in:

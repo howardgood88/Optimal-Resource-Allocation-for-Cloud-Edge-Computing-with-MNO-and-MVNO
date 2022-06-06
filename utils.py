@@ -3,8 +3,9 @@ from time import time
 import scipy.integrate as integrate
 import math
 import logging
-from parameters import (rnd_seed, Task_type_index)
+from parameters import (rnd_seed, Task_type_index, case_num)
 import matplotlib.pyplot as plt
+import os
 
 np.random.seed(rnd_seed)
 
@@ -110,11 +111,11 @@ def sgn(x):
 class Metrics:
     '''For plotting the result.'''
     # roundly
-    statistic_data = [] # 3x3
     mno_vm_resource = [] # 3x3
     mvno_vm_resource = [] # 3x3
     mvno_vm_cost = [] # float
     # hourly
+    statistic_data = [] # 3x3
     mno_task_fitness = [] # (VoIP, IP Video, FTP)
     mno_task_resource = [] # 3x3
     mvno_task_fitness = [] # (VoIP, IP Video, FTP)
@@ -183,11 +184,11 @@ class Metrics:
     def plot_statistic_data(cls):
         plt.figure(figsize=cls.figsize)
         plt.title('Statistical data in each round')
-        plt.xlabel('round')
+        plt.xlabel('hour')
         plt.ylabel('statistic data')
 
         cls.plot_3dim_bar(cls.statistic_data)
-        plt.savefig('figs/statistic_data')
+        plt.savefig(f'figs/{case_num}statistic_data')
 
     @classmethod
     def plot_mno(cls):
@@ -220,7 +221,7 @@ class Metrics:
         plot_vm_resource()
         plot_task_fitness()
         plot_task_resource()
-        plt.savefig('figs/mno')
+        plt.savefig(f'figs/{case_num}mno')
 
     @classmethod
     def plot_mvno(cls):
@@ -253,7 +254,7 @@ class Metrics:
         plot_vm_resource()
         plot_task_fitness()
         plot_task_resource()
-        plt.savefig('figs/mvno')
+        plt.savefig(f'figs/{case_num}mvno')
 
     @classmethod
     def plot_mvno_vm_cost(cls):
@@ -263,7 +264,7 @@ class Metrics:
         plt.ylabel('VM total cost(dollar)')
 
         cls.plot_1dim_bar(cls.mvno_vm_cost)
-        plt.savefig('figs/mvno_vm_cost')
+        plt.savefig(f'figs/{case_num}mvno_vm_cost')
     
     @classmethod
     def plot(cls):
@@ -276,8 +277,10 @@ class Metrics:
         cls.mvno_task_fitness = np.array(cls.mvno_task_fitness)
         cls.mvno_task_resource = np.array(cls.mvno_task_resource)
 
+        if not os.path.exists(f'figs/{case_num}'):
+            os.makedirs(f'figs/{case_num}')
         cls.plot_statistic_data()
         cls.plot_mno()
         cls.plot_mvno()
         cls.plot_mvno_vm_cost()
-        plt.show()
+        # plt.show()

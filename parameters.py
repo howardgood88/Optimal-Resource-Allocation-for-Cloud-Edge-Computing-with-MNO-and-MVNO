@@ -6,7 +6,8 @@ class Global:
 
 rnd_seed = 1126
 logging_level = logging.INFO
-test_data_dir = './data/case5/'
+case_num = 'case2/'
+test_data_dir = './data/' + case_num
 # the length of log with filling "-"
 title1, title2, title3, title4, title5 = 130, 115, 100, 85, 70
 # round time
@@ -24,7 +25,7 @@ PT5_cloud_a = 2 # must
 PT5_cloud_b = 0.557
 PT5_cloud_d = 45
 PT5_edge_a = 2
-PT5_edge_b = 2
+PT5_edge_b = 0.557
 PT5_edge_d = 2
 
 # contract

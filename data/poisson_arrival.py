@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.integrate as integrate
+from parameters import *
 import json
 import os
 
@@ -20,13 +21,9 @@ def beta(a, b, t, d):
 
 machine_num = 300
 user_num = 100
-total_time = 30000
-history_time = 5000
-dir = 'data/case4/'
-# spe: seconds per event arrive
-voip_spe = 1 / 30
-ipVideo_spe = 1 / 30
-ftp_spe = 1 / 100
+total_time = 3600 * 12
+history_time = 3600 * 4
+dir = 'data/case1/'
 
 def machine_generator(filename):
     id = 1
@@ -60,8 +57,8 @@ def task_events_generator(filename, last_t):
     with open(filename, 'a') as f:
         f.write('[\n')
         freqs = (voip_spe, ipVideo_spe, ftp_spe)
-        attrs = (("VoIP", 0.3, (17, 13, 300, 200), (4, 4, 3, 15)), ("IP_Video", 0.4, (2, 4, 45, 5), (4, 4, 500, 700)),
-                ("FTP", 0.7, (5, 3, 40, 10), (4, 5, 700, 900)))
+        attrs = (("VoIP", 0.3, voip_bw_up_attr, voip_bw_down_attr), ("IP_Video", 0.4, ipVideo_bw_up_attr, ipVideo_bw_down_attr),
+                    ("FTP", 0.7, ftp_bw_up_attr, ftp_bw_down_attr))
         while t < last_t:
             # outcome events
             if t in event_in:

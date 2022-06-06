@@ -8,7 +8,11 @@ from parameters import *
 
 # initial setting for logging
 import logging
-logging.basicConfig(format=f'%(levelname)s:Time %(system_time)s:%(message)s', filename=test_data_dir + 'log.txt'
+if logging_level == logging.INFO:
+    lev = 'INFO'
+elif logging_level == logging.DEBUG:
+    lev = 'DEBUG'
+logging.basicConfig(format=f'%(levelname)s:Time %(system_time)s:%(message)s', filename=test_data_dir + f'log_{lev}.txt'
                     , filemode='w', level=logging_level)
 ## set the logger filter for showing system time
 logger = logging.getLogger('root')
@@ -143,7 +147,7 @@ def update_history_data(hourly_history_data: np.array, hour_task_record: np.arra
         statistic_data = np.mean(hour_task_record, axis=0)
     else:
         hourly_history_data = np.vstack([hourly_history_data, hour_task_record])
-    _message = f'add hour data\n{np.mean(hour_task_record, axis=0)}\ninto statistic data\n{statistic_data}, '
+    _message = f'add hour data:\n{np.mean(hour_task_record, axis=0)}\ninto statistic data:\n{statistic_data}\n'
     # update statistic data with the influence of _phi
     statistic_data = statistic_data * (1 - phi) + np.mean(hour_task_record, axis=0) * phi
     logging.info(_message + f'statistic data becomes:\n{statistic_data}')

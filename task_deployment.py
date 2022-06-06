@@ -136,28 +136,30 @@ class TaskDeployment:
         '''Initialization.'''
         assert(self.unaccepted_task_queue.empty())
         self.hour_utility = [0, 0, 0]
+        self.population_hour_utility = [[0, 0, 0] for _ in range(offspring_number)]
         self.hour_task_num = [0, 0, 0]
         self.hour_task_resource = [[0, 0, 0] for _ in range(3)]
         self.hour_fitness = [0, 0, 0]
+        self.population_hour_fitness = [[0, 0, 0] for _ in range(offspring_number)]
         assert(len(self.running_task_id_to_vm) == 0)
 
     def __exit__(self, type, value, traceback):
         '''Get the statistic fitness of optimizing populations at the end of an hour.'''
-        hour_task_num = []
         for i in range(len(self.hour_task_num)):
             if self.hour_task_num[i] == 0:
                 self.hour_task_num[i] = 1
             # average the utility
             self.hour_utility[i] = max(self.hour_utility[i], 0)
             self.hour_fitness[i] = self.hour_utility[i] / self.hour_task_num[i]
-            hour_task_num.append([val / self.hour_task_num[i] for val in self.hour_task_resource[i]])
+            for pop_idx in range(offspring_number):
+                self.population_hour_fitness[pop_idx][i] = self.population_hour_utility[pop_idx][i] / self.hour_task_num[i]
 
         if self.operator == 'MNO':
             Metrics.mno_task_fitness.append(self.hour_fitness)
-            Metrics.mno_task_resource.append(hour_task_num)
+            Metrics.mno_task_resource.append(self.hour_task_resource)
         else:
             Metrics.mvno_task_fitness.append(self.hour_fitness)
-            Metrics.mvno_task_resource.append(hour_task_num)
+            Metrics.mvno_task_resource.append(self.hour_task_resource)
 
         for idx in range(len(self.optimizing.fitness)):
             self.optimizing.fitness[idx] = max(self.optimizing.fitness[idx], 0)
@@ -227,8 +229,8 @@ class TaskDeployment:
         logging.info(f'task utility: {max_utility}\n')
     
         self.hour_utility[task_type_idx] += max(max_utility, -100)
-        for idx, _utility in enumerate(offsprings_max_utility):
-            self.optimizing.fitness[idx] += _utility
+        for idx, max_utility in enumerate(offsprings_max_utility):
+            self.population_hour_utility[idx][task_type_idx] += max(max_utility, -100)
 
     def reschedule_task(self, task: np.array) -> None:
         '''Reschedule event in task_events.'''
@@ -298,6 +300,7 @@ class TaskDeployment:
         '''Update the parameters based on the performance of optimizing offsprings of this hour.'''
         with step_logger('Updating best population', title5, f'Finished updating best population.'):
             self.optimizing.best_fitness = sum(self.hour_fitness)
+            self.optimizing.fitness = np.sum(self.population_hour_fitness, axis=1)
             self.optimizing.update_best_population()
             logging.info(f'best population as {toSoftmax(self.optimizing.best_population)}, fitness: {self.optimizing.best_fitness}.')
         with step_logger('Generate new offsprings', title5, 'Finished generating new offsprings.'):
