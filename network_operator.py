@@ -39,7 +39,7 @@ class MNO(Network_operator):
         # the id of all vm own by MNO, transform to list because vm_id_list never changes.
         self.total_vm_id = np.array(vm_id_list, dtype=list)
         self.contract = Contract()
-        self._vm_assignment = VMAssignment(self.contract, self.total_vm_id, vm_list)
+        self._vm_assignment = None
 
     @timer
     def vm_assignment(self, statistic_data: np.array, vm_list: dict) -> None:
@@ -55,6 +55,7 @@ class MNO(Network_operator):
                 vm.avg_bw_up = bw_up_sum / len(vm.from_user)
                 vm.avg_bw_down = bw_down_sum / len(vm.from_user)
         get_avg_vm_bw()
+        self._vm_assignment = VMAssignment(self.contract, self.total_vm_id, vm_list)
         self.hold_vm_id, self.mvno.hold_vm_id = self._vm_assignment.run(statistic_data)
         # MNO
         mno_resource = get_total_resource(self.hold_vm_id, vm_list)

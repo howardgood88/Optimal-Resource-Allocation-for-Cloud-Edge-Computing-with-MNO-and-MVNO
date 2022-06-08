@@ -4,7 +4,7 @@ from parameters import *
 import json
 import os
 
-np.random.seed(1126)
+np.random.seed(rnd_seed)
 
 def beta(a, b, t, d):
     '''Beta Distribution Generator.'''
@@ -22,8 +22,8 @@ def beta(a, b, t, d):
 machine_num = 300
 user_num = 100
 total_time = 3600 * 12
-history_time = 3600 * 4
-dir = 'data/case1/'
+history_time = 3600 * 3
+dir = './data/case1/'
 
 def machine_generator(filename):
     id = 1
@@ -91,8 +91,10 @@ def task_events_generator(filename, last_t):
         f.truncate()
         f.write('\n]')
 
-machine_generator(dir + 'machine_attributes.json')
-# runtime task
-task_events_generator(dir + 'task_events.json', total_time)
-# history data
-task_events_generator(dir + 'history_data.json', history_time)
+if __name__ == '__main__':
+    machine_generator(dir + 'machine_attributes.json')
+    # runtime task
+    task_events_generator(dir + 'task_events.json', total_time)
+    # history data
+    task_events_generator(dir + 'history_data.json', history_time)
+    print(f'Finished generating, save result to {dir}')

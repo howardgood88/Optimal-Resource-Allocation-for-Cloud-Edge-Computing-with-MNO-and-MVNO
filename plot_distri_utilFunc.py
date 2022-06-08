@@ -6,8 +6,6 @@ from task_deployment import UtilityFunc
 from data.parameters import *
 import os
 
-np.random.seed(rnd_seed)
-
 dir = './figs/distributions/'
 if not os.path.exists(dir):
     os.makedirs(dir)
@@ -125,18 +123,20 @@ def utility_func_delay_test(max_x, _slice, func, location):
         y.append(func(val, location))
     plt.plot(x, y)
     plt.savefig(f'{dir}{func.__qualname__}_{location}_utility_func.png')
-    
-beta_test()
-PT5_test()
-# plt.show()
-utility_func_bw_test(800, 8000, UtilityFunc.VoIP.bw_up)
-utility_func_bw_test(40, 4000, UtilityFunc.VoIP.bw_down)
-utility_func_delay_test(20, 2000, UtilityFunc.VoIP.delay, 'cloud')
-utility_func_delay_test(20, 2000, UtilityFunc.VoIP.delay, 'edge')
-# plt.show()
-utility_func_bw_test(50, 5000, UtilityFunc.IPVideo.bw_up)
-utility_func_bw_test(1000, 10000, UtilityFunc.IPVideo.bw_down)
-# plt.show()
-utility_func_bw_test(50, 5000, UtilityFunc.FTP.bw_up)
-utility_func_bw_test(1500, 15000, UtilityFunc.FTP.bw_down)
-# plt.show()
+
+if __name__ == '__main__':
+    beta_test()
+    PT5_test()
+    # plt.show()
+    utility_func_bw_test(800, 8000, UtilityFunc.VoIP.bw_up)
+    utility_func_bw_test(40, 4000, UtilityFunc.VoIP.bw_down)
+    utility_func_delay_test(20, 2000, UtilityFunc.VoIP.delay, 'cloud')
+    utility_func_delay_test(20, 2000, UtilityFunc.VoIP.delay, 'edge')
+    # plt.show()
+    utility_func_bw_test(50, 5000, UtilityFunc.IPVideo.bw_up)
+    utility_func_bw_test(1000, 10000, UtilityFunc.IPVideo.bw_down)
+    # plt.show()
+    utility_func_bw_test(50, 5000, UtilityFunc.FTP.bw_up)
+    utility_func_bw_test(1500, 15000, UtilityFunc.FTP.bw_down)
+    # plt.show()
+    print(f'Finished plotting, save result to {dir}!')

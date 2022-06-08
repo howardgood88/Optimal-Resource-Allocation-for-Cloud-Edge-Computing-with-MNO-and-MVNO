@@ -115,7 +115,7 @@ class Metrics:
     mvno_vm_resource = [] # 3x3
     mvno_vm_cost = [] # float
     # hourly
-    statistic_data = [] # 3x3
+    hour_data = [] # 3x3
     mno_task_fitness = [] # (VoIP, IP Video, FTP)
     mno_task_resource = [] # 3x3
     mvno_task_fitness = [] # (VoIP, IP Video, FTP)
@@ -128,31 +128,33 @@ class Metrics:
 
     ################# Common-used Functions #################
 
-    @classmethod
-    def plot_3dim_bar(cls, data):
-        ax1 = plt.gca()
-        ax2 = ax1.twinx()
-        x = np.arange(1, len(data) + 1)
-        labels = [str(i) for i in x]
-        # VoIP
-        ax1.bar(x - cls.offset - cls.gap, data[:, 0, 0], width=cls.width/1.5, color='tab:pink', label='VoIP cr(GCUs-s)')
-        ax2.bar(x - cls.offset + cls.gap, data[:, 0, 1], width=cls.width/1.5, label='VoIP bw up(kbps)')
-        ax2.bar(x - cls.offset + cls.gap, data[:, 0, 2], width=cls.width/1.5, bottom=data[:, 0, 1], label='VoIP bw down(kbps)')
-        # IP Video
-        ax1.bar(x - cls.gap, data[:, 1, 0], width=cls.width/1.5, color='tab:gray', label='IP Video cr(GCUs-s)')
-        ax2.bar(x + cls.gap, data[:, 1, 1], width=cls.width/1.5, label='IP Video bw up(kbps)')
-        ax2.bar(x + cls.gap, data[:, 1, 2], width=cls.width/1.5, bottom=data[:, 1, 1], label='IP Video bw down(kbps)')
-        # FTP
-        ax1.bar(x + cls.offset - cls.gap, data[:, 2, 0], width=cls.width/1.5, color='tab:olive', label='FTP cr(GCUs-s)')
-        ax2.bar(x + cls.offset + cls.gap, data[:, 2, 1], width=cls.width/1.5, label='FTP bw up(kbps)')
-        ax2.bar(x + cls.offset + cls.gap, data[:, 2, 2], width=cls.width/1.5, bottom=data[:, 2, 1], label='FTP bw down(kbps)')
+    # @classmethod
+    # def plot_3dim_bar(cls, data):
+    #     ax1 = plt.gca()
+    #     ax2 = ax1.twinx()
+    #     x = np.arange(1, len(data) + 1)
+    #     labels = [str(i) for i in x]
+    #     # VoIP
+    #     ax1.bar(x - cls.offset - cls.gap, data[:, 0, 0], width=cls.width/1.5, color='tab:pink', label='VoIP cr(GCUs-s)')
+    #     ax2.bar(x - cls.offset + cls.gap, data[:, 0, 1], width=cls.width/1.5, label='VoIP bw up(kbps)')
+    #     ax2.bar(x - cls.offset + cls.gap, data[:, 0, 2], width=cls.width/1.5, bottom=data[:, 0, 1], label='VoIP bw down(kbps)')
+    #     # IP Video
+    #     ax1.bar(x - cls.gap, data[:, 1, 0], width=cls.width/1.5, color='tab:gray', label='IP Video cr(GCUs-s)')
+    #     ax2.bar(x + cls.gap, data[:, 1, 1], width=cls.width/1.5, label='IP Video bw up(kbps)')
+    #     ax2.bar(x + cls.gap, data[:, 1, 2], width=cls.width/1.5, bottom=data[:, 1, 1], label='IP Video bw down(kbps)')
+    #     # FTP
+    #     ax1.bar(x + cls.offset - cls.gap, data[:, 2, 0], width=cls.width/1.5, color='tab:olive', label='FTP cr(GCUs-s)')
+    #     ax2.bar(x + cls.offset + cls.gap, data[:, 2, 1], width=cls.width/1.5, label='FTP bw up(kbps)')
+    #     ax2.bar(x + cls.offset + cls.gap, data[:, 2, 2], width=cls.width/1.5, bottom=data[:, 2, 1], label='FTP bw down(kbps)')
 
-        ax1.set_xticks(x)
-        ax1.set_xticklabels(labels)
-        ax2.set_xticks(x)
-        ax2.set_xticklabels(labels)
-        ax1.legend(loc='upper right')
-        ax2.legend(loc='upper left')
+    #     ax1.set_xticks(x)
+    #     ax1.set_xticklabels(labels)
+    #     ax1.legend(loc='upper right')
+    #     ax1.set_ylabel('cr(GCUs/s)')
+    #     ax2.set_xticks(x)
+    #     ax2.set_xticklabels(labels)
+    #     ax2.legend(loc='upper left')
+    #     ax2.set_ylabel('bw(Kbps)')
 
     @classmethod
     def plot_2dim_bar(cls, data):
@@ -161,6 +163,19 @@ class Metrics:
         plt.bar(x - cls.offset, data[:, 0], width=cls.width, label='VoIP')
         plt.bar(x, data[:, 1], width=cls.width, label='IP Video')
         plt.bar(x + cls.offset, data[:, 2], width=cls.width, label='FTP')
+
+        ax = plt.gca()
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels)
+        ax.legend()
+
+    @classmethod
+    def plot_2dim_line(cls, data):
+        x = np.arange(1, len(data) + 1)
+        labels = [str(i) for i in x]
+        plt.plot(x, data[:, 0], 'o-', label='VoIP')
+        plt.plot(x, data[:, 1], 'o-', label='IP Video')
+        plt.plot(x, data[:, 2], 'o-', label='FTP')
 
         ax = plt.gca()
         ax.set_xticks(x)
@@ -181,80 +196,148 @@ class Metrics:
     ################# Plotting each type of data #################
 
     @classmethod
-    def plot_statistic_data(cls):
+    def plot_hour_data(cls):
         plt.figure(figsize=cls.figsize)
-        plt.title('Statistical data in each round')
+        # cr
+        plt.subplot(311)
+        plt.title('Hour data - cr in each round')
         plt.xlabel('hour')
-        plt.ylabel('statistic data')
+        plt.ylabel('cr (GCUs/s)')
+        cls.plot_2dim_line(cls.hour_data[:, :, 0])
+        # T up
+        plt.subplot(312)
+        plt.title('Hour data - uplink throughput in each round')
+        plt.xlabel('hour')
+        plt.ylabel('throughput (Kbps)')
+        cls.plot_2dim_line(cls.hour_data[:, :, 1])
+        # T down
+        plt.subplot(313)
+        plt.title('Hour data - downlink throughput in each round')
+        plt.xlabel('hour')
+        plt.ylabel('throughput (Kbps)')
+        cls.plot_2dim_line(cls.hour_data[:, :, 2])
 
-        cls.plot_3dim_bar(cls.statistic_data)
-        plt.savefig(f'figs/{case_num}statistic_data')
+        plt.savefig(f'figs/{case_num}hour_data_resource')
 
     @classmethod
     def plot_mno(cls):
         def plot_vm_resource():
+            plt.figure(figsize=cls.figsize)
+            # cr
             plt.subplot(311)
-            plt.title('VM resource in each round')
+            plt.title('MNO VM resource - cr in each round')
             plt.xlabel('round')
-            plt.ylabel('VM resource')
-            
-            cls.plot_3dim_bar(cls.mno_vm_resource)
+            plt.ylabel('cr (GCUs/s)')
+            cls.plot_2dim_bar(cls.mno_vm_resource[:, :, 0])
+            # T up
+            plt.subplot(312)
+            plt.title('MNO VM resource - uplink throughput in each round')
+            plt.xlabel('round')
+            plt.ylabel('average throughput (Kbps)')
+            cls.plot_2dim_bar(cls.mno_vm_resource[:, :, 1])
+            # T down
+            plt.subplot(313)
+            plt.title('MNO VM resource - downlink throughput in each round')
+            plt.xlabel('round')
+            plt.ylabel('average throughput (Kbps)')
+            cls.plot_2dim_bar(cls.mno_vm_resource[:, :, 2])
+
+            plt.savefig(f'figs/{case_num}mno_vm_resource')
 
         def plot_task_fitness():
-            plt.subplot(312)
-            plt.title('Task fitness in hour')
+            plt.figure(figsize=cls.figsize)
+            plt.title('MNO Task fitness in hour')
             plt.xlabel('hour')
             plt.ylabel('total fitness in an hour')
-
-            cls.plot_2dim_bar(cls.mno_task_fitness)
+            cls.plot_2dim_line(cls.mno_task_fitness)
+            plt.savefig(f'figs/{case_num}mno_task_fitness')
 
         def plot_task_resource():
-            plt.subplot(313)
-            plt.title('Task consuming resource in hour')
+            plt.figure(figsize=cls.figsize)
+            # cr
+            plt.subplot(311)
+            plt.title('MNO Task consuming resource - cr in hour')
             plt.xlabel('hour')
-            plt.ylabel('total task consuming resource in an hour')
+            plt.ylabel('cr (GCUs/s)')
+            cls.plot_2dim_line(cls.mno_task_resource[:, :, 0])
+            # T up
+            plt.subplot(312)
+            plt.title('MNO Task consuming resource - uplink throughput in hour')
+            plt.xlabel('hour')
+            plt.ylabel('average throughput (Kbps)')
+            cls.plot_2dim_line(cls.mno_task_resource[:, :, 1])
+            # T up
+            plt.subplot(313)
+            plt.title('MNO Task consuming resource - downlink throughput in hour')
+            plt.xlabel('hour')
+            plt.ylabel('average throughput (Kbps)')
+            cls.plot_2dim_line(cls.mno_task_resource[:, :, 2])
 
-            cls.plot_3dim_bar(cls.mno_task_resource)
+            plt.savefig(f'figs/{case_num}mno_task_resource')
 
-        plt.figure(figsize=cls.figsize)
-        plt.title('MNO')
         plot_vm_resource()
         plot_task_fitness()
         plot_task_resource()
-        plt.savefig(f'figs/{case_num}mno')
 
     @classmethod
     def plot_mvno(cls):
         def plot_vm_resource():
+            plt.figure(figsize=cls.figsize)
+            # cr
             plt.subplot(311)
-            plt.title('VM resource in each round')
+            plt.title('MVNO VM resource - cr in each round')
             plt.xlabel('round')
-            plt.ylabel('VM resource')
-            
-            cls.plot_3dim_bar(cls.mvno_vm_resource)
+            plt.ylabel('cr (GCUs/s)')
+            cls.plot_2dim_bar(cls.mvno_vm_resource[:, :, 0])
+            # T up
+            plt.subplot(312)
+            plt.title('MVNO VM resource - uplink throughput in each round')
+            plt.xlabel('round')
+            plt.ylabel('average throughput (Kbps)')
+            cls.plot_2dim_bar(cls.mvno_vm_resource[:, :, 1])
+            # T down
+            plt.subplot(313)
+            plt.title('MVNO VM resource - downlink throughput in each round')
+            plt.xlabel('round')
+            plt.ylabel('average throughput (Kbps)')
+            cls.plot_2dim_bar(cls.mvno_vm_resource[:, :, 2])
+
+            plt.savefig(f'figs/{case_num}mvno_vm_resource')
 
         def plot_task_fitness():
-            plt.subplot(312)
-            plt.title('Task fitness in hour')
+            plt.figure(figsize=cls.figsize)
+            plt.title('MVNO Task fitness in hour')
             plt.xlabel('hour')
             plt.ylabel('total fitness in an hour')
-
-            cls.plot_2dim_bar(cls.mvno_task_fitness)
+            cls.plot_2dim_line(cls.mvno_task_fitness)
+            plt.savefig(f'figs/{case_num}mvno_task_fitness')
 
         def plot_task_resource():
-            plt.subplot(313)
-            plt.title('Task consuming resource in hour')
+            plt.figure(figsize=cls.figsize)
+            # cr
+            plt.subplot(311)
+            plt.title('MVNO Task consuming resource - cr in hour')
             plt.xlabel('hour')
-            plt.ylabel('total task consuming resource in an hour')
+            plt.ylabel('cr (GCUs/s)')
+            cls.plot_2dim_line(cls.mvno_task_resource[:, :, 0])
+            # T up
+            plt.subplot(312)
+            plt.title('MVNO Task consuming resource - uplink throughput in hour')
+            plt.xlabel('hour')
+            plt.ylabel('average throughput (Kbps)')
+            cls.plot_2dim_line(cls.mvno_task_resource[:, :, 1])
+            # T up
+            plt.subplot(313)
+            plt.title('MVNO Task consuming resource - downlink throughput in hour')
+            plt.xlabel('hour')
+            plt.ylabel('average throughput (Kbps)')
+            cls.plot_2dim_line(cls.mvno_task_resource[:, :, 2])
 
-            cls.plot_3dim_bar(cls.mvno_task_resource)
+            plt.savefig(f'figs/{case_num}mvno_task_resource')
 
-        plt.figure(figsize=cls.figsize)
-        plt.title('MVNO')
         plot_vm_resource()
         plot_task_fitness()
         plot_task_resource()
-        plt.savefig(f'figs/{case_num}mvno')
 
     @classmethod
     def plot_mvno_vm_cost(cls):
@@ -268,7 +351,7 @@ class Metrics:
     
     @classmethod
     def plot(cls):
-        cls.statistic_data = np.array(cls.statistic_data)
+        cls.hour_data = np.array(cls.hour_data)
         cls.mno_vm_resource = np.array(cls.mno_vm_resource)
         cls.mvno_vm_resource = np.array(cls.mvno_vm_resource)
         cls.mvno_vm_cost = np.array(cls.mvno_vm_cost)
@@ -279,8 +362,10 @@ class Metrics:
 
         if not os.path.exists(f'figs/{case_num}'):
             os.makedirs(f'figs/{case_num}')
-        cls.plot_statistic_data()
+        cls.plot_hour_data()
         cls.plot_mno()
         cls.plot_mvno()
         cls.plot_mvno_vm_cost()
         # plt.show()
+        logging.info(f'Save figs to ./figs/{case_num}!')
+        print(f'Save figs to ./figs/{case_num}!')

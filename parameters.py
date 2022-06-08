@@ -13,8 +13,8 @@ title1, title2, title3, title4, title5 = 130, 115, 100, 85, 70
 # round time
 small_round_minutes = 60 * 60 # s
 # 60 * 24 * 7
-big_round_minutes = small_round_minutes * 6
-big_round_times = 4
+big_round_minutes = small_round_minutes * 4
+big_round_times = 6
 
 # user to vm generating data
 beta_a = 2
@@ -29,7 +29,7 @@ PT5_edge_b = 0.557
 PT5_edge_d = 1.443
 
 # contract
-expected_max_vm_num = 120
+expected_max_vm_num = 100
 expected_min_vm_num = 5
 bw_low = 100000 * expected_min_vm_num
 bw_high = 100000 * expected_max_vm_num # Kbps
@@ -60,15 +60,15 @@ ipVideo_bw_down_bmax = 950
 ftp_bw_up_bmin = 5
 ftp_bw_up_bmax = 35
 ftp_bw_down_bmin = 100
-ftp_bw_down_bmax = 1100
+ftp_bw_down_bmax = 1200
 
 # update history data
-phi = 0.7
+phi = 0.9
 
 # optimizing
 ## the max time of searching the valid offsprings in vm assignment
-max_searching_times = 50
-optimizing_times = 10
+max_searching_times = 1000
+optimizing_times = 100
 offspring_number = 10
 mutate_rate = 0.05
 

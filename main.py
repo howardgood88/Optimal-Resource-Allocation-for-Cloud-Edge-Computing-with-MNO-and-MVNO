@@ -255,9 +255,10 @@ while Global.system_time // big_round_minutes < big_round_times:
 
                 hourly_statistic_data = get_hourly_statistic_data(hour_events)
                 hour_task_record.append(hourly_statistic_data)
-                Metrics.statistic_data.append(hourly_statistic_data)
+                Metrics.hour_data.append(hourly_statistic_data)
         hour_task_record = np.array(hour_task_record, dtype=list)
         start_time = Global.system_time
         assert(Global.system_time % big_round_minutes == 0)
-logging.info('Finish simulating, showing result...')
+logging.info(f'Finished simulating, save log to {test_data_dir}log_{lev}.txt')
+print(f'Finished simulating, save log to {test_data_dir}log_{lev}.txt!')
 Metrics.plot()

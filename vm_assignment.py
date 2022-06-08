@@ -5,8 +5,6 @@ from utils import (step_logger)
 from parameters import (rnd_seed, _lambda, optimizing_times, _lambda, title4)
 import logging
 
-np.random.seed(rnd_seed)
-
 class VMAssignment:
     '''VM Assignment!!!'''
     def __init__(self, contract: Contract, candidate_vm_id: np.array, vm_list: dict):

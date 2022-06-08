@@ -4,13 +4,18 @@ import json
 from parameters import *
 import numpy as np
 
+np.random.seed(rnd_seed)
+
 # the traffic ratio over peek traffic of 24 hours in a day
-hour_traffic_ratio = [0.51, 0.42, 0.33, 0.31, 0.23, 0.23, 0.24, 0.22, 0.24, 0.33, 0.35, 0.52, 0.56, 0.56, 0.64, 0.8, 0.91, 0.97, 0.98, 0.95, 0.92, 0.965, 0.87, 0.8]
+# hour_traffic_ratio = [0.51, 0.42, 0.33, 0.31, 0.23, 0.23, 0.24, 0.22, 0.24, 0.33, 0.35, 0.52, 0.56, 0.56, 0.64, 0.8, 0.91, 0.97, 0.98, 0.95, 0.92, 0.965, 0.87, 0.8]
+day_hour_traffic_ratio = [0.09, 0.09, 0.07, 0.06, 0.05, 0.09, 0.2, 0.6, 0.69, 0.67, 0.66, 0.5, 0.53, 0.6, 0.57, 0.41, 0.21, 0.19, 0.17, 0.18, 0.11, 0.09, 0.07, 0.08]
+history_hour_traffic_ratio = [sum(day_hour_traffic_ratio) / len(day_hour_traffic_ratio) for _ in range(6)]
+print(f'history ratio: {history_hour_traffic_ratio[0]}')
 
 user_num = 100
-dir = 'data/case2/'
+dir = './data/case2/'
 
-def task_events_generator(filename):
+def task_events_generator(filename, hour_traffic_ratio):
     def event_gen(_type, max_cpu, bw_up_attr, bw_down_attr):
         cpu_req = np.random.random() * max_cpu
         return [event_id, 0, t, _type, str(np.random.randint(0, user_num)), cpu_req, cpu_req * np.random.random(),
@@ -60,6 +65,8 @@ def task_events_generator(filename):
         f.truncate()
         f.write('\n]')
 
-poisson_arrival.machine_generator(dir + 'machine_attributes.json')
-task_events_generator(dir + 'task_events.json')
-poisson_arrival.task_events_generator(dir + 'history_data.json', 10000)
+if __name__ == '__main__':
+    poisson_arrival.machine_generator(dir + 'machine_attributes.json')
+    task_events_generator(dir + 'task_events.json', day_hour_traffic_ratio)
+    task_events_generator(dir + 'history_data.json', history_hour_traffic_ratio)
+    print(f'Finished generating, save result to {dir}')

@@ -43,6 +43,7 @@ class VMAssignmentOptimizing(GeneticOptimizing):
 
     def step(self, statistic_data: np.array) -> np.array:
         '''Get the next valid offsprings.'''
+        self.statistic_data = statistic_data
         if self.new_populations is None:
             self.new_populations = np.array([self.choose_vm(self.candidate_vm_id, statistic_data) for _ in range(offspring_number)], dtype=bool)
             self.min_population_len = min(len(population) for population in self.new_populations)
@@ -74,7 +75,8 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         try_count = 0
         selected_vm = np.zeros(candidate_vm_id.shape, dtype=bool)
         while not self.check_condition(selected_vm, statistic_data):
-            selected_vm = np.random.choice([True, False], candidate_vm_id.shape, p=[1 - mno_rate, mno_rate])
+            ratio = np.random.random()
+            selected_vm = np.random.choice([True, False], candidate_vm_id.shape, p=[(1 - mno_rate) * ratio, 1 - (1 - mno_rate) * ratio])
             try_count += 1
             if try_count == 1000:
                 raise ValueError('vm assignment can\'t find solution.')
@@ -116,11 +118,14 @@ class VMAssignmentOptimizing(GeneticOptimizing):
 
     def mutation(self, offsprings: np.array) -> np.array:
         for i in range(len(offsprings)):
-            mutate = np.random.choice([True, False], offsprings[i].shape, p=[mutate_rate, 1 - mutate_rate])
-            self.valid_evolution_message += f'offspring {i + 1} mutate at {np.arange(*offsprings[i].shape)[mutate]} bit\n'
-            for j in range(len(offsprings[i])):
-                if mutate[j]:
-                    offsprings[i, j] = np.logical_not(offsprings[i, j])
+            if np.random.random() < mutate_rate:
+                offsprings[i] = self.choose_vm(self.candidate_vm_id, self.statistic_data)
+            else:
+                mutate = np.random.choice([True, False], offsprings[i].shape, p=[mutate_rate, 1 - mutate_rate])
+                self.valid_evolution_message += f'offspring {i + 1} mutate at {np.arange(*offsprings[i].shape)[mutate]} bit\n'
+                for j in range(len(offsprings[i])):
+                    if mutate[j]:
+                        offsprings[i, j] = np.logical_not(offsprings[i, j])
         self.valid_evolution_message += f'new offsprings:\n{offsprings}\n'
         return offsprings
 
