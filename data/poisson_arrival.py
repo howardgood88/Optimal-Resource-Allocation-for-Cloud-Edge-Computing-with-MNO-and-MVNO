@@ -21,8 +21,8 @@ def beta(a, b, t, d):
 
 machine_num = 300
 user_num = 100
-total_time = 3600 * 12
-history_time = 3600 * 3
+total_time = 3600 * 6
+history_time = 3600 * 1
 dir = './data/case1/'
 
 def machine_generator(filename):
