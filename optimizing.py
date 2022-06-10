@@ -215,7 +215,7 @@ class TaskDeploymentParametersOptimizing(GeneticOptimizing):
         # update best population
         flag = True
         for idx, (fitness, population) in enumerate(zip(self.fitness, self.new_populations)):
-            logging.debug(f'population {idx + 1} {toSoftmax(population)} with fitness: {fitness}')
+            logging.debug(f'population {idx + 1} {toSoftmax(population)[:-2]} with fitness: {fitness}')
             if fitness > self.best_fitness:
                 flag = False
                 logging.info(f'better population {idx + 1} found, update best population!')

@@ -156,9 +156,9 @@ def update_history_data(hourly_history_data: np.array, hour_task_record: np.arra
 def task_deployment(hour_events: np.array, minutes_range: tuple) -> None:
     '''Random assign task to operator and deploy the task.'''
     # start hourly task deployment
-    logging.info(f'mno deploy with best population {toSoftmax(mno._task_deployment.optimizing.best_population)} '
+    logging.info(f'mno deploy with best population {toSoftmax(mno._task_deployment.optimizing.best_population[:-2])} '
                     f'with fitness: {mno._task_deployment.optimizing.best_fitness}')
-    logging.info(f'mvno deploy with best population {toSoftmax(mvno._task_deployment.optimizing.best_population)} '
+    logging.info(f'mvno deploy with best population {toSoftmax(mvno._task_deployment.optimizing.best_population[:-2])} '
                     f'with fitness: {mvno._task_deployment.optimizing.best_fitness}')
     global task_events
     idx = 0
@@ -222,6 +222,7 @@ while Global.system_time // big_round_minutes < big_round_times:
     with step_logger(f'Start of Round {round}', title1, f'Finished Round {round}.'):
         with step_logger('Start of updating history data', title2, 'Finished update history data.'):
             hourly_history_data, statistic_data = update_history_data(hourly_history_data, hour_task_record, statistic_data)
+            Metrics.statistic_data.append(statistic_data)
 
         with step_logger('Start of VM Assignment', title2, 'Finished vm assignment.'):
             mno.vm_assignment(statistic_data, vm_list)

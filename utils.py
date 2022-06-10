@@ -35,7 +35,7 @@ def get_TD_populations_log_msg(msg: str, populations: np.array) -> None:
     ''''Log the Task Deployment populations by toSoftmax.'''
     msg += ':\n'
     for idx, population in enumerate(populations):
-        msg += f'{idx + 1}: {toSoftmax(population)}\n'
+        msg += f'{idx + 1}: {toSoftmax(population)[:-2]}\n'
     return msg
 
 class step_logger:
@@ -111,6 +111,7 @@ def sgn(x):
 class Metrics:
     '''For plotting the result.'''
     # roundly
+    statistic_data = [] # 3x3
     mno_vm_resource = [] # 3x3
     mvno_vm_resource = [] # 3x3
     mvno_vm_cost = [] # float
@@ -120,6 +121,8 @@ class Metrics:
     mno_task_resource = [] # 3x3
     mvno_task_fitness = [] # (VoIP, IP Video, FTP)
     mvno_task_resource = [] # 3x3
+    mno_block_rate = [] # (VoIP, IP Video, FTP)
+    mvno_block_rate = [] # (VoIP, IP Video, FTP)
     # parameters
     offset = 0.3
     gap = 0.05
@@ -196,23 +199,47 @@ class Metrics:
     ################# Plotting each type of data #################
 
     @classmethod
+    def plot_statistic_data(cls):
+        plt.figure(figsize=cls.figsize)
+        # cr
+        plt.subplot(311)
+        plt.title('Statistic data - cr in each round')
+        plt.xlabel('round')
+        plt.ylabel('cr (GCUs/s)')
+        cls.plot_2dim_line(cls.statistic_data[:, :, 0])
+        # T up
+        plt.subplot(312)
+        plt.title('Statistic data - uplink throughput in each round')
+        plt.xlabel('round')
+        plt.ylabel('throughput (Kbps)')
+        cls.plot_2dim_line(cls.statistic_data[:, :, 1])
+        # T down
+        plt.subplot(313)
+        plt.title('Statistic data - downlink throughput in each round')
+        plt.xlabel('round')
+        plt.ylabel('throughput (Kbps)')
+        cls.plot_2dim_line(cls.statistic_data[:, :, 2])
+
+        plt.savefig(f'figs/{case_num}statistic_data')
+
+    @classmethod
     def plot_hour_data(cls):
         plt.figure(figsize=cls.figsize)
         # cr
         plt.subplot(311)
-        plt.title('Hour data - cr in each round')
+        plt.title('Hour data - cr in each hour')
         plt.xlabel('hour')
         plt.ylabel('cr (GCUs/s)')
         cls.plot_2dim_line(cls.hour_data[:, :, 0])
         # T up
         plt.subplot(312)
-        plt.title('Hour data - uplink throughput in each round')
+        plt.title('Hour data - uplink throughput in each hour')
         plt.xlabel('hour')
         plt.ylabel('throughput (Kbps)')
         cls.plot_2dim_line(cls.hour_data[:, :, 1])
         # T down
         plt.subplot(313)
-        plt.title('Hour data - downlink throughput in each round')
+        plt.title('Hour data - downlink throughput in each hour')
         plt.xlabel('hour')
         plt.ylabel('throughput (Kbps)')
         cls.plot_2dim_line(cls.hour_data[:, :, 2])
@@ -246,7 +273,7 @@ class Metrics:
 
         def plot_task_fitness():
             plt.figure(figsize=cls.figsize)
-            plt.title('MNO Task fitness in hour')
+            plt.title('MNO Task fitness in each hour')
             plt.xlabel('hour')
             plt.ylabel('total fitness in an hour')
             cls.plot_2dim_line(cls.mno_task_fitness)
@@ -256,19 +283,19 @@ class Metrics:
             plt.figure(figsize=cls.figsize)
             # cr
             plt.subplot(311)
-            plt.title('MNO Task consuming resource - cr in hour')
+            plt.title('MNO Task consuming resource - cr in each hour')
             plt.xlabel('hour')
             plt.ylabel('cr (GCUs/s)')
             cls.plot_2dim_line(cls.mno_task_resource[:, :, 0])
             # T up
             plt.subplot(312)
-            plt.title('MNO Task consuming resource - uplink throughput in hour')
+            plt.title('MNO Task consuming resource - uplink throughput in each hour')
             plt.xlabel('hour')
             plt.ylabel('average throughput (Kbps)')
             cls.plot_2dim_line(cls.mno_task_resource[:, :, 1])
             # T up
             plt.subplot(313)
-            plt.title('MNO Task consuming resource - downlink throughput in hour')
+            plt.title('MNO Task consuming resource - downlink throughput in each hour')
             plt.xlabel('hour')
             plt.ylabel('average throughput (Kbps)')
             cls.plot_2dim_line(cls.mno_task_resource[:, :, 2])
@@ -278,6 +305,15 @@ class Metrics:
         plot_vm_resource()
         plot_task_fitness()
         plot_task_resource()
+
+    @classmethod
+    def plot_mno_block_rate(cls):
+        plt.figure(figsize=cls.figsize)
+        plt.title('MNO block rate in each hour')
+        plt.xlabel('hour')
+        plt.ylabel('percentage (%)')
+        cls.plot_2dim_line(cls.mno_block_rate)
+        plt.savefig(f'figs/{case_num}mno_task_block_rate')
 
     @classmethod
     def plot_mvno(cls):
@@ -306,7 +342,7 @@ class Metrics:
 
         def plot_task_fitness():
             plt.figure(figsize=cls.figsize)
-            plt.title('MVNO Task fitness in hour')
+            plt.title('MVNO Task fitness in each hour')
             plt.xlabel('hour')
             plt.ylabel('total fitness in an hour')
             cls.plot_2dim_line(cls.mvno_task_fitness)
@@ -316,19 +352,19 @@ class Metrics:
             plt.figure(figsize=cls.figsize)
             # cr
             plt.subplot(311)
-            plt.title('MVNO Task consuming resource - cr in hour')
+            plt.title('MVNO Task consuming resource - cr in each hour')
             plt.xlabel('hour')
             plt.ylabel('cr (GCUs/s)')
             cls.plot_2dim_line(cls.mvno_task_resource[:, :, 0])
             # T up
             plt.subplot(312)
-            plt.title('MVNO Task consuming resource - uplink throughput in hour')
+            plt.title('MVNO Task consuming resource - uplink throughput in each hour')
             plt.xlabel('hour')
             plt.ylabel('average throughput (Kbps)')
             cls.plot_2dim_line(cls.mvno_task_resource[:, :, 1])
             # T up
             plt.subplot(313)
-            plt.title('MVNO Task consuming resource - downlink throughput in hour')
+            plt.title('MVNO Task consuming resource - downlink throughput in each hour')
             plt.xlabel('hour')
             plt.ylabel('average throughput (Kbps)')
             cls.plot_2dim_line(cls.mvno_task_resource[:, :, 2])
@@ -348,9 +384,19 @@ class Metrics:
 
         cls.plot_1dim_bar(cls.mvno_vm_cost)
         plt.savefig(f'figs/{case_num}mvno_vm_cost')
+
+    @classmethod
+    def plot_mvno_block_rate(cls):
+        plt.figure(figsize=cls.figsize)
+        plt.title('MVNO block rate in each hour')
+        plt.xlabel('hour')
+        plt.ylabel('percentage (%)')
+        cls.plot_2dim_line(cls.mvno_block_rate)
+        plt.savefig(f'figs/{case_num}mvno_task_block_rate')
     
     @classmethod
     def plot(cls):
+        cls.statistic_data = np.array(cls.statistic_data)
         cls.hour_data = np.array(cls.hour_data)
         cls.mno_vm_resource = np.array(cls.mno_vm_resource)
         cls.mvno_vm_resource = np.array(cls.mvno_vm_resource)
@@ -359,13 +405,18 @@ class Metrics:
         cls.mno_task_resource = np.array(cls.mno_task_resource)
         cls.mvno_task_fitness = np.array(cls.mvno_task_fitness)
         cls.mvno_task_resource = np.array(cls.mvno_task_resource)
+        cls.mno_block_rate = np.array(cls.mno_block_rate)
+        cls.mvno_block_rate = np.array(cls.mvno_block_rate)
 
         if not os.path.exists(f'figs/{case_num}'):
             os.makedirs(f'figs/{case_num}')
+        cls.plot_statistic_data()
         cls.plot_hour_data()
         cls.plot_mno()
+        cls.plot_mno_block_rate()
         cls.plot_mvno()
         cls.plot_mvno_vm_cost()
+        cls.plot_mvno_block_rate()
         # plt.show()
         logging.info(f'Save figs to ./figs/{case_num}!')
         print(f'Save figs to ./figs/{case_num}!')

@@ -127,6 +127,8 @@ class TaskDeployment:
         self.hour_utility = [0, 0, 0] # VoIP, IP Video, FTP
         # the number of valid task in an hour
         self.hour_task_num = [0, 0, 0] # VoIP, IP Video, FTP
+        # block rate of tasks in an hour (exclude the tasks drop cause by the transformation of hour.)
+        self.block_num = [0, 0, 0] # VoIP, IP Video, FTP
         # the sum of task resource
         self.hour_task_resource = [[0, 0, 0] for _ in range(3)] # 3x3
         # the average of hour_utility
@@ -143,6 +145,7 @@ class TaskDeployment:
         self.hour_utility = [0, 0, 0]
         self.population_hour_utility = [[0, 0, 0] for _ in range(offspring_number)]
         self.hour_task_num = [0, 0, 0]
+        self.block_num = [0, 0, 0]
         self.hour_task_resource = [[0, 0, 0] for _ in range(3)]
         self.hour_fitness = [0, 0, 0]
         self.population_hour_fitness = [[0, 0, 0] for _ in range(offspring_number)]
@@ -162,9 +165,11 @@ class TaskDeployment:
         if self.operator == 'MNO':
             Metrics.mno_task_fitness.append(self.hour_fitness)
             Metrics.mno_task_resource.append(self.hour_task_resource)
+            Metrics.mno_block_rate.append([block_num / (block_num + pass_num) for block_num, pass_num in zip(self.block_num, self.hour_task_num)])
         else:
             Metrics.mvno_task_fitness.append(self.hour_fitness)
             Metrics.mvno_task_resource.append(self.hour_task_resource)
+            Metrics.mvno_block_rate.append([block_num / (block_num + pass_num) for block_num, pass_num in zip(self.block_num, self.hour_task_num)])
 
         for idx in range(len(self.optimizing.fitness)):
             self.optimizing.fitness[idx] = max(self.optimizing.fitness[idx], 0)
@@ -181,6 +186,7 @@ class TaskDeployment:
         
         self.hour_task_num[task_type_idx] += 1
         max_utility = float('-inf')
+        max_utilities = []
         offsprings_max_utility = [float('-inf') for _ in range(len(self.optimizing.new_populations))]
         selected_vm_id = None
         for vm_id in candidate_vm_id:
@@ -197,16 +203,16 @@ class TaskDeployment:
             cr_diff = abs(cpu_request - vm.cr)
             # checking the operating value and vm remaining resource
             if min(bw_up, bw_down) < self.optimizing.best_op_bw or vm.cr < self.optimizing.best_op_cr or \
-                vm.cr < task[Task_event_index.average_cpu_usage] or vm.local_bw_up < task[Task_event_index.T_up] or \
-                vm.local_bw_down < task[Task_event_index.T_down]:
+                vm.cr < task[Task_event_index.average_cpu_usage] or vm.avg_bw_up < task[Task_event_index.T_up] or \
+                vm.avg_bw_down < task[Task_event_index.T_down]:
                 continue
             utilities = [
                 task_utility.bw_up(bw_up),
                 task_utility.bw_down(bw_down),
                 task_utility.cr(vm.cr),
                 task_utility.price(vm.price),
-                task_utility.delay(delay, vm.location),
-                task_utility.cr_diff(cr_diff)
+                task_utility.delay(delay, vm.location)
+                # task_utility.cr_diff(cr_diff)
             ]
             utility = sum([g * u for g, u in zip(softmax(self.optimizing.best_gamma[Task_type_index[task_type]]), utilities)])
             # virtual deployment by offsprings
@@ -223,14 +229,17 @@ class TaskDeployment:
             # keep the best vm
             if utility > max_utility:
                 max_utility = utility
+                max_utilities = utilities
                 selected_vm_id = vm_id
 
         if selected_vm_id == None:
             # if no feasible solution
             self.reschedule_task(task)
             self.hour_task_num[task_type_idx] -= 1
+            self.block_num[task_type_idx] += 1
         else:
             self.bind_task(task, vm_list[selected_vm_id])
+        logging.info(f'task utilities: {max_utilities}\n')
         logging.info(f'task utility: {max_utility}\n')
     
         self.hour_utility[task_type_idx] += max(max_utility, -100)
@@ -266,14 +275,14 @@ class TaskDeployment:
         _message += f'{selected_vm.cr}\n'
 
         task_T_up = task[Task_event_index.T_up.value]
-        _message += f'task bw_up: {task_T_up}, local_bw_up: {selected_vm.local_bw_up} -> '
-        selected_vm.local_bw_up -= task_T_up
-        _message += f'{selected_vm.local_bw_up}\n'
+        _message += f'task bw_up: {task_T_up}, avg_bw_up: {selected_vm.avg_bw_up} -> '
+        selected_vm.avg_bw_up -= task_T_up
+        _message += f'{selected_vm.avg_bw_up}\n'
 
         task_T_down = task[Task_event_index.T_down.value]
-        _message += f'task bw_down: {task_T_down}, local_bw_down: {selected_vm.local_bw_down} -> '
-        selected_vm.local_bw_down -= task_T_down
-        _message += f'{selected_vm.local_bw_down}'
+        _message += f'task bw_down: {task_T_down}, avg_bw_down: {selected_vm.avg_bw_down} -> '
+        selected_vm.avg_bw_down -= task_T_down
+        _message += f'{selected_vm.avg_bw_down}'
         logging.info(_message)
         task_type = task[Task_event_index.task_type.value]
         task_type_idx = Task_type_index[task_type].value
@@ -291,13 +300,13 @@ class TaskDeployment:
         vm.cr += task[Task_event_index.average_cpu_usage.value]
         _message += f'{vm.cr}\n'
 
-        _message += f'local_bw_up: {vm.local_bw_up} -> '
-        vm.local_bw_up += task[Task_event_index.T_up.value]
-        _message += f'{vm.local_bw_up}\n'
+        _message += f'avg_bw_up: {vm.avg_bw_up} -> '
+        vm.avg_bw_up += task[Task_event_index.T_up.value]
+        _message += f'{vm.avg_bw_up}\n'
 
-        _message += f'local_bw_down: {vm.local_bw_down} -> '
-        vm.local_bw_down += task[Task_event_index.T_down.value]
-        _message += f'{vm.local_bw_down}\n'
+        _message += f'avg_bw_down: {vm.avg_bw_down} -> '
+        vm.avg_bw_down += task[Task_event_index.T_down.value]
+        _message += f'{vm.avg_bw_down}\n'
         logging.info(_message)
 
         del self.running_task_id_to_vm[task_id]
@@ -308,7 +317,7 @@ class TaskDeployment:
             self.optimizing.best_fitness = sum(self.hour_fitness)
             self.optimizing.fitness = np.sum(self.population_hour_fitness, axis=1)
             self.optimizing.update_best_population()
-            logging.info(f'best population as {toSoftmax(self.optimizing.best_population)}, fitness: {self.optimizing.best_fitness}.')
+            logging.info(f'best population as {toSoftmax(self.optimizing.best_population)[:-2]}, fitness: {self.optimizing.best_fitness}.')
         with step_logger('Generate new offsprings', title5, 'Finished generating new offsprings.'):
             self.optimizing.step()
             logging.info(get_TD_populations_log_msg('final new offspring', self.optimizing.new_populations))
