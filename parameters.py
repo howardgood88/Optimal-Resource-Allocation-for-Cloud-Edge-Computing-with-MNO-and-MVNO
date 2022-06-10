@@ -13,8 +13,8 @@ title1, title2, title3, title4, title5 = 130, 115, 100, 85, 70
 # round time
 small_round_minutes = 60 * 60 # s
 # 60 * 24 * 7
-big_round_minutes = small_round_minutes * 4
-big_round_times = 6
+big_round_minutes = small_round_minutes * 24
+big_round_times = 3
 
 # user to vm generating data
 beta_a = 2
