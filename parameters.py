@@ -49,7 +49,7 @@ _gamma = [
     [3.0, 0.5, 1.0, 3.0, 1.0, 3.0] # FTP
 ]
 _op_bw = 300 # Kbps
-_op_cr = 0.2 # GCU-second/second
+_op_cr = 0.05 # GCU-second/second
 
 # utility function
 max_score = 100

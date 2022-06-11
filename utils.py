@@ -201,11 +201,11 @@ class Metrics:
     @classmethod
     def plot_statistic_data(cls):
         plt.figure(figsize=cls.figsize)
-        # cr
+        # computing resource
         plt.subplot(311)
-        plt.title('Statistic data - cr in each round')
+        plt.title('Statistic data - computing resource in each round')
         plt.xlabel('round')
-        plt.ylabel('cr (GCUs/s)')
+        plt.ylabel('computing resource (GCUs/s)')
         cls.plot_2dim_line(cls.statistic_data[:, :, 0])
         # T up
         plt.subplot(312)
@@ -225,11 +225,11 @@ class Metrics:
     @classmethod
     def plot_hour_data(cls):
         plt.figure(figsize=cls.figsize)
-        # cr
+        # computing resource
         plt.subplot(311)
-        plt.title('Hour data - cr in each hour')
+        plt.title('Hour data - computing resource in each hour')
         plt.xlabel('hour')
-        plt.ylabel('cr (GCUs/s)')
+        plt.ylabel('computing resource (GCUs/s)')
         cls.plot_2dim_line(cls.hour_data[:, :, 0])
         # T up
         plt.subplot(312)
@@ -250,11 +250,11 @@ class Metrics:
     def plot_mno(cls):
         def plot_vm_resource():
             plt.figure(figsize=cls.figsize)
-            # cr
+            # computing resource
             plt.subplot(311)
-            plt.title('MNO VM resource - cr in each round')
+            plt.title('MNO VM resource - computing resource in each round')
             plt.xlabel('round')
-            plt.ylabel('cr (GCUs/s)')
+            plt.ylabel('computing resource (GCUs/s)')
             cls.plot_2dim_bar(cls.mno_vm_resource[:, :, 0])
             # T up
             plt.subplot(312)
@@ -292,11 +292,11 @@ class Metrics:
 
         def plot_task_resource():
             plt.figure(figsize=cls.figsize)
-            # cr
+            # computing resource
             plt.subplot(311)
-            plt.title('MNO Task consuming resource - cr in each hour')
+            plt.title('MNO Task consuming resource - computing resource in each hour')
             plt.xlabel('hour')
-            plt.ylabel('cr (GCUs/s)')
+            plt.ylabel('computing resource (GCUs/s)')
             cls.plot_2dim_line(cls.mno_task_resource[:, :, 0])
             # T up
             plt.subplot(312)
@@ -330,11 +330,11 @@ class Metrics:
     def plot_mvno(cls):
         def plot_vm_resource():
             plt.figure(figsize=cls.figsize)
-            # cr
+            # computing resource
             plt.subplot(311)
-            plt.title('MVNO VM resource - cr in each round')
+            plt.title('MVNO VM resource - computing resource in each round')
             plt.xlabel('round')
-            plt.ylabel('cr (GCUs/s)')
+            plt.ylabel('computing resource (GCUs/s)')
             cls.plot_2dim_bar(cls.mvno_vm_resource[:, :, 0])
             # T up
             plt.subplot(312)
@@ -372,11 +372,11 @@ class Metrics:
 
         def plot_task_resource():
             plt.figure(figsize=cls.figsize)
-            # cr
+            # computing resource
             plt.subplot(311)
-            plt.title('MVNO Task consuming resource - cr in each hour')
+            plt.title('MVNO Task consuming resource - computing resource in each hour')
             plt.xlabel('hour')
-            plt.ylabel('cr (GCUs/s)')
+            plt.ylabel('computing resource (GCUs/s)')
             cls.plot_2dim_line(cls.mvno_task_resource[:, :, 0])
             # T up
             plt.subplot(312)
@@ -446,3 +446,18 @@ class Metrics:
         # plt.show()
         logging.info(f'Save figs to ./figs/{case_num}!')
         print(f'Save figs to ./figs/{case_num}!')
+        
+        # save metrics data
+        if not os.path.exists('Metrics'):
+            os.makedirs('Metrics')
+        np.save('Metrics/statistic_data', cls.statistic_data)
+        np.save('Metrics/hour_data', cls.hour_data)
+        np.save('Metrics/mno_vm_resource', cls.mno_vm_resource)
+        np.save('Metrics/mvno_vm_resource', cls.mvno_vm_resource)
+        np.save('Metrics/mvno_vm_cost', cls.mvno_vm_cost)
+        np.save('Metrics/mno_task_fitness', cls.mno_task_fitness)
+        np.save('Metrics/mno_task_resource', cls.mno_task_resource)
+        np.save('Metrics/mvno_task_fitness', cls.mvno_task_fitness)
+        np.save('Metrics/mvno_task_resource', cls.mvno_task_resource)
+        np.save('Metrics/mno_block_rate', cls.mno_block_rate)
+        np.save('Metrics/mvno_block_rate', cls.mvno_block_rate)
