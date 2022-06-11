@@ -272,9 +272,9 @@ class Metrics:
             plt.savefig(f'figs/{case_num}MNO/mno_vm_resource')
 
         def plot_task_fitness():
-            for day in range(big_round_times):
+            for day in range(big_round_times - 2):
                 plt.figure(figsize=cls.figsize)
-                plt.title(f'MNO Task fitness in busy hour - day {day}')
+                plt.title(f'MNO Task fitness in busy hour - day {day + 1}')
                 plt.xlabel('hour')
                 plt.ylabel('total fitness in an hour')
 
@@ -352,9 +352,9 @@ class Metrics:
             plt.savefig(f'figs/{case_num}MVNO/mvno_vm_resource')
 
         def plot_task_fitness():
-            for day in range(big_round_times):
+            for day in range(big_round_times - 2):
                 plt.figure(figsize=cls.figsize)
-                plt.title(f'MVNO Task fitness in busy hour - day {day}')
+                plt.title(f'MVNO Task fitness in busy hour - day {day + 1}')
                 plt.xlabel('hour')
                 plt.ylabel('total fitness in an hour')
 
