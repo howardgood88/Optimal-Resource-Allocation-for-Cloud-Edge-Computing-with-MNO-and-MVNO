@@ -6,7 +6,7 @@ class Global:
 
 rnd_seed = 1126
 logging_level = logging.INFO
-case_num = 'case2/'
+case_num = 'case4/'
 test_data_dir = './data/' + case_num
 # the length of log with filling "-"
 title1, title2, title3, title4, title5 = 130, 115, 100, 85, 70
@@ -14,7 +14,7 @@ title1, title2, title3, title4, title5 = 130, 115, 100, 85, 70
 small_round_minutes = 60 * 60 # s
 # 60 * 24 * 7
 big_round_minutes = small_round_minutes * 24
-big_round_times = 3
+big_round_times = 7
 
 # user to vm generating data
 beta_a = 2

@@ -30,9 +30,13 @@ def task_events_generator(filename, hour_traffic_ratio):
         os.remove(filename)
     with open(filename, 'a') as f:
         f.write('[\n')
-        for _ in range(number_of_days):
+        for i in range(number_of_days):
+            if i % 7 < 5:
+                r = 1
+            else:
+                r = 0.12
             for hour_ratio in hour_traffic_ratio:
-                freqs = (voip_spe * hour_ratio, ipVideo_spe * hour_ratio, ftp_spe * hour_ratio)
+                freqs = (voip_spe * hour_ratio * r, ipVideo_spe * hour_ratio * r, ftp_spe * hour_ratio * r)
                 attrs = (("VoIP", 0.3, voip_bw_up_attr, voip_bw_down_attr), ("IP_Video", 0.4, ipVideo_bw_up_attr, ipVideo_bw_down_attr),
                         ("FTP", 0.7, ftp_bw_up_attr, ftp_bw_down_attr))
                 while 1:

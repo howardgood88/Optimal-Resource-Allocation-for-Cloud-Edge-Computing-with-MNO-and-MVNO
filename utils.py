@@ -3,7 +3,7 @@ from time import time
 import scipy.integrate as integrate
 import math
 import logging
-from parameters import (rnd_seed, Task_type_index, case_num)
+from parameters import (rnd_seed, Task_type_index, case_num, big_round_times)
 import matplotlib.pyplot as plt
 import os
 
@@ -269,15 +269,26 @@ class Metrics:
             plt.ylabel('average throughput (Kbps)')
             cls.plot_2dim_bar(cls.mno_vm_resource[:, :, 2])
 
-            plt.savefig(f'figs/{case_num}mno_vm_resource')
+            plt.savefig(f'figs/{case_num}MNO/mno_vm_resource')
 
         def plot_task_fitness():
-            plt.figure(figsize=cls.figsize)
-            plt.title('MNO Task fitness in each hour')
-            plt.xlabel('hour')
-            plt.ylabel('total fitness in an hour')
-            cls.plot_2dim_line(cls.mno_task_fitness)
-            plt.savefig(f'figs/{case_num}mno_task_fitness')
+            for day in range(big_round_times):
+                plt.figure(figsize=cls.figsize)
+                plt.title(f'MNO Task fitness in busy hour - day {day}')
+                plt.xlabel('hour')
+                plt.ylabel('total fitness in an hour')
+
+                x = np.arange(1, 12) # 7 AM to 5 PM
+                labels = [str(i + 6) for i in x]
+                plt.plot(x, cls.mno_task_fitness[24 * day + 6:24 * day + 17, 0], 'o-', label='VoIP')
+                plt.plot(x, cls.mno_task_fitness[24 * day + 6:24 * day + 17, 1], 'o-', label='IP Video')
+                plt.plot(x, cls.mno_task_fitness[24 * day + 6:24 * day + 17, 2], 'o-', label='FTP')
+
+                ax = plt.gca()
+                ax.set_xticks(x)
+                ax.set_xticklabels(labels)
+                ax.legend()
+                plt.savefig(f'figs/{case_num}MNO/mno_task_fitness_day_{day + 1}')
 
         def plot_task_resource():
             plt.figure(figsize=cls.figsize)
@@ -300,7 +311,7 @@ class Metrics:
             plt.ylabel('average throughput (Kbps)')
             cls.plot_2dim_line(cls.mno_task_resource[:, :, 2])
 
-            plt.savefig(f'figs/{case_num}mno_task_resource')
+            plt.savefig(f'figs/{case_num}MNO/mno_task_resource')
 
         plot_vm_resource()
         plot_task_fitness()
@@ -313,7 +324,7 @@ class Metrics:
         plt.xlabel('hour')
         plt.ylabel('percentage (%)')
         cls.plot_2dim_line(cls.mno_block_rate)
-        plt.savefig(f'figs/{case_num}mno_task_block_rate')
+        plt.savefig(f'figs/{case_num}MNO/mno_task_block_rate')
 
     @classmethod
     def plot_mvno(cls):
@@ -338,15 +349,26 @@ class Metrics:
             plt.ylabel('average throughput (Kbps)')
             cls.plot_2dim_bar(cls.mvno_vm_resource[:, :, 2])
 
-            plt.savefig(f'figs/{case_num}mvno_vm_resource')
+            plt.savefig(f'figs/{case_num}MVNO/mvno_vm_resource')
 
         def plot_task_fitness():
-            plt.figure(figsize=cls.figsize)
-            plt.title('MVNO Task fitness in each hour')
-            plt.xlabel('hour')
-            plt.ylabel('total fitness in an hour')
-            cls.plot_2dim_line(cls.mvno_task_fitness)
-            plt.savefig(f'figs/{case_num}mvno_task_fitness')
+            for day in range(big_round_times):
+                plt.figure(figsize=cls.figsize)
+                plt.title(f'MVNO Task fitness in busy hour - day {day}')
+                plt.xlabel('hour')
+                plt.ylabel('total fitness in an hour')
+
+                x = np.arange(1, 12) # 7 AM to 5 PM
+                labels = [str(i + 6) for i in x]
+                plt.plot(x, cls.mvno_task_fitness[24 * day + 6:24 * day + 17, 0], 'o-', label='VoIP')
+                plt.plot(x, cls.mvno_task_fitness[24 * day + 6:24 * day + 17, 1], 'o-', label='IP Video')
+                plt.plot(x, cls.mvno_task_fitness[24 * day + 6:24 * day + 17, 2], 'o-', label='FTP')
+
+                ax = plt.gca()
+                ax.set_xticks(x)
+                ax.set_xticklabels(labels)
+                ax.legend()
+                plt.savefig(f'figs/{case_num}MVNO/mvno_task_fitness_day_{day + 1}')
 
         def plot_task_resource():
             plt.figure(figsize=cls.figsize)
@@ -369,7 +391,7 @@ class Metrics:
             plt.ylabel('average throughput (Kbps)')
             cls.plot_2dim_line(cls.mvno_task_resource[:, :, 2])
 
-            plt.savefig(f'figs/{case_num}mvno_task_resource')
+            plt.savefig(f'figs/{case_num}MVNO/mvno_task_resource')
 
         plot_vm_resource()
         plot_task_fitness()
@@ -383,7 +405,7 @@ class Metrics:
         plt.ylabel('VM total cost(dollar)')
 
         cls.plot_1dim_bar(cls.mvno_vm_cost)
-        plt.savefig(f'figs/{case_num}mvno_vm_cost')
+        plt.savefig(f'figs/{case_num}MVNO/mvno_vm_cost')
 
     @classmethod
     def plot_mvno_block_rate(cls):
@@ -392,7 +414,7 @@ class Metrics:
         plt.xlabel('hour')
         plt.ylabel('percentage (%)')
         cls.plot_2dim_line(cls.mvno_block_rate)
-        plt.savefig(f'figs/{case_num}mvno_task_block_rate')
+        plt.savefig(f'figs/{case_num}MVNO/mvno_task_block_rate')
     
     @classmethod
     def plot(cls):
@@ -412,8 +434,12 @@ class Metrics:
             os.makedirs(f'figs/{case_num}')
         cls.plot_statistic_data()
         cls.plot_hour_data()
+        if not os.path.exists(f'figs/{case_num}MNO/'):
+            os.makedirs(f'figs/{case_num}MNO/')
         cls.plot_mno()
         cls.plot_mno_block_rate()
+        if not os.path.exists(f'figs/{case_num}MVNO/'):
+            os.makedirs(f'figs/{case_num}MVNO/')
         cls.plot_mvno()
         cls.plot_mvno_vm_cost()
         cls.plot_mvno_block_rate()
