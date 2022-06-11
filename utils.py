@@ -278,11 +278,11 @@ class Metrics:
                 plt.xlabel('hour')
                 plt.ylabel('total fitness in an hour')
 
-                x = np.arange(1, 12) # 7 AM to 5 PM
-                labels = [str(i + 6) for i in x]
-                plt.plot(x, cls.mno_task_fitness[24 * day + 6:24 * day + 17, 0], 'o-', label='VoIP')
-                plt.plot(x, cls.mno_task_fitness[24 * day + 6:24 * day + 17, 1], 'o-', label='IP Video')
-                plt.plot(x, cls.mno_task_fitness[24 * day + 6:24 * day + 17, 2], 'o-', label='FTP')
+                x = np.arange(1, 11) # 8 AM to 5 PM
+                labels = [str(i + 7) for i in x]
+                plt.plot(x, cls.mno_task_fitness[24 * day + 7:24 * day + 17, 0], 'o-', label='VoIP')
+                plt.plot(x, cls.mno_task_fitness[24 * day + 7:24 * day + 17, 1], 'o-', label='IP Video')
+                plt.plot(x, cls.mno_task_fitness[24 * day + 7:24 * day + 17, 2], 'o-', label='FTP')
 
                 ax = plt.gca()
                 ax.set_xticks(x)
@@ -358,11 +358,11 @@ class Metrics:
                 plt.xlabel('hour')
                 plt.ylabel('total fitness in an hour')
 
-                x = np.arange(1, 12) # 7 AM to 5 PM
-                labels = [str(i + 6) for i in x]
-                plt.plot(x, cls.mvno_task_fitness[24 * day + 6:24 * day + 17, 0], 'o-', label='VoIP')
-                plt.plot(x, cls.mvno_task_fitness[24 * day + 6:24 * day + 17, 1], 'o-', label='IP Video')
-                plt.plot(x, cls.mvno_task_fitness[24 * day + 6:24 * day + 17, 2], 'o-', label='FTP')
+                x = np.arange(1, 11) # 7 AM to 5 PM
+                labels = [str(i + 7) for i in x]
+                plt.plot(x, cls.mvno_task_fitness[24 * day + 7:24 * day + 17, 0], 'o-', label='VoIP')
+                plt.plot(x, cls.mvno_task_fitness[24 * day + 7:24 * day + 17, 1], 'o-', label='IP Video')
+                plt.plot(x, cls.mvno_task_fitness[24 * day + 7:24 * day + 17, 2], 'o-', label='FTP')
 
                 ax = plt.gca()
                 ax.set_xticks(x)
