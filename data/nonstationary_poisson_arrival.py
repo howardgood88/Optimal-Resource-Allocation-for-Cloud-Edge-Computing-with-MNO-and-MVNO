@@ -11,8 +11,7 @@ np.random.seed(rnd_seed)
 # hour_traffic_ratio = [0.51, 0.42, 0.33, 0.31, 0.23, 0.23, 0.24, 0.22, 0.24, 0.33, 0.35, 0.52, 0.56, 0.56, 0.64, 0.8, 0.91, 0.97, 0.98, 0.95, 0.92, 0.965, 0.87, 0.8]
 day_hour_traffic_ratio = [0.09, 0.09, 0.07, 0.06, 0.05, 0.09, 0.2, 0.6, 0.69, 0.67, 0.66, 0.5, 0.53, 0.6, 0.57, 0.41, 0.21, 0.19, 0.17, 0.18, 0.11, 0.09, 0.07, 0.08]
 history_hour_traffic_ratio = [sum(day_hour_traffic_ratio) / len(day_hour_traffic_ratio) for _ in range(24)]
-print(f'history ratio: {history_hour_traffic_ratio[0]}')
-
+# print(f'history ratio: {history_hour_traffic_ratio[0]}')
 
 user_num = 100
 machine_num = 300
@@ -40,7 +39,7 @@ def machine_generator(filename):
     for dir in out_files:
         if not os.path.exists(dir):
             os.makedirs(dir)
-        with open(dir + filename, 'a') as f:
+        with open(dir + filename, 'w') as f:
             f.write(_str)
 
 def task_events_generator(filename, hour_traffic_ratio):
@@ -111,4 +110,4 @@ if __name__ == '__main__':
     machine_generator('machine_attributes.json')
     task_events_generator('task_events.json', day_hour_traffic_ratio)
     task_events_generator('history_data.json', history_hour_traffic_ratio)
-    print(f'Finished generating, save result to {dir}')
+    print(f'Finished generating, save result to {out_files}')

@@ -171,9 +171,9 @@ class TaskDeployment:
             Metrics.mvno_task_resource.append(self.hour_task_resource)
             Metrics.mvno_block_rate.append([block_num / (block_num + pass_num) for block_num, pass_num in zip(self.block_num, self.hour_task_num)])
 
-        for idx in range(len(self.optimizing.fitness)):
-            self.optimizing.fitness[idx] = max(self.optimizing.fitness[idx], 0)
-            self.optimizing.fitness[idx] /= sum(self.hour_task_num)
+        # for idx in range(len(self.optimizing.fitness)):
+        #     self.optimizing.fitness[idx] = max(self.optimizing.fitness[idx], 0)
+        #     self.optimizing.fitness[idx] /= sum(self.hour_task_num)
         self.all_release()
 
     def deploy(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
@@ -314,8 +314,8 @@ class TaskDeployment:
     def update_parameters(self) -> None:
         '''Update the parameters based on the performance of optimizing offsprings of this hour.'''
         with step_logger('Updating best population', title5, f'Finished updating best population.'):
-            self.optimizing.best_fitness = sum(self.hour_fitness)
-            self.optimizing.fitness = np.sum(self.population_hour_fitness, axis=1)
+            self.optimizing.best_fitness = max(sum(self.hour_fitness), 0)
+            self.optimizing.fitness = np.maximum(np.sum(self.population_hour_fitness, axis=1), 0)
             self.optimizing.update_best_population()
             logging.info(f'best population as {toSoftmax(self.optimizing.best_population)[:-2]}, fitness: {self.optimizing.best_fitness}.')
         with step_logger('Generate new offsprings', title5, 'Finished generating new offsprings.'):

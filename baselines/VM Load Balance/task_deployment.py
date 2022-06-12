@@ -196,10 +196,8 @@ class TaskDeployment:
             bw_up = vm.from_user[user_id]['bw_up']
             bw_down = vm.from_user[user_id]['bw_down']
             delay = vm.from_user[user_id]['delay']
-            cr_diff = abs(cpu_request - vm.cr)
-            # checking the operating value and vm remaining resource
-            if min(bw_up, bw_down) < op_bw or vm.cr < op_cr or \
-                vm.cr < task[Task_event_index.average_cpu_usage] or vm.avg_bw_up < task[Task_event_index.T_up] or \
+            # checking vm remaining resource
+            if vm.cr < task[Task_event_index.average_cpu_usage] or vm.avg_bw_up < task[Task_event_index.T_up] or \
                 vm.avg_bw_down < task[Task_event_index.T_down]:
                 continue
             utilities = [

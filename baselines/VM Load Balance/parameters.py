@@ -38,15 +38,15 @@ cr_high = 1 * expected_max_vm_num
 
 # vm assignment
 mno_rate = 0.6
-_theta = 0.3
+_theta = 0
 _lambda = 0.6
 _mu = 0.8
 
 # task deployment
 gamma = [
-    [3.0, 1.0, 1.0, 3.0, 5.0, 3.0], # VoIP
-    [0.5, 3.0, 2.0, 3.0, 2.0, 3.0], # IP Video
-    [3.0, 0.5, 1.0, 3.0, 1.0, 3.0] # FTP
+    [0.5, 1.5, 1.0, 2.0, 3.0], # VoIP
+    [0.5, 3.0, 2.0, 2.0, 2.0], # IP Video
+    [0.5, 3.0, 1.0, 2.0, 1.0] # FTP
 ]
 op_bw = 300 # Kbps
 op_cr = 0.05 # GCU-second/second
@@ -69,7 +69,7 @@ phi = 0.9
 ## the max time of searching the valid offsprings in vm assignment
 max_searching_times = 1000
 optimizing_times = 100
-offspring_number = 10
+offspring_number = 5
 mutate_rate = 0.05
 
 @unique

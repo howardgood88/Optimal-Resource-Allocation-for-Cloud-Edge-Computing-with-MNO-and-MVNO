@@ -182,22 +182,14 @@ class TaskDeployment:
         selected_vm_id = None
         shuffled_candidate_vm_id = candidate_vm_id.copy()
         np.random.shuffle(shuffled_candidate_vm_id)
-        for vm_id in shuffled_candidate_vm_id:
-            # deployment by best population
-            vm = vm_list[vm_id]
-            ## only accept vm of the same type
-            if vm.task_type != task_type:
-                continue
-            ## calculate the utilities
+        # random choice
+        if len(shuffled_candidate_vm_id) > 0:
+            selected_vm_id = shuffled_candidate_vm_id[0]
+            vm = vm_list[selected_vm_id]
             task_utility = UtilityFunc.get_task_utility_func(task_type)
             bw_up = vm.from_user[user_id]['bw_up']
             bw_down = vm.from_user[user_id]['bw_down']
             delay = vm.from_user[user_id]['delay']
-            # checking the operating value and vm remaining resource
-            if min(bw_up, bw_down) < op_bw or vm.cr < op_cr or \
-                vm.cr < task[Task_event_index.average_cpu_usage] or vm.avg_bw_up < task[Task_event_index.T_up] or \
-                vm.avg_bw_down < task[Task_event_index.T_down]:
-                continue
             utilities = [
                 task_utility.bw_up(bw_up),
                 task_utility.bw_down(bw_down),
@@ -205,10 +197,7 @@ class TaskDeployment:
                 task_utility.price(vm.price),
                 task_utility.delay(delay, vm.location)
             ]
-            # equal to random select a valid vm
             utility = sum([g * u for g, u in zip(softmax(gamma[Task_type_index[task_type]]), utilities)])
-            selected_vm_id = vm_id
-            break
 
         if selected_vm_id == None:
             # if no feasible solution

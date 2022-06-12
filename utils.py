@@ -446,18 +446,18 @@ class Metrics:
         # plt.show()
         logging.info(f'Save figs to ./figs/{case_num}!')
         print(f'Save figs to ./figs/{case_num}!')
-        
+
         # save metrics data
-        if not os.path.exists('Metrics'):
-            os.makedirs('Metrics')
-        np.save('Metrics/statistic_data', cls.statistic_data)
-        np.save('Metrics/hour_data', cls.hour_data)
-        np.save('Metrics/mno_vm_resource', cls.mno_vm_resource)
-        np.save('Metrics/mvno_vm_resource', cls.mvno_vm_resource)
-        np.save('Metrics/mvno_vm_cost', cls.mvno_vm_cost)
-        np.save('Metrics/mno_task_fitness', cls.mno_task_fitness)
-        np.save('Metrics/mno_task_resource', cls.mno_task_resource)
-        np.save('Metrics/mvno_task_fitness', cls.mvno_task_fitness)
-        np.save('Metrics/mvno_task_resource', cls.mvno_task_resource)
-        np.save('Metrics/mno_block_rate', cls.mno_block_rate)
-        np.save('Metrics/mvno_block_rate', cls.mvno_block_rate)
+        if not os.path.exists(f'Metrics/{case_num}'):
+            os.makedirs(f'Metrics/{case_num}')
+        np.save(f'Metrics/{case_num}statistic_data', cls.statistic_data)
+        np.save(f'Metrics/{case_num}hour_data', cls.hour_data)
+        np.save(f'Metrics/{case_num}mno_vm_resource', cls.mno_vm_resource)
+        np.save(f'Metrics/{case_num}mvno_vm_resource', cls.mvno_vm_resource)
+        np.save(f'Metrics/{case_num}mvno_vm_cost', cls.mvno_vm_cost)
+        np.save(f'Metrics/{case_num}mno_task_fitness', cls.mno_task_fitness)
+        np.save(f'Metrics/{case_num}mno_task_resource', cls.mno_task_resource)
+        np.save(f'Metrics/{case_num}mvno_task_fitness', cls.mvno_task_fitness)
+        np.save(f'Metrics/{case_num}mvno_task_resource', cls.mvno_task_resource)
+        np.save(f'Metrics/{case_num}mno_block_rate', cls.mno_block_rate)
+        np.save(f'Metrics/{case_num}mvno_block_rate', cls.mvno_block_rate)

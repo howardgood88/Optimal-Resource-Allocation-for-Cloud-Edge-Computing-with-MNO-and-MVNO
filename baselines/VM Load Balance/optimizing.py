@@ -166,18 +166,18 @@ class VMAssignmentOptimizing(GeneticOptimizing):
         bw_down_sum = sum(bw_down_task_x)
 
         # check condition
-        bw_up_voip_cond = bw_up_task_x[voip_idx] >= T_voip_up
-        bw_up_ipVideo_cond = bw_up_task_x[ipVideo_idx] >= T_ipVideo_up
-        bw_up_ftp_cond = bw_up_task_x[ftp_idx] >= T_ftp_up
-        bw_down_voip_cond = bw_down_task_x[voip_idx] >= T_voip_down
-        bw_down_ipVideo_cond = bw_down_task_x[ipVideo_idx] >= T_ipVideo_down
-        bw_down_ftp_cond = bw_down_task_x[ftp_idx] >= T_ftp_down
-        cr_voip_cond = cr_task_x[voip_idx] >= cr_voip
-        cr_ipVideo_cond = cr_task_x[ipVideo_idx] >= cr_ipVideo
-        cr_ftp_cond = cr_task_x[ftp_idx] >= cr_ftp
-        bw_low_cond = bw_low <= min(bw_up_sum, bw_down_sum) * (1 + _theta)
-        bw_high_cond = max(bw_up_sum, bw_down_sum) * (1 + _theta) <= bw_high
-        cr_cond = cr_low <= sum(cr_task_x) * (1 * _theta) <= cr_high
+        bw_up_voip_cond = bw_up_task_x[voip_idx] * (1 - _theta) >= T_voip_up
+        bw_up_ipVideo_cond = bw_up_task_x[ipVideo_idx] * (1 - _theta) >= T_ipVideo_up
+        bw_up_ftp_cond = bw_up_task_x[ftp_idx] * (1 - _theta) >= T_ftp_up
+        bw_down_voip_cond = bw_down_task_x[voip_idx] * (1 - _theta) >= T_voip_down
+        bw_down_ipVideo_cond = bw_down_task_x[ipVideo_idx] * (1 - _theta) >= T_ipVideo_down
+        bw_down_ftp_cond = bw_down_task_x[ftp_idx] * (1 - _theta) >= T_ftp_down
+        cr_voip_cond = cr_task_x[voip_idx] * (1 - _theta) >= cr_voip
+        cr_ipVideo_cond = cr_task_x[ipVideo_idx] * (1 - _theta) >= cr_ipVideo
+        cr_ftp_cond = cr_task_x[ftp_idx] * (1 - _theta) >= cr_ftp
+        bw_low_cond = bw_low <= min(bw_up_sum, bw_down_sum)
+        bw_high_cond = max(bw_up_sum, bw_down_sum) <= bw_high
+        cr_cond = cr_low <= sum(cr_task_x) <= cr_high
 
         return bw_up_voip_cond and\
             bw_up_ipVideo_cond and\

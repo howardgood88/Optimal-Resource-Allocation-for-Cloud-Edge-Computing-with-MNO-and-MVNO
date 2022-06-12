@@ -169,7 +169,7 @@ def task_deployment(hour_events: np.array, minutes_range: tuple) -> None:
         if event[Task_event_index.event_type.value] == Event_type.start:
             # get/assign the operator to the task
             operator = user_id_to_operator.setdefault(user_id, np.random.choice([mno, mvno], 1, p = [mno_rate, 1 - mno_rate])[0])
-            logging.info(f'task{event[Task_event_index.index.value]} assign to {operator.name}')
+            logging.info(f'task {event[Task_event_index.index.value]} assign to {operator.name}, task type: {event[Task_event_index.task_type.value]}')
             # generate the user to vm data if new user not in history data arrival
             if user_id not in user_id_set:
                 update_user_to_vm([user_id])
