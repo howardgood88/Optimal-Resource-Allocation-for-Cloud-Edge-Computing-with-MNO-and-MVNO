@@ -123,6 +123,8 @@ class Metrics:
     mvno_task_resource = [] # 3x3
     mno_block_rate = [] # (VoIP, IP Video, FTP)
     mvno_block_rate = [] # (VoIP, IP Video, FTP)
+    mno_user_cost = [] # float
+    mvno_user_cost = [] # float
     # parameters
     offset = 0.3
     gap = 0.05
@@ -195,6 +197,16 @@ class Metrics:
         ax.set_xticks(x)
         ax.set_xticklabels(labels)
         ax.legend()
+
+    @classmethod
+    def plot_1dim_line(cls, data):
+        x = np.arange(1, len(data) + 1)
+        labels = [str(i) for i in x]
+        plt.plot(x, data, '-o')
+
+        ax = plt.gca()
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels)
 
     ################# Plotting each type of data #################
 
@@ -320,11 +332,20 @@ class Metrics:
     @classmethod
     def plot_mno_block_rate(cls):
         plt.figure(figsize=cls.figsize)
-        plt.title('MNO block rate in each hour')
+        plt.title('MNO block ratio in each hour')
         plt.xlabel('hour')
-        plt.ylabel('percentage (%)')
+        plt.ylabel('ratio')
         cls.plot_2dim_line(cls.mno_block_rate)
         plt.savefig(f'figs/{case_num}MNO/mno_task_block_rate')
+
+    @classmethod
+    def plot_mno_user_cost(cls):
+        plt.figure(figsize=cls.figsize)
+        plt.title('MNO average user cost in each hour')
+        plt.xlabel('hour')
+        plt.ylabel('cost (dollar)')
+        cls.plot_1dim_line(cls.mno_user_cost)
+        plt.savefig(f'figs/{case_num}MNO/mno_user_cost')
 
     @classmethod
     def plot_mvno(cls):
@@ -410,11 +431,20 @@ class Metrics:
     @classmethod
     def plot_mvno_block_rate(cls):
         plt.figure(figsize=cls.figsize)
-        plt.title('MVNO block rate in each hour')
+        plt.title('MVNO block ratio in each hour')
         plt.xlabel('hour')
-        plt.ylabel('percentage (%)')
+        plt.ylabel('ratio')
         cls.plot_2dim_line(cls.mvno_block_rate)
         plt.savefig(f'figs/{case_num}MVNO/mvno_task_block_rate')
+
+    @classmethod
+    def plot_mvno_user_cost(cls):
+        plt.figure(figsize=cls.figsize)
+        plt.title('MVNO average user cost in each hour')
+        plt.xlabel('hour')
+        plt.ylabel('cost (dollar)')
+        cls.plot_1dim_line(cls.mvno_user_cost)
+        plt.savefig(f'figs/{case_num}MVNO/mvno_user_cost')
     
     @classmethod
     def plot(cls):
@@ -429,6 +459,8 @@ class Metrics:
         cls.mvno_task_resource = np.array(cls.mvno_task_resource)
         cls.mno_block_rate = np.array(cls.mno_block_rate)
         cls.mvno_block_rate = np.array(cls.mvno_block_rate)
+        cls.mno_user_cost = np.array(cls.mno_user_cost)
+        cls.mvno_user_cost = np.array(cls.mvno_user_cost)
 
         if not os.path.exists(f'figs/{case_num}'):
             os.makedirs(f'figs/{case_num}')
@@ -438,11 +470,13 @@ class Metrics:
             os.makedirs(f'figs/{case_num}MNO/')
         cls.plot_mno()
         cls.plot_mno_block_rate()
+        cls.plot_mno_user_cost()
         if not os.path.exists(f'figs/{case_num}MVNO/'):
             os.makedirs(f'figs/{case_num}MVNO/')
         cls.plot_mvno()
         cls.plot_mvno_vm_cost()
         cls.plot_mvno_block_rate()
+        cls.plot_mvno_user_cost()
         # plt.show()
         logging.info(f'Save figs to ./figs/{case_num}!')
         print(f'Save figs to ./figs/{case_num}!')
@@ -461,3 +495,5 @@ class Metrics:
         np.save(f'Metrics/{case_num}mvno_task_resource', cls.mvno_task_resource)
         np.save(f'Metrics/{case_num}mno_block_rate', cls.mno_block_rate)
         np.save(f'Metrics/{case_num}mvno_block_rate', cls.mvno_block_rate)
+        np.save(f'Metrics/{case_num}mno_user_cost', cls.mno_user_cost)
+        np.save(f'Metrics/{case_num}mvno_user_cost', cls.mvno_user_cost)

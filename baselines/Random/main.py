@@ -237,7 +237,6 @@ while Global.system_time // big_round_minutes < big_round_times:
                 event_time_idx = Task_event_index.event_time.value
                 hour_mask = (minutes_range[0] <= task_events[:, event_time_idx]) & (task_events[:, event_time_idx] < minutes_range[1])
                 hour_events = task_events[hour_mask]
-                
                 with mno._task_deployment, mvno._task_deployment, step_logger(f'Start of hour {hour_num}\n'
                     f'Get hour events:\nid,type,time\n{hour_events}', 0, f'Finished hour {hour_num}'):
                     if not hour_events.size == 0:

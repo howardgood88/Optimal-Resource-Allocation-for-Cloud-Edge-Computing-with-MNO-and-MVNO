@@ -13,8 +13,8 @@ day_hour_traffic_ratio = [0.09, 0.09, 0.07, 0.06, 0.05, 0.09, 0.2, 0.6, 0.69, 0.
 history_hour_traffic_ratio = [sum(day_hour_traffic_ratio) / len(day_hour_traffic_ratio) for _ in range(24)]
 # print(f'history ratio: {history_hour_traffic_ratio[0]}')
 
-user_num = 100
-machine_num = 300
+user_num = 300
+machine_num = 400
 out_files = ['./data/case4/', './baselines/VM Load Balance/data/case4/', './baselines/Random/data/case4/']
 number_of_days = 7
 

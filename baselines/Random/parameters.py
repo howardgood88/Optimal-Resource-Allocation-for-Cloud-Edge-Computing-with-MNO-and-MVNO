@@ -4,7 +4,7 @@ import logging
 class Global:
     system_time = 0
 
-rnd_seed = 1126
+rnd_seed = 1127
 logging_level = logging.INFO
 case_num = 'case4/'
 test_data_dir = './data/' + case_num
@@ -29,7 +29,7 @@ PT5_edge_b = 0.557
 PT5_edge_d = 1.443
 
 # contract
-expected_max_vm_num = 100
+expected_max_vm_num = 200
 expected_min_vm_num = 5
 bw_low = 100000 * expected_min_vm_num
 bw_high = 100000 * expected_max_vm_num # Kbps

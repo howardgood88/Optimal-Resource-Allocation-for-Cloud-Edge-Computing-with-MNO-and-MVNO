@@ -137,6 +137,8 @@ class TaskDeployment:
         self.running_task_id_to_vm = {}
         # keep the starting time of an hour
         self.starting_systime = None
+        # user cost
+        self.user_cost = 0
 
     def __enter__(self):
         '''Initialization.'''
@@ -149,6 +151,7 @@ class TaskDeployment:
         self.hour_task_resource = [[0, 0, 0] for _ in range(3)]
         self.hour_fitness = [0, 0, 0]
         self.population_hour_fitness = [[0, 0, 0] for _ in range(offspring_number)]
+        self.user_cost = 0
         assert(len(self.running_task_id_to_vm) == 0)
 
     def __exit__(self, type, value, traceback):
@@ -162,19 +165,21 @@ class TaskDeployment:
             for pop_idx in range(offspring_number):
                 self.population_hour_fitness[pop_idx][i] = self.population_hour_utility[pop_idx][i] / self.hour_task_num[i]
 
+        self.all_release()
         if self.operator == 'MNO':
             Metrics.mno_task_fitness.append(self.hour_fitness)
             Metrics.mno_task_resource.append(self.hour_task_resource)
             Metrics.mno_block_rate.append([block_num / (block_num + pass_num) for block_num, pass_num in zip(self.block_num, self.hour_task_num)])
+            Metrics.mno_user_cost.append(self.user_cost / sum(self.hour_task_num))
         else:
             Metrics.mvno_task_fitness.append(self.hour_fitness)
             Metrics.mvno_task_resource.append(self.hour_task_resource)
             Metrics.mvno_block_rate.append([block_num / (block_num + pass_num) for block_num, pass_num in zip(self.block_num, self.hour_task_num)])
+            Metrics.mvno_user_cost.append(self.user_cost / sum(self.hour_task_num))
 
         # for idx in range(len(self.optimizing.fitness)):
         #     self.optimizing.fitness[idx] = max(self.optimizing.fitness[idx], 0)
         #     self.optimizing.fitness[idx] /= sum(self.hour_task_num)
-        self.all_release()
 
     def deploy(self, candidate_vm_id: np.array, task: np.array, vm_list: dict) -> None:
         '''Start running TaskDeployment algorithm.'''
@@ -189,6 +194,7 @@ class TaskDeployment:
         max_utilities = []
         offsprings_max_utility = [float('-inf') for _ in range(len(self.optimizing.new_populations))]
         selected_vm_id = None
+        cost = 0
         for vm_id in candidate_vm_id:
             # deployment by best population
             vm = vm_list[vm_id]
@@ -231,6 +237,7 @@ class TaskDeployment:
                 max_utility = utility
                 max_utilities = utilities
                 selected_vm_id = vm_id
+                cost = vm.price
 
         if selected_vm_id == None:
             # if no feasible solution
@@ -245,6 +252,7 @@ class TaskDeployment:
         self.hour_utility[task_type_idx] += max(max_utility, -100)
         for idx, max_utility in enumerate(offsprings_max_utility):
             self.population_hour_utility[idx][task_type_idx] += max(max_utility, -100)
+        self.user_cost += cost
 
     def reschedule_task(self, task: np.array) -> None:
         '''Reschedule event in task_events.'''
@@ -256,11 +264,16 @@ class TaskDeployment:
         Task_handler.delete_events()
         event_time_idx = Task_event_index.event_time.value
         next_round_start_systime = self.starting_systime + small_round_minutes
-        retry_offset = np.random.randint(0, 60)
-        logging.info(f'Task {task_id} unaccepted, retry after {retry_offset} minutes.')
-        interval = end_event[event_time_idx] - start_event[event_time_idx]
-        start_event[event_time_idx] = next_round_start_systime + retry_offset
-        end_event[event_time_idx] = next_round_start_systime + interval + retry_offset
+        retry_offset = np.random.randint(5, 10)
+        if start_event[event_time_idx] + retry_offset < next_round_start_systime and end_event[event_time_idx] + retry_offset >= next_round_start_systime:
+            interval = end_event[event_time_idx] - start_event[event_time_idx]
+            start_event[event_time_idx] = next_round_start_systime
+            end_event[event_time_idx] = next_round_start_systime + interval
+            logging.info(f'Task {task_id} unaccepted, retry after {next_round_start_systime - Global.system_time + retry_offset} minutes.')
+        else:
+            start_event[event_time_idx] = start_event[event_time_idx] + retry_offset
+            end_event[event_time_idx] = end_event[event_time_idx] + retry_offset
+            logging.info(f'Task {task_id} unaccepted, retry after {retry_offset} minutes.')
         Task_handler.insert_event(end_event)
         Task_handler.insert_event(start_event)
 
@@ -333,4 +346,8 @@ class TaskDeployment:
             self.reschedule_task(task)
         # release undone tasks
         for task in tasks:
+            task_type = task[Task_event_index.task_type.value]
+            task_type_idx = Task_type_index[task_type].value
+            self.hour_task_num[task_type_idx] -= 1
+            self.block_num[task_type_idx] += 1
             self.release(task)
