@@ -48,8 +48,10 @@ gamma = [
     [0.5, 3.0, 2.0, 2.0, 2.0], # IP Video
     [0.5, 3.0, 1.0, 2.0, 1.0] # FTP
 ]
-op_bw = 300 # Kbps
-op_cr = 0.05 # GCU-second/second
+mno_op_bw = 600 # Kbps
+mno_op_cr = 0.2 # GCU-second/second
+mvno_op_bw = 300 # Kbps
+mvno_op_cr = 0.05 # GCU-second/second
 
 # utility function
 max_score = 100

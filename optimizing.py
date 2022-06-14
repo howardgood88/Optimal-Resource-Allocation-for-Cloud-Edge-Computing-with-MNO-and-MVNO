@@ -4,7 +4,7 @@ import math
 from contract import Contract
 from utils import (toSoftmax, get_TD_populations_log_msg)
 from parameters import (offspring_number, Task_type_index, _theta, _lambda, mutate_rate, rnd_seed,
-                        _gamma, _op_bw, _op_cr, max_searching_times, mno_rate)
+                        _gamma, max_searching_times, mno_rate)
 import logging
 
 np.random.seed(rnd_seed)
@@ -194,10 +194,10 @@ class VMAssignmentOptimizing(GeneticOptimizing):
 
 class TaskDeploymentParametersOptimizing(GeneticOptimizing):
 
-    def __init__(self):
+    def __init__(self, op_bw, op_cr):
         self.best_gamma = np.array(_gamma)
-        self.best_op_bw = _op_bw
-        self.best_op_cr = _op_cr
+        self.best_op_bw = op_bw
+        self.best_op_cr = op_cr
 
         # Save the populations without softmax
         self.new_populations = np.array([self.initialize_population() for _ in range(offspring_number)])

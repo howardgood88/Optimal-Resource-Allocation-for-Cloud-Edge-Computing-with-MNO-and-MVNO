@@ -118,9 +118,11 @@ class UtilityFunc:
 
 class TaskDeployment:
     '''Task Deployment!!!'''
-    def __init__(self, operator):
+    def __init__(self, operator, op_bw, op_cr):
+        self.op_bw = op_bw
+        self.op_cr = op_cr
         self.operator = operator
-        self.optimizing = TaskDeploymentParametersOptimizing()
+        self.optimizing = TaskDeploymentParametersOptimizing(op_bw, op_cr)
         # each element with two inner element: start event and end event of a task
         self.unaccepted_task_queue = Queue()
         # the sum of utility in an hour
@@ -139,6 +141,9 @@ class TaskDeployment:
         self.starting_systime = None
         # user cost
         self.user_cost = 0
+        # number of tasks assign to cloud/edge
+        self.hour_cloud_task_num = [0, 0, 0]
+        self.hour_edge_task_num = [0, 0, 0]
 
     def __enter__(self):
         '''Initialization.'''
@@ -153,6 +158,8 @@ class TaskDeployment:
         self.population_hour_fitness = [[0, 0, 0] for _ in range(offspring_number)]
         self.user_cost = 0
         assert(len(self.running_task_id_to_vm) == 0)
+        self.hour_cloud_task_num = [0, 0, 0]
+        self.hour_edge_task_num = [0, 0, 0]
 
     def __exit__(self, type, value, traceback):
         '''Get the statistic fitness of optimizing populations at the end of an hour.'''
@@ -171,11 +178,15 @@ class TaskDeployment:
             Metrics.mno_task_resource.append(self.hour_task_resource)
             Metrics.mno_block_rate.append([block_num / (block_num + pass_num) for block_num, pass_num in zip(self.block_num, self.hour_task_num)])
             Metrics.mno_user_cost.append(self.user_cost / sum(self.hour_task_num))
+            Metrics.mno_cloud_task_num.append(self.hour_cloud_task_num)
+            Metrics.mno_edge_task_num.append(self.hour_edge_task_num)
         else:
             Metrics.mvno_task_fitness.append(self.hour_fitness)
             Metrics.mvno_task_resource.append(self.hour_task_resource)
             Metrics.mvno_block_rate.append([block_num / (block_num + pass_num) for block_num, pass_num in zip(self.block_num, self.hour_task_num)])
             Metrics.mvno_user_cost.append(self.user_cost / sum(self.hour_task_num))
+            Metrics.mvno_cloud_task_num.append(self.hour_cloud_task_num)
+            Metrics.mvno_edge_task_num.append(self.hour_edge_task_num)
 
         # for idx in range(len(self.optimizing.fitness)):
         #     self.optimizing.fitness[idx] = max(self.optimizing.fitness[idx], 0)
@@ -208,7 +219,7 @@ class TaskDeployment:
             delay = vm.from_user[user_id]['delay']
             cr_diff = abs(cpu_request - vm.cr)
             # checking the operating value and vm remaining resource
-            if min(bw_up, bw_down) < self.optimizing.best_op_bw or vm.cr < self.optimizing.best_op_cr or \
+            if min(bw_up, bw_down) < self.op_bw or vm.cr < self.op_cr or \
                 vm.cr < task[Task_event_index.average_cpu_usage] or vm.avg_bw_up < task[Task_event_index.T_up] or \
                 vm.avg_bw_down < task[Task_event_index.T_down]:
                 continue
@@ -246,6 +257,10 @@ class TaskDeployment:
             self.block_num[task_type_idx] += 1
         else:
             self.bind_task(task, vm_list[selected_vm_id])
+            if vm_list[selected_vm_id].location == 'cloud':
+                self.hour_cloud_task_num[task_type_idx] += 1
+            else:
+                self.hour_edge_task_num[task_type_idx] += 1
         logging.info(f'task utilities: {max_utilities}\n')
         logging.info(f'task utility: {max_utility}\n')
     

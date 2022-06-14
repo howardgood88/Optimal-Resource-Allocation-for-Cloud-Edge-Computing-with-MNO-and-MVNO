@@ -125,6 +125,10 @@ class Metrics:
     mvno_block_rate = [] # (VoIP, IP Video, FTP)
     mno_user_cost = [] # float
     mvno_user_cost = [] # float
+    mno_cloud_task_num = [] # (VoIP, IP Video, FTP)
+    mno_edge_task_num = [] # (VoIP, IP Video, FTP)
+    mvno_cloud_task_num = [] # (VoIP, IP Video, FTP)
+    mvno_edge_task_num = [] # (VoIP, IP Video, FTP)
     # parameters
     offset = 0.3
     gap = 0.05
@@ -207,6 +211,19 @@ class Metrics:
         ax = plt.gca()
         ax.set_xticks(x)
         ax.set_xticklabels(labels)
+
+    @classmethod
+    def plot_cloud_edge_task_num(cls, data1, data2):
+        x = np.arange(1, len(data1) + 1)
+        labels = [str(i) for i in x]
+
+        plt.plot(x, data1, 'o-', label='cloud')
+        plt.plot(x, data2, 'o-', label='edge')
+
+        ax = plt.gca()
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels)
+        ax.legend()
 
     ################# Plotting each type of data #################
 
@@ -325,27 +342,51 @@ class Metrics:
 
             plt.savefig(f'figs/{case_num}MNO/mno_task_resource')
 
+        def plot_block_rate():
+            plt.figure(figsize=cls.figsize)
+            plt.title('MNO block ratio in each hour')
+            plt.xlabel('hour')
+            plt.ylabel('ratio')
+            cls.plot_2dim_line(cls.mno_block_rate)
+            plt.savefig(f'figs/{case_num}MNO/mno_task_block_rate')
+
+        def plot_user_cost():
+            plt.figure(figsize=cls.figsize)
+            plt.title('MNO average user cost in each hour')
+            plt.xlabel('hour')
+            plt.ylabel('cost (dollar)')
+            cls.plot_1dim_line(cls.mno_user_cost)
+            plt.savefig(f'figs/{case_num}MNO/mno_user_cost')
+
+        def plot_task_num():
+            plt.figure(figsize=cls.figsize)
+            # VoIP
+            plt.subplot(311)
+            plt.title('MNO number of task assign to cloud/edge VM in each hour - VoIP')
+            plt.xlabel('hour')
+            plt.ylabel('number of task')
+            cls.plot_cloud_edge_task_num(cls.mno_cloud_task_num[:, 0], cls.mno_edge_task_num[:, 0])
+            # IP Video
+            plt.subplot(312)
+            plt.title('MNO number of task assign to cloud/edge VM in each hour - IP Video')
+            plt.xlabel('hour')
+            plt.ylabel('number of task')
+            cls.plot_cloud_edge_task_num(cls.mno_cloud_task_num[:, 1], cls.mno_edge_task_num[:, 1])
+            # FTP
+            plt.subplot(313)
+            plt.title('MNO number of task assign to cloud/edge VM in each hour - FTP')
+            plt.xlabel('hour')
+            plt.ylabel('number of task')
+            cls.plot_cloud_edge_task_num(cls.mno_cloud_task_num[:, 2], cls.mno_edge_task_num[:, 2])
+
+            plt.savefig(f'figs/{case_num}MNO/mno_task_num')
+
         plot_vm_resource()
         plot_task_fitness()
         plot_task_resource()
-
-    @classmethod
-    def plot_mno_block_rate(cls):
-        plt.figure(figsize=cls.figsize)
-        plt.title('MNO block ratio in each hour')
-        plt.xlabel('hour')
-        plt.ylabel('ratio')
-        cls.plot_2dim_line(cls.mno_block_rate)
-        plt.savefig(f'figs/{case_num}MNO/mno_task_block_rate')
-
-    @classmethod
-    def plot_mno_user_cost(cls):
-        plt.figure(figsize=cls.figsize)
-        plt.title('MNO average user cost in each hour')
-        plt.xlabel('hour')
-        plt.ylabel('cost (dollar)')
-        cls.plot_1dim_line(cls.mno_user_cost)
-        plt.savefig(f'figs/{case_num}MNO/mno_user_cost')
+        plot_block_rate()
+        plot_user_cost()
+        plot_task_num()
 
     @classmethod
     def plot_mvno(cls):
@@ -414,37 +455,61 @@ class Metrics:
 
             plt.savefig(f'figs/{case_num}MVNO/mvno_task_resource')
 
+        def plot_vm_cost():
+            plt.figure(figsize=cls.figsize)
+            plt.title('MVNO VM total cost in each round')
+            plt.xlabel('round')
+            plt.ylabel('VM total cost(dollar)')
+
+            cls.plot_1dim_bar(cls.mvno_vm_cost)
+            plt.savefig(f'figs/{case_num}MVNO/mvno_vm_cost')
+
+        def plot_block_rate():
+            plt.figure(figsize=cls.figsize)
+            plt.title('MVNO block ratio in each hour')
+            plt.xlabel('hour')
+            plt.ylabel('ratio')
+            cls.plot_2dim_line(cls.mvno_block_rate)
+            plt.savefig(f'figs/{case_num}MVNO/mvno_task_block_rate')
+
+        def plot_user_cost():
+            plt.figure(figsize=cls.figsize)
+            plt.title('MVNO average user cost in each hour')
+            plt.xlabel('hour')
+            plt.ylabel('cost (dollar)')
+            cls.plot_1dim_line(cls.mvno_user_cost)
+            plt.savefig(f'figs/{case_num}MVNO/mvno_user_cost')
+
+        def plot_task_num():
+            plt.figure(figsize=cls.figsize)
+            # VoIP
+            plt.subplot(311)
+            plt.title('MNO number of task assign to cloud/edge VM in each hour - VoIP')
+            plt.xlabel('hour')
+            plt.ylabel('number of task')
+            cls.plot_cloud_edge_task_num(cls.mvno_cloud_task_num[:, 0], cls.mvno_edge_task_num[:, 0])
+            # IP Video
+            plt.subplot(312)
+            plt.title('MNO number of task assign to cloud/edge VM in each hour - IP Video')
+            plt.xlabel('hour')
+            plt.ylabel('number of task')
+            cls.plot_cloud_edge_task_num(cls.mvno_cloud_task_num[:, 1], cls.mvno_edge_task_num[:, 1])
+            # FTP
+            plt.subplot(313)
+            plt.title('MNO number of task assign to cloud/edge VM in each hour - FTP')
+            plt.xlabel('hour')
+            plt.ylabel('number of task')
+            cls.plot_cloud_edge_task_num(cls.mvno_cloud_task_num[:, 2], cls.mvno_edge_task_num[:, 2])
+
+            plt.savefig(f'figs/{case_num}MVNO/mvno_task_num')
+
         plot_vm_resource()
         plot_task_fitness()
         plot_task_resource()
-
-    @classmethod
-    def plot_mvno_vm_cost(cls):
-        plt.figure(figsize=cls.figsize)
-        plt.title('MVNO VM total cost in each round')
-        plt.xlabel('round')
-        plt.ylabel('VM total cost(dollar)')
-
-        cls.plot_1dim_bar(cls.mvno_vm_cost)
-        plt.savefig(f'figs/{case_num}MVNO/mvno_vm_cost')
-
-    @classmethod
-    def plot_mvno_block_rate(cls):
-        plt.figure(figsize=cls.figsize)
-        plt.title('MVNO block ratio in each hour')
-        plt.xlabel('hour')
-        plt.ylabel('ratio')
-        cls.plot_2dim_line(cls.mvno_block_rate)
-        plt.savefig(f'figs/{case_num}MVNO/mvno_task_block_rate')
-
-    @classmethod
-    def plot_mvno_user_cost(cls):
-        plt.figure(figsize=cls.figsize)
-        plt.title('MVNO average user cost in each hour')
-        plt.xlabel('hour')
-        plt.ylabel('cost (dollar)')
-        cls.plot_1dim_line(cls.mvno_user_cost)
-        plt.savefig(f'figs/{case_num}MVNO/mvno_user_cost')
+        plot_vm_cost()
+        plot_block_rate()
+        plot_user_cost()
+        plot_task_num()
     
     @classmethod
     def plot(cls):
@@ -461,6 +526,10 @@ class Metrics:
         cls.mvno_block_rate = np.array(cls.mvno_block_rate)
         cls.mno_user_cost = np.array(cls.mno_user_cost)
         cls.mvno_user_cost = np.array(cls.mvno_user_cost)
+        cls.mno_cloud_task_num = np.array(cls.mno_cloud_task_num)
+        cls.mno_edge_task_num = np.array(cls.mno_edge_task_num)
+        cls.mvno_cloud_task_num = np.array(cls.mvno_cloud_task_num)
+        cls.mvno_edge_task_num = np.array(cls.mvno_edge_task_num)
 
         if not os.path.exists(f'figs/{case_num}'):
             os.makedirs(f'figs/{case_num}')
@@ -469,14 +538,9 @@ class Metrics:
         if not os.path.exists(f'figs/{case_num}MNO/'):
             os.makedirs(f'figs/{case_num}MNO/')
         cls.plot_mno()
-        cls.plot_mno_block_rate()
-        cls.plot_mno_user_cost()
         if not os.path.exists(f'figs/{case_num}MVNO/'):
             os.makedirs(f'figs/{case_num}MVNO/')
         cls.plot_mvno()
-        cls.plot_mvno_vm_cost()
-        cls.plot_mvno_block_rate()
-        cls.plot_mvno_user_cost()
         # plt.show()
         logging.info(f'Save figs to ./figs/{case_num}!')
         print(f'Save figs to ./figs/{case_num}!')
@@ -497,3 +561,7 @@ class Metrics:
         np.save(f'Metrics/{case_num}mvno_block_rate', cls.mvno_block_rate)
         np.save(f'Metrics/{case_num}mno_user_cost', cls.mno_user_cost)
         np.save(f'Metrics/{case_num}mvno_user_cost', cls.mvno_user_cost)
+        np.save(f'Metrics/{case_num}mno_cloud_task_num', cls.mno_cloud_task_num)
+        np.save(f'Metrics/{case_num}mno_edge_task_num', cls.mno_edge_task_num)
+        np.save(f'Metrics/{case_num}mvno_cloud_task_num', cls.mvno_cloud_task_num)
+        np.save(f'Metrics/{case_num}mvno_edge_task_num', cls.mvno_edge_task_num)

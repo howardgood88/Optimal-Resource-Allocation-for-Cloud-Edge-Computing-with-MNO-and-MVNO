@@ -4,13 +4,13 @@ from vm_assignment import VMAssignment
 from task_deployment import TaskDeployment
 from contract import Contract
 from utils import (step_logger, get_total_resource, timer, Metrics)
-from parameters import (_mu, title4)
+from parameters import (_mu, title4, mno_op_bw, mno_op_cr, mvno_op_bw, mvno_op_cr)
 import logging
 
 class Network_operator(abc.ABC):
     def __init__(self):
         self.hold_vm_id = None
-        self._task_deployment = TaskDeployment(self.name)
+        self._task_deployment = TaskDeployment(self.name, self.op_bw, self.op_cr)
 
     def deploy_task(self, task: np.array, vm_list: dict) -> None:
         '''Delegate to class TaskDeployment.'''
@@ -29,11 +29,15 @@ class Network_operator(abc.ABC):
 class MVNO(Network_operator):
     def __init__(self):
         self.name = 'MVNO'
+        self.op_bw = mvno_op_bw
+        self.op_cr = mvno_op_cr
         super().__init__()
 
 class MNO(Network_operator):
     def __init__(self, mvno: MVNO, vm_id_list: list, vm_list: dict):
         self.name = 'MNO'
+        self.op_bw = mno_op_bw
+        self.op_cr = mno_op_cr
         super().__init__()
         self.mvno = mvno
         # the id of all vm own by MNO, transform to list because vm_id_list never changes.
