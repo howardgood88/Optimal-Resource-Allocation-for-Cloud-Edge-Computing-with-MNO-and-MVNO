@@ -190,6 +190,7 @@ class TaskDeployment:
         selected_vm_id = None
         shuffled_candidate_vm_id = candidate_vm_id.copy()
         np.random.shuffle(shuffled_candidate_vm_id)
+        cost = 0
         for vm_id in shuffled_candidate_vm_id:
             # deployment by best population
             vm = vm_list[vm_id]

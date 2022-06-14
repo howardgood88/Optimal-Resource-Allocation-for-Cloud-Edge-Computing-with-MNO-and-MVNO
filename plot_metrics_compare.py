@@ -34,7 +34,15 @@ offset = 0.3
 figsize = (16, 12)
 def plot_2dim_bar(data1, data2, data3):
     x = np.arange(1, len(data1) + 1)
-    labels = [str(i) for i in x]
+    if len(data1) > 50:
+        labels = ['' for i in range(1, len(x) + 1)]
+        for idx, s in zip(range(12, len(data1) + 12, 24), range(len(data1) // 24)):
+            labels[idx] = str(s + 1)
+        for idx, s in zip(range(24, len(data1), 24), range(len(data1) // 24 - 1)):
+            labels[idx] = '|'
+    else:
+        # tick_x = x
+        labels = [str(i) for i in x]
     plt.bar(x - offset, data1, width=width, label='VATA')
     plt.bar(x, data2, width=width, label='VM Load Balance')
     plt.bar(x + offset, data3, width=width, label='Random')
@@ -46,7 +54,15 @@ def plot_2dim_bar(data1, data2, data3):
 
 def plot_2dim_line(data1, data2, data3):
     x = np.arange(1, len(data1) + 1)
-    labels = [str(i) for i in x]
+    if len(data1) > 50:
+        labels = ['' for i in range(1, len(x) + 1)]
+        for idx, s in zip(range(12, len(data1) + 12, 24), range(len(data1) // 24)):
+            labels[idx] = str(s + 1)
+        for idx, s in zip(range(24, len(data1), 24), range(len(data1) // 24 - 1)):
+            labels[idx] = '|'
+    else:
+        # tick_x = x
+        labels = [str(i) for i in x]
     plt.plot(x, data1, 'o-', label='VATA')
     plt.plot(x, data2, 'o-', label='VM Load Balance')
     plt.plot(x, data3, 'o-', label='Random')
@@ -176,9 +192,9 @@ def plot_1d(metric, fig_title, xlabel, ylabel, file_name):
 plot_3x3('mno_vm_resource', 'MNO/', 'MNO VM', 'round', 'MNO_vm')
 plot_3x3('mvno_vm_resource', 'MVNO/', 'MVNO VM', 'round', 'MVNO_vm')
 plot_1d('mvno_vm_cost', 'MVNO VM cost', 'round', 'VM total cost(dollar)', 'MVNO/mvno_vm_cost')
-plot_2d('mno_task_fitness', 'MNO/', 'MNO task fitness in busy hour', 'fitness', 'mno_task_fitness')
+plot_2d('mno_task_fitness', 'MNO/', 'MNO task fitness in busy days', 'fitness', 'mno_task_fitness')
 plot_3x3('mno_task_resource', 'MNO/', 'MNO task', 'hour', 'mno_task')
-plot_2d('mvno_task_fitness', 'MVNO/', 'MVNO task fitness in busy hour', 'fitness', 'mvno_task_fitness')
+plot_2d('mvno_task_fitness', 'MVNO/', 'MVNO task fitness in busy days', 'fitness', 'mvno_task_fitness')
 plot_3x3('mvno_task_resource', 'MVNO/', 'MVNO task', 'hour', 'mvno_task')
 plot_2d('mno_block_rate', 'MNO/', 'MNO task block ratio', 'block ratio', 'mno_task_block_rate')
 plot_2d('mvno_block_rate', 'MVNO/', 'MVNO task block ratio', 'block ratio', 'mvno_task_block_rate')

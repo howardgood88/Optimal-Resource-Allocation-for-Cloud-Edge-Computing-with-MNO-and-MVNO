@@ -19,7 +19,7 @@ big_round_times = 7
 # user to vm generating data
 beta_a = 2
 beta_b = 1.5
-beta_t = 100
+beta_t = 3
 beta_d = 0
 PT5_cloud_a = 2
 PT5_cloud_b = 0.557
@@ -29,16 +29,16 @@ PT5_edge_b = 0.557
 PT5_edge_d = 1.443
 
 # contract
-expected_max_vm_num = 200
+expected_max_vm_num = 80
 expected_min_vm_num = 5
-bw_low = 100000 * expected_min_vm_num
-bw_high = 100000 * expected_max_vm_num # Kbps
+bw_low = 5000 * expected_min_vm_num
+bw_high = 5000 * expected_max_vm_num # Kbps
 cr_low = 1 * expected_min_vm_num
 cr_high = 1 * expected_max_vm_num
 
 # vm assignment
 mno_rate = 0.6
-_theta = 0
+_theta = 0.25
 _lambda = 0.6
 _mu = 0.8
 
