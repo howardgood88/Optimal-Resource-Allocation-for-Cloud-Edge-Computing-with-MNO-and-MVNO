@@ -188,14 +188,20 @@ class TaskDeployment:
         selected_vm_id = None
         shuffled_candidate_vm_id = candidate_vm_id.copy()
         np.random.shuffle(shuffled_candidate_vm_id)
+        cost = 0
         # random choice
-        if len(shuffled_candidate_vm_id) > 0:
-            selected_vm_id = shuffled_candidate_vm_id[0]
+        idx = 0
+        while idx < len(shuffled_candidate_vm_id):
+            selected_vm_id = shuffled_candidate_vm_id[idx]
             vm = vm_list[selected_vm_id]
             task_utility = UtilityFunc.get_task_utility_func(task_type)
             bw_up = vm.from_user[user_id]['bw_up']
             bw_down = vm.from_user[user_id]['bw_down']
             delay = vm.from_user[user_id]['delay']
+            if vm.cr < task[Task_event_index.average_cpu_usage] or vm.avg_bw_up < task[Task_event_index.T_up] or \
+                vm.avg_bw_down < task[Task_event_index.T_down]:
+                idx += 1
+                continue
             utilities = [
                 task_utility.bw_up(bw_up),
                 task_utility.bw_down(bw_down),
@@ -205,6 +211,7 @@ class TaskDeployment:
             ]
             utility = sum([g * u for g, u in zip(softmax(gamma[Task_type_index[task_type]]), utilities)])
             cost = vm.price
+            break
 
         if selected_vm_id == None:
             # if no feasible solution
