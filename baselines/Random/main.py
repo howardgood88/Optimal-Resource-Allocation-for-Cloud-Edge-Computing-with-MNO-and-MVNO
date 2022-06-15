@@ -124,8 +124,8 @@ def generate_user_to_vm_data(location: str) -> dict:
                 }
     elif location == 'edge':
         return {
-                    'bw_up':beta(beta_a, beta_b, beta_t, beta_d),
-                    'bw_down':beta(beta_a, beta_b, beta_t, beta_d),
+                    'bw_up':beta(beta_a, beta_b, beta_t, beta_d) * 0.6,
+                    'bw_down':beta(beta_a, beta_b, beta_t, beta_d) * 0.6,
                     'delay':PT5(PT5_edge_a, PT5_edge_b, PT5_edge_d)
                 }
     else:

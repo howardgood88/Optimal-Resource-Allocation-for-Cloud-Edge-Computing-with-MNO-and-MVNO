@@ -40,8 +40,8 @@ def plot_2dim_bar(data1, data2, data3):
     x = np.arange(1, len(data1) + 1)
     if len(data1) > 50:
         labels = ['' for i in range(1, len(x) + 1)]
-        for idx, s in zip(range(12, len(data1) + 12, 24), range(len(data1) // 24)):
-            labels[idx] = str(s + 1)
+        # for idx, s in zip(range(12, len(data1) + 12, 24), range(len(data1) // 24)):
+        #     labels[idx] = str(s + 1)
         for idx, s in zip(range(24, len(data1), 24), range(len(data1) // 24 - 1)):
             labels[idx] = '|'
     else:
@@ -60,8 +60,8 @@ def plot_2dim_line(data1, data2, data3):
     x = np.arange(1, len(data1) + 1)
     if len(data1) > 50:
         labels = ['' for i in range(1, len(x) + 1)]
-        for idx, s in zip(range(12, len(data1) + 12, 24), range(len(data1) // 24)):
-            labels[idx] = str(s + 1)
+        # for idx, s in zip(range(12, len(data1) + 12, 24), range(len(data1) // 24)):
+        #     labels[idx] = str(s + 1)
         for idx, s in zip(range(24, len(data1), 24), range(len(data1) // 24 - 1)):
             labels[idx] = '|'
     else:
@@ -198,8 +198,8 @@ def plot_cloud_edge_task_num(metric1, metric2, op):
         x = np.arange(1, len(data1) + 1)
         if len(data1) > 50:
             labels = ['' for i in range(1, len(x) + 1)]
-            for idx, s in zip(range(12, len(data1) + 12, 24), range(len(data1) // 24)):
-                labels[idx] = str(s + 1)
+            # for idx, s in zip(range(12, len(data1) + 12, 24), range(len(data1) // 24)):
+            #     labels[idx] = str(s + 1)
             for idx, s in zip(range(24, len(data1), 24), range(len(data1) // 24 - 1)):
                 labels[idx] = '|'
         else:

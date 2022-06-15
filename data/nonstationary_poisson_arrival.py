@@ -9,7 +9,8 @@ np.random.seed(rnd_seed)
 
 # the traffic ratio over peek traffic of 24 hours in a day
 # hour_traffic_ratio = [0.51, 0.42, 0.33, 0.31, 0.23, 0.23, 0.24, 0.22, 0.24, 0.33, 0.35, 0.52, 0.56, 0.56, 0.64, 0.8, 0.91, 0.97, 0.98, 0.95, 0.92, 0.965, 0.87, 0.8]
-day_hour_traffic_ratio = [0.09, 0.09, 0.07, 0.06, 0.05, 0.09, 0.2, 0.6, 0.69, 0.67, 0.66, 0.5, 0.53, 0.6, 0.57, 0.41, 0.21, 0.19, 0.17, 0.18, 0.11, 0.09, 0.07, 0.08]
+# hour 1~24
+day_hour_traffic_ratio = [0.09, 0.09, 0.07, 0.07, 0.07, 0.13, 0.44, 0.73, 0.77, 0.78, 0.72, 0.48, 0.69, 0.69, 0.47, 0.26, 0.20, 0.19, 0.12, 0.10, 0.08, 0.07, 0.07, 0.07]
 history_hour_traffic_ratio = [sum(day_hour_traffic_ratio) / len(day_hour_traffic_ratio) for _ in range(24)]
 # print(f'history ratio: {history_hour_traffic_ratio[0]}')
 
@@ -24,10 +25,10 @@ def machine_generator(filename):
     for id in range(machine_num):
         _type = np.random.choice(['VoIP', 'IP_Video', 'FTP'])
         location = np.random.choice(['cloud', 'edge'])
-        discount = 1
+        discount, max_cpu = 1, 1
         if location == 'edge':
-            discount = 0.8
-        cpu = np.random.random()
+            discount, max_cpu = 0.8, 0.6
+        cpu = np.random.random() * max_cpu
         price = int(cpu * 250 * discount)
         _str += f'"{id}":{{"id":"{id}","task_type":"{_type}","location":"{location}","cpu_capacity":{cpu:.2f},"price":{price}}}'
         if id != machine_num - 1:
