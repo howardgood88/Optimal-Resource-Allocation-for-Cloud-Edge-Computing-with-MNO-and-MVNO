@@ -101,13 +101,18 @@ def task_events_generator(filename, hour_traffic_ratio):
         with open(dir + filename, 'w') as f:
             f.write(_str)
 
+def plot():
+    plt.figure()
+    plt.title('traffic pattern in a day')
+    plt.xlabel('hour')
+    plt.ylabel('traffic ratio compare to peak value')
+    plt.plot(np.arange(1, len(day_hour_traffic_ratio) + 1), day_hour_traffic_ratio)
+    plt.savefig('data/daily_pattern')
+
 if __name__ == '__main__':
     if not os.path.exists('./data'):
         os.makedirs('./data')
-    plt.figure()
-    plt.plot(np.arange(len(day_hour_traffic_ratio)), day_hour_traffic_ratio)
-    plt.savefig('data/daily_pattern')
-    
+    plot()
     machine_generator('machine_attributes.json')
     task_events_generator('task_events.json', day_hour_traffic_ratio)
     task_events_generator('history_data.json', history_hour_traffic_ratio)

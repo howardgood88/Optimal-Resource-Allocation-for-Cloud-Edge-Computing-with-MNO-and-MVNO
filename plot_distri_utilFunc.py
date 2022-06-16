@@ -25,7 +25,7 @@ def beta_test():
     plt.title('User to VM bandwidth generation (beta distribution)')
     plt.xlabel('bandwidth(Mbps)')
     plt.ylabel('times')
-    plot_beta(beta_a, beta_b, beta_t, beta_d, 10000)
+    plot_beta(beta_a, beta_b, beta_t, beta_d, 30000)
     plt.savefig(f'{dir}user_to_vm_bw')
     # VoIP uplink throughput
     plt.figure(figsize=figsize)
