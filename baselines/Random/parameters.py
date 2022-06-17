@@ -39,14 +39,14 @@ cr_high = 1 * expected_max_vm_num
 # vm assignment
 mno_rate = 0.6
 _theta = 0.25
-_lambda = 0.6
-_mu = 0.8
+_lambda = 0.3
+_mu = 0.7
 
 # task deployment
 gamma = [
-    [0.5, 1.5, 1.0, 2.0, 3.0], # VoIP
-    [0.5, 3.0, 2.0, 2.0, 2.0], # IP Video
-    [0.5, 3.0, 1.0, 2.0, 1.0] # FTP
+    [0.5, 0.5, 1.0, 3.0], # VoIP
+    [0.5, 2.0, 1.0, 2.0], # IP Video
+    [0.5, 3.0, 1.0, 1.0] # FTP
 ]
 mno_op_bw = 600 # Kbps
 mno_op_cr = 0.2 # GCU-second/second

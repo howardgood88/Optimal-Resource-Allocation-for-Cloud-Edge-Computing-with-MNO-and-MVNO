@@ -56,14 +56,15 @@ class MNO(Network_operator):
         self._vm_assignment = VMAssignment(self.contract, self.total_vm_id, vm_list)
         self.hold_vm_id, self.mvno.hold_vm_id = self._vm_assignment.run(statistic_data)
         # MNO
-        mno_resource = get_total_resource(self.hold_vm_id, vm_list)
-        logging.info(f'mno vm id: {self.hold_vm_id},\ntotal resource (bw_up, bw_down, cr): {mno_resource}')
+        mno_resource, edge_num, cloud_num = get_total_resource(self.hold_vm_id, vm_list)
+        logging.info(f'mno vm id: {self.hold_vm_id},\ntotal resource (bw_up, bw_down, cr): {mno_resource},\n'
+                        f'cloud num: {cloud_num}, edge num: {edge_num}')
         Metrics.mno_vm_resource.append(mno_resource)
         # MVNO
-        mvno_resource = get_total_resource(self.mvno.hold_vm_id, vm_list)
+        mvno_resource, edge_num, cloud_num = get_total_resource(self.mvno.hold_vm_id, vm_list)
         mvno_cost = self._vm_assignment.vm_highest_price - self._vm_assignment.optimizing.best_fitness
-        logging.info(f'mvno vm id: {self.mvno.hold_vm_id},\ntotal resource (bw_up, bw_down, cr): {mvno_resource}, '
-                        f'cost: {mvno_cost}')
+        logging.info(f'mvno vm id: {self.mvno.hold_vm_id},\ntotal resource (bw_up, bw_down, cr): {mvno_resource},\n'
+                        f'cloud num: {cloud_num}, edge num: {edge_num}, cost: {mvno_cost}')
         Metrics.mvno_vm_resource.append(mvno_resource)
         Metrics.mvno_vm_cost.append(mvno_cost)
 

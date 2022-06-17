@@ -31,22 +31,22 @@ PT5_edge_d = 1.443
 # contract
 expected_max_vm_num = 80
 expected_min_vm_num = 5
-bw_low = 5000 * expected_min_vm_num
-bw_high = 5000 * expected_max_vm_num # Kbps
+bw_low = 3000 * expected_min_vm_num
+bw_high = 3000 * expected_max_vm_num # Kbps
 cr_low = 1 * expected_min_vm_num
 cr_high = 1 * expected_max_vm_num
 
 # vm assignment
 mno_rate = 0.6
 _theta = 0.25
-_lambda = 0.6
-_mu = 0.8
+_lambda = 0.3
+_mu = 0.7
 
 # task deployment
 _gamma = [
-    [0.5, 1.5, 1.0, 2.0, 3.0], # VoIP
-    [0.5, 3.0, 2.0, 2.0, 2.0], # IP Video
-    [0.5, 3.0, 1.0, 2.0, 1.0] # FTP
+    [0.5, 0.5, 1.0, 3.0], # VoIP
+    [0.5, 2.0, 1.0, 2.0], # IP Video
+    [0.5, 3.0, 1.0, 1.0] # FTP
 ]
 mno_op_bw = 600 # Kbps
 mno_op_cr = 0.2 # GCU-second/second

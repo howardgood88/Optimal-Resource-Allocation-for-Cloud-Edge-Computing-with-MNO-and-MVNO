@@ -221,7 +221,7 @@ class TaskDeployment:
             utilities = [
                 task_utility.bw_up(bw_up),
                 task_utility.bw_down(bw_down),
-                task_utility.cr(vm.cr),
+                # task_utility.cr(vm.cr),
                 task_utility.price(vm.price),
                 task_utility.delay(delay, vm.location)
                 # task_utility.cr_diff(cr_diff)

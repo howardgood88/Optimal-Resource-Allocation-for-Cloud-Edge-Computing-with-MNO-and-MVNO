@@ -60,8 +60,8 @@ def task_events_generator(filename, hour_traffic_ratio):
             r = 0.12
         for hour_ratio in hour_traffic_ratio:
             freqs = (voip_spe * hour_ratio * r, ipVideo_spe * hour_ratio * r, ftp_spe * hour_ratio * r)
-            attrs = (("VoIP", 0.3, voip_bw_up_attr, voip_bw_down_attr), ("IP_Video", 0.4, ipVideo_bw_up_attr, ipVideo_bw_down_attr),
-                    ("FTP", 0.7, ftp_bw_up_attr, ftp_bw_down_attr))
+            attrs = (("VoIP", voip_max_cpu, voip_bw_up_attr, voip_bw_down_attr), ("IP_Video", ipVideo_max_cpu, ipVideo_bw_up_attr, ipVideo_bw_down_attr),
+                    ("FTP", ftp_max_cpu, ftp_bw_up_attr, ftp_bw_down_attr))
             while 1:
                 # outcome events
                 if t in event_in:
