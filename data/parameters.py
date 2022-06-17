@@ -11,7 +11,7 @@ ipVideo_max_cpu = 0.4
 ftp_max_cpu = 0.3
 
 voip_bw_up_attr = (4, 4, 3, 15)
-voip_bw_down_attr = (17, 13, 300, 200)
+voip_bw_down_attr = (17, 13, 30, 47)
 ipVideo_bw_up_attr = (2, 4, 45, 5)
 ipVideo_bw_down_attr = (4, 4, 500, 700)
 ftp_bw_up_attr = (5, 3, 40, 10)
