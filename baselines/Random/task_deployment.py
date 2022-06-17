@@ -32,11 +32,8 @@ class UtilityFunc:
             return max_score * (max_price - p) / max_price
 
         @staticmethod
-        def delay(d: float, location: str) -> float:
-            if location == 'cloud':
-                return max_score * 1.5 ** -(d - PT5_cloud_d)
-            elif location == 'edge':
-                return max_score * 1.5 ** -(d - PT5_edge_d)
+        def delay(d: float) -> float:
+            return max_score * 1.05 ** -d
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -63,11 +60,8 @@ class UtilityFunc:
             return max_score * (max_price - p) / max_price
 
         @staticmethod
-        def delay(d: float, location: str) -> float:
-            if location == 'cloud':
-                return max_score * 1.5 ** -(d - PT5_cloud_d)
-            elif location == 'edge':
-                return max_score * 1.5 ** -(d - PT5_edge_d)
+        def delay(d: float) -> float:
+            return max_score * 1.05 ** -d
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -94,11 +88,8 @@ class UtilityFunc:
             return (max_price - p) / max_price * max_score
 
         @staticmethod
-        def delay(d: float, location: str) -> float:
-            if location == 'cloud':
-                return max_score * 1.5 ** -(d - PT5_cloud_d)
-            elif location == 'edge':
-                return max_score * 1.5 ** -(d - PT5_edge_d)
+        def delay(d: float) -> float:
+            return max_score * 1.05 ** -d
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -142,6 +133,8 @@ class TaskDeployment:
         # number of tasks assign to cloud/edge
         self.hour_cloud_task_num = [0, 0, 0]
         self.hour_edge_task_num = [0, 0, 0]
+        # avoid a task to retry too many times in an hour
+        self.retry_times = {}
 
     def __enter__(self):
         '''Initialization.'''
@@ -158,6 +151,7 @@ class TaskDeployment:
         assert(len(self.running_task_id_to_vm) == 0)
         self.hour_cloud_task_num = [0, 0, 0]
         self.hour_edge_task_num = [0, 0, 0]
+        self.retry_times = {}
 
     def __exit__(self, type, value, traceback):
         '''Deploy to max resource vm.'''
@@ -218,15 +212,25 @@ class TaskDeployment:
                 task_utility.bw_down(bw_down),
                 # task_utility.cr(vm.cr),
                 task_utility.price(vm.price),
-                task_utility.delay(delay, vm.location)
+                task_utility.delay(delay)
             ]
-            utility = sum([g * u for g, u in zip(softmax(gamma[Task_type_index[task_type]]), utilities)])
+            utility = sum([g * u for g, u in zip(gamma[Task_type_index[task_type]], 
+                utilities)]) / sum(gamma[Task_type_index[task_type]])
             cost = vm.price
             break
 
+        task_id = task[Task_event_index.index.value]
+        if task_id not in self.retry_times:
+            self.retry_times[task_id] = 0
         if selected_vm_id == None:
-            # if no feasible solution
-            self.reschedule_task(task)
+            if self.retry_times[task_id] <= 3:
+                # if no feasible solution
+                self.reschedule_task(task)
+                self.retry_times[task_id] += 1
+            else:
+                Task_handler.set_mask(task_id)
+                events = Task_handler.get_deleted_events()
+                Task_handler.delete_events()
             self.hour_task_num[task_type_idx] -= 1
             self.block_num[task_type_idx] += 1
         else:

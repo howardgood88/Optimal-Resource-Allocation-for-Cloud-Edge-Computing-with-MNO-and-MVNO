@@ -378,7 +378,7 @@ class Metrics:
             plt.ylabel('number of task')
             cls.plot_cloud_edge_task_num(cls.mno_cloud_task_num[:, 1], cls.mno_edge_task_num[:, 1])
             # FTP
-            plt.subplot(312)
+            plt.subplot(313)
             plt.title('MNO number of task assign to cloud/edge VM in each hour - FTP')
             plt.xlabel('hour')
             plt.ylabel('number of task')
@@ -500,7 +500,7 @@ class Metrics:
             plt.ylabel('number of task')
             cls.plot_cloud_edge_task_num(cls.mvno_cloud_task_num[:, 1], cls.mvno_edge_task_num[:, 1])
             # FTP
-            plt.subplot(312)
+            plt.subplot(313)
             plt.title('MNO number of task assign to cloud/edge VM in each hour - FTP')
             plt.xlabel('hour')
             plt.ylabel('number of task')

@@ -44,9 +44,9 @@ _mu = 0.7
 
 # task deployment
 _gamma = [
-    [0.5, 0.5, 1.0, 3.0], # VoIP
+    [0.5, 0.5, 1.0, 5.0], # VoIP
     [0.5, 2.0, 1.0, 2.0], # IP Video
-    [0.5, 3.0, 1.0, 1.0] # FTP
+    [0.5, 3.0, 1.0, 0.5] # FTP
 ]
 mno_op_bw = 600 # Kbps
 mno_op_cr = 0.2 # GCU-second/second
