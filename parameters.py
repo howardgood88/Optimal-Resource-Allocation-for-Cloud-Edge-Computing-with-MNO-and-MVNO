@@ -55,14 +55,14 @@ mvno_op_cr = 0.05 # GCU-second/second
 
 # utility function
 max_score = 100
-voip_bw_up_bmin = 370 # Kbps
-voip_bw_down_bmin = 16.5
-ipVideo_bw_up_bmax = 20
-ipVideo_bw_down_bmax = 950
-ftp_bw_up_bmin = 5
-ftp_bw_up_bmax = 35
-ftp_bw_down_bmin = 100
-ftp_bw_down_bmax = 1200
+voip_bw_up_bmin = 64 # Kbps
+voip_bw_down_bmin = 5
+ipVideo_bw_up_bmin = 5
+ipVideo_bw_up_bmax = 50
+ipVideo_bw_down_bmin = 24
+ipVideo_bw_down_bmax = 5000
+ftp_bw_up_bmax = 50
+ftp_bw_down_bmax = 5000
 
 # update history data
 phi = 0.9

@@ -42,13 +42,13 @@ class UtilityFunc:
     class IPVideo:
         @staticmethod
         def bw_up(bw: float) -> float:
-            bw = min(bw, ipVideo_bw_up_bmax)
-            return max_score * math.log10(bw + 1) / math.log10(ipVideo_bw_up_bmax + 1)
+            bw = min(bw, ftp_bw_up_bmax)
+            return max_score * math.log10(bw / ipVideo_bw_up_bmin) / math.log10(ipVideo_bw_up_bmax / ipVideo_bw_up_bmin) * (sgn(bw - ipVideo_bw_up_bmin) + 1) / 2
 
         @staticmethod
         def bw_down(bw: float) -> float:
-            bw = min(bw, ipVideo_bw_down_bmax)
-            return max_score * math.log10(bw + 1) / math.log10(ipVideo_bw_down_bmax + 1)
+            bw = min(bw, ftp_bw_down_bmax)
+            return max_score * math.log10(bw / ipVideo_bw_down_bmin) / math.log10(ipVideo_bw_down_bmax / ipVideo_bw_down_bmin) * (sgn(bw - ipVideo_bw_down_bmin) + 1) / 2
 
         @staticmethod
         def cr(cr: float) -> float:
@@ -71,12 +71,12 @@ class UtilityFunc:
         @staticmethod
         def bw_up(bw: float) -> float:
             bw = min(bw, ftp_bw_up_bmax)
-            return max_score * math.log10(bw / ftp_bw_up_bmin) / math.log10(ftp_bw_up_bmax / ftp_bw_up_bmin) * (sgn(bw - ftp_bw_up_bmin) + 1) / 2
+            return max_score * math.log10(bw + 1) / math.log10(ftp_bw_up_bmax + 1)
 
         @staticmethod
         def bw_down(bw: float) -> float:
             bw = min(bw, ftp_bw_down_bmax)
-            return max_score * math.log10(bw / ftp_bw_down_bmin) / math.log10(ftp_bw_down_bmax / ftp_bw_down_bmin) * (sgn(bw - ftp_bw_down_bmin) + 1) / 2
+            return max_score * math.log10(bw + 1) / math.log10(ftp_bw_down_bmax + 1)
 
         @staticmethod
         def cr(cr: float) -> float:
