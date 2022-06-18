@@ -367,6 +367,6 @@ class TaskDeployment:
         for task in tasks:
             task_type = task[Task_event_index.task_type.value]
             task_type_idx = Task_type_index[task_type].value
-            self.hour_task_num[task_type_idx] -= 1
+            # self.hour_task_num[task_type_idx] -= 1
             self.block_num[task_type_idx] += 1
             self.release(task)

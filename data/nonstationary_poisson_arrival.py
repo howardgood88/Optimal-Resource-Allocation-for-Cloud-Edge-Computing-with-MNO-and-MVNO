@@ -25,9 +25,9 @@ def machine_generator(filename):
     for id in range(machine_num):
         _type = np.random.choice(['VoIP', 'IP_Video', 'FTP'])
         location = np.random.choice(['cloud', 'edge'])
-        discount, max_cpu = 1, 1
+        discount, max_cpu = 0.7, 1
         if location == 'edge':
-            discount, max_cpu = 0.8, 0.6
+            discount, max_cpu = 1, 0.6
         cpu = np.random.random() * max_cpu
         price = int(cpu * 250 * discount)
         _str += f'"{id}":{{"id":"{id}","task_type":"{_type}","location":"{location}","cpu_capacity":{cpu:.2f},"price":{price}}}'
