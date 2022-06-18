@@ -25,7 +25,7 @@ def machine_generator(filename):
     for id in range(machine_num):
         _type = np.random.choice(['VoIP', 'IP_Video', 'FTP'])
         location = np.random.choice(['cloud', 'edge'])
-        discount, max_cpu = 0.7, 1
+        discount, max_cpu = 0.67, 1
         if location == 'edge':
             discount, max_cpu = 1, 0.6
         cpu = np.random.random() * max_cpu
