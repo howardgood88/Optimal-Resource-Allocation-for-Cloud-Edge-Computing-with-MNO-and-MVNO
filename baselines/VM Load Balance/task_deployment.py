@@ -33,7 +33,7 @@ class UtilityFunc:
 
         @staticmethod
         def delay(d: float) -> float:
-            return max_score * 1.05 ** -d
+            return max_score * delay_factor ** -d
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -61,7 +61,7 @@ class UtilityFunc:
 
         @staticmethod
         def delay(d: float) -> float:
-            return max_score * 1.05 ** -d
+            return max_score * delay_factor ** -d
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -89,7 +89,7 @@ class UtilityFunc:
 
         @staticmethod
         def delay(d: float) -> float:
-            return max_score * 1.05 ** -d
+            return max_score * delay_factor ** -d
 
         @staticmethod
         def cr_diff(diff: float) -> float:

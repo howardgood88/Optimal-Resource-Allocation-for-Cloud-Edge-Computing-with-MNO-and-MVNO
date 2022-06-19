@@ -3,7 +3,7 @@ from time import time
 import scipy.integrate as integrate
 import math
 import logging
-from parameters import (rnd_seed, Task_type_index, case_num, big_round_times)
+from parameters import (rnd_seed, Task_type_index, case_num, big_round_times, testing)
 import matplotlib.pyplot as plt
 import os
 
@@ -139,6 +139,8 @@ class Metrics:
     gap = 0.05
     width = 0.2
     figsize = (16, 12)
+    fig_dir = f'./figs/{case_num[:-1]}_{testing}'
+    metric_dir = f'Metrics/{case_num[:-1]}_{testing}'
 
     ################# Common-used Functions #################
 
@@ -254,7 +256,7 @@ class Metrics:
         plt.ylabel('throughput (Kbps)')
         cls.plot_2dim_line(cls.statistic_data[:, :, 2])
 
-        plt.savefig(f'figs/{case_num}statistic_data')
+        plt.savefig(cls.fig_dir + 'statistic_data')
 
     @classmethod
     def plot_hour_data(cls):
@@ -278,7 +280,7 @@ class Metrics:
         plt.ylabel('throughput (Kbps)')
         cls.plot_2dim_line(cls.hour_data[:, :, 2])
 
-        plt.savefig(f'figs/{case_num}hour_data_resource')
+        plt.savefig(cls.fig_dir + 'hour_data_resource')
 
     @classmethod
     def plot_mno(cls):
@@ -303,7 +305,7 @@ class Metrics:
             plt.ylabel('average throughput (Kbps)')
             cls.plot_2dim_bar(cls.mno_vm_resource[:, :, 2])
 
-            plt.savefig(f'figs/{case_num}MNO/mno_vm_resource')
+            plt.savefig(cls.fig_dir + 'MNO/mno_vm_resource')
 
         def plot_task_fitness():
             for day in range(big_round_times - 2):
@@ -322,7 +324,7 @@ class Metrics:
                 ax.set_xticks(x)
                 ax.set_xticklabels(labels)
                 ax.legend()
-                plt.savefig(f'figs/{case_num}MNO/mno_task_fitness_day_{day + 1}')
+                plt.savefig(cls.fig_dir + f'MNO/mno_task_fitness_day_{day + 1}')
 
         def plot_task_resource():
             plt.figure(figsize=cls.figsize)
@@ -345,7 +347,7 @@ class Metrics:
             plt.ylabel('average throughput (Kbps)')
             cls.plot_2dim_line(cls.mno_task_resource[:, :, 2])
 
-            plt.savefig(f'figs/{case_num}MNO/mno_task_resource')
+            plt.savefig(cls.fig_dir + 'MNO/mno_task_resource')
 
         def plot_block_rate():
             plt.figure(figsize=cls.figsize)
@@ -353,7 +355,7 @@ class Metrics:
             plt.xlabel('hour')
             plt.ylabel('ratio')
             cls.plot_2dim_line(cls.mno_block_rate)
-            plt.savefig(f'figs/{case_num}MNO/mno_task_block_rate')
+            plt.savefig(cls.fig_dir + 'MNO/mno_task_block_rate')
 
         def plot_user_cost():
             plt.figure(figsize=cls.figsize)
@@ -361,7 +363,7 @@ class Metrics:
             plt.xlabel('hour')
             plt.ylabel('cost (dollar)')
             cls.plot_1dim_line(cls.mno_user_cost)
-            plt.savefig(f'figs/{case_num}MNO/mno_user_cost')
+            plt.savefig(cls.fig_dir + 'MNO/mno_user_cost')
 
         def plot_task_num():
             plt.figure(figsize=cls.figsize)
@@ -384,7 +386,7 @@ class Metrics:
             plt.ylabel('number of task')
             cls.plot_cloud_edge_task_num(cls.mno_cloud_task_num[:, 2], cls.mno_edge_task_num[:, 2])
 
-            plt.savefig(f'figs/{case_num}MNO/mno_cloud_task_num')
+            plt.savefig(cls.fig_dir + 'MNO/mno_task_num')
 
         plot_vm_resource()
         plot_task_fitness()
@@ -416,7 +418,7 @@ class Metrics:
             plt.ylabel('average throughput (Kbps)')
             cls.plot_2dim_bar(cls.mvno_vm_resource[:, :, 2])
 
-            plt.savefig(f'figs/{case_num}MVNO/mvno_vm_resource')
+            plt.savefig(cls.fig_dir + 'MVNO/mvno_vm_resource')
 
         def plot_task_fitness():
             for day in range(big_round_times - 2):
@@ -435,7 +437,7 @@ class Metrics:
                 ax.set_xticks(x)
                 ax.set_xticklabels(labels)
                 ax.legend()
-                plt.savefig(f'figs/{case_num}MVNO/mvno_task_fitness_day_{day + 1}')
+                plt.savefig(cls.fig_dir + f'MVNO/mvno_task_fitness_day_{day + 1}')
 
         def plot_task_resource():
             plt.figure(figsize=cls.figsize)
@@ -458,7 +460,7 @@ class Metrics:
             plt.ylabel('average throughput (Kbps)')
             cls.plot_2dim_line(cls.mvno_task_resource[:, :, 2])
 
-            plt.savefig(f'figs/{case_num}MVNO/mvno_task_resource')
+            plt.savefig(cls.fig_dir + 'MVNO/mvno_task_resource')
 
         def plot_vm_cost():
             plt.figure(figsize=cls.figsize)
@@ -467,7 +469,7 @@ class Metrics:
             plt.ylabel('VM total cost(dollar)')
 
             cls.plot_1dim_bar(cls.mvno_vm_cost)
-            plt.savefig(f'figs/{case_num}MVNO/mvno_vm_cost')
+            plt.savefig(cls.fig_dir + 'MVNO/mvno_vm_cost')
 
         def plot_block_rate():
             plt.figure(figsize=cls.figsize)
@@ -475,7 +477,7 @@ class Metrics:
             plt.xlabel('hour')
             plt.ylabel('ratio')
             cls.plot_2dim_line(cls.mvno_block_rate)
-            plt.savefig(f'figs/{case_num}MVNO/mvno_task_block_rate')
+            plt.savefig(cls.fig_dir + 'MVNO/mvno_task_block_rate')
 
         def plot_user_cost():
             plt.figure(figsize=cls.figsize)
@@ -483,7 +485,7 @@ class Metrics:
             plt.xlabel('hour')
             plt.ylabel('cost (dollar)')
             cls.plot_1dim_line(cls.mvno_user_cost)
-            plt.savefig(f'figs/{case_num}MVNO/mvno_user_cost')
+            plt.savefig(cls.fig_dir + 'MVNO/mvno_user_cost')
 
         def plot_task_num():
             plt.figure(figsize=cls.figsize)
@@ -506,7 +508,7 @@ class Metrics:
             plt.ylabel('number of task')
             cls.plot_cloud_edge_task_num(cls.mvno_cloud_task_num[:, 2], cls.mvno_edge_task_num[:, 2])
 
-            plt.savefig(f'figs/{case_num}MVNO/mvno_cloud_task_num')
+            plt.savefig(cls.fig_dir + 'MVNO/mvno_task_num')
 
         plot_vm_resource()
         plot_task_fitness()
@@ -536,37 +538,37 @@ class Metrics:
         cls.mvno_cloud_task_num = np.array(cls.mvno_cloud_task_num)
         cls.mvno_edge_task_num = np.array(cls.mvno_edge_task_num)
 
-        if not os.path.exists(f'figs/{case_num}'):
-            os.makedirs(f'figs/{case_num}')
-        cls.plot_statistic_data()
-        cls.plot_hour_data()
-        if not os.path.exists(f'figs/{case_num}MNO/'):
-            os.makedirs(f'figs/{case_num}MNO/')
+        if not os.path.exists(cls.fig_dir):
+            os.makedirs(cls.fig_dir)
+        # cls.plot_statistic_data()
+        # cls.plot_hour_data()
+        if not os.path.exists(cls.fig_dir + 'MNO/'):
+            os.makedirs(cls.fig_dir + 'MNO/')
         cls.plot_mno()
-        if not os.path.exists(f'figs/{case_num}MVNO/'):
-            os.makedirs(f'figs/{case_num}MVNO/')
+        if not os.path.exists(cls.fig_dir + 'MVNO/'):
+            os.makedirs(cls.fig_dir + 'MVNO/')
         cls.plot_mvno()
         # plt.show()
-        logging.info(f'Save figs to ./figs/{case_num}!')
-        print(f'Save figs to ./figs/{case_num}!')
+        logging.info(f'Save figs to {cls.fig_dir}!')
+        print(f'Save figs to {cls.fig_dir}!')
 
         # save metrics data
-        if not os.path.exists(f'Metrics/{case_num}'):
-            os.makedirs(f'Metrics/{case_num}')
-        np.save(f'Metrics/{case_num}statistic_data', cls.statistic_data)
-        np.save(f'Metrics/{case_num}hour_data', cls.hour_data)
-        np.save(f'Metrics/{case_num}mno_vm_resource', cls.mno_vm_resource)
-        np.save(f'Metrics/{case_num}mvno_vm_resource', cls.mvno_vm_resource)
-        np.save(f'Metrics/{case_num}mvno_vm_cost', cls.mvno_vm_cost)
-        np.save(f'Metrics/{case_num}mno_task_fitness', cls.mno_task_fitness)
-        np.save(f'Metrics/{case_num}mno_task_resource', cls.mno_task_resource)
-        np.save(f'Metrics/{case_num}mvno_task_fitness', cls.mvno_task_fitness)
-        np.save(f'Metrics/{case_num}mvno_task_resource', cls.mvno_task_resource)
-        np.save(f'Metrics/{case_num}mno_block_rate', cls.mno_block_rate)
-        np.save(f'Metrics/{case_num}mvno_block_rate', cls.mvno_block_rate)
-        np.save(f'Metrics/{case_num}mno_user_cost', cls.mno_user_cost)
-        np.save(f'Metrics/{case_num}mvno_user_cost', cls.mvno_user_cost)
-        np.save(f'Metrics/{case_num}mno_cloud_task_num', cls.mno_cloud_task_num)
-        np.save(f'Metrics/{case_num}mno_edge_task_num', cls.mno_edge_task_num)
-        np.save(f'Metrics/{case_num}mvno_cloud_task_num', cls.mvno_cloud_task_num)
-        np.save(f'Metrics/{case_num}mvno_edge_task_num', cls.mvno_edge_task_num)
+        if not os.path.exists(cls.metric_dir):
+            os.makedirs(cls.metric_dir)
+        np.save(cls.metric_dir + 'statistic_data', cls.statistic_data)
+        np.save(cls.metric_dir + 'hour_data', cls.hour_data)
+        np.save(cls.metric_dir + 'mno_vm_resource', cls.mno_vm_resource)
+        np.save(cls.metric_dir + 'mvno_vm_resource', cls.mvno_vm_resource)
+        np.save(cls.metric_dir + 'mvno_vm_cost', cls.mvno_vm_cost)
+        np.save(cls.metric_dir + 'mno_task_fitness', cls.mno_task_fitness)
+        np.save(cls.metric_dir + 'mno_task_resource', cls.mno_task_resource)
+        np.save(cls.metric_dir + 'mvno_task_fitness', cls.mvno_task_fitness)
+        np.save(cls.metric_dir + 'mvno_task_resource', cls.mvno_task_resource)
+        np.save(cls.metric_dir + 'mno_block_rate', cls.mno_block_rate)
+        np.save(cls.metric_dir + 'mvno_block_rate', cls.mvno_block_rate)
+        np.save(cls.metric_dir + 'mno_user_cost', cls.mno_user_cost)
+        np.save(cls.metric_dir + 'mvno_user_cost', cls.mvno_user_cost)
+        np.save(cls.metric_dir + 'mno_cloud_task_num', cls.mno_cloud_task_num)
+        np.save(cls.metric_dir + 'mno_edge_task_num', cls.mno_edge_task_num)
+        np.save(cls.metric_dir + 'mvno_cloud_task_num', cls.mvno_cloud_task_num)
+        np.save(cls.metric_dir + 'mvno_edge_task_num', cls.mvno_edge_task_num)

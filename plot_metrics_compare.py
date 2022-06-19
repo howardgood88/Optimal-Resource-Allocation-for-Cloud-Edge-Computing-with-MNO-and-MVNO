@@ -1,9 +1,9 @@
-from parameters import case_num
+from parameters import (case_num, testing)
 import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-paths = [f'./Metrics/{case_num}', f'./baselines/VM Load Balance/Metrics/{case_num}', f'./baselines/Random/Metrics/{case_num}']
+paths = [f'./Metrics/{case_num[:-1]}_{testing}', f'./baselines/VM Load Balance/Metrics/{case_num[:-1]}_{testing}', f'./baselines/Random/Metrics/{case_num[:-1]}_{testing}']
 
 data = []
 for path in paths:
@@ -25,7 +25,7 @@ for path in paths:
         'mvno_edge_task_num' : np.load(path + 'mvno_edge_task_num.npy'), # (VoIP, IP Video, FTP)
     })
 
-_dir = './figs/comparison/'
+_dir = f'./figs/comparison_{testing}'
 if not os.path.exists(_dir):
     os.makedirs(_dir)
 if not os.path.exists(_dir + 'MNO/'):

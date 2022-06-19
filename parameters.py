@@ -19,7 +19,7 @@ big_round_times = 7
 # user to vm generating data
 beta_a = 2
 beta_b = 1.5
-beta_t = 3
+beta_t = 4
 beta_d = 0
 PT5_cloud_a = 2
 PT5_cloud_b = 0.557
@@ -44,10 +44,11 @@ _mu = 0.7
 
 # task deployment
 _gamma = [
-    [0.5, 0.5, 1.0, 5.0], # VoIP
-    [0.5, 2.0, 1.0, 2.0], # IP Video
-    [0.5, 3.0, 1.0, 0.5] # FTP
+    [0.01, 5, 1.0, 0.5], # VoIP
+    [0.01, 1, 1.0, 0.1], # IP Video
+    [0.01, 3, 1.0, 0.01] # FTP
 ]
+testing = 'all_testing_513_0501001/'
 mno_op_bw = 600 # Kbps
 mno_op_cr = 0.2 # GCU-second/second
 mvno_op_bw = 300 # Kbps
@@ -63,6 +64,7 @@ ipVideo_bw_down_bmin = 24
 ipVideo_bw_down_bmax = 5000
 ftp_bw_up_bmax = 50
 ftp_bw_down_bmax = 5000
+delay_factor = 1.015
 
 # update history data
 phi = 0.9
