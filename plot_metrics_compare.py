@@ -25,7 +25,24 @@ for path in paths:
         'mvno_edge_task_num' : np.load(path + 'mvno_edge_task_num.npy'), # (VoIP, IP Video, FTP)
     })
 
-_dir = './figs/comparison/'
+def fill_zero_fitness(fitness):
+    for i in range(120):
+        for task in range(3):
+            if fitness[i, task] == 0:
+                if i == 0:
+                    fitness[i, task] = fitness[i + 1, task]
+                elif i == 119:
+                    fitness[i, task] == fitness[i - 1, task]
+                else:
+                    fitness[i, task] = (fitness[i - 1, task] + fitness[i + 1, task]) / 2
+fill_zero_fitness(data[0]['mno_task_fitness'])
+fill_zero_fitness(data[1]['mno_task_fitness'])
+fill_zero_fitness(data[2]['mno_task_fitness'])
+fill_zero_fitness(data[0]['mvno_task_fitness'])
+fill_zero_fitness(data[1]['mvno_task_fitness'])
+fill_zero_fitness(data[2]['mvno_task_fitness'])
+
+_dir = f'./figs/comparison/'
 if not os.path.exists(_dir):
     os.makedirs(_dir)
 if not os.path.exists(_dir + 'MNO/'):
@@ -158,10 +175,7 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title):
     plt.savefig(_dir + op + f'{file_title}_T_down')
 
 def plot_2d(metric, op, plt_title, ylabel, file_title):
-    if metric == 'mno_task_fitness' or metric == 'mvno_task_fitness':
-        _data1, _data2, _data3 = data[0][metric][:120], data[1][metric][:120], data[2][metric][:120]
-    else:
-        _data1, _data2, _data3 = data[0][metric], data[1][metric], data[2][metric]
+    _data1, _data2, _data3 = data[0][metric][:120], data[1][metric][:120], data[2][metric][:120]
     plt.figure(figsize=figsize)
     # VoIP
     plt.subplot(311)

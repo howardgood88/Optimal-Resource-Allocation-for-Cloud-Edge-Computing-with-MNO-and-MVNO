@@ -1,14 +1,14 @@
 rnd_seed = 1126
 
 # spe: seconds per event arrive
-voip_spe = 1 / 10
-ipVideo_spe = 1 / 15
-ftp_spe = 1 / 25
+voip_spe = 1 / 5
+ipVideo_spe = 1 / 10
+ftp_spe = 1 / 20
 
 # cpu
 voip_max_cpu = 0.0138
 ipVideo_max_cpu = 0.0212
-ftp_max_cpu = 0.0001
+ftp_max_cpu = 0.001
 
 voip_bw_up_attr = (4, 4, 3, 15)
 voip_bw_down_attr = (17, 13, 30, 47)
