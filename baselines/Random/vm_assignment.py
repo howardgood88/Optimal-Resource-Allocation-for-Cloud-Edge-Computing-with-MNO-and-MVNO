@@ -11,7 +11,7 @@ class VMAssignment:
         self.optimizing = VMAssignmentOptimizing(contract, candidate_vm_id, vm_list)
         self.candidate_vm_id = candidate_vm_id
         self.vm_list = vm_list
-        self.vm_highest_price = sum([vm.price for vm in vm_list.values()])
+        self.vm_highest_price = sum([vm.origin_price for vm in vm_list.values()])
     
     def run(self, statistic_data: np.array) -> None:
         '''Start running VM Assignment algorithm.'''
@@ -26,7 +26,7 @@ class VMAssignment:
                     for vm_id in selected_vm_id:
                         # reverse by highest price value to make optimizing maximize other than minimize.
                         # _lambda is the discount MNO provide to MVNO
-                        cost += self.vm_list[vm_id].price * _lambda
+                        cost += self.vm_list[vm_id].origin_price * _lambda
                     fitness = self.vm_highest_price - cost
                     logging.debug(f'population {idx + 1} {selected_vm_id} with cost: {cost}, fitness: {fitness}')
                     self.optimizing.fitness[idx] = fitness

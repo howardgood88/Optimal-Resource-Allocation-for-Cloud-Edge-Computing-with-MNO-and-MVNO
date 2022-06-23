@@ -11,8 +11,6 @@ np.random.seed(rnd_seed)
 # hour_traffic_ratio = [0.51, 0.42, 0.33, 0.31, 0.23, 0.23, 0.24, 0.22, 0.24, 0.33, 0.35, 0.52, 0.56, 0.56, 0.64, 0.8, 0.91, 0.97, 0.98, 0.95, 0.92, 0.965, 0.87, 0.8]
 # hour 1~24
 day_hour_traffic_ratio = [0.09, 0.09, 0.07, 0.07, 0.07, 0.13, 0.44, 0.73, 0.77, 0.78, 0.72, 0.48, 0.69, 0.69, 0.47, 0.26, 0.20, 0.19, 0.12, 0.10, 0.08, 0.07, 0.07, 0.07]
-history_hour_traffic_ratio = [sum(day_hour_traffic_ratio) / len(day_hour_traffic_ratio) for _ in range(24)]
-# print(f'history ratio: {history_hour_traffic_ratio[0]}')
 
 user_num = 300
 machine_num = 300
@@ -43,17 +41,16 @@ def machine_generator(filename):
         with open(dir + filename, 'w') as f:
             f.write(_str)
 
-def task_events_generator(filename, hour_traffic_ratio):
-    def event_gen(_type, max_cpu, bw_up_attr, bw_down_attr):
-        cpu_req = np.random.random() * max_cpu
-        return [event_id, 0, t, _type, str(np.random.randint(0, user_num)), cpu_req, cpu_req * np.random.random(),
+def task_events_generator(filename, days, hour_traffic_ratio):
+    def event_gen(_type, cpu, bw_up_attr, bw_down_attr):
+        return [event_id, 0, t, _type, str(np.random.randint(0, user_num)), cpu, beta(4, 4, 0.01, cpu - 0.005),
                 beta(*bw_up_attr), beta(*bw_down_attr)]
     t = 0
     event_id = 0
     event_in = {}
     
     _str = '[\n'
-    for i in range(number_of_days):
+    for i in range(days):
         if i % 7 < 5:
             r = 1
         else:
@@ -114,6 +111,6 @@ if __name__ == '__main__':
         os.makedirs('./data')
     plot()
     machine_generator('machine_attributes.json')
-    task_events_generator('task_events.json', day_hour_traffic_ratio)
-    task_events_generator('history_data.json', history_hour_traffic_ratio)
+    task_events_generator('task_events.json', number_of_days, day_hour_traffic_ratio)
+    task_events_generator('history_data.json', 1, day_hour_traffic_ratio)
     print(f'Finished generating, save result to {out_files}')

@@ -65,6 +65,8 @@ def get_hourly_statistic_data(hour_events: np.array) -> np.array:
     task_type_idx = Task_event_index.task_type.value
     average_cpu_usage_idx = Task_event_index.average_cpu_usage.value
     T_down_idx = Task_event_index.T_down.value
+    # only get the income events for traffic statistic
+    hour_events = hour_events[hour_events[:, Task_event_index.event_type.value] == Event_type.start]
 
     hourly_statistic_data = [None for i in range(len(Task_type_index))]
     for task_type, task_idx in Task_type_index.__members__.items():

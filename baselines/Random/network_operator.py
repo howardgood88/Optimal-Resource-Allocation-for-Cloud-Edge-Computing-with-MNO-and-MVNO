@@ -4,7 +4,7 @@ from vm_assignment import VMAssignment
 from task_deployment import TaskDeployment
 from contract import Contract
 from utils import (step_logger, get_total_resource, timer, Metrics)
-from parameters import (_mu, mno_op_bw, mno_op_cr, mvno_op_bw, mvno_op_cr)
+from parameters import (_mu, mno_op_bw, mno_op_cr, mvno_op_bw, mvno_op_cr, expected_task_num)
 import logging
 
 class Network_operator(abc.ABC):
@@ -57,13 +57,13 @@ class MNO(Network_operator):
         self.hold_vm_id, self.mvno.hold_vm_id = self._vm_assignment.run(statistic_data)
         # MNO
         mno_resource, edge_num, cloud_num = get_total_resource(self.hold_vm_id, vm_list)
-        logging.info(f'mno vm id: {self.hold_vm_id},\ntotal resource (bw_up, bw_down, cr): {mno_resource},\n'
+        logging.info(f'mno vm id: {self.hold_vm_id},\ntotal resource (cr, bw_up, bw_down): {mno_resource},\n'
                         f'cloud num: {cloud_num}, edge num: {edge_num}')
         Metrics.mno_vm_resource.append(mno_resource)
         # MVNO
         mvno_resource, edge_num, cloud_num = get_total_resource(self.mvno.hold_vm_id, vm_list)
         mvno_cost = self._vm_assignment.vm_highest_price - self._vm_assignment.optimizing.best_fitness
-        logging.info(f'mvno vm id: {self.mvno.hold_vm_id},\ntotal resource (bw_up, bw_down, cr): {mvno_resource},\n'
+        logging.info(f'mvno vm id: {self.mvno.hold_vm_id},\ntotal resource (cr, bw_up, bw_down): {mvno_resource},\n'
                         f'cloud num: {cloud_num}, edge num: {edge_num}, cost: {mvno_cost}')
         Metrics.mvno_vm_resource.append(mvno_resource)
         Metrics.mvno_vm_cost.append(mvno_cost)
@@ -72,4 +72,6 @@ class MNO(Network_operator):
         
         # the price mvno sells to its customers
         for id in self.mvno.hold_vm_id:
-            vm_list[id].price = vm_list[id].price * _mu
+            vm_list[id].price = vm_list[id].origin_price * _mu / expected_task_num
+        for id in self.hold_vm_id:
+            vm_list[id].price = vm_list[id].origin_price / expected_task_num

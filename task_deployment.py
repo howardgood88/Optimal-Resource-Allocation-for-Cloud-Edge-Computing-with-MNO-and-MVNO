@@ -29,7 +29,7 @@ class UtilityFunc:
 
         @staticmethod
         def price(p: float) -> float:
-            max_price = 250
+            max_price = 250 / expected_max_vm_num
             return max_score * (max_price - p) / max_price
 
         @staticmethod
@@ -57,7 +57,7 @@ class UtilityFunc:
 
         @staticmethod
         def price(p: float) -> float:
-            max_price = 250
+            max_price = 250 / expected_max_vm_num
             return max_score * (max_price - p) / max_price
 
         @staticmethod
@@ -85,7 +85,7 @@ class UtilityFunc:
 
         @staticmethod
         def price(p: float) -> float:
-            max_price = 250
+            max_price = 250 / expected_max_vm_num
             return (max_price - p) / max_price * max_score
 
         @staticmethod

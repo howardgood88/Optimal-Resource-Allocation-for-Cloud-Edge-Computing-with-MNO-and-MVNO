@@ -7,6 +7,7 @@ class VM:
         self.location = attributes['location']
         self.cr = attributes['cpu_capacity']
         self.price = attributes['price']
+        self.origin_price = attributes['price']
         self.local_bw_up = 100000 # Kbps
         self.local_bw_down = 100000 # Kbps
         # the bw and daley to user (runtime)

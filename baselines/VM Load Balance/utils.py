@@ -60,14 +60,14 @@ class step_logger:
 
 def get_total_resource(vm_id_list: np.array, vm_list: dict):
     _sum = [[0, 0, 0] for _ in range(3)]
-    edge_num, cloud_num = 0, 0
+    edge_num, cloud_num = [0, 0, 0], [0, 0, 0]
     for vm_id in vm_id_list:
         vm = vm_list[vm_id]
-        if vm.location == 'cloud':
-            cloud_num += 1
-        else:
-            edge_num += 1
         task_type_idx = Task_type_index[vm.task_type].value
+        if vm.location == 'cloud':
+            cloud_num[task_type_idx] += 1
+        else:
+            edge_num[task_type_idx] += 1
         _sum[task_type_idx][0] += vm.cr
         _sum[task_type_idx][1] += vm.avg_bw_up
         _sum[task_type_idx][2] += vm.avg_bw_down
