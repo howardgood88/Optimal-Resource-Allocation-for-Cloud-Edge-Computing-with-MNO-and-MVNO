@@ -11,6 +11,7 @@ class Network_operator(abc.ABC):
     def __init__(self):
         self.hold_vm_id = None
         self._task_deployment = TaskDeployment(self.name, self.op_bw, self.op_cr)
+        self.profit = 0
 
     def deploy_task(self, task: np.array, vm_list: dict) -> None:
         '''Delegate to class TaskDeployment.'''
@@ -71,6 +72,8 @@ class MNO(Network_operator):
         mvno_cost = self._vm_assignment.vm_highest_price - self._vm_assignment.optimizing.best_fitness
         logging.info(f'mvno vm id: {self.mvno.hold_vm_id},\ntotal resource (cr, bw_up, bw_down): {mvno_resource},\n'
                         f'cloud num: {cloud_num}, edge num: {edge_num}, cost: {mvno_cost}')
+        self.profit += mvno_cost
+        self.mvno.profit -= mvno_cost
         Metrics.mvno_vm_resource.append(mvno_resource)
         Metrics.mvno_vm_cost.append(mvno_cost)
 

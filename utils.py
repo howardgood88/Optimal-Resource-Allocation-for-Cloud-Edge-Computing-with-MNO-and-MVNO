@@ -120,6 +120,8 @@ class Metrics:
     mno_vm_resource = [] # 3x3
     mvno_vm_resource = [] # 3x3
     mvno_vm_cost = [] # float
+    mno_profit = [] # float
+    mvno_profit = [] # float
     # hourly
     hour_data = [] # 3x3
     mno_task_fitness = [] # (VoIP, IP Video, FTP)
@@ -535,6 +537,8 @@ class Metrics:
         cls.mno_edge_task_num = np.array(cls.mno_edge_task_num)
         cls.mvno_cloud_task_num = np.array(cls.mvno_cloud_task_num)
         cls.mvno_edge_task_num = np.array(cls.mvno_edge_task_num)
+        cls.mno_profit = np.array(cls.mno_profit)
+        cls.mvno_profit = np.array(cls.mvno_profit)
 
         if not os.path.exists(f'figs/{case_num}'):
             os.makedirs(f'figs/{case_num}')
@@ -570,3 +574,5 @@ class Metrics:
         np.save(f'Metrics/{case_num}mno_edge_task_num', cls.mno_edge_task_num)
         np.save(f'Metrics/{case_num}mvno_cloud_task_num', cls.mvno_cloud_task_num)
         np.save(f'Metrics/{case_num}mvno_edge_task_num', cls.mvno_edge_task_num)
+        np.save(f'Metrics/{case_num}mno_profit', cls.mno_profit)
+        np.save(f'Metrics/{case_num}mvno_profit', cls.mvno_profit)

@@ -228,7 +228,9 @@ while Global.system_time // big_round_minutes < big_round_times:
 
         with step_logger('Start of VM Assignment', title2, 'Finished vm assignment.'):
             mno.vm_assignment(statistic_data, vm_list)
-            
+        
+        mno.profit = 0
+        mvno.profit = 0
         with step_logger('Start of Task Deployment', title2, f'Finished Task Deployment.'):
             hour_task_record = []
             while Global.system_time == start_time or Global.system_time % big_round_minutes != 0:
@@ -244,6 +246,8 @@ while Global.system_time // big_round_minutes < big_round_times:
                     f'Get hour events: {len(hour_events)}\nid,type,time\n{hour_events}', 0, f'Finished hour {hour_num}'):
                     if not hour_events.size == 0:
                         task_deployment(hour_events, minutes_range)
+                        mno.profit += mno._task_deployment.user_cost
+                        mvno.profit += mvno._task_deployment.user_cost
                 task_events = Task_handler.task_events
                 Task_handler.changed = False
 
@@ -259,6 +263,8 @@ while Global.system_time // big_round_minutes < big_round_times:
                 hourly_statistic_data = get_hourly_statistic_data(hour_events)
                 hour_task_record.append(hourly_statistic_data)
                 Metrics.hour_data.append(hourly_statistic_data)
+        Metrics.mno_profit.append(mno.profit)
+        Metrics.mvno_profit.append(mvno.profit)
         hour_task_record = np.array(hour_task_record, dtype=list)
         start_time = Global.system_time
         assert(Global.system_time % big_round_minutes == 0)

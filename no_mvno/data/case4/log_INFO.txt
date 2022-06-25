@@ -1,0 +1,20 @@
+INFO:Time 0:--------------------------------------------------------Start of load data--------------------------------------------------------
+INFO:Time 0:Finished loading data.
+INFO:Time 0:-----------------------------------------------------Start of Initialization------------------------------------------------------
+INFO:Time 0:Finished creating vm instance, store in vm_list that map from vm_id to vm instance.
+INFO:Time 0:Finished data preprocessing, get hour_task_record as hourly history data and record user has appeared.
+INFO:Time 0:New user/users detected, finished updating vm_list.from_user.
+INFO:Time 0:Finished initialization.
+INFO:Time 0:---------------------------------------------------------Start of Round 1---------------------------------------------------------
+INFO:Time 0:---------------------------------------------Start of Task Deployment----------------------------------------------
+INFO:Time 0:Start of hour 1
+Get hour events: 223
+id,type,time
+[[0 0 51 ... 0.012329542916013686 16.911585514142196 66.2133759722862]
+ [1 0 57 ... 0.02048085514207202 21.80900231434915 911.6442321807724]
+ [2 0 70 ... 0.004113860285045552 39.60291631955988 1215.8719331679981]
+ ...
+ [194 1 3574 ... 0.020909441564025764 20.81095197523938 864.4541561922995]
+ [195 1 3579 ... 0.011662829067926647 15.84245799394538 59.90186350196741]
+ [197 1 3588 ... 0.02457813365164128 16.79710439626865 903.363138731475]]
+INFO:Time 51:New user/users detected, finished updating vm_list.from_user.
