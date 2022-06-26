@@ -1,4 +1,4 @@
-from parameters import case_num
+from parameters import case_num, expected_task_num
 import numpy as np
 import matplotlib.pyplot as plt
 import os
@@ -46,13 +46,13 @@ def plot_profit():
     plt.title('Profit comparison between Only MNO, MNO with MVNO and MVNO with MNO in each round')
     plt.xlabel('round')
     plt.ylabel('profit (dollar)')
-    x = np.arange(len(data[1]['mno_profit']))
-    plt.bar(x - 0.2, data[1]['mno_profit'], width = 0.5, label='Only MNO')
-    plt.bar(x, data[0]['mno_profit'], width = 0.5, label='MNO with MVNO')
-    plt.bar(x + 0.2, data[0]['mvno_profit'], width = 0.5, label='MVNO with MNO')
+    x = np.arange(1, len(data[1]['mno_profit']) + 1)
+    plt.bar(x - 0.2, data[1]['mno_profit'], width = 0.2, label='Only MNO')
+    plt.bar(x, data[0]['mno_profit'], width = 0.2, label='MNO with MVNO')
+    plt.bar(x + 0.2, data[0]['mvno_profit'], width = 0.2, label='MVNO with MNO')
     plt.legend()
+    plt.savefig(_dir + f'profit_{expected_task_num}')
     plt.show()
-    plt.savefig(_dir + 'profit')
 
 ########################## 
 plot_profit()
