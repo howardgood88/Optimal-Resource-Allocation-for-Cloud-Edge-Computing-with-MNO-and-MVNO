@@ -31,8 +31,8 @@ PT5_edge_d = 1.443
 # contract
 expected_max_vm_num = 80
 expected_min_vm_num = 5
-bw_low = 5000 * expected_min_vm_num
-bw_high = 5000 * expected_max_vm_num # Kbps
+bw_low = 4000 * expected_min_vm_num
+bw_high = 4000 * expected_max_vm_num # Kbps
 cr_low = 1 * expected_min_vm_num
 cr_high = 1 * expected_max_vm_num
 
@@ -61,9 +61,9 @@ voip_bw_down_bmin = 5
 ipVideo_bw_up_bmin = 5
 ipVideo_bw_up_bmax = 50
 ipVideo_bw_down_bmin = 24
-ipVideo_bw_down_bmax = 5000
+ipVideo_bw_down_bmax = 4000
 ftp_bw_up_bmax = 50
-ftp_bw_down_bmax = 5000
+ftp_bw_down_bmax = 4000
 
 # update history data
 phi = 0.9
