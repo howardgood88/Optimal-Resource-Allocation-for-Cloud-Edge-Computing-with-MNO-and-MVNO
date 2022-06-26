@@ -71,12 +71,12 @@ class UtilityFunc:
         @staticmethod
         def bw_up(bw: float) -> float:
             bw = min(bw, ftp_bw_up_bmax)
-            return max_score * math.log10(bw + 1) / math.log10(ftp_bw_up_bmax + 1)
+            return max_score * math.log10(bw / 10 + 1) / math.log10(ftp_bw_up_bmax / 10 + 1)
 
         @staticmethod
         def bw_down(bw: float) -> float:
             bw = min(bw, ftp_bw_down_bmax)
-            return max_score * math.log10(bw + 1) / math.log10(ftp_bw_down_bmax + 1)
+            return max_score * math.log10(bw / 80 + 1) / math.log10(ftp_bw_down_bmax / 80 + 1)
 
         @staticmethod
         def cr(cr: float) -> float:
