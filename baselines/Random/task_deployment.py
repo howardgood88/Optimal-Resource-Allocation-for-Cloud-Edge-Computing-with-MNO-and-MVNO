@@ -135,6 +135,8 @@ class TaskDeployment:
         self.hour_edge_task_num = [0, 0, 0]
         # avoid a task to retry too many times in an hour
         self.retry_times = {}
+        # count vm utilization
+        self.vm_used = set()
 
     def __enter__(self):
         '''Initialization.'''
@@ -234,8 +236,10 @@ class TaskDeployment:
             self.hour_task_num[task_type_idx] -= 1
             self.block_num[task_type_idx] += 1
         else:
-            self.bind_task(task, vm_list[selected_vm_id])
-            if vm_list[selected_vm_id].location == 'cloud':
+            vm = vm_list[selected_vm_id]
+            self.vm_used.add(vm.id)
+            self.bind_task(task, vm)
+            if vm.location == 'cloud':
                 self.hour_cloud_task_num[task_type_idx] += 1
             else:
                 self.hour_edge_task_num[task_type_idx] += 1

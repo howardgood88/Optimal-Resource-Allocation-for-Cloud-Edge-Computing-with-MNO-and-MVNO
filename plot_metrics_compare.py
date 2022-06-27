@@ -23,6 +23,8 @@ for path in paths:
         'mno_edge_task_num' : np.load(path + 'mno_edge_task_num.npy'), # (VoIP, IP Video, FTP)
         'mvno_cloud_task_num' : np.load(path + 'mvno_cloud_task_num.npy'), # (VoIP, IP Video, FTP)
         'mvno_edge_task_num' : np.load(path + 'mvno_edge_task_num.npy'), # (VoIP, IP Video, FTP)
+        'mno_vm_utilization' : np.load(path + 'mno_vm_utilization.npy'), # float
+        'mvno_vm_utilization' : np.load(path + 'mvno_vm_utilization.npy'), # float
     })
 
 def fill_zero_fitness(fitness):
@@ -197,12 +199,12 @@ def plot_2d(metric, op, plt_title, ylabel, file_title):
     plot_2dim_line(_data1[:, 2], _data2[:, 2], _data3[:, 2])
     plt.savefig(_dir + op + file_title)
 
-def plot_1d(metric, fig_title, xlabel, ylabel, file_name):
+def plot_1d(metric, fig_title, xlabel, ylabel, file_name, plot_func):
     plt.figure(figsize=figsize)
     plt.title(fig_title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plot_2dim_line(data[0][metric], data[1][metric], data[2][metric])
+    plot_func(data[0][metric], data[1][metric], data[2][metric])
     plt.savefig(_dir + file_name)
 
 ########################## 
@@ -303,16 +305,18 @@ def plot_cloud_edge_task_num(metric1, metric2, op):
 
 plot_3x3('mno_vm_resource', 'MNO/', 'MNO VM', 'round', 'vm_resource')
 plot_3x3('mvno_vm_resource', 'MVNO/', 'MVNO VM', 'round', 'vm_resource')
-plot_1d('mvno_vm_cost', 'MVNO VM cost', 'round', 'VM total cost(dollar)', 'MVNO/vm_cost')
+plot_1d('mvno_vm_cost', 'MVNO VM cost', 'round', 'VM total cost(dollar)', 'MVNO/vm_cost', plot_2dim_line)
 plot_2d('mno_task_fitness', 'MNO/', 'MNO task fitness in busy days', 'fitness', 'task_fitness')
 plot_3x3('mno_task_resource', 'MNO/', 'MNO task', 'hour', 'task_resource')
 plot_2d('mvno_task_fitness', 'MVNO/', 'MVNO task fitness in busy days', 'fitness', 'task_fitness')
 plot_3x3('mvno_task_resource', 'MVNO/', 'MVNO task', 'hour', 'task_resource')
 plot_2d('mno_block_rate', 'MNO/', 'MNO task blocking ratio', 'blocking ratio', 'task_block_rate')
 plot_2d('mvno_block_rate', 'MVNO/', 'MVNO task blocking ratio', 'blocking ratio', 'task_block_rate')
-plot_1d('mno_user_cost', 'MNO average user cost', 'hour', 'average user cost(dollar)', 'MNO/user_cost')
-plot_1d('mvno_user_cost', 'MVNO average user cost', 'hour', 'average user cost(dollar)', 'MVNO/user_cost')
+plot_1d('mno_user_cost', 'MNO average user cost', 'hour', 'average user cost(dollar)', 'MNO/user_cost', plot_2dim_line)
+plot_1d('mvno_user_cost', 'MVNO average user cost', 'hour', 'average user cost(dollar)', 'MVNO/user_cost', plot_2dim_line)
 plot_cloud_edge_task_num('mno_cloud_task_num', 'mno_edge_task_num', 'MNO/')
 plot_cloud_edge_task_num('mvno_cloud_task_num', 'mvno_edge_task_num', 'MVNO/')
+plot_1d('mno_vm_utilization', 'MNO VM utilization', 'round', 'utilization', 'MNO/vm_utilization', plot_2dim_bar)
+plot_1d('mvno_vm_utilization', 'MVNO VM utilization', 'round', 'utilization', 'MVNO/vm_utilization', plot_2dim_bar)
 
 print(f'Save figs to {_dir}!')

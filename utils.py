@@ -120,6 +120,8 @@ class Metrics:
     mno_vm_resource = [] # 3x3
     mvno_vm_resource = [] # 3x3
     mvno_vm_cost = [] # float
+    mno_vm_utilization = [] # float
+    mvno_vm_utilization = [] # float
     # hourly
     hour_data = [] # 3x3
     mno_task_fitness = [] # (VoIP, IP Video, FTP)
@@ -386,12 +388,21 @@ class Metrics:
 
             plt.savefig(f'figs/{case_num}MNO/mno_task_num')
 
+        def plot_vm_utilization():
+            plt.figure(figsize=cls.figsize)
+            plt.title('MNO VM utilization in each round')
+            plt.xlabel('round')
+            plt.ylabel('utilization')
+            cls.plot_1dim_bar(cls.mno_vm_utilization)
+            plt.savefig(f'figs/{case_num}MNO/mno_vm_utilization')
+
         plot_vm_resource()
         plot_task_fitness()
         plot_task_resource()
         plot_block_rate()
         plot_user_cost()
         plot_task_num()
+        plot_vm_utilization()
 
     @classmethod
     def plot_mvno(cls):
@@ -508,6 +519,14 @@ class Metrics:
 
             plt.savefig(f'figs/{case_num}MVNO/mvno_task_num')
 
+        def plot_vm_utilization():
+            plt.figure(figsize=cls.figsize)
+            plt.title('MVNO VM utilization in each round')
+            plt.xlabel('round')
+            plt.ylabel('utilization')
+            cls.plot_1dim_bar(cls.mvno_vm_utilization)
+            plt.savefig(f'figs/{case_num}MVNO/mvno_vm_utilization')
+
         plot_vm_resource()
         plot_task_fitness()
         plot_task_resource()
@@ -515,6 +534,7 @@ class Metrics:
         plot_block_rate()
         plot_user_cost()
         plot_task_num()
+        plot_vm_utilization()
     
     @classmethod
     def plot(cls):
@@ -535,6 +555,8 @@ class Metrics:
         cls.mno_edge_task_num = np.array(cls.mno_edge_task_num)
         cls.mvno_cloud_task_num = np.array(cls.mvno_cloud_task_num)
         cls.mvno_edge_task_num = np.array(cls.mvno_edge_task_num)
+        cls.mno_vm_utilization = np.array(cls.mno_vm_utilization)
+        cls.mvno_vm_utilization = np.array(cls.mvno_vm_utilization)
 
         if not os.path.exists(f'figs/{case_num}'):
             os.makedirs(f'figs/{case_num}')
@@ -570,3 +592,5 @@ class Metrics:
         np.save(f'Metrics/{case_num}mno_edge_task_num', cls.mno_edge_task_num)
         np.save(f'Metrics/{case_num}mvno_cloud_task_num', cls.mvno_cloud_task_num)
         np.save(f'Metrics/{case_num}mvno_edge_task_num', cls.mvno_edge_task_num)
+        np.save(f'Metrics/{case_num}mno_vm_utilization', cls.mno_vm_utilization)
+        np.save(f'Metrics/{case_num}mvno_vm_utilization', cls.mvno_vm_utilization)

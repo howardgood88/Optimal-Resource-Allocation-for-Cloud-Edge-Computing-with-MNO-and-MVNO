@@ -108,11 +108,23 @@ def utility_func_bw_test(max_x, _slice, func):
     plt.plot(x, y)
     plt.savefig(f'{dir}{func.__qualname__}_utility_func.png')
 
+def utility_func_price_test(max_x, _slice, func):
+    plt.figure(figsize=figsize)
+    plt.title(f'{func.__qualname__} Utility Function')
+    plt.xlabel('price (dollar)')
+    plt.ylabel('utility')
+    x = np.arange(0, max_x, max_x / _slice)
+    y = []
+    for val in x:
+        y.append(func(val))
+    plt.plot(x, y)
+    plt.savefig(f'{dir}{func.__qualname__}_utility_func.png')
+
 def utility_func_delay_test(max_x, _slice, func):
     plt.figure(figsize=figsize)
     plt.title(f'{func.__qualname__} Utility Function')
     plt.xlabel('delay(ms)')
-    plt.ylabel('times')
+    plt.ylabel('utility')
     x = np.arange(0, max_x, max_x / _slice)
     y = []
     for val in x:
@@ -126,6 +138,7 @@ if __name__ == '__main__':
     # plt.show()
     utility_func_bw_test(20, 2000, UtilityFunc.VoIP.bw_up)
     utility_func_bw_test(150, 1500, UtilityFunc.VoIP.bw_down)
+    utility_func_price_test(250 / expected_task_num, 25000 / expected_task_num, UtilityFunc.VoIP.price)
     utility_func_delay_test(100, 1000, UtilityFunc.VoIP.delay)
     # plt.show()
     utility_func_bw_test(50, 5000, UtilityFunc.IPVideo.bw_up)
