@@ -64,7 +64,7 @@ ipVideo_bw_down_bmin = 24
 ipVideo_bw_down_bmax = 5000
 ftp_bw_up_bmax = 50
 ftp_bw_down_bmax = 5000
-delay_factor = 1.015
+delay_factor = 1.02
 
 # update history data
 phi = 0.9
