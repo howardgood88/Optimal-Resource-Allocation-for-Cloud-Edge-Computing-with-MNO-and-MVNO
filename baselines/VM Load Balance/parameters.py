@@ -56,8 +56,8 @@ mvno_op_cr = 0.05 # GCU-second/second
 
 # utility function
 max_score = 100
-voip_bw_up_bmin = 64 # Kbps
-voip_bw_down_bmin = 5
+voip_bw_up_bmin = 5 # Kbps
+voip_bw_down_bmin = 64
 ipVideo_bw_up_bmin = 5
 ipVideo_bw_up_bmax = 50
 ipVideo_bw_down_bmin = 24
