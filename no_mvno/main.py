@@ -214,8 +214,9 @@ with step_logger('Start of Initialization', title1, 'Finished initialization.'):
     Global.system_time = 0
     # create dict map from vm_id to VM instance
     vm_list = createVM(machine_attributes)
-    for vm in vm_list.values():
-        vm.price = vm.price / expected_max_vm_num
+    for vm_id in vm_list.keys():
+        vm = vm_list[vm_id]
+        vm.price = vm.origin_price / expected_task_num
     hour_task_record, user_id_set = data_preprocessing(history_data)
     # sort the set to make simulation reproducible. (or will get different user_to_vm)
     user_id_list = np.array(sorted(user_id_set))

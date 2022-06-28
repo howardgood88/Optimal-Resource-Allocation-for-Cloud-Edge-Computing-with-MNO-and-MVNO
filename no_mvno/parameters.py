@@ -37,14 +37,13 @@ cr_low = 1 * expected_min_vm_num
 cr_high = 1 * expected_max_vm_num
 
 # vm assignment
-mno_rate = 0.6
+bad_user_rate = 0.8
 _theta = 0.25
 _lambda = 0.3
-_mu = 0.7
-expected_task_num = 60
+_mu = 0.85
+expected_task_num = 100
 
 # task deployment
-bad_user_rate = 0.85
 _gamma = [
     [0.01, 5.0, 1.0, 0.5], # VoIP
     [0.01, 1.0, 1.0, 0.1], # IP Video

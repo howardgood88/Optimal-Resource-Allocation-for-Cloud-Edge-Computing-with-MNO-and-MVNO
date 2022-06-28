@@ -29,12 +29,12 @@ class UtilityFunc:
 
         @staticmethod
         def price(p: float) -> float:
-            max_price = 250 / expected_max_vm_num
+            max_price = 250 / expected_task_num
             return max_score * (max_price - p) / max_price
 
         @staticmethod
         def delay(d: float) -> float:
-            return max_score * 1.05 ** -d
+            return max_score * 1.02 ** -d
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -57,12 +57,12 @@ class UtilityFunc:
 
         @staticmethod
         def price(p: float) -> float:
-            max_price = 250 / expected_max_vm_num
+            max_price = 250 / expected_task_num
             return max_score * (max_price - p) / max_price
 
         @staticmethod
         def delay(d: float) -> float:
-            return max_score * 1.05 ** -d
+            return max_score * 1.02 ** -d
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -72,12 +72,12 @@ class UtilityFunc:
         @staticmethod
         def bw_up(bw: float) -> float:
             bw = min(bw, ftp_bw_up_bmax)
-            return max_score * math.log10(bw + 1) / math.log10(ftp_bw_up_bmax + 1)
+            return max_score * math.log10(bw / 10 + 1) / math.log10(ftp_bw_up_bmax / 10 + 1)
 
         @staticmethod
         def bw_down(bw: float) -> float:
             bw = min(bw, ftp_bw_down_bmax)
-            return max_score * math.log10(bw + 1) / math.log10(ftp_bw_down_bmax + 1)
+            return max_score * math.log10(bw / 80 + 1) / math.log10(ftp_bw_down_bmax / 80 + 1)
 
         @staticmethod
         def cr(cr: float) -> float:
@@ -85,12 +85,12 @@ class UtilityFunc:
 
         @staticmethod
         def price(p: float) -> float:
-            max_price = 250 / expected_max_vm_num
+            max_price = 250 / expected_task_num
             return (max_price - p) / max_price * max_score
 
         @staticmethod
         def delay(d: float) -> float:
-            return max_score * 1.05 ** -d
+            return max_score * 1.02 ** -d
 
         @staticmethod
         def cr_diff(diff: float) -> float:
@@ -228,16 +228,16 @@ class TaskDeployment:
             utility = sum([g * u for g, u in zip(self.optimizing.best_gamma[Task_type_index[task_type]], 
                 utilities)]) / sum(self.optimizing.best_gamma[Task_type_index[task_type]])
             # virtual deployment by offsprings
-            for idx, population in enumerate(self.optimizing.new_populations):
-                population = toSoftmax(population)
-                _op_bw, _op_cr = population[-2], population[-1]
-                if min(bw_up, bw_down) < _op_bw and vm.cr < _op_cr:
-                    continue
-                _gamma = [population[0:6], population[6:12], population[12:18]]
-                _utility = sum([g * u for g, u in zip(_gamma[Task_type_index[task_type]], utilities)])
+            # for idx, population in enumerate(self.optimizing.new_populations):
+            #     population = toSoftmax(population)
+            #     _op_bw, _op_cr = population[-2], population[-1]
+            #     if min(bw_up, bw_down) < _op_bw and vm.cr < _op_cr:
+            #         continue
+            #     _gamma = [population[0:6], population[6:12], population[12:18]]
+            #     _utility = sum([g * u for g, u in zip(_gamma[Task_type_index[task_type]], utilities)])
 
-                if _utility > offsprings_max_utility[idx]:
-                    offsprings_max_utility[idx] = _utility
+            #     if _utility > offsprings_max_utility[idx]:
+            #         offsprings_max_utility[idx] = _utility
             # keep the best vm
             if utility > max_utility:
                 max_utility = utility
@@ -269,8 +269,8 @@ class TaskDeployment:
         logging.info(f'task utility: {max_utility}\n')
     
         self.hour_utility[task_type_idx] += max(max_utility, -100)
-        for idx, max_utility in enumerate(offsprings_max_utility):
-            self.population_hour_utility[idx][task_type_idx] += max(max_utility, -100)
+        # for idx, max_utility in enumerate(offsprings_max_utility):
+        #     self.population_hour_utility[idx][task_type_idx] += max(max_utility, -100)
         self.user_cost += cost
 
     def reschedule_task(self, task: np.array) -> None:

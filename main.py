@@ -226,11 +226,11 @@ while Global.system_time // big_round_minutes < big_round_times:
             hourly_history_data, statistic_data = update_history_data(hourly_history_data, hour_task_record, statistic_data)
             Metrics.statistic_data.append(statistic_data)
 
+        mno.profit = 0
+        mvno.profit = 0
         with step_logger('Start of VM Assignment', title2, 'Finished vm assignment.'):
             mno.vm_assignment(statistic_data, vm_list)
         
-        mno.profit = 0
-        mvno.profit = 0
         with step_logger('Start of Task Deployment', title2, f'Finished Task Deployment.'):
             hour_task_record = []
             while Global.system_time == start_time or Global.system_time % big_round_minutes != 0:

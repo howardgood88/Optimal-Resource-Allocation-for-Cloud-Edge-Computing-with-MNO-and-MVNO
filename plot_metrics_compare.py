@@ -3,8 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-paths = [f'./Metrics/{case_num}', f'./no_mvno/Metrics/{case_num}']
-
 data = []
 path = f'./Metrics/{case_num}'
 data.append({

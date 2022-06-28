@@ -4,7 +4,7 @@ import math
 from contract import Contract
 from utils import (toSoftmax, get_TD_populations_log_msg)
 from parameters import (offspring_number, Task_type_index, _theta, _lambda, mutate_rate, rnd_seed,
-                        _gamma, max_searching_times, mno_rate)
+                        _gamma, max_searching_times)
 import logging
 
 np.random.seed(rnd_seed)
