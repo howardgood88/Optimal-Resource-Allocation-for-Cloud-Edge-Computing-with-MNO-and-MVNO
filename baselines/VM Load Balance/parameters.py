@@ -38,7 +38,7 @@ cr_high = 1 * expected_max_vm_num
 
 # vm assignment
 mno_rate = 0.6
-_theta = 0.25
+_theta = 0.2
 _lambda = 0.3
 _mu = 0.7
 expected_task_num = 100
