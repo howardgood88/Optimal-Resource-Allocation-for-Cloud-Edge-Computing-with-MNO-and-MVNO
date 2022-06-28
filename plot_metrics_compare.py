@@ -49,7 +49,7 @@ def plot_profit():
     plt.bar(x, data[0]['mno_profit'], width = 0.2, label='MNO with MVNO')
     plt.bar(x + 0.2, data[0]['mvno_profit'], width = 0.2, label='MVNO with MNO')
     plt.legend()
-    plt.savefig(_dir + f'profit_{expected_task_num}')
+    plt.savefig(_dir + f'profit_{expected_task_num}_03_09')
     plt.show()
 
 ########################## 

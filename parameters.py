@@ -31,17 +31,17 @@ PT5_edge_d = 1.443
 # contract
 expected_max_vm_num = 80
 expected_min_vm_num = 5
-bw_low = 3000 * expected_min_vm_num
-bw_high = 3000 * expected_max_vm_num # Kbps
+bw_low = 4000 * expected_min_vm_num
+bw_high = 4000 * expected_max_vm_num # Kbps
 cr_low = 1 * expected_min_vm_num
 cr_high = 1 * expected_max_vm_num
 
 # vm assignment
 mno_rate = 0.7
-_theta = 0.25
+_theta = 0.2
 _lambda = 0.3
 _mu = 0.9
-expected_task_num = 100
+expected_task_num = 80
 
 # task deployment
 _gamma = [
