@@ -310,9 +310,9 @@ class Metrics:
         def plot_task_fitness():
             for day in range(big_round_times - 2):
                 plt.figure(figsize=cls.figsize)
-                plt.title(f'MNO Task fitness in busy hour - day {day + 1}')
+                plt.title(f'MNO Task average utility in busy hour - day {day + 1}')
                 plt.xlabel('hour')
-                plt.ylabel('total fitness in an hour')
+                plt.ylabel('total average utility in an hour')
 
                 x = np.arange(1, 11) # 8 AM to 5 PM
                 labels = [str(i + 7) for i in x]
@@ -432,9 +432,9 @@ class Metrics:
         def plot_task_fitness():
             for day in range(big_round_times - 2):
                 plt.figure(figsize=cls.figsize)
-                plt.title(f'MVNO Task fitness in busy hour - day {day + 1}')
+                plt.title(f'MVNO Task average utility in busy hour - day {day + 1}')
                 plt.xlabel('hour')
-                plt.ylabel('total fitness in an hour')
+                plt.ylabel('total average utility in an hour')
 
                 x = np.arange(1, 11) # 7 AM to 5 PM
                 labels = [str(i + 7) for i in x]
