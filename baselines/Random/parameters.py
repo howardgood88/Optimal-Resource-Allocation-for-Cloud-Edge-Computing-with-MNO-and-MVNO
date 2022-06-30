@@ -37,7 +37,7 @@ cr_low = 1 * expected_min_vm_num
 cr_high = 1 * expected_max_vm_num
 
 # vm assignment
-mno_rate = 0.6
+mno_rate = 0.7
 _theta = 0.2
 _lambda = 0.3
 _mu = 0.7
