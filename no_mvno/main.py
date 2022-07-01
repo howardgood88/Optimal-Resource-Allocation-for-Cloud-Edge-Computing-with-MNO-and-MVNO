@@ -235,7 +235,10 @@ while Global.system_time // big_round_minutes < big_round_times:
     round = Global.system_time // big_round_minutes + 1
     with step_logger(f'Start of Round {round}', title1, f'Finished Round {round}.'):
         get_avg_vm_bw()
-        mno.profit = 0
+        mno.revenue = 0
+        mno.cost = 0
+        for vm in vm_list.values():
+            mno.cost += vm.origin_price * delta
         with step_logger('Start of Task Deployment', title2, f'Finished Task Deployment.'):
             hour_task_record = []
             while Global.system_time == start_time or Global.system_time % big_round_minutes != 0:
@@ -251,7 +254,7 @@ while Global.system_time // big_round_minutes < big_round_times:
                     f'Get hour events: {len(hour_events)}\nid,type,time\n{hour_events}', 0, f'Finished hour {hour_num}'):
                     if not hour_events.size == 0:
                         task_deployment(hour_events, minutes_range)
-                        mno.profit += mno._task_deployment.user_cost
+                        mno.revenue += mno._task_deployment.user_cost
                 task_events = Task_handler.task_events
                 Task_handler.changed = False
 
@@ -261,7 +264,8 @@ while Global.system_time // big_round_minutes < big_round_times:
 
                 hourly_statistic_data = get_hourly_statistic_data(hour_events)
                 Metrics.hour_data.append(hourly_statistic_data)
-        Metrics.mno_profit.append(mno.profit)
+        Metrics.mno_revenue.append(mno.revenue)
+        Metrics.mno_cost.append(mno.cost)
         start_time = Global.system_time
         assert(Global.system_time % big_round_minutes == 0)
 logging.info(f'Finished simulating, save log to {test_data_dir}log_{lev}.txt')

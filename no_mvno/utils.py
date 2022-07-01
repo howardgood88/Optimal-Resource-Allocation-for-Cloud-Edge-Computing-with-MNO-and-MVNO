@@ -116,7 +116,8 @@ def sgn(x):
 class Metrics:
     '''For plotting the result.'''
     # roundly
-    mno_profit = [] # float
+    mno_revenue = [] # float
+    mno_cost = [] # float
     # hourly
     hour_data = [] # 3x3
     mno_task_fitness = [] # (VoIP, IP Video, FTP)
@@ -317,7 +318,8 @@ class Metrics:
         cls.mno_user_cost = np.array(cls.mno_user_cost)
         cls.mno_cloud_task_num = np.array(cls.mno_cloud_task_num)
         cls.mno_edge_task_num = np.array(cls.mno_edge_task_num)
-        cls.mno_profit = np.array(cls.mno_profit)
+        cls.mno_revenue = np.array(cls.mno_revenue)
+        cls.mno_cost = np.array(cls.mno_cost)
 
         if not os.path.exists(f'figs/{case_num}'):
             os.makedirs(f'figs/{case_num}')
@@ -337,4 +339,5 @@ class Metrics:
         np.save(f'Metrics/{case_num}mno_user_cost', cls.mno_user_cost)
         np.save(f'Metrics/{case_num}mno_cloud_task_num', cls.mno_cloud_task_num)
         np.save(f'Metrics/{case_num}mno_edge_task_num', cls.mno_edge_task_num)
-        np.save(f'Metrics/{case_num}mno_profit', cls.mno_profit)
+        np.save(f'Metrics/{case_num}mno_revenue', cls.mno_revenue)
+        np.save(f'Metrics/{case_num}mno_cost', cls.mno_cost)

@@ -4,14 +4,15 @@ from vm_assignment import VMAssignment
 from task_deployment import TaskDeployment
 from contract import Contract
 from utils import (step_logger, get_total_resource, timer, Metrics)
-from parameters import (_mu, title4, mno_op_bw, mno_op_cr, mvno_op_bw, mvno_op_cr, expected_task_num)
+from parameters import (_mu, title4, mno_op_bw, mno_op_cr, mvno_op_bw, mvno_op_cr, expected_task_num, delta)
 import logging
 
 class Network_operator(abc.ABC):
     def __init__(self):
         self.hold_vm_id = None
         self._task_deployment = TaskDeployment(self.name, self.op_bw, self.op_cr)
-        self.profit = 0
+        self.revenue = 0
+        self.cost = 0
 
     def deploy_task(self, task: np.array, vm_list: dict) -> None:
         '''Delegate to class TaskDeployment.'''
@@ -72,8 +73,11 @@ class MNO(Network_operator):
         mvno_cost = self._vm_assignment.vm_highest_price - self._vm_assignment.optimizing.best_fitness
         logging.info(f'mvno vm id: {self.mvno.hold_vm_id},\ntotal resource (cr, bw_up, bw_down): {mvno_resource},\n'
                         f'cloud num: {cloud_num}, edge num: {edge_num}, cost: {mvno_cost}')
-        self.profit += mvno_cost
-        self.mvno.profit -= mvno_cost
+        self.revenue += mvno_cost
+        for vm_id in self.hold_vm_id:
+            vm = vm_list[vm_id]
+            self.cost += vm.origin_price * delta
+        self.mvno.cost += mvno_cost
         Metrics.mvno_vm_resource.append(mvno_resource)
         Metrics.mvno_vm_cost.append(mvno_cost)
 

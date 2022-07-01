@@ -14,7 +14,7 @@ day_hour_traffic_ratio = [0.09, 0.09, 0.07, 0.07, 0.07, 0.13, 0.44, 0.73, 0.77, 
 
 user_num = 300
 machine_num = 300
-out_files = ['./data/case4/', './baselines/VM Load Balance/data/case4/', './baselines/Random/data/case4/']
+out_files = ['./data/case4/', './no_mvno/data/case4/']
 number_of_days = 7
 
 def machine_generator(filename):

@@ -120,8 +120,10 @@ class Metrics:
     mno_vm_resource = [] # 3x3
     mvno_vm_resource = [] # 3x3
     mvno_vm_cost = [] # float
-    mno_profit = [] # float
-    mvno_profit = [] # float
+    mno_revenue = [] # float
+    mno_cost = [] # float
+    mvno_revenue = [] # float
+    mvno_cost = [] # float
     # hourly
     hour_data = [] # 3x3
     mno_task_fitness = [] # (VoIP, IP Video, FTP)
@@ -537,8 +539,10 @@ class Metrics:
         cls.mno_edge_task_num = np.array(cls.mno_edge_task_num)
         cls.mvno_cloud_task_num = np.array(cls.mvno_cloud_task_num)
         cls.mvno_edge_task_num = np.array(cls.mvno_edge_task_num)
-        cls.mno_profit = np.array(cls.mno_profit)
-        cls.mvno_profit = np.array(cls.mvno_profit)
+        cls.mno_revenue = np.array(cls.mno_revenue)
+        cls.mno_cost = np.array(cls.mno_cost)
+        cls.mvno_revenue = np.array(cls.mvno_revenue)
+        cls.mvno_cost = np.array(cls.mvno_cost)
 
         if not os.path.exists(f'figs/{case_num}'):
             os.makedirs(f'figs/{case_num}')
@@ -574,5 +578,7 @@ class Metrics:
         np.save(f'Metrics/{case_num}mno_edge_task_num', cls.mno_edge_task_num)
         np.save(f'Metrics/{case_num}mvno_cloud_task_num', cls.mvno_cloud_task_num)
         np.save(f'Metrics/{case_num}mvno_edge_task_num', cls.mvno_edge_task_num)
-        np.save(f'Metrics/{case_num}mno_profit', cls.mno_profit)
-        np.save(f'Metrics/{case_num}mvno_profit', cls.mvno_profit)
+        np.save(f'Metrics/{case_num}mno_revenue', cls.mno_revenue)
+        np.save(f'Metrics/{case_num}mno_cost', cls.mno_cost)
+        np.save(f'Metrics/{case_num}mvno_revenue', cls.mvno_revenue)
+        np.save(f'Metrics/{case_num}mvno_cost', cls.mvno_cost)

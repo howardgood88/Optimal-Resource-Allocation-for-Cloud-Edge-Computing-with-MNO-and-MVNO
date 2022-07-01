@@ -37,11 +37,12 @@ cr_low = 1 * expected_min_vm_num
 cr_high = 1 * expected_max_vm_num
 
 # vm assignment
-mno_rate = 0.7
+mno_rate = 0.85
 _theta = 0.2
-_lambda = 0.3
+delta = 0.5
+_lambda = 0.7
 _mu = 0.9
-expected_task_num = 80
+expected_task_num = 3
 
 # task deployment
 _gamma = [

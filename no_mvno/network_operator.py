@@ -7,7 +7,8 @@ class Network_operator(abc.ABC):
     def __init__(self):
         self.hold_vm_id = None
         self._task_deployment = TaskDeployment(self.name, self.op_bw, self.op_cr)
-        self.profit = 0
+        self.revenue = 0
+        self.cost = 0
 
     def deploy_task(self, task: np.array, vm_list: dict) -> None:
         '''Delegate to class TaskDeployment.'''
