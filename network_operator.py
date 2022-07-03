@@ -74,7 +74,7 @@ class MNO(Network_operator):
         logging.info(f'mvno vm id: {self.mvno.hold_vm_id},\ntotal resource (cr, bw_up, bw_down): {mvno_resource},\n'
                         f'cloud num: {cloud_num}, edge num: {edge_num}, cost: {mvno_cost}')
         self.revenue += mvno_cost
-        for vm_id in self.hold_vm_id:
+        for vm_id in self.total_vm_id:
             vm = vm_list[vm_id]
             self.cost += vm.origin_price * delta
         self.mvno.cost += mvno_cost
