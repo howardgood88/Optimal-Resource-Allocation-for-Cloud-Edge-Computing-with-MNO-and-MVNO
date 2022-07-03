@@ -62,9 +62,9 @@ voip_bw_down_bmin = 64
 ipVideo_bw_up_bmin = 5
 ipVideo_bw_up_bmax = 50
 ipVideo_bw_down_bmin = 24
-ipVideo_bw_down_bmax = 5000
+ipVideo_bw_down_bmax = 4000
 ftp_bw_up_bmax = 50
-ftp_bw_down_bmax = 5000
+ftp_bw_down_bmax = 4000
 
 # update history data
 phi = 0.9
