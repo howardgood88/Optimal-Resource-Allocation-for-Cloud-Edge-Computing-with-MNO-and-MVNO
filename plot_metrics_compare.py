@@ -34,7 +34,7 @@ def fill_zero_fitness(fitness):
                 if i == 0:
                     fitness[i, task] = fitness[i + 1, task]
                 elif i == 119:
-                    fitness[i, task] == fitness[i - 1, task]
+                    fitness[i, task] = fitness[i - 1, task]
                 else:
                     fitness[i, task] = (fitness[i - 1, task] + fitness[i + 1, task]) / 2
 fill_zero_fitness(data[0]['mno_task_fitness'])
@@ -107,7 +107,7 @@ def plot_2dim_line(data1, data2, data3):
 
 ###########################
 
-def plot_3x3(metric, op, plt_title, xlabel, file_title):
+def plot_3x3(metric, op, plt_title, xlabel, file_title, ylim):
     if xlabel == 'round':
         plt_func = plot_2dim_bar
     elif xlabel == 'hour':
@@ -120,18 +120,24 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title):
     plt.xlabel(xlabel)
     plt.ylabel('computing resource (GCUs/s)')
     plt_func(data[0][metric][:, 0, 0], data[1][metric][:, 0, 0], data[2][metric][:, 0, 0])
+    if ylim:
+        plt.ylim(*ylim)
     ## IP Video
     plt.subplot(312)
     plt.title(f'{plt_title} computing resource - IP Video')
     plt.xlabel(xlabel)
     plt.ylabel('computing resource (GCUs/s)')
     plt_func(data[0][metric][:, 1, 0], data[1][metric][:, 1, 0], data[2][metric][:, 1, 0])
+    if ylim:
+        plt.ylim(*ylim)
     ## FTP
     plt.subplot(313)
     plt.title(f'{plt_title} computing resource - FTP')
     plt.xlabel(xlabel)
     plt.ylabel('computing resource (GCUs/s)')
     plt_func(data[0][metric][:, 2, 0], data[1][metric][:, 2, 0], data[2][metric][:, 2, 0])
+    if ylim:
+        plt.ylim(*ylim)
     plt.savefig(_dir + op + f'{file_title}_cr')
     # uplink throughput
     plt.figure(figsize=figsize)
@@ -141,18 +147,24 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title):
     plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 0, 1], data[1][metric][:, 0, 1], data[2][metric][:, 0, 1])
+    if ylim:
+        plt.ylim(*ylim)
     ## IP Video
     plt.subplot(312)
     plt.title(f'{plt_title} uplink throughput - IP Video')
     plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 1, 1], data[1][metric][:, 1, 1], data[2][metric][:, 1, 1])
+    if ylim:
+        plt.ylim(*ylim)
     ## FTP
     plt.subplot(313)
     plt.title(f'{plt_title} uplink throughput - FTP')
     plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 2, 1], data[1][metric][:, 2, 1], data[2][metric][:, 2, 1])
+    if ylim:
+        plt.ylim(*ylim)
     plt.savefig(_dir + op + f'{file_title}_T_up')
     # downlink throughput
     plt.figure(figsize=figsize)
@@ -162,21 +174,27 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title):
     plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 0, 2], data[1][metric][:, 0, 2], data[2][metric][:, 0, 2])
+    if ylim:
+        plt.ylim(*ylim)
     ## IP Video
     plt.subplot(312)
     plt.title(f'{plt_title} downlink throughput - IP Video')
     plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 1, 2], data[1][metric][:, 1, 2], data[2][metric][:, 1, 2])
+    if ylim:
+        plt.ylim(*ylim)
     ## FTP
     plt.subplot(313)
     plt.title(f'{plt_title} downlink throughput - FTP')
     plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 2, 2], data[1][metric][:, 2, 2], data[2][metric][:, 2, 2])
+    if ylim:
+        plt.ylim(*ylim)
     plt.savefig(_dir + op + f'{file_title}_T_down')
 
-def plot_2d(metric, op, plt_title, ylabel, file_title):
+def plot_2d(metric, op, plt_title, ylabel, file_title, ylim):
     _data1, _data2, _data3 = data[0][metric][:120], data[1][metric][:120], data[2][metric][:120]
     plt.figure(figsize=figsize)
     # VoIP
@@ -185,26 +203,36 @@ def plot_2d(metric, op, plt_title, ylabel, file_title):
     plt.xlabel('hour')
     plt.ylabel(ylabel)
     plot_2dim_line(_data1[:, 0], _data2[:, 0], _data3[:, 0])
+    if ylim:
+        plt.ylim(*ylim)
     # IP Video
     plt.subplot(312)
     plt.title(f'{plt_title} - IP Video')
     plt.xlabel('hour')
     plt.ylabel(ylabel)
     plot_2dim_line(_data1[:, 1], _data2[:, 1], _data3[:, 1])
+    if ylim:
+        plt.ylim(*ylim)
     # FTP
     plt.subplot(313)
     plt.title(f'{plt_title} - FTP')
     plt.xlabel('hour')
     plt.ylabel(ylabel)
     plot_2dim_line(_data1[:, 2], _data2[:, 2], _data3[:, 2])
+    if ylim:
+        plt.ylim(*ylim)
     plt.savefig(_dir + op + file_title)
 
-def plot_1d(metric, fig_title, xlabel, ylabel, file_name, plot_func):
+def plot_1d(metric, fig_title, xlabel, ylabel, file_name, plot_func, ylim):
+    if metric == 'mno_user_cost' or metric == 'mvno_user_cost':
+        data[0][metric], data[1][metric], data[2][metric] = data[0][metric][:120], data[1][metric][:120], data[2][metric][:120]
     plt.figure(figsize=figsize)
     plt.title(fig_title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plot_func(data[0][metric], data[1][metric], data[2][metric])
+    if ylim:
+        plt.ylim(*ylim)
     plt.savefig(_dir + file_name)
 
 ########################## 
@@ -303,20 +331,20 @@ def plot_cloud_edge_task_num(metric1, metric2, op):
 
 ##########################
 
-plot_3x3('mno_vm_resource', 'MNO/', 'MNO VM', 'round', 'vm_resource')
-plot_3x3('mvno_vm_resource', 'MVNO/', 'MVNO VM', 'round', 'vm_resource')
-plot_1d('mvno_vm_cost', 'MVNO VM cost', 'round', 'VM total cost(dollar)', 'MVNO/vm_cost', plot_2dim_line)
-plot_2d('mno_task_fitness', 'MNO/', 'MNO task fitness in busy days', 'fitness', 'task_fitness')
-plot_3x3('mno_task_resource', 'MNO/', 'MNO task', 'hour', 'task_resource')
-plot_2d('mvno_task_fitness', 'MVNO/', 'MVNO task fitness in busy days', 'fitness', 'task_fitness')
-plot_3x3('mvno_task_resource', 'MVNO/', 'MVNO task', 'hour', 'task_resource')
-plot_2d('mno_block_rate', 'MNO/', 'MNO task blocking ratio', 'blocking ratio', 'task_block_rate')
-plot_2d('mvno_block_rate', 'MVNO/', 'MVNO task blocking ratio', 'blocking ratio', 'task_block_rate')
-plot_1d('mno_user_cost', 'MNO average user cost', 'hour', 'average user cost(dollar)', 'MNO/user_cost', plot_2dim_line)
-plot_1d('mvno_user_cost', 'MVNO average user cost', 'hour', 'average user cost(dollar)', 'MVNO/user_cost', plot_2dim_line)
+plot_3x3('mno_vm_resource', 'MNO/', 'MNO VM', 'round', 'vm_resource', None)
+plot_3x3('mvno_vm_resource', 'MVNO/', 'MVNO VM', 'round', 'vm_resource', None)
+plot_1d('mvno_vm_cost', 'MVNO VM cost', 'round', 'VM total cost(dollar)', 'MVNO/vm_cost', plot_2dim_line, None)
+plot_2d('mno_task_fitness', 'MNO/', 'MNO task average utility in busy days', 'average utility', 'task_fitness', (0, 100))
+plot_3x3('mno_task_resource', 'MNO/', 'MNO task', 'hour', 'task_resource', None)
+plot_2d('mvno_task_fitness', 'MVNO/', 'MVNO task average utility in busy days', 'average utility', 'task_fitness', (0, 100))
+plot_3x3('mvno_task_resource', 'MVNO/', 'MVNO task', 'hour', 'task_resource', None)
+plot_2d('mno_block_rate', 'MNO/', 'MNO task blocking ratio', 'blocking ratio', 'task_block_rate', (0, 1))
+plot_2d('mvno_block_rate', 'MVNO/', 'MVNO task blocking ratio', 'blocking ratio', 'task_block_rate', (0, 1))
+plot_1d('mno_user_cost', 'MNO average user cost in busy days', 'hour', 'average user cost(dollar)', 'MNO/user_cost', plot_2dim_line, None)
+plot_1d('mvno_user_cost', 'MVNO average user cost in busy days', 'hour', 'average user cost(dollar)', 'MVNO/user_cost', plot_2dim_line, None)
 plot_cloud_edge_task_num('mno_cloud_task_num', 'mno_edge_task_num', 'MNO/')
 plot_cloud_edge_task_num('mvno_cloud_task_num', 'mvno_edge_task_num', 'MVNO/')
-plot_1d('mno_vm_utilization', 'MNO VM utilization', 'round', 'utilization', 'MNO/vm_utilization', plot_2dim_bar)
-plot_1d('mvno_vm_utilization', 'MVNO VM utilization', 'round', 'utilization', 'MVNO/vm_utilization', plot_2dim_bar)
+plot_1d('mno_vm_utilization', 'MNO VM utilization', 'round', 'utilization', 'MNO/vm_utilization', plot_2dim_bar, (0, 1))
+plot_1d('mvno_vm_utilization', 'MVNO VM utilization', 'round', 'utilization', 'MVNO/vm_utilization', plot_2dim_bar, (0, 1))
 
 print(f'Save figs to {_dir}!')
