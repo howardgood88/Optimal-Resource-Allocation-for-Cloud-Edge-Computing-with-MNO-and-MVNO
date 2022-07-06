@@ -3,6 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
+plt.rcParams.update({
+    'font.size': 18
+})
+
 paths = [f'./Metrics/{case_num}', f'./baselines/VM Load Balance/Metrics/{case_num}', f'./baselines/Random/Metrics/{case_num}']
 
 data = []
@@ -95,15 +99,19 @@ def plot_2dim_line(data1, data2, data3):
     ax.set_xticklabels(labels)
     ax.legend()
 
-# def plot_1dim_bar(data):
-#     x = np.arange(1, len(data) + 1)
-#     labels = [str(i) for i in x]
-#     plt.bar(x, data, width=width * 2)
+def plot_2d_hour_data(data):
+    x = np.arange(1, len(data) + 1)
+    labels = ['' for _ in range(len(data[:, 0]))]
+    for idx, s in zip(range(24, len(data[:, 0]), 24), range(len(data[:, 0]) // 24 - 1)):
+        labels[idx] = '|'
+    plt.plot(x, data[:, 0], 'o-', label='VoIP')
+    plt.plot(x, data[:, 1], 'o-', label='IP Video')
+    plt.plot(x, data[:, 2], 'o-', label='FTP')
 
-#     ax = plt.gca()
-#     ax.set_xticks(x)
-#     ax.set_xticklabels(labels)
-#     ax.legend()
+    ax = plt.gca()
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels)
+    ax.legend()
 
 ###########################
 
@@ -117,7 +125,6 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title, ylim):
     ## VoIP
     plt.subplot(311)
     plt.title(f'{plt_title} computing resource - VoIP')
-    plt.xlabel(xlabel)
     plt.ylabel('computing resource (GCUs/s)')
     plt_func(data[0][metric][:, 0, 0], data[1][metric][:, 0, 0], data[2][metric][:, 0, 0])
     if ylim:
@@ -125,7 +132,6 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title, ylim):
     ## IP Video
     plt.subplot(312)
     plt.title(f'{plt_title} computing resource - IP Video')
-    plt.xlabel(xlabel)
     plt.ylabel('computing resource (GCUs/s)')
     plt_func(data[0][metric][:, 1, 0], data[1][metric][:, 1, 0], data[2][metric][:, 1, 0])
     if ylim:
@@ -144,7 +150,6 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title, ylim):
     ## VoIP
     plt.subplot(311)
     plt.title(f'{plt_title} uplink throughput - VoIP')
-    plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 0, 1], data[1][metric][:, 0, 1], data[2][metric][:, 0, 1])
     if ylim:
@@ -152,7 +157,6 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title, ylim):
     ## IP Video
     plt.subplot(312)
     plt.title(f'{plt_title} uplink throughput - IP Video')
-    plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 1, 1], data[1][metric][:, 1, 1], data[2][metric][:, 1, 1])
     if ylim:
@@ -171,7 +175,6 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title, ylim):
     ## VoIP
     plt.subplot(311)
     plt.title(f'{plt_title} downlink throughput - VoIP')
-    plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 0, 2], data[1][metric][:, 0, 2], data[2][metric][:, 0, 2])
     if ylim:
@@ -179,7 +182,6 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title, ylim):
     ## IP Video
     plt.subplot(312)
     plt.title(f'{plt_title} downlink throughput - IP Video')
-    plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 1, 2], data[1][metric][:, 1, 2], data[2][metric][:, 1, 2])
     if ylim:
@@ -200,7 +202,6 @@ def plot_2d(metric, op, plt_title, ylabel, file_title, ylim):
     # VoIP
     plt.subplot(311)
     plt.title(f'{plt_title} - VoIP')
-    plt.xlabel('hour')
     plt.ylabel(ylabel)
     plot_2dim_line(_data1[:, 0], _data2[:, 0], _data3[:, 0])
     if ylim:
@@ -208,7 +209,6 @@ def plot_2d(metric, op, plt_title, ylabel, file_title, ylim):
     # IP Video
     plt.subplot(312)
     plt.title(f'{plt_title} - IP Video')
-    plt.xlabel('hour')
     plt.ylabel(ylabel)
     plot_2dim_line(_data1[:, 1], _data2[:, 1], _data3[:, 1])
     if ylim:
@@ -261,13 +261,11 @@ def plot_cloud_edge_task_num(metric1, metric2, op):
         # VoIP
         plt.subplot(311)
         plt.title('[VATA] number of tasks assign to cloud/edge VM - VoIP')
-        plt.xlabel('hour')
         plt.ylabel('number of tasks')
         plot(data[0][metric1][:, 0], data[0][metric2][:, 0])
         # IP Video
         plt.subplot(312)
         plt.title('[VATA] number of tasks assign to cloud/edge VM - IP Video')
-        plt.xlabel('hour')
         plt.ylabel('number of tasks')
         plot(data[0][metric1][:, 1], data[0][metric2][:, 1])
         # FTP
@@ -284,13 +282,11 @@ def plot_cloud_edge_task_num(metric1, metric2, op):
         # VoIP
         plt.subplot(311)
         plt.title('[VM Load Balance] number of tasks assign to cloud/edge VM - VoIP')
-        plt.xlabel('hour')
         plt.ylabel('number of tasks')
         plot(data[1][metric1][:, 0], data[1][metric2][:, 0])
         # IP Video
         plt.subplot(312)
         plt.title('[VM Load Balance] number of tasks assign to cloud/edge VM - IP Video')
-        plt.xlabel('hour')
         plt.ylabel('number of tasks')
         plot(data[1][metric1][:, 1], data[1][metric2][:, 1])
         # FTP
@@ -307,13 +303,11 @@ def plot_cloud_edge_task_num(metric1, metric2, op):
         # VoIP
         plt.subplot(311)
         plt.title('[Random] number of tasks assign to cloud/edge VM - VoIP')
-        plt.xlabel('hour')
         plt.ylabel('number of tasks')
         plot(data[2][metric1][:, 0], data[2][metric2][:, 0])
         # IP Video
         plt.subplot(312)
         plt.title('[Random] number of tasks assign to cloud/edge VM - IP Video')
-        plt.xlabel('hour')
         plt.ylabel('number of tasks')
         plot(data[2][metric1][:, 1], data[2][metric2][:, 1])
         # FTP
@@ -328,6 +322,28 @@ def plot_cloud_edge_task_num(metric1, metric2, op):
     plot_VATA()
     plot_load_balance()
     plot_random()
+
+def plot_hour_data():
+    data = np.load(f'./Metrics/{case_num}hour_data.npy', allow_pickle=True)
+    plt.figure(figsize=figsize)
+    # computing resource
+    plt.subplot(311)
+    plt.title('Hour data - computing resource in each hour')
+    plt.ylabel('computing resource (GCUs/s)')
+    plot_2d_hour_data(data[:, :, 0])
+    # T up
+    plt.subplot(312)
+    plt.title('Hour data - uplink throughput in each hour')
+    plt.ylabel('throughput (Kbps)')
+    plot_2d_hour_data(data[:, :, 1])
+    # T down
+    plt.subplot(313)
+    plt.title('Hour data - downlink throughput in each hour')
+    plt.xlabel('hour')
+    plt.ylabel('throughput (Kbps)')
+    plot_2d_hour_data(data[:, :, 2])
+
+    plt.savefig(f'figs/{case_num}hour_data_resource')
 
 ##########################
 
@@ -346,5 +362,6 @@ plot_cloud_edge_task_num('mno_cloud_task_num', 'mno_edge_task_num', 'MNO/')
 plot_cloud_edge_task_num('mvno_cloud_task_num', 'mvno_edge_task_num', 'MVNO/')
 plot_1d('mno_vm_utilization', 'MNO VM utilization', 'round', 'utilization', 'MNO/vm_utilization', plot_2dim_bar, (0, 1))
 plot_1d('mvno_vm_utilization', 'MVNO VM utilization', 'round', 'utilization', 'MVNO/vm_utilization', plot_2dim_bar, (0, 1))
+plot_hour_data()
 
 print(f'Save figs to {_dir}!')

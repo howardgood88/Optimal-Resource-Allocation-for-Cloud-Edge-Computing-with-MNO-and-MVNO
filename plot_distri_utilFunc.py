@@ -6,6 +6,10 @@ from task_deployment import UtilityFunc
 from data.parameters import *
 import os
 
+plt.rcParams.update({
+    'font.size': 18
+})
+
 dir = './figs/distributions/'
 if not os.path.exists(dir):
     os.makedirs(dir)
@@ -96,9 +100,9 @@ def PT5_test():
     plot_PT5(PT5_edge_a, PT5_edge_b, PT5_edge_d, 20000)
     plt.savefig(f'{dir}user_to_vm_edge_delay')
 
-def utility_func_bw_test(max_x, _slice, func):
+def utility_func_bw_test(max_x, _slice, func, _title):
     plt.figure(figsize=figsize)
-    plt.title(f'{func.__qualname__} Utility Function')
+    plt.title(f'{_title} Utility Function')
     plt.xlabel('throughput(Kbps)')
     plt.ylabel('utility')
     x = np.arange(max_x / _slice, max_x, max_x / _slice)
@@ -108,9 +112,9 @@ def utility_func_bw_test(max_x, _slice, func):
     plt.plot(x, y)
     plt.savefig(f'{dir}{func.__qualname__}_utility_func.png')
 
-def utility_func_price_test(max_x, _slice, func):
+def utility_func_price_test(max_x, _slice, func, _title):
     plt.figure(figsize=figsize)
-    plt.title(f'{func.__qualname__} Utility Function')
+    plt.title(f'{_title} Utility Function')
     plt.xlabel('price (dollar)')
     plt.ylabel('utility')
     x = np.arange(0, max_x, max_x / _slice)
@@ -120,9 +124,9 @@ def utility_func_price_test(max_x, _slice, func):
     plt.plot(x, y)
     plt.savefig(f'{dir}{func.__qualname__}_utility_func.png')
 
-def utility_func_delay_test(max_x, _slice, func):
+def utility_func_delay_test(max_x, _slice, func, _title):
     plt.figure(figsize=figsize)
-    plt.title(f'{func.__qualname__} Utility Function')
+    plt.title(f'{_title} Utility Function')
     plt.xlabel('delay(ms)')
     plt.ylabel('utility')
     x = np.arange(0, max_x, max_x / _slice)
@@ -136,15 +140,15 @@ if __name__ == '__main__':
     beta_test()
     PT5_test()
     # plt.show()
-    utility_func_bw_test(20, 2000, UtilityFunc.VoIP.bw_up)
-    utility_func_bw_test(150, 1500, UtilityFunc.VoIP.bw_down)
-    utility_func_price_test(250 / expected_task_num, 25000 / expected_task_num, UtilityFunc.VoIP.price)
-    utility_func_delay_test(100, 1000, UtilityFunc.VoIP.delay)
+    utility_func_bw_test(20, 2000, UtilityFunc.VoIP.bw_up, 'VoIP Uplink Throughput')
+    utility_func_bw_test(150, 1500, UtilityFunc.VoIP.bw_down, 'VoIP Downlink Throughput')
+    utility_func_price_test(250 / expected_task_num, 25000 / expected_task_num, UtilityFunc.VoIP.price, 'Price')
+    utility_func_delay_test(100, 1000, UtilityFunc.VoIP.delay, 'Delay')
     # plt.show()
-    utility_func_bw_test(50, 5000, UtilityFunc.IPVideo.bw_up)
-    utility_func_bw_test(4000, 40000, UtilityFunc.IPVideo.bw_down)
+    utility_func_bw_test(50, 5000, UtilityFunc.IPVideo.bw_up, 'IP Video Uplink Throughput')
+    utility_func_bw_test(4000, 40000, UtilityFunc.IPVideo.bw_down, 'IP Video Downlink Throughput')
     # plt.show()
-    utility_func_bw_test(50, 5000, UtilityFunc.FTP.bw_up)
-    utility_func_bw_test(4000, 40000, UtilityFunc.FTP.bw_down)
+    utility_func_bw_test(50, 5000, UtilityFunc.FTP.bw_up, 'FTP Uplink Throughput')
+    utility_func_bw_test(4000, 40000, UtilityFunc.FTP.bw_down, 'FTP Downlink Throughput')
     # plt.show()
     print(f'Finished plotting, save result to {dir}!')

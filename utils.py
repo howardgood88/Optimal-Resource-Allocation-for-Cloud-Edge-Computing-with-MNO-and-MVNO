@@ -7,6 +7,10 @@ from parameters import (rnd_seed, Task_type_index, case_num, big_round_times)
 import matplotlib.pyplot as plt
 import os
 
+plt.rcParams.update({
+    'font.size': 18
+})
+
 np.random.seed(rnd_seed)
 
 def printReturn(func):
@@ -188,7 +192,9 @@ class Metrics:
     @classmethod
     def plot_2dim_line(cls, data):
         x = np.arange(1, len(data) + 1)
-        labels = [str(i) for i in x]
+        labels = ['' for _ in range(len(data[:, :, 0]))]
+        for idx, s in zip(range(24, len(data[:, :, 0]), 24), range(len(data[:, :, 0]) // 24 - 1)):
+            labels[idx] = '|'
         plt.plot(x, data[:, 0], 'o-', label='VoIP')
         plt.plot(x, data[:, 1], 'o-', label='IP Video')
         plt.plot(x, data[:, 2], 'o-', label='FTP')
