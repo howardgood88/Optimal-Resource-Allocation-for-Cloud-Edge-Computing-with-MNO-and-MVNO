@@ -3,6 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
+plt.rcParams.update({
+    'font.size': 18,
+})
+
 data = []
 path = f'./Metrics/{case_num}'
 data.append({
@@ -46,7 +50,7 @@ if not os.path.exists(_dir):
 def plot_revenue():
     plt.figure(figsize=(16,12))
     plt.title('Revenue comparison between Only MNO, MNO with MVNO and MVNO with MNO in each round')
-    plt.xlabel('round')
+    plt.xlabel('round (day)')
     plt.ylabel('total revenue (dollar)')
     x = np.arange(1, len(data[1]['mno_revenue']) + 1)
     plt.bar(x - 0.2, data[1]['mno_revenue'], width = 0.2, label='Only MNO')
@@ -54,12 +58,12 @@ def plot_revenue():
     plt.bar(x + 0.2, data[0]['mvno_revenue'], width = 0.2, label='MVNO with MNO')
     plt.legend()
     plt.savefig(_dir + f'revenue_{expected_task_num}_{para}')
-    plt.show()
+    # plt.show()
 
 def plot_cost():
     plt.figure(figsize=(16,12))
     plt.title('Cost comparison between Only MNO, MNO with MVNO and MVNO with MNO in each round')
-    plt.xlabel('round')
+    plt.xlabel('round (day)')
     plt.ylabel('total cost (dollar)')
     x = np.arange(1, len(data[1]['mno_cost']) + 1)
     plt.bar(x - 0.2, data[1]['mno_cost'], width = 0.2, label='Only MNO')
@@ -67,12 +71,12 @@ def plot_cost():
     plt.bar(x + 0.2, data[0]['mvno_cost'], width = 0.2, label='MVNO with MNO')
     plt.legend()
     plt.savefig(_dir + f'cost_{expected_task_num}_{para}')
-    plt.show()
+    # plt.show()
 
 def plot_profit():
     plt.figure(figsize=(16,12))
     plt.title('Profit comparison between Only MNO, MNO with MVNO and MVNO with MNO in each round')
-    plt.xlabel('round')
+    plt.xlabel('round (day)')
     plt.ylabel('total profit (dollar)')
     x = np.arange(1, len(data[1]['mno_revenue']) + 1)
     plt.bar(x - 0.2, data[1]['mno_revenue'] - data[1]['mno_cost'], width = 0.2, label='Only MNO')
@@ -80,7 +84,7 @@ def plot_profit():
     plt.bar(x + 0.2, data[0]['mvno_revenue'] - data[0]['mvno_cost'], width = 0.2, label='MVNO with MNO')
     plt.legend()
     plt.savefig(_dir + f'profit_{expected_task_num}_{para}')
-    plt.show()
+    # plt.show()
 
 ########################## 
 plot_revenue()
