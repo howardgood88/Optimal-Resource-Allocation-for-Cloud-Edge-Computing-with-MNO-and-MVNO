@@ -3,6 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
+plt.rcParams.update({
+    'font.size': 18
+})
+
 paths = [f'./Metrics/{case_num[:-1]}_{testing}', f'./baselines/VM Load Balance/Metrics/{case_num[:-1]}_{testing}', f'./baselines/Random/Metrics/{case_num[:-1]}_{testing}']
 
 data = []
@@ -98,13 +102,11 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title):
     ## VoIP
     plt.subplot(311)
     plt.title(f'{plt_title} computing resource - VoIP')
-    plt.xlabel(xlabel)
     plt.ylabel('computing resource (GCUs/s)')
     plt_func(data[0][metric][:, 0, 0], data[1][metric][:, 0, 0], data[2][metric][:, 0, 0])
     ## IP Video
     plt.subplot(312)
     plt.title(f'{plt_title} computing resource - IP Video')
-    plt.xlabel(xlabel)
     plt.ylabel('computing resource (GCUs/s)')
     plt_func(data[0][metric][:, 1, 0], data[1][metric][:, 1, 0], data[2][metric][:, 1, 0])
     ## FTP
@@ -119,13 +121,11 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title):
     ## VoIP
     plt.subplot(311)
     plt.title(f'{plt_title} uplink throughput - VoIP')
-    plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 0, 1], data[1][metric][:, 0, 1], data[2][metric][:, 0, 1])
     ## IP Video
     plt.subplot(312)
     plt.title(f'{plt_title} uplink throughput - IP Video')
-    plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 1, 1], data[1][metric][:, 1, 1], data[2][metric][:, 1, 1])
     ## FTP
@@ -140,13 +140,11 @@ def plot_3x3(metric, op, plt_title, xlabel, file_title):
     ## VoIP
     plt.subplot(311)
     plt.title(f'{plt_title} downlink throughput - VoIP')
-    plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 0, 2], data[1][metric][:, 0, 2], data[2][metric][:, 0, 2])
     ## IP Video
     plt.subplot(312)
     plt.title(f'{plt_title} downlink throughput - IP Video')
-    plt.xlabel(xlabel)
     plt.ylabel('throughput (Kbps)')
     plt_func(data[0][metric][:, 1, 2], data[1][metric][:, 1, 2], data[2][metric][:, 1, 2])
     ## FTP
@@ -166,13 +164,11 @@ def plot_2d(metric, op, plt_title, ylabel, file_title):
     # VoIP
     plt.subplot(311)
     plt.title(f'{plt_title} - VoIP')
-    plt.xlabel('hour')
     plt.ylabel(ylabel)
     plot_2dim_line(_data1[:, 0], _data2[:, 0], _data3[:, 0])
     # IP Video
     plt.subplot(312)
     plt.title(f'{plt_title} - IP Video')
-    plt.xlabel('hour')
     plt.ylabel(ylabel)
     plot_2dim_line(_data1[:, 1], _data2[:, 1], _data3[:, 1])
     # FTP
@@ -217,13 +213,11 @@ def plot_cloud_edge_task_num(metric1, metric2, op):
         # VoIP
         plt.subplot(311)
         plt.title('[VATA] number of tasks assign to cloud/edge VM - VoIP')
-        plt.xlabel('hour')
         plt.ylabel('number of tasks')
         plot(data[0][metric1][:, 0], data[0][metric2][:, 0])
         # IP Video
         plt.subplot(312)
         plt.title('[VATA] number of tasks assign to cloud/edge VM - IP Video')
-        plt.xlabel('hour')
         plt.ylabel('number of tasks')
         plot(data[0][metric1][:, 1], data[0][metric2][:, 1])
         # FTP
@@ -240,13 +234,11 @@ def plot_cloud_edge_task_num(metric1, metric2, op):
         # VoIP
         plt.subplot(311)
         plt.title('[VM Load Balance] number of tasks assign to cloud/edge VM - VoIP')
-        plt.xlabel('hour')
         plt.ylabel('number of tasks')
         plot(data[1][metric1][:, 0], data[1][metric2][:, 0])
         # IP Video
         plt.subplot(312)
         plt.title('[VM Load Balance] number of tasks assign to cloud/edge VM - IP Video')
-        plt.xlabel('hour')
         plt.ylabel('number of tasks')
         plot(data[1][metric1][:, 1], data[1][metric2][:, 1])
         # FTP
@@ -263,13 +255,11 @@ def plot_cloud_edge_task_num(metric1, metric2, op):
         # VoIP
         plt.subplot(311)
         plt.title('[Random] number of tasks assign to cloud/edge VM - VoIP')
-        plt.xlabel('hour')
         plt.ylabel('number of tasks')
         plot(data[2][metric1][:, 0], data[2][metric2][:, 0])
         # IP Video
         plt.subplot(312)
         plt.title('[Random] number of tasks assign to cloud/edge VM - IP Video')
-        plt.xlabel('hour')
         plt.ylabel('number of tasks')
         plot(data[2][metric1][:, 1], data[2][metric2][:, 1])
         # FTP

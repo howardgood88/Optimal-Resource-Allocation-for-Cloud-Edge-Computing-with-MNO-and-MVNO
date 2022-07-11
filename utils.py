@@ -7,6 +7,10 @@ from parameters import (rnd_seed, Task_type_index, case_num, big_round_times, te
 import matplotlib.pyplot as plt
 import os
 
+plt.rcParams.update({
+    'font.size': 18
+})
+
 np.random.seed(rnd_seed)
 
 def printReturn(func):
