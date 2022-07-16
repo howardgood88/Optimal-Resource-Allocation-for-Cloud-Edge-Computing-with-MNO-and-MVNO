@@ -192,8 +192,8 @@ class Metrics:
     @classmethod
     def plot_2dim_line(cls, data):
         x = np.arange(1, len(data) + 1)
-        labels = ['' for _ in range(len(data[:, :, 0]))]
-        for idx, s in zip(range(24, len(data[:, :, 0]), 24), range(len(data[:, :, 0]) // 24 - 1)):
+        labels = ['' for _ in range(len(data))]
+        for idx, s in zip(range(24, len(data), 24), range(len(data) // 24 - 1)):
             labels[idx] = '|'
         plt.plot(x, data[:, 0], 'o-', label='VoIP')
         plt.plot(x, data[:, 1], 'o-', label='IP Video')
