@@ -12,11 +12,12 @@ figsize = (16, 12)
 if not os.path.exists(save_path):
     os.mkdir(save_path)
 
-def plot_cloud_edge(cloud, edge):
+def plot_cloud_edge(cloud, edge, flag=True):
     x = np.arange(1, len(cloud) + 1)
     labels = ['' for i in range(1, len(x) + 1)]
-    for idx, s in zip(range(24, len(cloud), 24), range(len(cloud) // 24 - 1)):
-        labels[idx] = '|'
+    if flag:
+        for idx in range(24, len(cloud), 24):
+            labels[idx] = str(idx)
 
     plt.plot(x, cloud, 'o-', label='cloud')
     plt.plot(x, edge, 'o-', label='edge')
@@ -75,17 +76,17 @@ def plot_delay_testing():
     plt.subplot(411)
     plt.title('number of VoIP tasks assign to MVNO cloud/edge VoIP VM - delay weighting factor: 0')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(price_data['cloud'][:, 0], price_data['edge'][:, 0])
+    plot_cloud_edge(price_data['cloud'][:, 0], price_data['edge'][:, 0], flag = False)
     ## 0.1
     plt.subplot(412)
     plt.title('number of VoIP tasks assign to MVNO cloud/edge VoIP VM - delay weighting factor: 0.1')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(data[0]['cloud'][:, 0], data[0]['edge'][:, 0])
+    plot_cloud_edge(data[0]['cloud'][:, 0], data[0]['edge'][:, 0], flag = False)
     ## 0.5
     plt.subplot(413)
     plt.title('number of VoIP tasks assign to MVNO cloud/edge VoIP VM - delay weighting factor: 0.5')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(data[1]['cloud'][:, 0], data[1]['edge'][:, 0])
+    plot_cloud_edge(data[1]['cloud'][:, 0], data[1]['edge'][:, 0], flag = False)
     ## 1
     plt.subplot(414)
     plt.title('number of VoIP tasks assign to MVNO cloud/edge VoIP VM - delay weighting factor: 1')
@@ -100,17 +101,17 @@ def plot_delay_testing():
     plt.subplot(411)
     plt.title('number of IP Video tasks assign to MVNO cloud/edge IP Video VM - delay weighting factor: 0')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(price_data['cloud'][:, 1], price_data['edge'][:, 1])
+    plot_cloud_edge(price_data['cloud'][:, 1], price_data['edge'][:, 1], flag = False)
     ## 0.1
     plt.subplot(412)
     plt.title('number of IP Video tasks assign to MVNO cloud/edge IP Video VM - delay weighting factor: 0.1')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(data[0]['cloud'][:, 1], data[0]['edge'][:, 1])
+    plot_cloud_edge(data[0]['cloud'][:, 1], data[0]['edge'][:, 1], flag = False)
     ## 0.5
     plt.subplot(413)
     plt.title('number of IP Video tasks assign to MVNO cloud/edge IP Video VM - delay weighting factor: 0.5')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(data[1]['cloud'][:, 1], data[1]['edge'][:, 1])
+    plot_cloud_edge(data[1]['cloud'][:, 1], data[1]['edge'][:, 1], flag = False)
     ## 1
     plt.subplot(414)
     plt.title('number of IP Video tasks assign to MVNO cloud/edge IP Video VM - delay weighting factor: 1')
@@ -125,17 +126,17 @@ def plot_delay_testing():
     plt.subplot(411)
     plt.title('number of FTP tasks assign to MVNO cloud/edge FTP VM - delay weighting factor: 0')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(price_data['cloud'][:, 2], price_data['edge'][:, 2])
+    plot_cloud_edge(price_data['cloud'][:, 2], price_data['edge'][:, 2], flag = False)
     ## 0.1
     plt.subplot(412)
     plt.title('number of FTP tasks assign to MVNO cloud/edge FTP VM - delay weighting factor: 0.1')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(data[0]['cloud'][:, 2], data[0]['edge'][:, 2])
+    plot_cloud_edge(data[0]['cloud'][:, 2], data[0]['edge'][:, 2], flag = False)
     ## 0.5
     plt.subplot(413)
     plt.title('number of FTP tasks assign to MVNO cloud/edge FTP VM - delay weighting factor: 0.5')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(data[1]['cloud'][:, 2], data[1]['edge'][:, 2])
+    plot_cloud_edge(data[1]['cloud'][:, 2], data[1]['edge'][:, 2], flag = False)
     ## 1
     plt.subplot(414)
     plt.title('number of FTP tasks assign to MVNO cloud/edge FTP VM - delay weighting factor: 1')
@@ -160,17 +161,17 @@ def plot_T_testing():
     plt.subplot(411)
     plt.title('number of VoIP tasks assign to MVNO cloud/edge VoIP VM - throughput weighting factor: 0')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(price_data['cloud'][:, 0], price_data['edge'][:, 0])
+    plot_cloud_edge(price_data['cloud'][:, 0], price_data['edge'][:, 0], flag = False)
     ## 0.1
     plt.subplot(412)
     plt.title('number of VoIP tasks assign to MVNO cloud/edge VoIP VM - throughput weighting factor: 0.5')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(data[0]['cloud'][:, 0], data[0]['edge'][:, 0])
+    plot_cloud_edge(data[0]['cloud'][:, 0], data[0]['edge'][:, 0], flag = False)
     ## 0.5
     plt.subplot(413)
     plt.title('number of VoIP tasks assign to MVNO cloud/edge VoIP VM - throughput weighting factor: 1')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(data[1]['cloud'][:, 0], data[1]['edge'][:, 0])
+    plot_cloud_edge(data[1]['cloud'][:, 0], data[1]['edge'][:, 0], flag = False)
     ## 1
     plt.subplot(414)
     plt.title('number of VoIP tasks assign to MVNO cloud/edge VoIP VM - throughput weighting factor: 5')
@@ -185,12 +186,12 @@ def plot_T_testing():
     plt.subplot(311)
     plt.title('number of IP Video tasks assign to MVNO cloud/edge IP Video VM - throughput weighting factor: 0')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(price_data['cloud'][:, 1], price_data['edge'][:, 1])
+    plot_cloud_edge(price_data['cloud'][:, 1], price_data['edge'][:, 1], flag = False)
     ## 0.1
     plt.subplot(312)
     plt.title('number of IP Video tasks assign to MVNO cloud/edge IP Video VM - throughput weighting factor: 0.5')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(data[0]['cloud'][:, 1], data[0]['edge'][:, 1])
+    plot_cloud_edge(data[0]['cloud'][:, 1], data[0]['edge'][:, 1], flag = False)
     ## 0.5
     plt.subplot(313)
     plt.title('number of IP Video tasks assign to MVNO cloud/edge IP Video VM - throughput weighting factor: 1')
@@ -205,17 +206,17 @@ def plot_T_testing():
     plt.subplot(411)
     plt.title('number of FTP tasks assign to MVNO cloud/edge FTP VM - throughput weighting factor: 0')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(price_data['cloud'][:, 2], price_data['edge'][:, 2])
+    plot_cloud_edge(price_data['cloud'][:, 2], price_data['edge'][:, 2], flag = False)
     ## 0.1
     plt.subplot(412)
     plt.title('number of FTP tasks assign to MVNO cloud/edge FTP VM - throughput weighting factor: 0.5')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(data[0]['cloud'][:, 2], data[0]['edge'][:, 2])
+    plot_cloud_edge(data[0]['cloud'][:, 2], data[0]['edge'][:, 2], flag = False)
     ## 0.5
     plt.subplot(413)
     plt.title('number of FTP tasks assign to MVNO cloud/edge FTP VM - throughput weighting factor: 1')
     plt.ylabel('number of tasks')
-    plot_cloud_edge(data[1]['cloud'][:, 2], data[1]['edge'][:, 2])
+    plot_cloud_edge(data[1]['cloud'][:, 2], data[1]['edge'][:, 2], flag = False)
     ## 1
     plt.subplot(414)
     plt.title('number of FTP tasks assign to MVNO cloud/edge FTP VM - throughput weighting factor: 3')
