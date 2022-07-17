@@ -42,7 +42,7 @@ _theta = 0.2
 delta = 0.5
 _lambda = 0.7
 _mu = 0.9
-expected_task_num = 35
+expected_task_num = 30
 
 # task deployment
 _gamma = [

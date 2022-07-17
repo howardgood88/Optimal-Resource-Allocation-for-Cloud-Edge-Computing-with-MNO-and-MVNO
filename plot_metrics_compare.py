@@ -42,6 +42,13 @@ data.append({
     'mno_cost' : np.load(path + 'mno_cost.npy'), # float
 })
 
+max_y = max(max(data[1]['mno_revenue']), max(data[0]['mno_revenue']), max(data[0]['mvno_revenue']),
+            max(data[1]['mno_cost']), max(data[0]['mno_cost']), max(data[0]['mvno_cost']),
+            max(data[1]['mno_revenue'] - data[1]['mno_cost']), max(data[0]['mno_revenue'] - data[0]['mno_cost']), max(data[0]['mvno_revenue'] - data[0]['mvno_cost']))
+min_y = min(min(data[1]['mno_revenue']), min(data[0]['mno_revenue']), min(data[0]['mvno_revenue']),
+            min(data[1]['mno_cost']), min(data[0]['mno_cost']), min(data[0]['mvno_cost']),
+            min(data[1]['mno_revenue'] - data[1]['mno_cost']), min(data[0]['mno_revenue'] - data[0]['mno_cost']), min(data[0]['mvno_revenue'] - data[0]['mvno_cost']))
+
 _dir = f'./figs/comparison/'
 para = ''
 if not os.path.exists(_dir):
@@ -56,6 +63,7 @@ def plot_revenue():
     plt.bar(x - 0.2, data[1]['mno_revenue'], width = 0.2, label='Only MNO')
     plt.bar(x, data[0]['mno_revenue'], width = 0.2, label='MNO with MVNO')
     plt.bar(x + 0.2, data[0]['mvno_revenue'], width = 0.2, label='MVNO with MNO')
+    plt.ylim(min_y, max_y)
     plt.legend()
     plt.savefig(_dir + f'revenue_{expected_task_num}_{para}')
     # plt.show()
@@ -69,6 +77,7 @@ def plot_cost():
     plt.bar(x - 0.2, data[1]['mno_cost'], width = 0.2, label='Only MNO')
     plt.bar(x, data[0]['mno_cost'], width = 0.2, label='MNO with MVNO')
     plt.bar(x + 0.2, data[0]['mvno_cost'], width = 0.2, label='MVNO with MNO')
+    plt.ylim(min_y, max_y)
     plt.legend()
     plt.savefig(_dir + f'cost_{expected_task_num}_{para}')
     # plt.show()
@@ -82,6 +91,7 @@ def plot_profit():
     plt.bar(x - 0.2, data[1]['mno_revenue'] - data[1]['mno_cost'], width = 0.2, label='Only MNO')
     plt.bar(x, data[0]['mno_revenue'] - data[0]['mno_cost'], width = 0.2, label='MNO with MVNO')
     plt.bar(x + 0.2, data[0]['mvno_revenue'] - data[0]['mvno_cost'], width = 0.2, label='MVNO with MNO')
+    plt.ylim(min_y, max_y)
     plt.legend()
     plt.savefig(_dir + f'profit_{expected_task_num}_{para}')
     # plt.show()
