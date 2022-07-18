@@ -8,7 +8,7 @@ plt.rcParams.update({
 })
 
 data = []
-path = f'./Metrics/{case_num}'
+path = f'./Metrics/{case_num}{expected_task_num}/'
 data.append({
     # 'mno_vm_resource' : np.load(path + 'mno_vm_resource.npy'), # 3x3
     # 'mvno_vm_resource' : np.load(path + 'mvno_vm_resource.npy'), # 3x3
@@ -30,7 +30,7 @@ data.append({
     'mvno_revenue' : np.load(path + 'mvno_revenue.npy'), # float
     'mvno_cost' : np.load(path + 'mvno_cost.npy'), # float
 })
-path = f'./no_mvno/Metrics/{case_num}'
+path = f'./no_mvno/Metrics/{case_num}{expected_task_num}/'
 data.append({
     # 'mno_task_fitness' : np.load(path + 'mno_task_fitness.npy'), # (VoIP, IP Video, FTP)
     # 'mno_task_resource' : np.load(path + 'mno_task_resource.npy'), # 3x3
@@ -41,6 +41,11 @@ data.append({
     'mno_revenue' : np.load(path + 'mno_revenue.npy'), # float
     'mno_cost' : np.load(path + 'mno_cost.npy'), # float
 })
+print(np.average(data[1]['mno_revenue']))
+print(np.average(data[1]['mno_cost']))
+print(np.average(data[1]['mno_revenue'] - data[1]['mno_cost']))
+print(np.sum(data[1]['mno_revenue'] - data[1]['mno_cost']) / np.sum(data[1]['mno_revenue']))
+assert()
 
 max_y = max(max(data[1]['mno_revenue']), max(data[0]['mno_revenue']), max(data[0]['mvno_revenue']),
             max(data[1]['mno_cost']), max(data[0]['mno_cost']), max(data[0]['mvno_cost']),

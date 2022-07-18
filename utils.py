@@ -3,7 +3,7 @@ from time import time
 import scipy.integrate as integrate
 import math
 import logging
-from parameters import (rnd_seed, Task_type_index, case_num, big_round_times)
+from parameters import (rnd_seed, Task_type_index, case_num, big_round_times, expected_task_num)
 import matplotlib.pyplot as plt
 import os
 
@@ -559,26 +559,26 @@ class Metrics:
         print(f'Save figs to ./figs/{case_num}!')
 
         # save metrics data
-        if not os.path.exists(f'Metrics/{case_num}'):
-            os.makedirs(f'Metrics/{case_num}')
-        np.save(f'Metrics/{case_num}statistic_data', cls.statistic_data)
-        np.save(f'Metrics/{case_num}hour_data', cls.hour_data)
-        np.save(f'Metrics/{case_num}mno_vm_resource', cls.mno_vm_resource)
-        np.save(f'Metrics/{case_num}mvno_vm_resource', cls.mvno_vm_resource)
-        np.save(f'Metrics/{case_num}mvno_vm_cost', cls.mvno_vm_cost)
-        np.save(f'Metrics/{case_num}mno_task_fitness', cls.mno_task_fitness)
-        np.save(f'Metrics/{case_num}mno_task_resource', cls.mno_task_resource)
-        np.save(f'Metrics/{case_num}mvno_task_fitness', cls.mvno_task_fitness)
-        np.save(f'Metrics/{case_num}mvno_task_resource', cls.mvno_task_resource)
-        np.save(f'Metrics/{case_num}mno_block_rate', cls.mno_block_rate)
-        np.save(f'Metrics/{case_num}mvno_block_rate', cls.mvno_block_rate)
-        np.save(f'Metrics/{case_num}mno_user_cost', cls.mno_user_cost)
-        np.save(f'Metrics/{case_num}mvno_user_cost', cls.mvno_user_cost)
-        np.save(f'Metrics/{case_num}mno_cloud_task_num', cls.mno_cloud_task_num)
-        np.save(f'Metrics/{case_num}mno_edge_task_num', cls.mno_edge_task_num)
-        np.save(f'Metrics/{case_num}mvno_cloud_task_num', cls.mvno_cloud_task_num)
-        np.save(f'Metrics/{case_num}mvno_edge_task_num', cls.mvno_edge_task_num)
-        np.save(f'Metrics/{case_num}mno_revenue', cls.mno_revenue)
-        np.save(f'Metrics/{case_num}mno_cost', cls.mno_cost)
-        np.save(f'Metrics/{case_num}mvno_revenue', cls.mvno_revenue)
-        np.save(f'Metrics/{case_num}mvno_cost', cls.mvno_cost)
+        if not os.path.exists(f'Metrics/{case_num}{expected_task_num}/'):
+            os.makedirs(f'Metrics/{case_num}{expected_task_num}/')
+        np.save(f'Metrics/{case_num}{expected_task_num}/statistic_data', cls.statistic_data)
+        np.save(f'Metrics/{case_num}{expected_task_num}/hour_data', cls.hour_data)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mno_vm_resource', cls.mno_vm_resource)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mvno_vm_resource', cls.mvno_vm_resource)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mvno_vm_cost', cls.mvno_vm_cost)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mno_task_fitness', cls.mno_task_fitness)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mno_task_resource', cls.mno_task_resource)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mvno_task_fitness', cls.mvno_task_fitness)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mvno_task_resource', cls.mvno_task_resource)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mno_block_rate', cls.mno_block_rate)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mvno_block_rate', cls.mvno_block_rate)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mno_user_cost', cls.mno_user_cost)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mvno_user_cost', cls.mvno_user_cost)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mno_cloud_task_num', cls.mno_cloud_task_num)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mno_edge_task_num', cls.mno_edge_task_num)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mvno_cloud_task_num', cls.mvno_cloud_task_num)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mvno_edge_task_num', cls.mvno_edge_task_num)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mno_revenue', cls.mno_revenue)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mno_cost', cls.mno_cost)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mvno_revenue', cls.mvno_revenue)
+        np.save(f'Metrics/{case_num}{expected_task_num}/mvno_cost', cls.mvno_cost)
