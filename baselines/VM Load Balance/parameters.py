@@ -41,7 +41,7 @@ mno_rate = 0.85
 _theta = 0.2
 _lambda = 0.7
 _mu = 0.9
-expected_task_num = 10
+expected_task_num = 30
 
 # task deployment
 gamma = [
