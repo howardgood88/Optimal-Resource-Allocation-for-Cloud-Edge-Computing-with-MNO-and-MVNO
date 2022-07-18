@@ -49,8 +49,7 @@ min_y = min(min(data[1]['mno_revenue']), min(data[0]['mno_revenue']), min(data[0
             min(data[1]['mno_cost']), min(data[0]['mno_cost']), min(data[0]['mvno_cost']),
             min(data[1]['mno_revenue'] - data[1]['mno_cost']), min(data[0]['mno_revenue'] - data[0]['mno_cost']), min(data[0]['mvno_revenue'] - data[0]['mvno_cost']))
 
-_dir = f'./figs/comparison/'
-para = ''
+_dir = f'./figs/comparison/{expected_task_num}/'
 if not os.path.exists(_dir):
     os.makedirs(_dir)
 
@@ -65,7 +64,7 @@ def plot_revenue():
     plt.bar(x + 0.2, data[0]['mvno_revenue'], width = 0.2, label='MVNO with MNO')
     plt.ylim(min_y, max_y)
     plt.legend()
-    plt.savefig(_dir + f'revenue_{expected_task_num}_{para}')
+    plt.savefig(_dir + 'revenue')
     # plt.show()
 
 def plot_cost():
@@ -79,7 +78,7 @@ def plot_cost():
     plt.bar(x + 0.2, data[0]['mvno_cost'], width = 0.2, label='MVNO with MNO')
     plt.ylim(min_y, max_y)
     plt.legend()
-    plt.savefig(_dir + f'cost_{expected_task_num}_{para}')
+    plt.savefig(_dir + 'cost')
     # plt.show()
 
 def plot_profit():
@@ -93,7 +92,7 @@ def plot_profit():
     plt.bar(x + 0.2, data[0]['mvno_revenue'] - data[0]['mvno_cost'], width = 0.2, label='MVNO with MNO')
     plt.ylim(min_y, max_y)
     plt.legend()
-    plt.savefig(_dir + f'profit_{expected_task_num}_{para}')
+    plt.savefig(_dir + 'profit')
     # plt.show()
 
 ########################## 
