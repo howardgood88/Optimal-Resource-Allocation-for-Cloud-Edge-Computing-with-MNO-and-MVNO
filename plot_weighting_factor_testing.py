@@ -46,7 +46,7 @@ def plot_price_testing():
 
     # IP Video
     plt.figure(figsize=figsize)
-    plt.title('number of IP Video tasks assign to MVNO cloud/edge VoIP VM')
+    plt.title('number of IP Video tasks assign to MVNO cloud/edge IP Video VM')
     plt.xlabel('hour')
     plt.ylabel('number of tasks')
     plot_cloud_edge(price_data['cloud'][:, 1], price_data['edge'][:, 1])
@@ -54,7 +54,7 @@ def plot_price_testing():
 
     # FTP
     plt.figure(figsize=figsize)
-    plt.title('number of FTP tasks assign to MVNO cloud/edge VoIP VM')
+    plt.title('number of FTP tasks assign to MVNO cloud/edge FTP VM')
     plt.xlabel('hour')
     plt.ylabel('number of tasks')
     plot_cloud_edge(price_data['cloud'][:, 2], price_data['edge'][:, 2])
