@@ -31,11 +31,6 @@ for path in paths:
         'mvno_vm_utilization' : np.load(path + 'mvno_vm_utilization.npy'), # float
     })
 
-print(np.average(data[0]['mvno_user_cost'][:120]))
-print(np.average(data[1]['mvno_user_cost'][:120]))
-print(np.average(data[2]['mvno_user_cost'][:120]))
-assert()
-
 def fill_zero_fitness(fitness):
     for i in range(120):
         for task in range(3):
