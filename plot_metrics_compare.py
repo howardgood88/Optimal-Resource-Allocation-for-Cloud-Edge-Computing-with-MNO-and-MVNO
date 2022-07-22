@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os
 
 plt.rcParams.update({
-    'font.size': 18,
+    'font.size': 24,
 })
 
 data = []
@@ -60,7 +60,7 @@ if not os.path.exists(_dir):
 
 def plot_revenue():
     plt.figure(figsize=(16,12))
-    plt.title('Revenue comparison between Only MNO, MNO with MVNO and MVNO with MNO in each round')
+    plt.title('Revenue comparison in each round')
     plt.xlabel('round (day)')
     plt.ylabel('total revenue (dollar)')
     x = np.arange(1, len(data[1]['mno_revenue']) + 1)
@@ -74,7 +74,7 @@ def plot_revenue():
 
 def plot_cost():
     plt.figure(figsize=(16,12))
-    plt.title('Cost comparison between Only MNO, MNO with MVNO and MVNO with MNO in each round')
+    plt.title('Cost comparison in each round')
     plt.xlabel('round (day)')
     plt.ylabel('total cost (dollar)')
     x = np.arange(1, len(data[1]['mno_cost']) + 1)
@@ -88,7 +88,7 @@ def plot_cost():
 
 def plot_profit():
     plt.figure(figsize=(16,12))
-    plt.title('Profit comparison between Only MNO, MNO with MVNO and MVNO with MNO in each round')
+    plt.title('Profit comparison in each round')
     plt.xlabel('round (day)')
     plt.ylabel('total profit (dollar)')
     x = np.arange(1, len(data[1]['mno_revenue']) + 1)

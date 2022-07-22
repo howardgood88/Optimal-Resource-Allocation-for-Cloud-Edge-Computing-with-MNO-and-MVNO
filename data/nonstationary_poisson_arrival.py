@@ -112,5 +112,5 @@ if __name__ == '__main__':
     plot()
     machine_generator('machine_attributes.json')
     task_events_generator('task_events.json', number_of_days, day_hour_traffic_ratio)
-    task_events_generator('history_data.json', 1, day_hour_traffic_ratio)
+    task_events_generator('history_data.json', number_of_days, day_hour_traffic_ratio)
     print(f'Finished generating, save result to {out_files}')
