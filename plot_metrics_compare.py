@@ -325,17 +325,17 @@ def plot_hour_data():
     plt.figure(figsize=figsize)
     # computing resource
     plt.subplot(311)
-    plt.title('Hour data - computing resource in each hour')
+    plt.title('Hour data - computing resource demand in each hour')
     plt.ylabel('computing resource (GCUs/s)')
     plot_2d_hour_data(data[:, :, 0], flag = False)
     # T up
     plt.subplot(312)
-    plt.title('Hour data - uplink throughput in each hour')
+    plt.title('Hour data - uplink throughput demand in each hour')
     plt.ylabel('throughput (Kbps)')
     plot_2d_hour_data(data[:, :, 1], flag = False)
     # T down
     plt.subplot(313)
-    plt.title('Hour data - downlink throughput in each hour')
+    plt.title('Hour data - downlink throughput demand in each hour')
     plt.xlabel('hour')
     plt.ylabel('throughput (Kbps)')
     plot_2d_hour_data(data[:, :, 2])
