@@ -151,7 +151,10 @@ def update_history_data(hourly_history_data: np.array, hour_task_record: np.arra
         hourly_history_data = np.vstack([hourly_history_data, hour_task_record])
     _message = f'add hour data:\n{np.mean(hour_task_record, axis=0)}\ninto statistic data:\n{statistic_data}\n'
     # update statistic data with the influence of _phi
-    statistic_data = statistic_data * (1 - phi) + np.mean(hour_task_record, axis=0) * phi
+    if round % 7 == 1 or round % 7 == 6:
+        statistic_data = np.mean(hourly_history_data[-168:-145], axis=0)
+    else:
+        statistic_data = statistic_data * (1 - phi) + np.mean(hour_task_record, axis=0) * phi
     logging.info(_message + f'statistic data becomes:\n{statistic_data}')
     return hourly_history_data, statistic_data
 
