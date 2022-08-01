@@ -41,11 +41,11 @@ data.append({
     'mno_revenue' : np.load(path + 'mno_revenue.npy'), # float
     'mno_cost' : np.load(path + 'mno_cost.npy'), # float
 })
-print(np.average(data[1]['mno_revenue']))
-print(np.average(data[1]['mno_cost']))
-print(np.average(data[1]['mno_revenue'] - data[1]['mno_cost']))
-print(np.sum(data[1]['mno_revenue'] - data[1]['mno_cost']) / np.sum(data[1]['mno_revenue']))
-assert()
+# print(np.average(data[1]['mno_revenue']))
+# print(np.average(data[1]['mno_cost']))
+# print(np.average(data[1]['mno_revenue'] - data[1]['mno_cost']))
+# print(np.sum(data[1]['mno_revenue'] - data[1]['mno_cost']) / np.sum(data[1]['mno_revenue']))
+# assert()
 
 max_y = max(max(data[1]['mno_revenue']), max(data[0]['mno_revenue']), max(data[0]['mvno_revenue']),
             max(data[1]['mno_cost']), max(data[0]['mno_cost']), max(data[0]['mvno_cost']),
@@ -62,7 +62,7 @@ def plot_revenue():
     plt.figure(figsize=(16,12))
     plt.title('Revenue comparison in each round')
     plt.xlabel('round (day)')
-    plt.ylabel('total revenue (dollar)')
+    plt.ylabel('total revenue (NTD)')
     x = np.arange(1, len(data[1]['mno_revenue']) + 1)
     plt.bar(x - 0.2, data[1]['mno_revenue'], width = 0.2, label='Only MNO')
     plt.bar(x, data[0]['mno_revenue'], width = 0.2, label='MNO with MVNO')
@@ -76,7 +76,7 @@ def plot_cost():
     plt.figure(figsize=(16,12))
     plt.title('Cost comparison in each round')
     plt.xlabel('round (day)')
-    plt.ylabel('total cost (dollar)')
+    plt.ylabel('total cost (NTD)')
     x = np.arange(1, len(data[1]['mno_cost']) + 1)
     plt.bar(x - 0.2, data[1]['mno_cost'], width = 0.2, label='Only MNO')
     plt.bar(x, data[0]['mno_cost'], width = 0.2, label='MNO with MVNO')
@@ -90,7 +90,7 @@ def plot_profit():
     plt.figure(figsize=(16,12))
     plt.title('Profit comparison in each round')
     plt.xlabel('round (day)')
-    plt.ylabel('total profit (dollar)')
+    plt.ylabel('total profit (NTD)')
     x = np.arange(1, len(data[1]['mno_revenue']) + 1)
     plt.bar(x - 0.2, data[1]['mno_revenue'] - data[1]['mno_cost'], width = 0.2, label='Only MNO')
     plt.bar(x, data[0]['mno_revenue'] - data[0]['mno_cost'], width = 0.2, label='MNO with MVNO')
