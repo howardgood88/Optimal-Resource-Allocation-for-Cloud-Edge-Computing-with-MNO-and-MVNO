@@ -4,7 +4,7 @@ import logging
 class Global:
     system_time = 0
 
-rnd_seed = 1127
+rnd_seed = 2000
 logging_level = logging.INFO
 case_num = 'case4/'
 test_data_dir = './data/' + case_num
@@ -41,7 +41,7 @@ mno_rate = 0.85
 _theta = 0.2
 _lambda = 0.7
 _mu = 0.9
-expected_task_num = 23
+expected_task_num = 24
 
 # task deployment
 gamma = [

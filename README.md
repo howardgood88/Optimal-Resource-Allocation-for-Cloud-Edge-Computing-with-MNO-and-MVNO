@@ -3,6 +3,6 @@
 # Mentions
 * simulation data time start at 0
 
-# Future Work
-* implement the assignment of the general purpose VM
-* decide which task deploy first when get in at the same time (random?)
+# Simulation Seed
+1. [1125, 1127, 1126]
+2. [1000, 2000, 3000]
