@@ -4,7 +4,7 @@ import logging
 class Global:
     system_time = 0
 
-rnd_seed = 1000
+rnd_seed = 1125
 logging_level = logging.INFO
 case_num = 'case4/'
 test_data_dir = './data/' + case_num
