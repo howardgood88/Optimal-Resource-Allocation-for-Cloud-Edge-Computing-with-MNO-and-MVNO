@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os
 
 plt.rcParams.update({
-    'font.size': 18
+    'font.size': 22
 })
 
 paths = [f'./Metrics/{case_num}', f'./baselines/VM Load Balance/Metrics/{case_num}', f'./baselines/Random/Metrics/{case_num}']
@@ -31,21 +31,21 @@ for path in paths:
         'mvno_vm_utilization' : np.load(path + 'mvno_vm_utilization.npy'), # float
     })
 
-algo_num = 1
-print(np.mean(data[algo_num]['mvno_task_fitness'][:, 0])) # VoIP Utility
-print(np.mean(data[algo_num]['mvno_task_fitness'][:, 1])) # IP Video
-print(np.mean(data[algo_num]['mvno_task_fitness'][:, 2])) # FTP
-print('----')
-print(np.mean(data[algo_num]['mvno_cloud_task_num'][:, 0])) # VoIP cloud num
-print(np.mean(data[algo_num]['mvno_cloud_task_num'][:, 1])) # IP Video cloud num
-print(np.mean(data[algo_num]['mvno_cloud_task_num'][:, 2])) # FTP cloud num
-print('----')
-print(np.mean(data[algo_num]['mvno_edge_task_num'][:, 0])) # VoIP edge num
-print(np.mean(data[algo_num]['mvno_edge_task_num'][:, 1])) # IP Video edge num
-print(np.mean(data[algo_num]['mvno_edge_task_num'][:, 2])) # FTP edge num
-print('----')
-print(np.mean(data[algo_num]['mvno_user_cost'])) # user cost
-assert()
+# algo_num = 1
+# print(np.mean(data[algo_num]['mvno_task_fitness'][:, 0])) # VoIP Utility
+# print(np.mean(data[algo_num]['mvno_task_fitness'][:, 1])) # IP Video
+# print(np.mean(data[algo_num]['mvno_task_fitness'][:, 2])) # FTP
+# print('----')
+# print(np.mean(data[algo_num]['mvno_cloud_task_num'][:, 0])) # VoIP cloud num
+# print(np.mean(data[algo_num]['mvno_cloud_task_num'][:, 1])) # IP Video cloud num
+# print(np.mean(data[algo_num]['mvno_cloud_task_num'][:, 2])) # FTP cloud num
+# print('----')
+# print(np.mean(data[algo_num]['mvno_edge_task_num'][:, 0])) # VoIP edge num
+# print(np.mean(data[algo_num]['mvno_edge_task_num'][:, 1])) # IP Video edge num
+# print(np.mean(data[algo_num]['mvno_edge_task_num'][:, 2])) # FTP edge num
+# print('----')
+# print(np.mean(data[algo_num]['mvno_user_cost'])) # user cost
+# assert()
 
 def fill_zero_fitness(fitness):
     for i in range(120):

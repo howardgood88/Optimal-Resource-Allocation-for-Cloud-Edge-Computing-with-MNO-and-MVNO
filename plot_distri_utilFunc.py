@@ -7,7 +7,7 @@ from data.parameters import *
 import os
 
 plt.rcParams.update({
-    'font.size': 26
+    'font.size': 40
 })
 
 dir = './figs/distributions/'
