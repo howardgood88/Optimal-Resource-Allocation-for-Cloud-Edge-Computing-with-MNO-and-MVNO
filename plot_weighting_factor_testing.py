@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os
 
 plt.rcParams.update({
-    'font.size': 18
+    'font.size': 28
 })
 
 path = './Metrics/'

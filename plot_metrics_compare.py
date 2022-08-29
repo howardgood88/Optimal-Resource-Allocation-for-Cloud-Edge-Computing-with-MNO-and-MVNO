@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os
 
 plt.rcParams.update({
-    'font.size': 18
+    'font.size': 26
 })
 
 paths = [f'./Metrics/{case_num[:-1]}_{testing}', f'./baselines/VM Load Balance/Metrics/{case_num[:-1]}_{testing}', f'./baselines/Random/Metrics/{case_num[:-1]}_{testing}']

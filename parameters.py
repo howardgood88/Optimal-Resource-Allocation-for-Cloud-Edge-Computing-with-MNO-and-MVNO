@@ -48,7 +48,7 @@ _gamma = [
     [0.01, 1, 1.0, 0.1], # IP Video
     [0.01, 3, 1.0, 0.01] # FTP
 ]
-testing = 'all_testing_513_0501001/'
+testing = 'price_testing_1_1_1/'
 mno_op_bw = 600 # Kbps
 mno_op_cr = 0.2 # GCU-second/second
 mvno_op_bw = 300 # Kbps
