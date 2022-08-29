@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os
 
 plt.rcParams.update({
-    'font.size': 22
+    'font.size': 24
 })
 
 paths = [f'./Metrics/{case_num}', f'./baselines/VM Load Balance/Metrics/{case_num}', f'./baselines/Random/Metrics/{case_num}']
@@ -91,7 +91,7 @@ def plot_2dim_bar(data1, data2, data3, flag=True):
     ax = plt.gca()
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
-    ax.legend()
+    ax.legend(prop={'size': 18})
 
 def plot_2dim_line(data1, data2, data3, flag=True):
     x = np.arange(1, len(data1) + 1)
@@ -110,7 +110,7 @@ def plot_2dim_line(data1, data2, data3, flag=True):
     ax = plt.gca()
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
-    ax.legend()
+    ax.legend(prop={'size': 24})
 
 def plot_2d_hour_data(data, flag=True):
     x = np.arange(1, len(data) + 1)
@@ -125,7 +125,7 @@ def plot_2d_hour_data(data, flag=True):
     ax = plt.gca()
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
-    ax.legend()
+    ax.legend(prop={'size': 18})
 
 ###########################
 
@@ -267,7 +267,7 @@ def plot_cloud_edge_task_num(metric1, metric2, op):
         ax = plt.gca()
         ax.set_xticks(x)
         ax.set_xticklabels(labels)
-        ax.legend()
+        ax.legend(prop={'size': 24})
 
     def plot_VATA():
         plt.figure(figsize=figsize)
