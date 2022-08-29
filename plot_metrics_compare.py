@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os
 
 plt.rcParams.update({
-    'font.size': 24,
+    'font.size': 26,
 })
 
 data = []
