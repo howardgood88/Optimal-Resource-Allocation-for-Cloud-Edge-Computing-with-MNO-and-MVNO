@@ -4,7 +4,7 @@ from vm_assignment import VMAssignment
 from task_deployment import TaskDeployment
 from contract import Contract
 from utils import (step_logger, get_total_resource, timer, Metrics)
-from parameters import (_mu, title4, mno_op_bw, mno_op_cr, mvno_op_bw, mvno_op_cr, expected_task_num)
+from parameters import (_mu, title4, mno_op_bw, mno_op_cr, mvno_op_bw, mvno_op_cr, expected_task_num, Task_type_index, case_num, _theta)
 import logging
 
 class Network_operator(abc.ABC):
@@ -77,7 +77,47 @@ class MNO(Network_operator):
         logging.info(f'contract: bw_high: {self.contract.bw_high}, bw_low: {self.contract.bw_low}, cr_high: {self.contract.cr_high}, cr_low: {self.contract.cr_low}')
         
         # the price mvno sells to its customers
+        mvno_vm_type_num = [0, 0, 0]
+        mvno_vm_cpu = [0, 0, 0]
+        mvno_vm_T_up = [0, 0, 0]
+        mvno_vm_T_down = [0, 0, 0]
         for id in self.mvno.hold_vm_id:
-            vm_list[id].price = vm_list[id].origin_price * _mu / expected_task_num
+            vm = vm_list[id]
+            vm.price = vm.origin_price * _mu / expected_task_num
+            mvno_vm_type_num[Task_type_index[vm.task_type]] += 1
+            mvno_vm_cpu[Task_type_index[vm.task_type]] += vm.cr
+            mvno_vm_T_up[Task_type_index[vm.task_type]] += vm.avg_bw_up
+            mvno_vm_T_down[Task_type_index[vm.task_type]] += vm.avg_bw_down
+        logging.info(f'MVNO CPU demand proportion before Allocation: VoIP {statistic_data[0, 0] / np.sum(statistic_data[:, 0])}, IP Video {statistic_data[1, 0] / np.sum(statistic_data[:, 0])}, FTP {statistic_data[2, 0] / np.sum(statistic_data[:, 0])}')
+        logging.info(f'MVNO CPU demand before Allocation: VoIP {statistic_data[0, 0] * _theta}, IP Video {statistic_data[1, 0] * _theta}, FTP {statistic_data[2, 0] * _theta}')
+        logging.info(f'MVNO T up demand proportion before Allocation: VoIP {statistic_data[0, 1] / np.sum(statistic_data[:, 1])}, IP Video {statistic_data[1, 1] / np.sum(statistic_data[:, 1])}, FTP {statistic_data[2, 1] / np.sum(statistic_data[:, 1])}')
+        logging.info(f'MVNO T up demand before Allocation: VoIP {statistic_data[0, 1] * _theta}, IP Video {statistic_data[1, 1] * _theta}, FTP {statistic_data[2, 1] * _theta}')
+        logging.info(f'MVNO T down demand proportion before Allocation: VoIP {statistic_data[0, 2] / np.sum(statistic_data[:, 2])}, IP Video {statistic_data[1, 2] / np.sum(statistic_data[:, 2])}, FTP {statistic_data[2, 2] / np.sum(statistic_data[:, 2])}')
+        logging.info(f'MVNO T down demand before Allocation: VoIP {statistic_data[0, 2] * _theta}, IP Video {statistic_data[1, 2] * _theta}, FTP {statistic_data[2, 2] * _theta}')
+        logging.info(f'MVNO VM number proportion after Allocation: VoIP {mvno_vm_type_num[0] / np.sum(mvno_vm_type_num)}, IP Video {mvno_vm_type_num[1] / np.sum(mvno_vm_type_num)}, FTP {mvno_vm_type_num[2] / np.sum(mvno_vm_type_num)}')
+        logging.info(f'MVNO VM CPU proportion after Allocation: VoIP {mvno_vm_cpu[0] / np.sum(mvno_vm_cpu)}, IP Video {mvno_vm_cpu[1] / np.sum(mvno_vm_cpu)}, FTP {mvno_vm_cpu[2] / np.sum(mvno_vm_cpu)}')
+        logging.info(f'MVNO VM CPU after Allocation: VoIP {mvno_vm_cpu[0]}, IP Video {mvno_vm_cpu[1]}, FTP {mvno_vm_cpu[2]}')
+        logging.info(f'MVNO VM T up proportion after Allocation: VoIP {mvno_vm_T_up[0] / np.sum(mvno_vm_T_up)}, IP Video {mvno_vm_T_up[1] / np.sum(mvno_vm_T_up)}, FTP {mvno_vm_T_up[2] / np.sum(mvno_vm_T_up)}')
+        logging.info(f'MVNO VM T up after Allocation: VoIP {mvno_vm_T_up[0]}, IP Video {mvno_vm_T_up[1]}, FTP {mvno_vm_T_up[2]}')
+        logging.info(f'MVNO VM T down proportion after Allocation: VoIP {mvno_vm_T_down[0] / np.sum(mvno_vm_T_down)}, IP Video {mvno_vm_T_down[1] / np.sum(mvno_vm_T_down)}, FTP {mvno_vm_T_down[2] / np.sum(mvno_vm_T_down)}')
+        logging.info(f'MVNO VM T down after Allocation: VoIP {mvno_vm_T_down[0]}, IP Video {mvno_vm_T_down[1]}, FTP {mvno_vm_T_down[2]}')
+        np.save(f'Metrics/{case_num}mvno_vm_type_num', mvno_vm_type_num)
+        mno_vm_type_num = [0, 0, 0]
+        mno_vm_cpu = [0, 0, 0]
+        mno_vm_T_up = [0, 0, 0]
+        mno_vm_T_down = [0, 0, 0]
         for id in self.hold_vm_id:
-            vm_list[id].price = vm_list[id].origin_price / expected_task_num
+            vm = vm_list[id]
+            vm.price = vm.origin_price / expected_task_num
+            mno_vm_type_num[Task_type_index[vm.task_type]] += 1
+            mno_vm_cpu[Task_type_index[vm.task_type]] += vm.cr
+            mno_vm_T_up[Task_type_index[vm.task_type]] += vm.avg_bw_up
+            mno_vm_T_down[Task_type_index[vm.task_type]] += vm.avg_bw_down
+        logging.info(f'MNO VM proportion after Allocation: VoIP {mno_vm_type_num[0] / np.sum(mno_vm_type_num)}, IP Video {mno_vm_type_num[1] / np.sum(mno_vm_type_num)}, FTP {mno_vm_type_num[2] / np.sum(mno_vm_type_num)}')
+        logging.info(f'MNO VM CPU proportion after Allocation: VoIP {mno_vm_cpu[0] / np.sum(mno_vm_cpu)}, IP Video {mno_vm_cpu[1] / np.sum(mno_vm_cpu)}, FTP {mno_vm_cpu[2] / np.sum(mno_vm_cpu)}')
+        logging.info(f'MNO VM CPU after Allocation: VoIP {mno_vm_cpu[0]}, IP Video {mno_vm_cpu[1]}, FTP {mno_vm_cpu[2]}')
+        logging.info(f'MNO VM T up proportion after Allocation: VoIP {mno_vm_T_up[0] / np.sum(mno_vm_T_up)}, IP Video {mno_vm_T_up[1] / np.sum(mno_vm_T_up)}, FTP {mno_vm_T_up[2] / np.sum(mno_vm_T_up)}')
+        logging.info(f'MNO VM T up after Allocation: VoIP {mno_vm_T_up[0]}, IP Video {mno_vm_T_up[1]}, FTP {mno_vm_T_up[2]}')
+        logging.info(f'MNO VM T down proportion after Allocation: VoIP {mno_vm_T_down[0] / np.sum(mno_vm_T_down)}, IP Video {mno_vm_T_down[1] / np.sum(mno_vm_T_down)}, FTP {mno_vm_T_down[2] / np.sum(mno_vm_T_down)}')
+        logging.info(f'MNO VM T down after Allocation: VoIP {mno_vm_T_down[0]}, IP Video {mno_vm_T_down[1]}, FTP {mno_vm_T_down[2]}')
+        np.save(f'Metrics/{case_num}mno_vm_type_num', mno_vm_type_num)
