@@ -110,7 +110,7 @@ def plot_2dim_line(data1, data2, data3, flag=True):
     ax = plt.gca()
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
-    ax.legend(prop={'size': 24})
+    ax.legend(prop={'size': 20})
 
 def plot_2d_hour_data(data, flag=True):
     x = np.arange(1, len(data) + 1)

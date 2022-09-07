@@ -5,6 +5,10 @@ from parameters import *
 import numpy as np
 import matplotlib.pyplot as plt
 
+plt.rcParams.update({
+    'font.size': 16
+})
+
 np.random.seed(rnd_seed)
 
 # the traffic ratio over peek traffic of 24 hours in a day
@@ -110,6 +114,7 @@ if __name__ == '__main__':
     if not os.path.exists('./data'):
         os.makedirs('./data')
     plot()
+    assert()
     machine_generator('machine_attributes.json')
     task_events_generator('task_events.json', number_of_days, day_hour_traffic_ratio)
     task_events_generator('history_data.json', number_of_days, day_hour_traffic_ratio)
